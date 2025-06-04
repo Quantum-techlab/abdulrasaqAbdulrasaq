@@ -1,9 +1,9 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Award, Users } from "lucide-react";
+import { EnhancedNavigation } from "@/components/EnhancedNavigation";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -74,24 +74,12 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-xl font-bold text-gradient">Abdulrasaq Alatare</div>
-            <div className="hidden md:flex space-x-8">
-              <a href="#about" className="hover:text-primary transition-colors">About</a>
-              <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
-              <a href="#experience" className="hover:text-primary transition-colors">Experience</a>
-              <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+      {/* Enhanced Navigation */}
+      <EnhancedNavigation />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
           <div className={`transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
@@ -103,9 +91,11 @@ const Index = () => {
               Building seamless digital experiences with modern web technologies
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button size="lg" className="group animate-glow">
-                <Mail className="mr-2 h-4 w-4" />
-                Get In Touch
+              <Button size="lg" className="group animate-glow" asChild>
+                <a href="mailto:ola283dayo@gmail.com">
+                  <Mail className="mr-2 h-4 w-4" />
+                  Get In Touch
+                </a>
               </Button>
               <div className="flex gap-4">
                 <Button variant="outline" size="lg" asChild>
