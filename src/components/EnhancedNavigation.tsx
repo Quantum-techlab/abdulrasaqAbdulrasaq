@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
 import { MobileMenu } from './MobileMenu';
 import { ScrollProgress } from './ScrollProgress';
+import { AnimatedNavBackground } from './AnimatedNavBackground';
+import { ProfilePopover } from './ProfilePopover';
+import { LanguageToggle } from './LanguageToggle';
 
 const menuItems = [
   { href: '#about', label: 'About' },
@@ -57,7 +60,8 @@ export const EnhancedNavigation = () => {
             : 'py-4 bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-6">
+        <AnimatedNavBackground />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div 
@@ -89,14 +93,18 @@ export const EnhancedNavigation = () => {
                 </button>
               ))}
               
-              <div className="ml-4">
+              <div className="ml-4 flex items-center space-x-2">
+                <LanguageToggle />
                 <ThemeToggle />
+                <ProfilePopover />
               </div>
             </div>
 
             {/* Mobile Navigation */}
             <div className="md:hidden flex items-center space-x-2">
+              <LanguageToggle />
               <ThemeToggle />
+              <ProfilePopover />
               <Button
                 variant="ghost"
                 size="icon"
