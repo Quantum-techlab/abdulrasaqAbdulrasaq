@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -13,6 +14,20 @@ const Index = () => {
   }, []);
 
   const projects = [
+    {
+      title: "Attendance System for IIH",
+      description: "Modern attendance tracking system for Ilorin Innovation Hub interns with real-time monitoring, analytics dashboard, and automated reporting features.",
+      tech: ["React", "Supabase", "TypeScript", "Tailwind CSS"],
+      github: "https://github.com/Quantum-techlab",
+      demo: "#"
+    },
+    {
+      title: "ScanShare",
+      description: "Advanced document scanning and sharing platform with OCR capabilities, cloud storage integration, and real-time collaboration features.",
+      tech: ["React", "OCR", "Cloud Storage", "Web APIs"],
+      github: "https://github.com/Quantum-techlab",
+      demo: "#"
+    },
     {
       title: "CrossDevice Sync",
       description: "Seamless file and clipboard sync between devices using modern web technologies. Features real-time synchronization and secure data transfer.",
@@ -38,10 +53,10 @@ const Index = () => {
 
   const experiences = [
     {
-      title: "Frontend Developer Intern",
+      title: "Software Engineer Intern",
       company: "Ilorin Innovation Hub",
       period: "2025",
-      description: "Built frontend features and assisted with event setups and technical support",
+      description: "Developed full-stack features, built attendance tracking systems, and provided technical support for events",
       icon: <MapPin className="w-4 h-4" />
     }
   ];
@@ -68,9 +83,10 @@ const Index = () => {
   ];
 
   const skills = [
-    "HTML", "CSS", "JavaScript", "React", "Vite", "Tailwind CSS",
-    "Supabase", "Firebase", "Tesseract.js", "Git/GitHub", "Node.js",
-    "Web APIs", "Responsive Design", "Authentication", "Dashboards", "OCR", "Accessibility"
+    "HTML", "CSS", "JavaScript", "TypeScript", "React", "Node.js", "Vite", "Tailwind CSS",
+    "Supabase", "Firebase", "PostgreSQL", "MongoDB", "Express.js", "REST APIs", "GraphQL",
+    "Git/GitHub", "Docker", "AI Integration", "Prompt Engineering", "OCR", "Web APIs", 
+    "Responsive Design", "Authentication", "Dashboards", "Accessibility", "Cloud Deployment"
   ];
 
   return (
@@ -84,11 +100,11 @@ const Index = () => {
         <div className="container mx-auto px-6 text-center relative z-10">
           <div className={`transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="text-gradient">Frontend</span><br />
-              <span className="text-foreground">Web Developer</span>
+              <span className="text-gradient">Software Engineer</span><br />
+              <span className="text-foreground">Frontend & AI Enthusiast</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Building seamless digital experiences with modern web technologies
+              Building innovative digital solutions with modern web technologies and AI integration
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Button size="lg" className="group animate-glow" asChild>
@@ -124,10 +140,13 @@ const Index = () => {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Hi, I'm <span className="text-primary font-semibold">Abdulrasaq</span> — a frontend developer passionate about building modern web applications with React and Supabase.
+                  Hi, I'm <span className="text-primary font-semibold">Abdulrasaq</span> — a software engineer specializing in frontend development with backend capabilities and AI integration expertise.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  I enjoy translating ideas into intuitive, accessible UIs and constantly improving through learning and collaboration. Currently studying Information and Communication Science at the University of Ilorin.
+                  I build full-stack web applications using React, Node.js, and modern cloud technologies. As an AI enthusiast and prompt engineer, I integrate intelligent features into applications to create innovative user experiences.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Currently studying Information and Communication Science at the University of Ilorin, I'm passionate about creating accessible, scalable solutions that solve real-world problems.
                 </p>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <MapPin className="w-4 h-4" />

@@ -37,7 +37,7 @@ export const ProfilePopover = () => {
             </Avatar>
             <div>
               <h3 className="font-semibold text-lg">Abdulrasaq Alatare</h3>
-              <p className="text-muted-foreground text-sm">Frontend Developer</p>
+              <p className="text-muted-foreground text-sm">Software Engineer & AI Enthusiast</p>
             </div>
           </div>
 
@@ -91,7 +91,7 @@ export const ProfilePopover = () => {
           <div className="pt-2 border-t">
             <p className="text-xs text-muted-foreground mb-2">Recent Activity</p>
             <div className="space-y-1">
-              <p className="text-sm">🔥 Currently coding: CrossDevice Sync</p>
+              <p className="text-sm">🔥 Currently coding: Attendance System & ScanShare</p>
               <p className="text-xs text-muted-foreground">Last updated: 2 hours ago</p>
             </div>
           </div>
