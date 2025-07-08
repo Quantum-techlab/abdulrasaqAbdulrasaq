@@ -19,7 +19,7 @@ export const AnimatedCard: React.FC<AnimatedCardProps> = ({
     <motion.div
       initial={{ y: 50, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: false, margin: "-50px" }}
       transition={{
         duration: 0.5,
         delay,

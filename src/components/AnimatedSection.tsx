@@ -25,7 +25,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
     <motion.div
       initial={directionVariants[direction]}
       whileInView={{ x: 0, y: 0, opacity: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, margin: "-100px" }}
       transition={{
         duration: 0.6,
         delay,

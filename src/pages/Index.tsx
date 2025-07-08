@@ -110,7 +110,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-800 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300">
       {/* Enhanced Navigation */}
       <EnhancedNavigation />
 
@@ -118,9 +118,9 @@ const Index = () => {
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         <FloatingElements />
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5"></div>
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5 dark:from-blue-400/10 dark:via-purple-400/10 dark:to-pink-400/10"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400/10 dark:bg-blue-300/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/10 dark:bg-purple-300/20 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-6 text-center relative z-10">
@@ -136,7 +136,7 @@ const Index = () => {
               className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6 shadow-lg"
             >
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-slate-600">Available for opportunities</span>
+              <span className="text-sm font-medium text-slate-600 dark:text-slate-300">Available for opportunities</span>
             </motion.div>
             
             <motion.h1 
@@ -149,14 +149,14 @@ const Index = () => {
                 Software Engineer
               </span>
               <br />
-              <span className="text-slate-700">Frontend & AI Enthusiast</span>
+              <span className="text-slate-700 dark:text-slate-200">Frontend & AI Enthusiast</span>
             </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed"
             >
               Building innovative digital solutions with modern web technologies, AI integration, and prompt engineering expertise
             </motion.p>
@@ -195,40 +195,40 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white/50 backdrop-blur-sm">
+      <section id="about" className="py-20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <AnimatedSection>
-              <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">About Me</h2>
+              <h2 className="text-4xl font-bold mb-12 text-center text-slate-800 dark:text-slate-100">About Me</h2>
             </AnimatedSection>
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <AnimatedSection direction="left" delay={0.2}>
                 <div className="space-y-6">
-                <p className="text-lg text-slate-600 leading-relaxed">
+                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
                   Hi, I'm <span className="text-blue-600 font-semibold">Abdulrasaq</span> — a software engineer specializing in frontend development with backend capabilities and AI integration expertise.
                 </p>
-                <p className="text-lg text-slate-600 leading-relaxed">
+                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
                   I build full-stack web applications using React, Node.js, and modern cloud technologies. As an AI enthusiast and prompt engineer, I integrate intelligent features into applications to create innovative user experiences.
                 </p>
-                <p className="text-lg text-slate-600 leading-relaxed">
+                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
                   Currently studying Information Technology at the University of Ilorin, I'm passionate about creating accessible, scalable solutions that solve real-world problems.
                 </p>
-                <div className="flex items-center gap-2 text-slate-500">
+                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                   <MapPin className="w-4 h-4" />
                   <span>University of Ilorin, Nigeria</span>
                 </div>
                 </div>
               </AnimatedSection>
               
-              <AnimatedCard delay={0.4} className="bg-white/70 backdrop-blur-sm border-white/20 shadow-xl p-8">
-                <h3 className="text-xl font-semibold mb-6 text-slate-800">Skills & Technologies</h3>
+              <AnimatedCard delay={0.4} className="bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-xl p-8">
+                <h3 className="text-xl font-semibold mb-6 text-slate-800 dark:text-slate-100">Skills & Technologies</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.map((skill, index) => (
                     <motion.div
                       key={index} 
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: false }}
                       transition={{ 
                         delay: index * 0.05,
                         duration: 0.3
@@ -237,7 +237,7 @@ const Index = () => {
                     >
                       <Badge 
                         variant="secondary" 
-                        className="bg-slate-100 hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-default border-0"
+                        className="bg-slate-100 dark:bg-slate-600 hover:bg-blue-100 dark:hover:bg-blue-800 hover:text-blue-700 dark:hover:text-blue-200 transition-colors cursor-default border-0"
                       >
                         {skill}
                       </Badge>
@@ -254,14 +254,14 @@ const Index = () => {
       <section id="projects" className="py-20">
         <div className="container mx-auto px-6">
           <AnimatedSection>
-            <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">Featured Projects</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center text-slate-800 dark:text-slate-100">Featured Projects</h2>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <AnimatedCard 
                 key={index} 
                 delay={index * 0.1}
-                className={`group bg-white/70 backdrop-blur-sm border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden ${
+                className={`group bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden ${
                   project.featured ? 'lg:col-span-1 ring-2 ring-blue-200' : ''
                 }`}
               >
@@ -269,7 +269,7 @@ const Index = () => {
                   <div className="flex items-start justify-between mb-3">
                     <motion.h3 
                       whileHover={{ scale: 1.02 }}
-                      className="text-xl font-semibold group-hover:text-blue-600 transition-colors"
+                      className="text-xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors"
                     >
                       {project.title}
                     </motion.h3>
@@ -278,10 +278,10 @@ const Index = () => {
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.5 + index * 0.1 }}
-                        className="flex items-center gap-1 bg-gradient-to-r from-blue-100 to-purple-100 px-2 py-1 rounded-full"
+                        className="flex items-center gap-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-800 dark:to-purple-800 px-2 py-1 rounded-full"
                       >
                         <Star className="w-3 h-3 text-blue-600" />
-                        <span className="text-xs font-medium text-blue-700">Featured</span>
+                        <span className="text-xs font-medium text-blue-700 dark:text-blue-200">Featured</span>
                       </motion.div>
                     )}
                   </div>
@@ -299,13 +299,13 @@ const Index = () => {
                     </Badge>
                   )}
                   
-                  <p className="text-slate-600 mb-6 leading-relaxed flex-grow">
+                  <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed flex-grow">
                     {project.description}
                   </p>
                   
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="outline" className="text-xs border-slate-200 text-slate-600">
+                      <Badge key={techIndex} variant="outline" className="text-xs border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300">
                         {tech}
                       </Badge>
                     ))}
@@ -333,10 +333,10 @@ const Index = () => {
       </section>
 
       {/* Experience & Certifications */}
-      <section id="experience" className="py-20 bg-white/50 backdrop-blur-sm">
+      <section id="experience" className="py-20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <AnimatedSection>
-            <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">Experience & Certifications</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center text-slate-800 dark:text-slate-100">Experience & Certifications</h2>
           </AnimatedSection>
           
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -345,20 +345,20 @@ const Index = () => {
               <div>
               <motion.h3 
                 whileHover={{ scale: 1.02 }}
-                className="text-2xl font-semibold mb-6 flex items-center gap-2 text-slate-800"
+                className="text-2xl font-semibold mb-6 flex items-center gap-2 text-slate-800 dark:text-slate-100"
               >
                 <Calendar className="w-5 h-5 text-blue-600" />
                 Experience
               </motion.h3>
               {experiences.map((exp, index) => (
-                <AnimatedCard key={index} delay={index * 0.1} className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg p-6 mb-4">
+                <AnimatedCard key={index} delay={index * 0.1} className="bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-6 mb-4">
                   <div className="flex items-start gap-3">
                     <div className="text-blue-600 mt-1">{exp.icon}</div>
                     <div>
-                      <h4 className="font-semibold text-lg text-slate-800">{exp.title}</h4>
+                      <h4 className="font-semibold text-lg text-slate-800 dark:text-slate-100">{exp.title}</h4>
                       <p className="text-blue-600 font-medium">{exp.company}</p>
-                      <p className="text-sm text-slate-500 mb-2">{exp.period}</p>
-                      <p className="text-slate-600">{exp.description}</p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">{exp.period}</p>
+                      <p className="text-slate-600 dark:text-slate-300">{exp.description}</p>
                     </div>
                   </div>
                 </AnimatedCard>
@@ -367,9 +367,9 @@ const Index = () => {
               <motion.h4 
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ delay: 0.3 }}
-                className="text-lg font-semibold mb-4 flex items-center gap-2 mt-8 text-slate-800"
+                className="text-lg font-semibold mb-4 flex items-center gap-2 mt-8 text-slate-800 dark:text-slate-100"
               >
                 <Users className="w-4 h-4 text-blue-600" />
                 Volunteering
@@ -377,9 +377,9 @@ const Index = () => {
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ delay: 0.4 }}
-                className="space-y-2 text-slate-600"
+                className="space-y-2 text-slate-600 dark:text-slate-300"
               >
                 <p>• iTalk Conference – Media Support</p>
                 <p>• AI in Nigeria Ilorin Community Launch – Technical Support</p>
@@ -392,17 +392,17 @@ const Index = () => {
               <div>
               <motion.h3 
                 whileHover={{ scale: 1.02 }}
-                className="text-2xl font-semibold mb-6 flex items-center gap-2 text-slate-800"
+                className="text-2xl font-semibold mb-6 flex items-center gap-2 text-slate-800 dark:text-slate-100"
               >
                 <Award className="w-5 h-5 text-blue-600" />
                 Certifications
               </motion.h3>
               <div className="space-y-4">
                 {certifications.map((cert, index) => (
-                  <AnimatedCard key={index} delay={index * 0.1} className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg p-4">
-                    <h4 className="font-semibold text-slate-800">{cert.title}</h4>
+                  <AnimatedCard key={index} delay={index * 0.1} className="bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-4">
+                    <h4 className="font-semibold text-slate-800 dark:text-slate-100">{cert.title}</h4>
                     <p className="text-blue-600 text-sm">{cert.issuer} • {cert.year}</p>
-                    <p className="text-slate-600 text-sm mt-1">{cert.description}</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">{cert.description}</p>
                   </AnimatedCard>
                 ))}
               </div>
@@ -416,10 +416,10 @@ const Index = () => {
       <section id="contact" className="py-20">
         <div className="container mx-auto px-6 text-center">
           <AnimatedSection>
-            <h2 className="text-4xl font-bold mb-8 text-slate-800">Let's Connect</h2>
+            <h2 className="text-4xl font-bold mb-8 text-slate-800 dark:text-slate-100">Let's Connect</h2>
           </AnimatedSection>
           <AnimatedSection delay={0.2}>
-            <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 max-w-2xl mx-auto">
             I'm always open to discussing new opportunities and interesting projects.
             </p>
           </AnimatedSection>
@@ -427,7 +427,7 @@ const Index = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: 0.4, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-md mx-auto"
           >
@@ -457,21 +457,21 @@ const Index = () => {
       <motion.footer 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         transition={{ duration: 0.6 }}
-        className="py-8 border-t border-slate-200 bg-white/30 backdrop-blur-sm"
+        className="py-8 border-t border-slate-200 dark:border-slate-700 bg-white/30 dark:bg-slate-800/30 backdrop-blur-sm"
       >
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-slate-600">
-              © 2025 Abdulrasaq Alatare. All rights reserved.
+            <p className="text-slate-600 dark:text-slate-300">
+              © 2025 Abdulrasaq Abdulrasaq. All rights reserved.
             </p>
             <div className="flex gap-4 mt-4 md:mt-0">
               <motion.a 
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
                 href="mailto:ola283dayo@gmail.com" 
-                className="text-slate-500 hover:text-blue-600 transition-colors"
+                className="text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors"
               >
                 <Mail className="w-5 h-5" />
               </motion.a>
@@ -481,7 +481,7 @@ const Index = () => {
                 href="https://github.com/Quantum-techlab" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-slate-500 hover:text-blue-600 transition-colors"
+                className="text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors"
               >
                 <Github className="w-5 h-5" />
               </motion.a>
@@ -491,7 +491,7 @@ const Index = () => {
                 href="https://linkedin.com/in/abdulrasaq-abdulrasaq" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-slate-500 hover:text-blue-600 transition-colors"
+                className="text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
               </motion.a>
