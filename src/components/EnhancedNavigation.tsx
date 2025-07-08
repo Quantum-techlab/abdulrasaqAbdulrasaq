@@ -75,7 +75,7 @@ export const EnhancedNavigation = () => {
                 isScrolled ? 'scale-90' : 'scale-100'
               }`}
             >
-              Abdulrasaq Alatare
+              Abdulrasaq Abdulrasaq
             </motion.div>
 
             {/* Desktop Navigation */}

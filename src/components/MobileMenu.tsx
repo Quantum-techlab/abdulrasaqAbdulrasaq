@@ -128,7 +128,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             className="p-6 border-t border-border"
           >
             <p className="text-sm text-muted-foreground text-center">
-              © 2025 Abdulrasaq Alatare
+              © 2025 Abdulrasaq Abdulrasaq
             </p>
           </motion.div>
         </div>
