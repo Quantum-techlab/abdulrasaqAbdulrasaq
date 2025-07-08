@@ -1,10 +1,15 @@
 
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Award, Users, ArrowRight, Star } from "lucide-react";
 import { EnhancedNavigation } from "@/components/EnhancedNavigation";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedCard } from "@/components/AnimatedCard";
+import { AnimatedButton } from "@/components/AnimatedButton";
+import { FloatingElements } from "@/components/FloatingElements";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -111,6 +116,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <FloatingElements />
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5"></div>
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
@@ -118,49 +124,73 @@ const Index = () => {
         </div>
         
         <div className="container mx-auto px-6 text-center relative z-10">
-          <div className={`transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
-            <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6 shadow-lg">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.25, 0, 1] }}
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6 shadow-lg"
+            >
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium text-slate-600">Available for opportunities</span>
-            </div>
+            </motion.div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+            >
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
                 Software Engineer
               </span>
               <br />
               <span className="text-slate-700">Frontend & AI Enthusiast</span>
-            </h1>
+            </motion.h1>
             
-            <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed"
+            >
               Building innovative digital solutions with modern web technologies, AI integration, and prompt engineering expertise
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button size="lg" className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300" asChild>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            >
+              <AnimatedButton size="lg" className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300" asChild>
                 <a href="mailto:ola283dayo@gmail.com">
                   <Mail className="mr-2 h-4 w-4" />
                   Get In Touch
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </a>
-              </Button>
+              </AnimatedButton>
               
               <div className="flex gap-3">
-                <Button variant="outline" size="lg" className="border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300" asChild>
+                <AnimatedButton variant="outline" size="lg" className="border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300" asChild>
                   <a href="https://github.com/Quantum-techlab" target="_blank" rel="noopener noreferrer">
                     <Github className="mr-2 h-4 w-4" />
                     GitHub
                   </a>
-                </Button>
-                <Button variant="outline" size="lg" className="border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300" asChild>
+                </AnimatedButton>
+                <AnimatedButton variant="outline" size="lg" className="border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300" asChild>
                   <a href="https://linkedin.com/in/abdulrasaq-abdulrasaq" target="_blank" rel="noopener noreferrer">
                     <Linkedin className="mr-2 h-4 w-4" />
                     LinkedIn
                   </a>
-                </Button>
+                </AnimatedButton>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -168,9 +198,12 @@ const Index = () => {
       <section id="about" className="py-20 bg-white/50 backdrop-blur-sm">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">About Me</h2>
+            <AnimatedSection>
+              <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">About Me</h2>
+            </AnimatedSection>
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
+              <AnimatedSection direction="left" delay={0.2}>
+                <div className="space-y-6">
                 <p className="text-lg text-slate-600 leading-relaxed">
                   Hi, I'm <span className="text-blue-600 font-semibold">Abdulrasaq</span> — a software engineer specializing in frontend development with backend capabilities and AI integration expertise.
                 </p>
@@ -184,22 +217,34 @@ const Index = () => {
                   <MapPin className="w-4 h-4" />
                   <span>University of Ilorin, Nigeria</span>
                 </div>
-              </div>
+                </div>
+              </AnimatedSection>
               
-              <Card className="bg-white/70 backdrop-blur-sm border-white/20 shadow-xl p-8">
+              <AnimatedCard delay={0.4} className="bg-white/70 backdrop-blur-sm border-white/20 shadow-xl p-8">
                 <h3 className="text-xl font-semibold mb-6 text-slate-800">Skills & Technologies</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.map((skill, index) => (
-                    <Badge 
+                    <motion.div
                       key={index} 
-                      variant="secondary" 
-                      className="bg-slate-100 hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-default border-0"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        delay: index * 0.05,
+                        duration: 0.3
+                      }}
+                      whileHover={{ scale: 1.1 }}
                     >
-                      {skill}
-                    </Badge>
+                      <Badge 
+                        variant="secondary" 
+                        className="bg-slate-100 hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-default border-0"
+                      >
+                        {skill}
+                      </Badge>
+                    </motion.div>
                   ))}
                 </div>
-              </Card>
+              </AnimatedCard>
             </div>
           </div>
         </div>
@@ -208,25 +253,36 @@ const Index = () => {
       {/* Projects Section */}
       <section id="projects" className="py-20">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">Featured Projects</h2>
+          <AnimatedSection>
+            <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">Featured Projects</h2>
+          </AnimatedSection>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <Card 
+              <AnimatedCard 
                 key={index} 
+                delay={index * 0.1}
                 className={`group bg-white/70 backdrop-blur-sm border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden ${
                   project.featured ? 'lg:col-span-1 ring-2 ring-blue-200' : ''
                 }`}
               >
                 <div className="p-6 h-full flex flex-col">
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-xl font-semibold group-hover:text-blue-600 transition-colors">
+                    <motion.h3 
+                      whileHover={{ scale: 1.02 }}
+                      className="text-xl font-semibold group-hover:text-blue-600 transition-colors"
+                    >
                       {project.title}
-                    </h3>
+                    </motion.h3>
                     {project.featured && (
-                      <div className="flex items-center gap-1 bg-gradient-to-r from-blue-100 to-purple-100 px-2 py-1 rounded-full">
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.5 + index * 0.1 }}
+                        className="flex items-center gap-1 bg-gradient-to-r from-blue-100 to-purple-100 px-2 py-1 rounded-full"
+                      >
                         <Star className="w-3 h-3 text-blue-600" />
                         <span className="text-xs font-medium text-blue-700">Featured</span>
-                      </div>
+                      </motion.div>
                     )}
                   </div>
                   
@@ -256,21 +312,21 @@ const Index = () => {
                   </div>
                   
                   <div className="flex gap-3 mt-auto">
-                    <Button variant="outline" size="sm" className="flex-1 hover:bg-slate-50" asChild>
+                    <AnimatedButton variant="outline" size="sm" className="flex-1 hover:bg-slate-50" asChild>
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="mr-2 h-3 w-3" />
                         Code
                       </a>
-                    </Button>
-                    <Button variant="outline" size="sm" className="flex-1 hover:bg-slate-50" asChild>
+                    </AnimatedButton>
+                    <AnimatedButton variant="outline" size="sm" className="flex-1 hover:bg-slate-50" asChild>
                       <a href={project.demo} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="mr-2 h-3 w-3" />
                         Demo
                       </a>
-                    </Button>
+                    </AnimatedButton>
                   </div>
                 </div>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         </div>
@@ -279,17 +335,23 @@ const Index = () => {
       {/* Experience & Certifications */}
       <section id="experience" className="py-20 bg-white/50 backdrop-blur-sm">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">Experience & Certifications</h2>
+          <AnimatedSection>
+            <h2 className="text-4xl font-bold mb-12 text-center text-slate-800">Experience & Certifications</h2>
+          </AnimatedSection>
           
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Experience */}
-            <div>
-              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2 text-slate-800">
+            <AnimatedSection direction="left" delay={0.2}>
+              <div>
+              <motion.h3 
+                whileHover={{ scale: 1.02 }}
+                className="text-2xl font-semibold mb-6 flex items-center gap-2 text-slate-800"
+              >
                 <Calendar className="w-5 h-5 text-blue-600" />
                 Experience
-              </h3>
+              </motion.h3>
               {experiences.map((exp, index) => (
-                <Card key={index} className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg p-6 mb-4">
+                <AnimatedCard key={index} delay={index * 0.1} className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg p-6 mb-4">
                   <div className="flex items-start gap-3">
                     <div className="text-blue-600 mt-1">{exp.icon}</div>
                     <div>
@@ -299,35 +361,53 @@ const Index = () => {
                       <p className="text-slate-600">{exp.description}</p>
                     </div>
                   </div>
-                </Card>
+                </AnimatedCard>
               ))}
               
-              <h4 className="text-lg font-semibold mb-4 flex items-center gap-2 mt-8 text-slate-800">
+              <motion.h4 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="text-lg font-semibold mb-4 flex items-center gap-2 mt-8 text-slate-800"
+              >
                 <Users className="w-4 h-4 text-blue-600" />
                 Volunteering
-              </h4>
-              <div className="space-y-2 text-slate-600">
+              </motion.h4>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="space-y-2 text-slate-600"
+              >
                 <p>• iTalk Conference – Media Support</p>
                 <p>• AI in Nigeria Ilorin Community Launch – Technical Support</p>
+              </motion.div>
               </div>
-            </div>
+            </AnimatedSection>
 
             {/* Certifications */}
-            <div>
-              <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2 text-slate-800">
+            <AnimatedSection direction="right" delay={0.4}>
+              <div>
+              <motion.h3 
+                whileHover={{ scale: 1.02 }}
+                className="text-2xl font-semibold mb-6 flex items-center gap-2 text-slate-800"
+              >
                 <Award className="w-5 h-5 text-blue-600" />
                 Certifications
-              </h3>
+              </motion.h3>
               <div className="space-y-4">
                 {certifications.map((cert, index) => (
-                  <Card key={index} className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg p-4">
+                  <AnimatedCard key={index} delay={index * 0.1} className="bg-white/70 backdrop-blur-sm border-white/20 shadow-lg p-4">
                     <h4 className="font-semibold text-slate-800">{cert.title}</h4>
                     <p className="text-blue-600 text-sm">{cert.issuer} • {cert.year}</p>
                     <p className="text-slate-600 text-sm mt-1">{cert.description}</p>
-                  </Card>
+                  </AnimatedCard>
                 ))}
               </div>
-            </div>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -335,55 +415,90 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-8 text-slate-800">Let's Connect</h2>
-          <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
+          <AnimatedSection>
+            <h2 className="text-4xl font-bold mb-8 text-slate-800">Let's Connect</h2>
+          </AnimatedSection>
+          <AnimatedSection delay={0.2}>
+            <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
             I'm always open to discussing new opportunities and interesting projects.
-          </p>
+            </p>
+          </AnimatedSection>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-md mx-auto">
-            <Button size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300" asChild>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center max-w-md mx-auto"
+          >
+            <AnimatedButton size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300" asChild>
               <a href="mailto:ola283dayo@gmail.com">
                 <Mail className="mr-2 h-4 w-4" />
                 Email Me
               </a>
-            </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto border-slate-200 hover:bg-slate-50" asChild>
+            </AnimatedButton>
+            <AnimatedButton variant="outline" size="lg" className="w-full sm:w-auto border-slate-200 hover:bg-slate-50" asChild>
               <a href="https://github.com/Quantum-techlab" target="_blank" rel="noopener noreferrer">
                 <Github className="mr-2 h-4 w-4" />
                 GitHub
               </a>
-            </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto border-slate-200 hover:bg-slate-50" asChild>
+            </AnimatedButton>
+            <AnimatedButton variant="outline" size="lg" className="w-full sm:w-auto border-slate-200 hover:bg-slate-50" asChild>
               <a href="https://linkedin.com/in/abdulrasaq-abdulrasaq" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="mr-2 h-4 w-4" />
                 LinkedIn
               </a>
-            </Button>
-          </div>
+            </AnimatedButton>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-slate-200 bg-white/30 backdrop-blur-sm">
+      <motion.footer 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="py-8 border-t border-slate-200 bg-white/30 backdrop-blur-sm"
+      >
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-slate-600">
               © 2025 Abdulrasaq Alatare. All rights reserved.
             </p>
             <div className="flex gap-4 mt-4 md:mt-0">
-              <a href="mailto:ola283dayo@gmail.com" className="text-slate-500 hover:text-blue-600 transition-colors">
+              <motion.a 
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+                href="mailto:ola283dayo@gmail.com" 
+                className="text-slate-500 hover:text-blue-600 transition-colors"
+              >
                 <Mail className="w-5 h-5" />
-              </a>
-              <a href="https://github.com/Quantum-techlab" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-600 transition-colors">
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.2, rotate: -5 }}
+                whileTap={{ scale: 0.9 }}
+                href="https://github.com/Quantum-techlab" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-slate-500 hover:text-blue-600 transition-colors"
+              >
                 <Github className="w-5 h-5" />
-              </a>
-              <a href="https://linkedin.com/in/abdulrasaq-abdulrasaq" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-600 transition-colors">
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+                href="https://linkedin.com/in/abdulrasaq-abdulrasaq" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-slate-500 hover:text-blue-600 transition-colors"
+              >
                 <Linkedin className="w-5 h-5" />
-              </a>
+              </motion.a>
             </div>
           </div>
         </div>
-      </footer>
+      </motion.footer>
     </div>
   );
 };

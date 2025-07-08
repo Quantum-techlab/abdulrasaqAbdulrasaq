@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -24,26 +25,47 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   onSectionClick 
 }) => {
   return (
-    <>
+    <AnimatePresence>
+      {isOpen && (
+        <>
       {/* Backdrop */}
-      <div 
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
         onClick={onClose}
       />
       
       {/* Menu */}
-      <div 
-        className={`fixed top-0 right-0 h-full w-80 bg-background/95 backdrop-blur-xl border-l border-border z-50 transform transition-transform duration-300 ease-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+      <motion.div 
+        initial={{ x: '100%' }}
+        animate={{ x: 0 }}
+        exit={{ x: '100%' }}
+        transition={{ 
+          type: "spring",
+          damping: 25,
+          stiffness: 200
+        }}
+        className="fixed top-0 right-0 h-full w-80 bg-background/95 backdrop-blur-xl border-l border-border z-50"
       >
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex justify-between items-center p-6 border-b border-border">
-            <div className="text-xl font-bold text-gradient">Menu</div>
-            <Button
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl font-bold text-gradient"
+            >
+              Menu
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Button
               variant="ghost"
               size="icon"
               onClick={onClose}
@@ -51,22 +73,26 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             >
               <X className="h-5 w-5" />
             </Button>
+            </motion.div>
           </div>
           
           {/* Navigation Items */}
           <nav className="flex-1 px-6 py-8">
             <ul className="space-y-6">
               {menuItems.map((item, index) => (
-                <li 
+                <motion.li 
                   key={item.href}
-                  className={`transform transition-all duration-300 delay-${index * 100}`}
-                  style={{
-                    transform: isOpen ? 'translateX(0)' : 'translateX(20px)',
-                    opacity: isOpen ? 1 : 0,
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ 
+                    delay: 0.1 + index * 0.1,
+                    duration: 0.3
                   }}
                 >
-                  <a
+                  <motion.a
                     href={item.href}
+                    whileHover={{ x: 10 }}
+                    transition={{ duration: 0.2 }}
                     onClick={(e) => {
                       e.preventDefault();
                       onSectionClick(item.href.substring(1));
@@ -79,25 +105,36 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                     }`}
                   >
                     {item.label}
-                    <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transform origin-left transition-transform duration-300 ${
-                      activeSection === item.href.substring(1) 
-                        ? 'scale-x-100' 
-                        : 'scale-x-0 group-hover:scale-x-100'
-                    }`} />
-                  </a>
-                </li>
+                    <motion.span 
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transform origin-left"
+                      initial={{ scaleX: 0 }}
+                      animate={{ 
+                        scaleX: activeSection === item.href.substring(1) ? 1 : 0 
+                      }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.a>
+                </motion.li>
               ))}
             </ul>
           </nav>
           
           {/* Footer */}
-          <div className="p-6 border-t border-border">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="p-6 border-t border-border"
+          >
             <p className="text-sm text-muted-foreground text-center">
               © 2025 Abdulrasaq Alatare
             </p>
-          </div>
+          </motion.div>
         </div>
-      </div>
-    </>
+      </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };

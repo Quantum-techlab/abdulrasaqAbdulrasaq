@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
@@ -53,7 +54,10 @@ export const EnhancedNavigation = () => {
   return (
     <>
       <ScrollProgress />
-      <nav 
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
         className={`fixed top-0 w-full z-40 transition-all duration-500 ${
           isScrolled 
             ? 'py-2 bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg' 
@@ -64,19 +68,23 @@ export const EnhancedNavigation = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <div 
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
               className={`text-2xl font-bold text-gradient transition-all duration-500 ${
                 isScrolled ? 'scale-90' : 'scale-100'
               }`}
             >
               Abdulrasaq Alatare
-            </div>
+            </motion.div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
               {menuItems.map((item) => (
-                <button
+                <motion.button
                   key={item.href}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(item.href.substring(1))}
                   className={`relative px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 group ${
                     activeSection === item.href.substring(1)
@@ -85,12 +93,16 @@ export const EnhancedNavigation = () => {
                   }`}
                 >
                   {item.label}
-                  <span className={`absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transform -translate-x-1/2 transition-all duration-300 ${
-                    activeSection === item.href.substring(1) 
-                      ? 'w-6' 
-                      : 'w-0 group-hover:w-6'
-                  }`} />
-                </button>
+                  <motion.span 
+                    className="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transform -translate-x-1/2"
+                    initial={{ width: 0 }}
+                    animate={{ 
+                      width: activeSection === item.href.substring(1) ? 24 : 0 
+                    }}
+                    whileHover={{ width: 24 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
               ))}
               
               <div className="ml-4 flex items-center space-x-2">
@@ -105,7 +117,11 @@ export const EnhancedNavigation = () => {
               <LanguageToggle />
               <ThemeToggle />
               <ProfilePopover />
-              <Button
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsMobileMenuOpen(true)}
@@ -113,10 +129,11 @@ export const EnhancedNavigation = () => {
               >
                 <Menu className="h-5 w-5" />
               </Button>
+              </motion.div>
             </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu */}
       <MobileMenu
