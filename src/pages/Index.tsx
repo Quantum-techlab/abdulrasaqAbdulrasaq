@@ -20,7 +20,17 @@ const Index = () => {
 
   const projects = [
     {
-      title: "Attendance System for IIH",
+      title: "FaceTrust AI",
+      description: "An AI-powered facial recognition system for secure identity verification and centralized data access. Uses deep learning models to provide instant, reliable identity verification connecting with databases (NIN, BVN, Passport).",
+      tech: ["React", "AI/ML", "Deep Learning", "Facial Recognition", "Database Integration"],
+      github: "https://github.com/Quantum-techlab",
+      demo: "https://facetrust-rho.vercel.app",
+      status: "Live",
+      featured: true,
+      highlight: "AI-Powered"
+    },
+    {
+      title: "Attendance System for IIH", 
       description: "Modern attendance tracking system for Ilorin Innovation Hub interns with real-time monitoring, analytics dashboard, and automated reporting features.",
       tech: ["React", "Supabase", "TypeScript", "Tailwind CSS"],
       github: "https://github.com/Quantum-techlab",
@@ -34,7 +44,7 @@ const Index = () => {
       tech: ["React", "OCR", "Cloud Storage", "Web APIs"],
       github: "https://github.com/Quantum-techlab",
       demo: "#",
-      status: "Active",
+      status: "Active", 
       featured: true
     },
     {
@@ -65,11 +75,20 @@ const Index = () => {
 
   const experiences = [
     {
+      title: "Software Director",
+      company: "ITSA - University of Ilorin",
+      period: "2025 – Present",
+      description: "Leading student-driven software initiatives and fostering collaboration within the department. Organizing tech workshops, hackathons, and mentorship programs while driving innovation through AI-powered projects and modern web technologies.",
+      icon: <Users className="w-4 h-4" />,
+      type: "leadership"
+    },
+    {
       title: "Software Engineer Intern",
       company: "Ilorin Innovation Hub",
       period: "2025",
       description: "Developed full-stack features, built attendance tracking systems, and provided technical support for events",
-      icon: <MapPin className="w-4 h-4" />
+      icon: <MapPin className="w-4 h-4" />,
+      type: "internship"
     }
   ];
 
@@ -273,17 +292,29 @@ const Index = () => {
                     >
                       {project.title}
                     </motion.h3>
-                    {project.featured && (
-                      <motion.div 
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                        className="flex items-center gap-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-800 dark:to-purple-800 px-2 py-1 rounded-full"
-                      >
-                        <Star className="w-3 h-3 text-blue-600" />
-                        <span className="text-xs font-medium text-blue-700 dark:text-blue-200">Featured</span>
-                      </motion.div>
-                    )}
+                   <div className="flex items-center gap-2">
+                     {project.featured && (
+                       <motion.div 
+                         initial={{ scale: 0 }}
+                         animate={{ scale: 1 }}
+                         transition={{ delay: 0.5 + index * 0.1 }}
+                         className="flex items-center gap-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-800 dark:to-purple-800 px-2 py-1 rounded-full"
+                       >
+                         <Star className="w-3 h-3 text-blue-600" />
+                         <span className="text-xs font-medium text-blue-700 dark:text-blue-200">Featured</span>
+                       </motion.div>
+                     )}
+                     {project.highlight && (
+                       <motion.div 
+                         initial={{ scale: 0 }}
+                         animate={{ scale: 1 }}
+                         transition={{ delay: 0.7 + index * 0.1 }}
+                         className="flex items-center gap-1 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 px-2 py-1 rounded-full"
+                       >
+                         <span className="text-xs font-medium text-purple-700 dark:text-purple-200">{project.highlight}</span>
+                       </motion.div>
+                     )}
+                   </div>
                   </div>
                   
                   {project.status && (
@@ -350,19 +381,26 @@ const Index = () => {
                 <Calendar className="w-5 h-5 text-blue-600" />
                 Experience
               </motion.h3>
-              {experiences.map((exp, index) => (
-                <AnimatedCard key={index} delay={index * 0.1} className="bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-6 mb-4">
-                  <div className="flex items-start gap-3">
-                    <div className="text-blue-600 mt-1">{exp.icon}</div>
-                    <div>
-                      <h4 className="font-semibold text-lg text-slate-800 dark:text-slate-100">{exp.title}</h4>
-                      <p className="text-blue-600 font-medium">{exp.company}</p>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">{exp.period}</p>
-                      <p className="text-slate-600 dark:text-slate-300">{exp.description}</p>
-                    </div>
-                  </div>
-                </AnimatedCard>
-              ))}
+                  {experiences.map((exp, index) => (
+                 <AnimatedCard key={index} delay={index * 0.1} className={`bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-6 mb-4 ${exp.type === 'leadership' ? 'ring-2 ring-purple-200 dark:ring-purple-800' : ''}`}>
+                   <div className="flex items-start gap-3">
+                     <div className={`${exp.type === 'leadership' ? 'text-purple-600' : 'text-blue-600'} mt-1`}>{exp.icon}</div>
+                     <div>
+                       <div className="flex items-center gap-2 mb-1">
+                         <h4 className="font-semibold text-lg text-slate-800 dark:text-slate-100">{exp.title}</h4>
+                         {exp.type === 'leadership' && (
+                           <Badge variant="outline" className="text-xs border-purple-200 text-purple-600 bg-purple-50 dark:border-purple-800 dark:text-purple-300 dark:bg-purple-900/30">
+                             Leadership
+                           </Badge>
+                         )}
+                       </div>
+                       <p className={`${exp.type === 'leadership' ? 'text-purple-600' : 'text-blue-600'} font-medium`}>{exp.company}</p>
+                       <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">{exp.period}</p>
+                       <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{exp.description}</p>
+                     </div>
+                   </div>
+                 </AnimatedCard>
+               ))}
               
               <motion.h4 
                 initial={{ opacity: 0, x: -20 }}
@@ -450,6 +488,53 @@ const Index = () => {
               </a>
             </AnimatedButton>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <AnimatedSection>
+              <h2 className="text-4xl font-bold mb-6 text-slate-800 dark:text-slate-100">Let's Work Together</h2>
+              <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 max-w-2xl mx-auto">
+                I'm always interested in new opportunities and exciting projects. Let's discuss how we can build something amazing together.
+              </p>
+            </AnimatedSection>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <AnimatedCard delay={0.1} className="bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-6 text-center">
+                <Mail className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+                <h3 className="font-semibold text-slate-800 dark:text-slate-100 mb-2">Email</h3>
+                <p className="text-slate-600 dark:text-slate-300">ola283dayo@gmail.com</p>
+              </AnimatedCard>
+              
+              <AnimatedCard delay={0.2} className="bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-6 text-center">
+                <Linkedin className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+                <h3 className="font-semibold text-slate-800 dark:text-slate-100 mb-2">LinkedIn</h3>
+                <p className="text-slate-600 dark:text-slate-300">Connect with me</p>
+              </AnimatedCard>
+              
+              <AnimatedCard delay={0.3} className="bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-6 text-center">
+                <Github className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+                <h3 className="font-semibold text-slate-800 dark:text-slate-100 mb-2">GitHub</h3>
+                <p className="text-slate-600 dark:text-slate-300">Check my work</p>
+              </AnimatedCard>
+            </div>
+
+            <AnimatedSection delay={0.4}>
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
+                <h3 className="text-2xl font-bold mb-4">Ready to start a project?</h3>
+                <p className="mb-6 opacity-90">I'm currently available for freelance work and full-time opportunities.</p>
+                <AnimatedButton size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100" asChild>
+                  <a href="https://chat.openai.com/mnt/data/Abdulrasaq_Abdulrasaq_Resume_2025.pdf" target="_blank" rel="noopener noreferrer">
+                    Download Resume
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </AnimatedButton>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
