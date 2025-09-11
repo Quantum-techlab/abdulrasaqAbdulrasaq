@@ -107,8 +107,8 @@ const Index = () => {
     {
       title: "AI for Africa",
       issuer: "TechMindsetAfrica",
-      year: "2024",
-      description: "Artificial Intelligence fundamentals"
+      year: "2025",
+      description: "Artificial Intelligence"
     },
     {
       title: "Basic Computing and Networking",
