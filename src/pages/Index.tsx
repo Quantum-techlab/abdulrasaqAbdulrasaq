@@ -1,10 +1,9 @@
-
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Award, Users, ArrowRight, Star, Download } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Award, Users, ArrowRight, Star, Download, Code, Zap } from "lucide-react";
 import { EnhancedNavigation } from "@/components/EnhancedNavigation";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedCard } from "@/components/AnimatedCard";
@@ -26,7 +25,7 @@ const Index = () => {
   const projects = [
     {
       title: "FaceTrust AI",
-      description: "An AI-powered facial recognition system for secure identity verification and centralized data access. Uses deep learning models to provide instant, reliable identity verification connecting with databases (NIN, BVN, Passport).",
+      description: "An AI-powered facial recognition system for secure identity verification and centralized data access. Uses deep learning models to provide instant, reliable identity verification and access control.",
       tech: ["React", "AI/ML", "Deep Learning", "Facial Recognition", "Database Integration"],
       github: "https://github.com/Quantum-techlab",
       demo: "https://facetrust-rho.vercel.app",
@@ -83,7 +82,7 @@ const Index = () => {
       title: "Software Director",
       company: "ITSA - University of Ilorin",
       period: "2025 – Present",
-      description: "Leading student-driven software initiatives and fostering collaboration within the department. Organizing tech workshops, hackathons, and mentorship programs while driving innovation through AI-powered projects and modern web technologies.",
+      description: "Leading student-driven software initiatives and fostering collaboration within the department. Organizing tech workshops, hackathons, and mentorship programs while driving innovation.",
       icon: <Users className="w-4 h-4" />,
       type: "leadership"
     },
@@ -119,17 +118,11 @@ const Index = () => {
   ];
 
   const skills = [
-    // Frontend
     "HTML", "CSS", "JavaScript", "TypeScript", "React", "Vite", "Tailwind CSS",
-    // Backend & Database
     "Node.js", "Express.js", "Supabase", "Firebase", "PostgreSQL", "MongoDB",
-    // API & Integration
     "REST APIs", "GraphQL", "Web APIs", "OCR Integration",
-    // AI & Prompt Engineering
     "AI Integration", "Prompt Engineering", "ChatGPT API", "Machine Learning Basics",
-    // DevOps & Tools
     "Git/GitHub", "Docker", "Cloud Deployment", "Authentication",
-    // Design & UX
     "Responsive Design", "Dashboards", "Accessibility", "UI/UX Design"
   ];
 
@@ -138,113 +131,222 @@ const Index = () => {
       <ParticleBackground />
       <EnhancedNavigation />
 
-      {/* Hero Section */}
+      {/* Professional Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-        <InteractiveGrid />
-        <FloatingElements />
+        {/* Background Elements */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.2)_0%,transparent_70%)]"></div>
+          {/* Animated Grid */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:20px_20px] dark:bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)]" />
+          
+          {/* Floating Orbs */}
           <motion.div 
             animate={{ 
+              x: [0, 100, 0],
+              y: [0, -50, 0],
               scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-              opacity: [0.3, 0.5, 0.3]
+              rotate: [0, 180, 360]
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
+            className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-xl"
           />
           <motion.div 
             animate={{ 
+              x: [0, -80, 0],
+              y: [0, 70, 0],
               scale: [1.2, 1, 1.2],
-              rotate: [360, 180, 0],
-              opacity: [0.5, 0.3, 0.5]
+              rotate: [360, 180, 0]
             }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"
+            className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-xl"
           />
-        </div>
-        
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+          
+          {/* Code-like decorative elements */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.1 }}
+            transition={{ delay: 2 }}
+            className="absolute top-1/4 right-20 text-blue-300/20 dark:text-blue-500/20 font-mono text-sm hidden lg:block"
           >
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/20 rounded-full px-6 py-3 mb-8 shadow-2xl"
-            >
-              <motion.div 
-                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-3 h-3 bg-green-500 rounded-full"
-              />
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Available for opportunities</span>
-            </motion.div>
+            {`
+const developer = {
+  name: 'Abdulrasaq',
+  skills: ['React', 'Node.js'],
+  passion: 'Building solutions'
+};
+            `}
+          </motion.div>
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-6xl mx-auto text-center">
             
+            {/* Status Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+              className="flex justify-center mb-8"
+            >
+              <div className="inline-flex items-center gap-3 backdrop-blur-xl bg-white/80 dark:bg-slate-800/80 border border-white/30 dark:border-slate-700/50 rounded-full px-6 py-3 shadow-2xl">
+                <motion.div 
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-3 h-3 bg-emerald-500 rounded-full shadow-lg shadow-emerald-500/50"
+                />
+                <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  Available for New Opportunities
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Main Hero Content */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1, ease: [0.23, 1, 0.32, 1] }}
-              className="mb-6"
+              transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+              className="space-y-8"
             >
-              <h1 className="text-6xl md:text-8xl font-bold leading-tight mb-4">
-                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-                  Abdulrasaq
-                </span>
-              </h1>
-              <div className="text-3xl md:text-5xl font-semibold text-slate-700 dark:text-slate-200 min-h-[60px] flex items-center justify-center">
-                <TypewriterText 
-                  texts={[
-                    "Software Engineer", 
-                    "Frontend Developer", 
-                    "AI Enthusiast", 
-                    "Problem Solver"
-                  ]} 
-                  className="text-gradient"
-                />
+              {/* Name and Title */}
+              <div>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-4">
+                  <span className="bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 dark:from-white dark:via-blue-300 dark:to-white bg-clip-text text-transparent">
+                    Abdulrasaq
+                  </span>
+                  <span className="block text-3xl md:text-5xl lg:text-6xl font-semibold text-slate-600 dark:text-slate-300 mt-2">
+                    Abdulrasaq
+                  </span>
+                </h1>
+                
+                {/* Animated Role */}
+                <div className="h-16 flex items-center justify-center">
+                  <div className="text-2xl md:text-4xl font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                    <TypewriterText 
+                      texts={[
+                        "Full-Stack Developer",
+                        "Software Engineer", 
+                        "React Specialist",
+                        "AI Integration Expert"
+                      ]} 
+                      className="text-gradient"
+                    />
+                  </div>
+                </div>
               </div>
-            </motion.div>
-            
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed"
-            >
-              Building innovative digital solutions with modern web technologies, AI integration, and prompt engineering expertise
-            </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-            >
-              <ModernButton variant="primary" size="lg" href="mailto:ola283dayo@gmail.com">
-                <Mail className="w-5 h-5" />
-                Get In Touch
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </ModernButton>
-              
-              <ModernButton variant="outline" size="lg" href="https://chat.openai.com/mnt/data/Abdulrasaq_Abdulrasaq_Resume_2025.pdf" target="_blank" rel="noopener noreferrer">
-                <Download className="w-5 h-5" />
-                Download Resume
-              </ModernButton>
-              
-              <div className="flex gap-4">
-                <ModernButton variant="ghost" href="https://github.com/Quantum-techlab" target="_blank" rel="noopener noreferrer">
-                  <Github className="w-5 h-5" />
+
+              {/* Description */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                className="max-w-4xl mx-auto"
+              >
+                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                  Passionate about crafting exceptional digital experiences through clean, efficient code. 
+                  I specialize in modern web technologies and AI integration to build scalable, 
+                  user-centric applications that make a real impact.
+                </p>
+                
+                {/* Location */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                  className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400"
+                >
+                  <MapPin className="w-4 h-4" />
+                  <span>University of Ilorin, Nigeria</span>
+                </motion.div>
+              </motion.div>
+
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
+              >
+                <ModernButton variant="primary" size="lg" href="mailto:ola283dayo@gmail.com">
+                  <Mail className="w-5 h-5" />
+                  Let's Connect
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </ModernButton>
-                <ModernButton variant="ghost" href="https://linkedin.com/in/abdulrasaq-abdulrasaq" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="w-5 h-5" />
+
+                <ModernButton variant="outline" size="lg" href="https://chat.openai.com/mnt/data/Abdulrasaq_Abdulrasaq_Resume_2025.pdf" target="_blank" rel="noopener noreferrer">
+                  <Download className="w-5 h-5" />
+                  Download Resume
                 </ModernButton>
-              </div>
+
+                {/* Social Links */}
+                <div className="flex items-center gap-3 ml-0 sm:ml-4">
+                  <ModernButton variant="ghost" href="https://github.com/Quantum-techlab" target="_blank" rel="noopener noreferrer">
+                    <Github className="w-5 h-5" />
+                  </ModernButton>
+                  <ModernButton variant="ghost" href="https://linkedin.com/in/abdulrasaq-abdulrasaq" target="_blank" rel="noopener noreferrer">
+                    <Linkedin className="w-5 h-5" />
+                  </ModernButton>
+                </div>
+              </motion.div>
+
+              {/* Professional Stats */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-12"
+              >
+                {[
+                  { number: "3+", label: "Years Experience", icon: <Calendar className="w-5 h-5" /> },
+                  { number: "15+", label: "Projects Completed", icon: <Code className="w-5 h-5" /> },
+                  { number: "5+", label: "Technologies Mastered", icon: <Zap className="w-5 h-5" /> },
+                  { number: "3", label: "Certifications", icon: <Award className="w-5 h-5" /> }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ 
+                      delay: 1.4 + index * 0.1,
+                      duration: 0.6,
+                      ease: [0.23, 1, 0.32, 1]
+                    }}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="text-center p-6 bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-white/30 dark:border-slate-700/50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <div className="flex items-center justify-center mb-3 text-blue-600 dark:text-blue-400">
+                      {stat.icon}
+                    </div>
+                    <div className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-1">
+                      {stat.number}
+                    </div>
+                    <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-6 h-10 border-2 border-slate-300 dark:border-slate-600 rounded-full flex justify-center"
+          >
+            <motion.div
+              animate={{ y: [0, 12, 0], opacity: [0, 1, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="w-1 h-3 bg-slate-400 dark:bg-slate-500 rounded-full mt-2"
+            />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* About Section */}
@@ -271,13 +373,10 @@ const Index = () => {
               >
                 <div className="space-y-6 text-lg leading-relaxed">
                   <p className="text-slate-600 dark:text-slate-300">
-                    Hi, I'm <span className="text-gradient font-semibold text-xl">Abdulrasaq</span> — a passionate software engineer specializing in frontend development with full-stack capabilities and AI integration expertise.
+                    Hi, I'm <span className="text-gradient font-semibold text-xl">Abdulrasaq</span> — a passionate software engineer specializing in frontend development with full-stack capabilities. I craft exceptional digital experiences using React, Node.js, and cutting-edge cloud technologies. As an AI enthusiast and prompt engineer, I seamlessly integrate intelligent features into web applications.
                   </p>
                   <p className="text-slate-600 dark:text-slate-300">
-                    I craft exceptional digital experiences using React, Node.js, and cutting-edge cloud technologies. As an AI enthusiast and prompt engineer, I seamlessly integrate intelligent features to create innovative, user-centric applications.
-                  </p>
-                  <p className="text-slate-600 dark:text-slate-300">
-                    Currently pursuing Information Technology at the University of Ilorin while serving as Software Director of ITSA, I'm dedicated to building accessible, scalable solutions that make a real-world impact.
+                    Currently pursuing Information Technology at the University of Ilorin while serving as Software Director of ITSA, I'm dedicated to building accessible, scalable solutions that make a real impact.
                   </p>
                 </div>
                 
@@ -320,7 +419,7 @@ const Index = () => {
                     >
                       <Badge 
                         variant="secondary" 
-                        className="text-sm py-2 px-4 bg-gradient-to-r from-slate-100/80 to-slate-200/80 dark:from-slate-800/80 dark:to-slate-700/80 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900/50 dark:hover:to-purple-900/50 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-300 cursor-default border border-slate-200/50 dark:border-slate-600/50 backdrop-blur-sm"
+                        className="text-sm py-2 px-4 bg-gradient-to-r from-slate-100/80 to-slate-200/80 dark:from-slate-800/80 dark:to-slate-700/80 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900/50 dark:hover:to-purple-900/50"
                       >
                         {skill}
                       </Badge>
@@ -449,7 +548,7 @@ const Index = () => {
                 Experience
               </motion.h3>
                   {experiences.map((exp, index) => (
-                 <AnimatedCard key={index} delay={index * 0.1} className={`bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-6 mb-4 ${exp.type === 'leadership' ? 'ring-2 ring-purple-200 dark:ring-purple-800' : ''}`}>
+                 <AnimatedCard key={index} delay={index * 0.1} className={`bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg p-6 mb-4 ${exp.type === 'leadership' ? 'ring-2 ring-purple-400/30 dark:ring-purple-500/30' : ''}`}>
                    <div className="flex items-start gap-3">
                      <div className={`${exp.type === 'leadership' ? 'text-purple-600' : 'text-blue-600'} mt-1`}>{exp.icon}</div>
                      <div>
