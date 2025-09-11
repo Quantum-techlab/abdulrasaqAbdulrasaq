@@ -4,12 +4,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Award, Users, ArrowRight, Star } from "lucide-react";
+import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Award, Users, ArrowRight, Star, Download } from "lucide-react";
 import { EnhancedNavigation } from "@/components/EnhancedNavigation";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedCard } from "@/components/AnimatedCard";
 import { AnimatedButton } from "@/components/AnimatedButton";
 import { FloatingElements } from "@/components/FloatingElements";
+import { GlassCard } from "@/components/GlassCard";
+import { ParticleBackground } from "@/components/ParticleBackground";
+import { TypewriterText } from "@/components/TypewriterText";
+import { ModernButton } from "@/components/ModernButton";
+import { InteractiveGrid } from "@/components/InteractiveGrid";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -129,53 +134,85 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300">
-      {/* Enhanced Navigation */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-500">
+      <ParticleBackground />
       <EnhancedNavigation />
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <InteractiveGrid />
         <FloatingElements />
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5 dark:from-blue-400/10 dark:via-purple-400/10 dark:to-pink-400/10"></div>
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400/10 dark:bg-blue-300/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/10 dark:bg-purple-300/20 rounded-full blur-3xl"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.2)_0%,transparent_70%)]"></div>
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
+          />
+          <motion.div 
+            animate={{ 
+              scale: [1.2, 1, 1.2],
+              rotate: [360, 180, 0],
+              opacity: [0.5, 0.3, 0.5]
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"
+          />
         </div>
         
         <div className="container mx-auto px-6 text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.25, 0, 1] }}
+            transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
           >
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6 shadow-lg"
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+              className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/20 rounded-full px-6 py-3 mb-8 shadow-2xl"
             >
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-slate-600 dark:text-slate-300">Available for opportunities</span>
+              <motion.div 
+                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-3 h-3 bg-green-500 rounded-full"
+              />
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Available for opportunities</span>
             </motion.div>
             
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+              transition={{ delay: 0.5, duration: 1, ease: [0.23, 1, 0.32, 1] }}
+              className="mb-6"
             >
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-                Software Engineer
-              </span>
-              <br />
-              <span className="text-slate-700 dark:text-slate-200">Frontend & AI Enthusiast</span>
-            </motion.h1>
+              <h1 className="text-6xl md:text-8xl font-bold leading-tight mb-4">
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+                  Abdulrasaq
+                </span>
+              </h1>
+              <div className="text-3xl md:text-5xl font-semibold text-slate-700 dark:text-slate-200 min-h-[60px] flex items-center justify-center">
+                <TypewriterText 
+                  texts={[
+                    "Software Engineer", 
+                    "Frontend Developer", 
+                    "AI Enthusiast", 
+                    "Problem Solver"
+                  ]} 
+                  className="text-gradient"
+                />
+              </div>
+            </motion.div>
             
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed"
+              transition={{ delay: 0.8, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+              className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed"
             >
               Building innovative digital solutions with modern web technologies, AI integration, and prompt engineering expertise
             </motion.p>
@@ -183,30 +220,27 @@ const Index = () => {
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+              transition={{ delay: 1, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
-              <AnimatedButton size="lg" className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300" asChild>
-                <a href="mailto:ola283dayo@gmail.com">
-                  <Mail className="mr-2 h-4 w-4" />
-                  Get In Touch
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </AnimatedButton>
+              <ModernButton variant="primary" size="lg" href="mailto:ola283dayo@gmail.com">
+                <Mail className="w-5 h-5" />
+                Get In Touch
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </ModernButton>
               
-              <div className="flex gap-3">
-                <AnimatedButton variant="outline" size="lg" className="border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300" asChild>
-                  <a href="https://github.com/Quantum-techlab" target="_blank" rel="noopener noreferrer">
-                    <Github className="mr-2 h-4 w-4" />
-                    GitHub
-                  </a>
-                </AnimatedButton>
-                <AnimatedButton variant="outline" size="lg" className="border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all duration-300" asChild>
-                  <a href="https://linkedin.com/in/abdulrasaq-abdulrasaq" target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="mr-2 h-4 w-4" />
-                    LinkedIn
-                  </a>
-                </AnimatedButton>
+              <ModernButton variant="outline" size="lg" href="https://chat.openai.com/mnt/data/Abdulrasaq_Abdulrasaq_Resume_2025.pdf" target="_blank" rel="noopener noreferrer">
+                <Download className="w-5 h-5" />
+                Download Resume
+              </ModernButton>
+              
+              <div className="flex gap-4">
+                <ModernButton variant="ghost" href="https://github.com/Quantum-techlab" target="_blank" rel="noopener noreferrer">
+                  <Github className="w-5 h-5" />
+                </ModernButton>
+                <ModernButton variant="ghost" href="https://linkedin.com/in/abdulrasaq-abdulrasaq" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="w-5 h-5" />
+                </ModernButton>
               </div>
             </motion.div>
           </motion.div>
@@ -214,81 +248,118 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+      <section id="about" className="py-24 relative">
         <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <AnimatedSection>
-              <h2 className="text-4xl font-bold mb-12 text-center text-slate-800 dark:text-slate-100">About Me</h2>
-            </AnimatedSection>
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <AnimatedSection direction="left" delay={0.2}>
-                <div className="space-y-6">
-                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Hi, I'm <span className="text-blue-600 font-semibold">Abdulrasaq</span> — a software engineer specializing in frontend development with backend capabilities and AI integration expertise.
-                </p>
-                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                  I build full-stack web applications using React, Node.js, and modern cloud technologies. As an AI enthusiast and prompt engineer, I integrate intelligent features into applications to create innovative user experiences.
-                </p>
-                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Currently studying Information Technology at the University of Ilorin, I'm passionate about creating accessible, scalable solutions that solve real-world problems.
-                </p>
-                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
-                  <MapPin className="w-4 h-4" />
+          <div className="max-w-7xl mx-auto">
+            <motion.h2 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+              className="text-5xl md:text-6xl font-bold mb-16 text-center"
+            >
+              <span className="text-gradient">About Me</span>
+            </motion.h2>
+            
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
+                className="space-y-8"
+              >
+                <div className="space-y-6 text-lg leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-300">
+                    Hi, I'm <span className="text-gradient font-semibold text-xl">Abdulrasaq</span> — a passionate software engineer specializing in frontend development with full-stack capabilities and AI integration expertise.
+                  </p>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    I craft exceptional digital experiences using React, Node.js, and cutting-edge cloud technologies. As an AI enthusiast and prompt engineer, I seamlessly integrate intelligent features to create innovative, user-centric applications.
+                  </p>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    Currently pursuing Information Technology at the University of Ilorin while serving as Software Director of ITSA, I'm dedicated to building accessible, scalable solutions that make a real-world impact.
+                  </p>
+                </div>
+                
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                  className="flex items-center gap-3 text-slate-500 dark:text-slate-400 text-lg"
+                >
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <MapPin className="w-5 h-5 text-blue-500" />
+                  </motion.div>
                   <span>University of Ilorin, Nigeria</span>
-                </div>
-                </div>
-              </AnimatedSection>
+                </motion.div>
+              </motion.div>
               
-              <AnimatedCard delay={0.4} className="bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-xl p-8">
-                <h3 className="text-xl font-semibold mb-6 text-slate-800 dark:text-slate-100">Skills & Technologies</h3>
-                <div className="flex flex-wrap gap-2">
+              <GlassCard delay={0.4} className="p-10">
+                <h3 className="text-2xl font-bold mb-8 text-slate-800 dark:text-slate-100">Skills & Technologies</h3>
+                <div className="flex flex-wrap gap-3">
                   {skills.map((skill, index) => (
                     <motion.div
                       key={index} 
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: false }}
+                      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      viewport={{ once: true }}
                       transition={{ 
-                        delay: index * 0.05,
-                        duration: 0.3
+                        delay: index * 0.03,
+                        duration: 0.5,
+                        ease: [0.23, 1, 0.32, 1]
                       }}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ 
+                        scale: 1.1, 
+                        y: -2,
+                        transition: { duration: 0.2 }
+                      }}
                     >
                       <Badge 
                         variant="secondary" 
-                        className="bg-slate-100 dark:bg-slate-600 hover:bg-blue-100 dark:hover:bg-blue-800 hover:text-blue-700 dark:hover:text-blue-200 transition-colors cursor-default border-0"
+                        className="text-sm py-2 px-4 bg-gradient-to-r from-slate-100/80 to-slate-200/80 dark:from-slate-800/80 dark:to-slate-700/80 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900/50 dark:hover:to-purple-900/50 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-300 cursor-default border border-slate-200/50 dark:border-slate-600/50 backdrop-blur-sm"
                       >
                         {skill}
                       </Badge>
                     </motion.div>
                   ))}
                 </div>
-              </AnimatedCard>
+              </GlassCard>
             </div>
           </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20">
+      <section id="projects" className="py-24 relative">
         <div className="container mx-auto px-6">
-          <AnimatedSection>
-            <h2 className="text-4xl font-bold mb-12 text-center text-slate-800 dark:text-slate-100">Featured Projects</h2>
-          </AnimatedSection>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            className="text-5xl md:text-6xl font-bold mb-20 text-center"
+          >
+            <span className="text-gradient">Featured Projects</span>
+          </motion.h2>
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <AnimatedCard 
+              <GlassCard
                 key={index} 
                 delay={index * 0.1}
-                className={`group bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm border-white/20 dark:border-slate-600/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden ${
-                  project.featured ? 'lg:col-span-1 ring-2 ring-blue-200' : ''
+                className={`group overflow-hidden ${
+                  project.featured ? 'ring-2 ring-blue-400/30 dark:ring-blue-500/30' : ''
                 }`}
               >
-                <div className="p-6 h-full flex flex-col">
-                  <div className="flex items-start justify-between mb-3">
+                <div className="p-8 h-full flex flex-col">
+                  <div className="flex items-start justify-between mb-4">
                     <motion.h3 
                       whileHover={{ scale: 1.02 }}
-                      className="text-xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors"
+                      className="text-xl font-bold text-slate-800 dark:text-slate-100 group-hover:text-blue-600 transition-colors"
                     >
                       {project.title}
                     </motion.h3>
@@ -298,10 +369,10 @@ const Index = () => {
                          initial={{ scale: 0 }}
                          animate={{ scale: 1 }}
                          transition={{ delay: 0.5 + index * 0.1 }}
-                         className="flex items-center gap-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-800 dark:to-purple-800 px-2 py-1 rounded-full"
+                         className="flex items-center gap-1 bg-gradient-to-r from-blue-100/80 to-purple-100/80 dark:from-blue-900/50 dark:to-purple-900/50 px-3 py-1 rounded-full backdrop-blur-sm"
                        >
                          <Star className="w-3 h-3 text-blue-600" />
-                         <span className="text-xs font-medium text-blue-700 dark:text-blue-200">Featured</span>
+                         <span className="text-xs font-medium text-blue-700 dark:text-blue-300">Featured</span>
                        </motion.div>
                      )}
                      {project.highlight && (
@@ -309,9 +380,9 @@ const Index = () => {
                          initial={{ scale: 0 }}
                          animate={{ scale: 1 }}
                          transition={{ delay: 0.7 + index * 0.1 }}
-                         className="flex items-center gap-1 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-800 dark:to-pink-800 px-2 py-1 rounded-full"
+                         className="flex items-center gap-1 bg-gradient-to-r from-purple-100/80 to-pink-100/80 dark:from-purple-900/50 dark:to-pink-900/50 px-3 py-1 rounded-full backdrop-blur-sm"
                        >
-                         <span className="text-xs font-medium text-purple-700 dark:text-purple-200">{project.highlight}</span>
+                         <span className="text-xs font-medium text-purple-700 dark:text-purple-300">{project.highlight}</span>
                        </motion.div>
                      )}
                    </div>
@@ -320,11 +391,11 @@ const Index = () => {
                   {project.status && (
                     <Badge 
                       variant="outline" 
-                      className={`w-fit mb-3 ${
-                        project.status === 'In Development' ? 'border-orange-200 text-orange-600 bg-orange-50' :
-                        project.status === 'Active' ? 'border-green-200 text-green-600 bg-green-50' :
-                        'border-slate-200 text-slate-600 bg-slate-50'
-                      }`}
+                      className={`w-fit mb-4 ${
+                        project.status === 'In Development' ? 'border-orange-300/50 text-orange-600 bg-orange-50/50 dark:border-orange-600/50 dark:text-orange-400 dark:bg-orange-900/20' :
+                        project.status === 'Active' ? 'border-green-300/50 text-green-600 bg-green-50/50 dark:border-green-600/50 dark:text-green-400 dark:bg-green-900/20' :
+                        'border-slate-300/50 text-slate-600 bg-slate-50/50 dark:border-slate-600/50 dark:text-slate-400 dark:bg-slate-900/20'
+                      } backdrop-blur-sm`}
                     >
                       {project.status}
                     </Badge>
@@ -336,28 +407,24 @@ const Index = () => {
                   
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="outline" className="text-xs border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300">
+                      <Badge key={techIndex} variant="outline" className="text-xs border-slate-300/50 dark:border-slate-600/50 text-slate-600 dark:text-slate-300 bg-slate-50/50 dark:bg-slate-800/50 backdrop-blur-sm">
                         {tech}
                       </Badge>
                     ))}
                   </div>
                   
                   <div className="flex gap-3 mt-auto">
-                    <AnimatedButton variant="outline" size="sm" className="flex-1 hover:bg-slate-50" asChild>
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="mr-2 h-3 w-3" />
-                        Code
-                      </a>
-                    </AnimatedButton>
-                    <AnimatedButton variant="outline" size="sm" className="flex-1 hover:bg-slate-50" asChild>
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="mr-2 h-3 w-3" />
-                        Demo
-                      </a>
-                    </AnimatedButton>
+                    <ModernButton variant="outline" size="sm" href={project.github} target="_blank" rel="noopener noreferrer">
+                      <Github className="w-4 h-4" />
+                      Code
+                    </ModernButton>
+                    <ModernButton variant="outline" size="sm" href={project.demo} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="w-4 h-4" />
+                      Demo
+                    </ModernButton>
                   </div>
                 </div>
-              </AnimatedCard>
+              </GlassCard>
             ))}
           </div>
         </div>
