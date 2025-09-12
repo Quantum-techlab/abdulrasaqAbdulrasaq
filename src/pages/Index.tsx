@@ -252,9 +252,11 @@ const developer = {
                       <img 
                         src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" 
                         alt="Abdulrasaq Abdulrasaq - Software Engineer"
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-cover"
                         style={{ 
-                          objectPosition: 'center 20%'
+                          objectPosition: 'center 15%',
+                          transform: 'scale(1.8)',
+                          transformOrigin: 'center 25%'
                         }}
                       />
                     </div>
