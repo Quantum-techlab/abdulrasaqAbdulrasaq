@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Mail, ExternalLink, MapPin, Calendar, Award, Users, ArrowRight, Star, Download, Code, Zap } from "lucide-react";
+import { useCountUp } from "@/hooks/useCountUp";
 import { EnhancedNavigation } from "@/components/EnhancedNavigation";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { AnimatedCard } from "@/components/AnimatedCard";
@@ -17,10 +18,27 @@ import { InteractiveGrid } from "@/components/InteractiveGrid";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const statsRef = useRef(null);
+  const isStatsInView = useInView(statsRef, { once: true });
+
+  // Count up animations
+  const yearsCount = useCountUp({ end: 3, duration: 2000, startDelay: 0 });
+  const projectsCount = useCountUp({ end: 6, duration: 2500, startDelay: 200 });
+  const techCount = useCountUp({ end: 27, duration: 3000, startDelay: 400 });
+  const certsCount = useCountUp({ end: 3, duration: 1500, startDelay: 600 });
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  useEffect(() => {
+    if (isStatsInView) {
+      yearsCount.startCountUp();
+      projectsCount.startCountUp();
+      techCount.startCountUp();
+      certsCount.startCountUp();
+    }
+  }, [isStatsInView]);
 
   const projects = [
     {
@@ -206,6 +224,32 @@ const developer = {
               transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
               className="space-y-8"
             >
+              {/* Profile Image */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                className="flex justify-center mb-8"
+              >
+                <div className="relative">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl backdrop-blur-sm">
+                    <img 
+                      src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" 
+                      alt="Abdulrasaq Abdulrasaq - Software Engineer"
+                      className="w-full h-full object-cover object-center scale-110 translate-y-2"
+                      style={{ 
+                        clipPath: 'ellipse(50% 60% at 50% 35%)'
+                      }}
+                    />
+                  </div>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 rounded-full border-2 border-dashed border-blue-400/30"
+                  />
+                </div>
+              </motion.div>
+
               {/* Name and Title */}
               <div>
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-4">
@@ -289,16 +333,17 @@ const developer = {
 
               {/* Professional Stats */}
               <motion.div
+                ref={statsRef}
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
                 className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-12"
               >
                 {[
-                  { number: "3+", label: "Years Experience", icon: <Calendar className="w-5 h-5" /> },
-                  { number: "15+", label: "Projects Completed", icon: <Code className="w-5 h-5" /> },
-                  { number: "5+", label: "Technologies Mastered", icon: <Zap className="w-5 h-5" /> },
-                  { number: "3", label: "Certifications", icon: <Award className="w-5 h-5" /> }
+                  { count: yearsCount.count, suffix: "+", label: "Years Experience", icon: <Calendar className="w-5 h-5" /> },
+                  { count: projectsCount.count, suffix: "+", label: "Projects Completed", icon: <Code className="w-5 h-5" /> },
+                  { count: techCount.count, suffix: "+", label: "Technologies Mastered", icon: <Zap className="w-5 h-5" /> },
+                  { count: certsCount.count, suffix: "", label: "Certifications", icon: <Award className="w-5 h-5" /> }
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -316,7 +361,7 @@ const developer = {
                       {stat.icon}
                     </div>
                     <div className="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-1">
-                      {stat.number}
+                      {stat.count}{stat.suffix}
                     </div>
                     <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">
                       {stat.label}
@@ -328,25 +373,6 @@ const developer = {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-6 h-10 border-2 border-slate-300 dark:border-slate-600 rounded-full flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0], opacity: [0, 1, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1 h-3 bg-slate-400 dark:bg-slate-500 rounded-full mt-2"
-            />
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* About Section */}
