@@ -743,7 +743,7 @@ const developer = {
                 <h3 className="text-2xl font-bold mb-4">Ready to start a project?</h3>
                 <p className="mb-6 opacity-90">I'm currently available for freelance work and full-time opportunities.</p>
                 <AnimatedButton size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100" asChild>
-                  <a href="https://chat.openai.com/mnt/data/Abdulrasaq_Abdulrasaq_Resume_2025.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">
                     Download Resume
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
