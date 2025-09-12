@@ -66,7 +66,7 @@ export const ProfilePopover = () => {
             </Button>
             
             <Button className="w-full justify-start bg-white hover:bg-slate-50 text-slate-700 border border-slate-200" variant="ghost" asChild>
-              <a href="https://chat.openai.com/mnt/data/Abdulrasaq_Abdulrasaq_Resume_2025.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">
                 <Download className="w-4 h-4 mr-2" />
                 Download Resume
               </a>
@@ -80,7 +80,7 @@ export const ProfilePopover = () => {
             </Button>
             
             <Button className="w-full justify-start bg-white hover:bg-slate-50 text-slate-700 border border-slate-200" variant="ghost" asChild>
-              <a href="https://linkedin.com/in/abdulrasaq-abdulrasaq" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="w-4 h-4 mr-2" />
                 View LinkedIn
               </a>
