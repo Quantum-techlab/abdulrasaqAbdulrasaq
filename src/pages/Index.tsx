@@ -15,6 +15,7 @@ import { ParticleBackground } from "@/components/ParticleBackground";
 import { TypewriterText } from "@/components/TypewriterText";
 import { ModernButton } from "@/components/ModernButton";
 import { InteractiveGrid } from "@/components/InteractiveGrid";
+import { FloatingCTA } from "@/components/FloatingCTA";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -148,6 +149,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-500">
       <ParticleBackground />
       <EnhancedNavigation />
+      <FloatingCTA />
 
       {/* Professional Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
@@ -231,21 +233,43 @@ const developer = {
                 transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
                 className="flex justify-center mb-8"
               >
-                <div className="relative">
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl backdrop-blur-sm">
-                    <img 
-                      src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" 
-                      alt="Abdulrasaq Abdulrasaq - Software Engineer"
-                      className="w-full h-full object-cover object-center scale-110 translate-y-2"
-                      style={{ 
-                        clipPath: 'ellipse(50% 60% at 50% 35%)'
-                      }}
-                    />
-                  </div>
+                <div className="relative group">
+                  {/* Animated border rings */}
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 rounded-full border-2 border-dashed border-blue-400/30"
+                    className="absolute inset-0 w-36 h-36 md:w-44 md:h-44 rounded-full border-2 border-dashed border-gradient-to-r from-blue-400/40 to-purple-400/40"
+                  />
+                  <motion.div
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 w-36 h-36 md:w-44 md:h-44 rounded-full border border-dotted border-gradient-to-r from-purple-400/20 to-pink-400/20"
+                  />
+                  
+                  {/* Main profile image */}
+                  <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white/30 dark:border-slate-700/50 shadow-2xl backdrop-blur-sm group-hover:scale-105 transition-transform duration-300">
+                    <div className="w-full h-full relative">
+                      <img 
+                        src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" 
+                        alt="Abdulrasaq Abdulrasaq - Software Engineer"
+                        className="w-full h-auto absolute top-0 left-1/2 transform -translate-x-1/2 scale-[2.5] translate-y-[-10px]"
+                        style={{ 
+                          height: '140%',
+                          objectFit: 'cover',
+                          objectPosition: 'center top'
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Gradient overlay for better blending */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/10 dark:to-slate-100/5 pointer-events-none" />
+                  </div>
+                  
+                  {/* Status indicator */}
+                  <motion.div 
+                    animate={{ scale: [1, 1.1, 1], opacity: [1, 0.8, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute bottom-2 right-2 w-4 h-4 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full border-2 border-white dark:border-slate-800 shadow-lg"
                   />
                 </div>
               </motion.div>
@@ -315,9 +339,9 @@ const developer = {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </ModernButton>
 
-                <ModernButton variant="outline" size="lg" href="https://chat.openai.com/mnt/data/Abdulrasaq_Abdulrasaq_Resume_2025.pdf" target="_blank" rel="noopener noreferrer">
+                <ModernButton variant="outline" size="lg" href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">
                   <Download className="w-5 h-5" />
-                  Download Resume
+                  View Resume
                 </ModernButton>
 
                 {/* Social Links */}
