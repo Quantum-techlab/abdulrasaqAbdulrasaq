@@ -19,57 +19,6 @@ import { FloatingCTA } from "@/components/FloatingCTA";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { SkillIcon } from "@/components/SkillIcon";
 
-// Net background component
-const NetBackground = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <svg
-        className="absolute inset-0 w-full h-full opacity-20 dark:opacity-10"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <pattern
-            id="grid"
-            width="60"
-            height="60"
-            patternUnits="userSpaceOnUse"
-          >
-            <path
-              d="M 60 0 L 0 0 0 60"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="text-blue-300 dark:text-blue-700"
-            />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </svg>
-      
-      {/* Animated dots at intersections */}
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-blue-400 dark:bg-blue-600 rounded-full opacity-60"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.6, 1, 0.6],
-          }}
-          transition={{
-            duration: 2 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 2,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
   const statsRef = useRef(null);
@@ -114,33 +63,6 @@ const Index = () => {
       status: "In Development",
       featured: true
     },
-    {
-      title: "MindConnect",
-      description: "A mental health peer support platform built with React and Supabase, connecting users with mental health resources and peer support communities.",
-      tech: ["React", "Supabase", "Real-time Chat", "Authentication"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "#",
-      status: "Active",
-      featured: true
-    },
-    {
-      title: "Textify Alchemy",
-      description: "Extract text from images and audio using Tesseract.js and Whisper API. Advanced OCR and speech-to-text conversion tool.",
-      tech: ["React", "Tesseract.js", "Whisper API", "File Processing"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "#",
-      status: "Active",
-      featured: true
-    },
-    {
-      title: "CrossDevice Sync",
-      description: "Transfer texts and files across devices using Supabase and cloud sync. Seamless cross-platform file sharing solution.",
-      tech: ["React", "Supabase", "Cloud Storage", "Real-time Sync"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "#",
-      status: "Active",
-      featured: true
-    }
     {
       title: "ScanShare",
       description: "Advanced document scanning and sharing platform with OCR capabilities, cloud storage integration, and real-time collaboration features.",
@@ -188,7 +110,6 @@ const Index = () => {
 
       {/* Professional Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-        <NetBackground />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
             
@@ -455,19 +376,9 @@ const Index = () => {
                 className="group overflow-hidden p-6"
               >
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
                   <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
                     {project.title}
                   </h3>
-                    {project.status && (
-                      <Badge 
-                        variant={project.status === 'Live' ? 'default' : 'secondary'}
-                        className={project.status === 'Live' ? 'bg-green-500 hover:bg-green-600' : ''}
-                      >
-                        {project.status}
-                      </Badge>
-                    )}
-                  </div>
                   <p className="text-slate-600 dark:text-slate-300 text-sm">
                     {project.description}
                   </p>
@@ -477,24 +388,6 @@ const Index = () => {
                         {tech}
                       </Badge>
                     ))}
-                  </div>
-                  <div className="flex gap-3 pt-2">
-                    {project.github && (
-                      <AnimatedButton variant="outline" size="sm" asChild>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github className="w-4 h-4" />
-                          Code
-                        </a>
-                      </AnimatedButton>
-                    )}
-                    {project.demo && project.demo !== '#' && (
-                      <AnimatedButton variant="default" size="sm" asChild>
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4" />
-                          Demo
-                        </a>
-                      </AnimatedButton>
-                    )}
                   </div>
                 </div>
               </GlassCard>
@@ -536,136 +429,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Professional Footer */}
-      <footer className="bg-slate-900 dark:bg-slate-950 text-white py-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20" />
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-4 gap-8 mb-12">
-              {/* Brand Section */}
-              <div className="md:col-span-2">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    Abdulrasaq Abdulrasaq
-                  </h3>
-                  <p className="text-slate-300 mb-6 max-w-md">
-                    Full-Stack Developer passionate about creating exceptional digital experiences 
-                    through clean, efficient code and innovative solutions.
-                  </p>
-                  <div className="flex items-center gap-2 text-slate-400 mb-4">
-                    <MapPin className="w-4 h-4" />
-                    <span>University of Ilorin, Nigeria</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-slate-400">
-                    <Mail className="w-4 h-4" />
-                    <a href="mailto:ola283dayo@gmail.com" className="hover:text-blue-400 transition-colors">
-                      ola283dayo@gmail.com
-                    </a>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
-                  <ul className="space-y-2">
-                    {['About', 'Projects', 'Experience', 'Contact'].map((item) => (
-                      <li key={item}>
-                        <a 
-                          href={`#${item.toLowerCase()}`}
-                          className="text-slate-300 hover:text-blue-400 transition-colors duration-200"
-                        >
-                          {item}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </div>
-
-              {/* Connect */}
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <h4 className="text-lg font-semibold mb-4 text-white">Connect</h4>
-                  <div className="flex flex-col gap-3">
-                    <a 
-                      href="https://github.com/Quantum-techlab" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-slate-300 hover:text-blue-400 transition-colors duration-200"
-                    >
-                      <Github className="w-4 h-4" />
-                      GitHub
-                    </a>
-                    <a 
-                      href="https://linkedin.com/in/abdulrasaq-abdulrasaq" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-slate-300 hover:text-blue-400 transition-colors duration-200"
-                    >
-                      <Linkedin className="w-4 h-4" />
-                      LinkedIn
-                    </a>
-                    <a 
-                      href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-slate-300 hover:text-blue-400 transition-colors duration-200"
-                    >
-                      <Download className="w-4 h-4" />
-                      Resume
-                    </a>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Bottom Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
-            >
-              <div className="text-slate-400 text-sm">
-                © {new Date().getFullYear()} Abdulrasaq Abdulrasaq. All rights reserved.
-              </div>
-              <div className="flex items-center gap-6 text-sm text-slate-400">
-                <span>Built with React & Tailwind CSS</span>
-                <div className="flex items-center gap-1">
-                  <span>Made with</span>
-                  <motion.span
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                    className="text-red-400"
-                  >
-                    ❤️
-                  </motion.span>
-                  <span>in Nigeria</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
