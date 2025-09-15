@@ -44,35 +44,77 @@ const Index = () => {
   }, [isStatsInView]);
 
   const projects = [
-    {
-      title: "FaceTrust AI",
-      description: "An AI-powered facial recognition system for secure identity verification and centralized data access. Uses deep learning models to provide instant, reliable identity verification and access control.",
-      tech: ["React", "AI/ML", "Deep Learning", "Facial Recognition", "Database Integration"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "https://facetrust-rho.vercel.app",
-      status: "Live",
-      featured: true,
-      highlight: "AI-Powered"
-    },
-    {
-      title: "Attendance System for IIH", 
-      description: "Modern attendance tracking system for Ilorin Innovation Hub interns with real-time monitoring, analytics dashboard, and automated reporting features.",
-      tech: ["React", "Supabase", "TypeScript", "Tailwind CSS"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "#",
-      status: "In Development",
-      featured: true
-    },
-    {
-      title: "ScanShare",
-      description: "Advanced document scanning and sharing platform with OCR capabilities, cloud storage integration, and real-time collaboration features.",
-      tech: ["React", "OCR", "Cloud Storage", "Web APIs"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "#",
-      status: "Active", 
-      featured: true
-    }
-  ];
+  {
+    title: "FaceTrust AI",
+    description: "An AI-powered facial recognition system for secure identity verification and centralized data access. Uses deep learning models to provide instant, reliable identity verification and access control.",
+    tech: ["React", "AI/ML", "Deep Learning", "Facial Recognition", "Database Integration"],
+    github: "https://github.com/Quantum-techlab",
+    demo: "https://facetrust-rho.vercel.app",
+    status: "Live",
+    featured: true,
+    highlight: "AI-Powered"
+  },
+  {
+    title: "Attendance System for IIH",
+    description: "Modern attendance tracking system for Ilorin Innovation Hub interns with real-time monitoring, analytics dashboard, and automated reporting features.",
+    tech: ["React", "Supabase", "TypeScript", "Tailwind CSS", "Geolocation API"],
+    github: "https://github.com/Quantum-techlab",
+    demo: "#",
+    status: "In Development",
+    featured: true,
+    highlight: "Geolocation-Enabled"
+  },
+  {
+    title: "ScanShare",
+    description: "Advanced document scanning and sharing platform with OCR capabilities, cloud storage integration, and real-time collaboration features.",
+    tech: ["React", "OCR", "Cloud Storage", "Web APIs"],
+    github: "https://github.com/Quantum-techlab",
+    demo: "#",
+    status: "Active",
+    featured: true,
+    highlight: "OCR & Cloud Integration"
+  },
+  {
+    title: "MindConnect",
+    description: "AI-driven mental wellness platform that enables anonymous conversations, guided support, and community-driven resources for better mental health.",
+    tech: ["React", "AI", "Node.js", "Tailwind CSS"],
+    github: "https://github.com/Quantum-techlab",
+    demo: "#",
+    status: "Beta",
+    featured: true,
+    highlight: "Mental Wellness"
+  },
+  {
+    title: "Textify",
+    description: "A versatile text extraction and transcription app that converts images and audio into editable text using Tesseract.js and AI transcription APIs.",
+    tech: ["React", "Tesseract.js", "Speech-to-Text APIs", "Tailwind CSS"],
+    github: "https://github.com/Quantum-techlab",
+    demo: "#",
+    status: "Active",
+    featured: true,
+    highlight: "OCR & Audio Transcription"
+  },
+  {
+    title: "CrossDevice Sync",
+    description: "A seamless note and file synchronization tool that allows users to sync data across multiple devices with real-time updates and encryption.",
+    tech: ["React", "Supabase", "Cloud Storage", "Encryption"],
+    github: "https://github.com/Quantum-techlab",
+    demo: "#",
+    status: "Stable",
+    featured: true,
+    highlight: "Cross-Platform Sync"
+  },
+  {
+    title: "SynBridge",
+    description: "A cross-device clipboard and file sync tool with end-to-end encryption, designed for fast, secure, and seamless sharing between multiple devices.",
+    tech: ["React", "Supabase", "WebSockets", "Encryption"],
+    github: "https://github.com/Quantum-techlab",
+    demo: "#",
+    status: "Stable",
+    featured: false,
+    highlight: "Secure File Sync"
+  }
+];
 
   const experiences = [
     {
