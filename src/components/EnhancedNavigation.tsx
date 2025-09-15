@@ -9,6 +9,7 @@ import { ScrollProgress } from './ScrollProgress';
 import { AnimatedNavBackground } from './AnimatedNavBackground';
 import { ProfilePopover } from './ProfilePopover';
 import { LanguageToggle } from './LanguageToggle';
+import { AAFavicon } from './AAFavicon';
 
 const menuItems = [
   { href: '#about', label: 'About' },
@@ -71,11 +72,11 @@ export const EnhancedNavigation = () => {
             <motion.div 
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
-              className={`text-2xl font-bold text-gradient transition-all duration-500 ${
+              className={`transition-all duration-500 ${
                 isScrolled ? 'scale-90' : 'scale-100'
               }`}
             >
-              Abdulrasaq Abdulrasaq
+              <AAFavicon size={isScrolled ? 'sm' : 'md'} />
             </motion.div>
 
             {/* Desktop Navigation */}
