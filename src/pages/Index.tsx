@@ -152,6 +152,8 @@ const Index = () => {
 
       {/* Professional Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div className="absolute inset-0 bg-grid-animated opacity-40" />
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
             
