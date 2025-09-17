@@ -420,18 +420,64 @@ const Index = () => {
                 className="group overflow-hidden p-6"
               >
                 <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-sm">
+                  <div className="flex items-start justify-between">
+                    <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                      {project.title}
+                    </h3>
+                    <Badge variant="outline" className="text-xs px-2 py-1">
+                      {project.status}
+                    </Badge>
+                  </div>
+                  
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                     {project.description}
                   </p>
+                  
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, techIndex) => (
                       <Badge key={techIndex} variant="secondary" className="text-xs">
                         {tech}
                       </Badge>
                     ))}
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-3 pt-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      asChild
+                      className="flex items-center gap-2 text-xs"
+                    >
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="no-underline"
+                      >
+                        <Github className="w-3 h-3" />
+                        Code
+                      </a>
+                    </Button>
+                    
+                    {project.demo !== "#" && (
+                      <Button
+                        variant="default"
+                        size="sm"
+                        asChild
+                        className="flex items-center gap-2 text-xs"
+                      >
+                        <a 
+                          href={project.demo} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="no-underline"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          Live Demo
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </GlassCard>
