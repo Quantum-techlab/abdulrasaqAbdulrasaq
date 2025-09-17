@@ -118,50 +118,77 @@ const Index = () => {
 
   const experiences = [
     {
-      title: "Software Director",
+      title: "Software Director & Tech Lead",
       company: "ITSA - University of Ilorin",
       period: "2025 – Present",
-      description: "Lead departmental software innovation initiatives and foster collaboration among students through tech projects and mentorship programs.",
+      description: "Leading software innovation initiatives within the department while fostering a collaborative environment for student developers through mentorship and hands-on project guidance.",
       responsibilities: [
-        "Lead departmental software innovation initiatives",
-        "Foster collaboration among students through tech projects and mentorship"
+        "Spearhead departmental software development projects and technical initiatives",
+        "Mentor and guide fellow students in modern web development practices",
+        "Organize coding workshops and technical skill-building sessions",
+        "Collaborate with faculty on technology integration projects"
       ],
       icon: <Users className="w-4 h-4" />,
       type: "leadership"
     },
     {
-      title: "Software Engineer Intern",
+      title: "Frontend Developer Intern",
       company: "Ilorin Innovation Hub",
-      period: "Apr 2025 – Present",
-      description: "Building modern web applications and developing comprehensive dashboards with real-time features for attendance management.",
+      period: "2025 – Present",
+      description: "Developing modern web applications with focus on React ecosystem, building comprehensive dashboards, and implementing advanced features like geolocation and role-based access control.",
       responsibilities: [
-        "Built frontend web apps using React, Vite, Tailwind, Supabase",
-        "Developed multi-role dashboards (admin, intern, staff) for attendance tracking",
-        "Integrated real-time geolocation for intern attendance verification"
+        "Built and customized React components including authentication flows and interactive dashboards",
+        "Implemented Supabase integration for authentication and database management",
+        "Developed geolocation features with row-level security and role-based access control",
+        "Created multi-role dashboards for admin, intern, and staff attendance tracking"
       ],
       icon: <MapPin className="w-4 h-4" />,
       type: "internship"
+    },
+    {
+      title: "Media & Technical Support Volunteer",
+      company: "iTalk Conference",
+      period: "2024",
+      description: "Provided comprehensive technical and media support for a large-scale technology conference, ensuring smooth operations and enhanced attendee experience.",
+      responsibilities: [
+        "Managed technical setup and troubleshooting for conference presentations",
+        "Coordinated media coverage and documentation of conference sessions",
+        "Assisted speakers with technical requirements and AV equipment",
+        "Supported live streaming and digital content management"
+      ],
+      icon: <Award className="w-4 h-4" />,
+      type: "volunteer"
     }
   ];
 
   const certifications = [
     {
-      title: "AWS Cloud Computing",
-      issuer: "AWS Cloud Club/DevTown",
+      title: "AWS Cloud Computing Fundamentals",
+      issuer: "AWS Cloud Club",
       year: "2024",
-      icon: <Code className="w-4 h-4" />
+      icon: <Code className="w-4 h-4" />,
+      description: "Comprehensive training in cloud computing concepts, AWS services, and cloud architecture fundamentals"
     },
     {
-      title: "Artificial Intelligence",
+      title: "Community Growth Recognition",
+      issuer: "DevTown",
+      year: "2024",
+      icon: <Users className="w-4 h-4" />,
+      description: "Grateful recognition for outstanding support in helping the developer community grow and thrive"
+    },
+    {
+      title: "Artificial Intelligence & Machine Learning",
       issuer: "TechMindset Africa",
       year: "2024",
-      icon: <Zap className="w-4 h-4" />
+      icon: <Zap className="w-4 h-4" />,
+      description: "Advanced training in AI concepts, machine learning algorithms, and practical AI implementation"
     },
     {
-      title: "Basic Computing & Networking",
+      title: "Computing Fundamentals & Networking",
       issuer: "NITDA",
       year: "2024",
-      icon: <Award className="w-4 h-4" />
+      icon: <Award className="w-4 h-4" />,
+      description: "Foundation certification in computer systems, networking principles, and IT infrastructure"
     }
   ];
 
@@ -406,18 +433,19 @@ const Index = () => {
                 <h3 className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100">Who I Am</h3>
                 <div className="space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed">
                   <p>
-                    I'm a passionate full-stack developer with 3+ years of experience in building modern web applications. 
-                    Currently pursuing my degree at the University of Ilorin while serving as Software Director at ITSA.
+                    I'm a passionate frontend developer and software engineer currently pursuing Information and Communication Science 
+                    at the University of Ilorin. As Software Director at ITSA, I lead innovative projects and mentor fellow developers 
+                    in building impactful digital solutions.
                   </p>
                   <p>
-                    My journey started with curiosity about how digital products work, which quickly evolved into a deep 
-                    love for creating solutions that genuinely impact users' lives. I specialize in React ecosystem, 
-                    AI integration, and building scalable applications with clean, maintainable code.
+                    My development journey began with a fascination for creating digital experiences that solve real-world problems. 
+                    I specialize in the React ecosystem, modern web technologies, and AI integration, with a strong focus on 
+                    building user-centric applications that combine functionality with exceptional design.
                   </p>
                   <p>
-                    When I'm not coding, you'll find me mentoring fellow developers, exploring new technologies, 
-                    or contributing to open-source projects. I believe in continuous learning and sharing knowledge 
-                    with the developer community.
+                    Beyond coding, I'm deeply involved in the tech community through volunteering at conferences, supporting 
+                    developer communities, and sharing knowledge. I believe in the power of technology to create positive 
+                    change and am always eager to collaborate on projects that make a meaningful impact.
                   </p>
                   <div className="flex items-center gap-4 pt-4">
                     <ModernButton variant="outline" href="#projects">
@@ -491,6 +519,8 @@ const Index = () => {
                       <div className={`p-3 rounded-full ${
                         experience.type === 'leadership' 
                           ? 'bg-gradient-to-r from-purple-500 to-blue-500' 
+                          : experience.type === 'volunteer'
+                          ? 'bg-gradient-to-r from-green-500 to-teal-500'
                           : 'bg-gradient-to-r from-blue-500 to-cyan-500'
                       } text-white shadow-lg`}>
                         {experience.icon}
@@ -575,6 +605,9 @@ const Index = () => {
                       </h3>
                       <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm mb-1">
                         {cert.issuer}
+                      </p>
+                      <p className="text-slate-500 dark:text-slate-400 text-xs mb-3 leading-relaxed">
+                        {cert.description}
                       </p>
                       <Badge variant="outline" className="text-xs">
                         {cert.year}
