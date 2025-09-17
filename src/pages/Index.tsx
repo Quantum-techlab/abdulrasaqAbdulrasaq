@@ -121,17 +121,47 @@ const Index = () => {
       title: "Software Director",
       company: "ITSA - University of Ilorin",
       period: "2025 – Present",
-      description: "Leading student-driven software initiatives and fostering collaboration within the department. Organizing tech workshops, hackathons, and mentorship programs while driving innovation.",
+      description: "Lead departmental software innovation initiatives and foster collaboration among students through tech projects and mentorship programs.",
+      responsibilities: [
+        "Lead departmental software innovation initiatives",
+        "Foster collaboration among students through tech projects and mentorship"
+      ],
       icon: <Users className="w-4 h-4" />,
       type: "leadership"
     },
     {
       title: "Software Engineer Intern",
       company: "Ilorin Innovation Hub",
-      period: "2025",
-      description: "Developed full-stack features, built attendance tracking systems, and provided technical support for events",
+      period: "Apr 2025 – Present",
+      description: "Building modern web applications and developing comprehensive dashboards with real-time features for attendance management.",
+      responsibilities: [
+        "Built frontend web apps using React, Vite, Tailwind, Supabase",
+        "Developed multi-role dashboards (admin, intern, staff) for attendance tracking",
+        "Integrated real-time geolocation for intern attendance verification"
+      ],
       icon: <MapPin className="w-4 h-4" />,
       type: "internship"
+    }
+  ];
+
+  const certifications = [
+    {
+      title: "AWS Cloud Computing",
+      issuer: "AWS Cloud Club/DevTown",
+      year: "2024",
+      icon: <Code className="w-4 h-4" />
+    },
+    {
+      title: "Artificial Intelligence",
+      issuer: "TechMindset Africa",
+      year: "2024",
+      icon: <Zap className="w-4 h-4" />
+    },
+    {
+      title: "Basic Computing & Networking",
+      issuer: "NITDA",
+      year: "2024",
+      icon: <Award className="w-4 h-4" />
     }
   ];
 
@@ -484,10 +514,71 @@ const Index = () => {
                           </Badge>
                         </div>
                         
-                        <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                           {experience.description}
                         </p>
+                        
+                        {experience.responsibilities && (
+                          <ul className="space-y-2">
+                            {experience.responsibilities.map((responsibility, idx) => (
+                              <li key={idx} className="flex items-start gap-3 text-slate-600 dark:text-slate-300">
+                                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
+                                <span className="text-sm leading-relaxed">{responsibility}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-6">
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            className="text-4xl md:text-5xl font-bold mb-16 text-center"
+          >
+            <span className="text-gradient">Certifications</span>
+          </motion.h2>
+          
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-6">
+              {certifications.map((cert, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    delay: index * 0.1,
+                    duration: 0.6,
+                    ease: [0.23, 1, 0.32, 1]
+                  }}
+                >
+                  <GlassCard delay={index * 0.1} className="p-6 text-center group hover:shadow-xl transition-all duration-300">
+                    <div className="mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        {cert.icon}
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">
+                        {cert.title}
+                      </h3>
+                      <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm mb-1">
+                        {cert.issuer}
+                      </p>
+                      <Badge variant="outline" className="text-xs">
+                        {cert.year}
+                      </Badge>
                     </div>
                   </GlassCard>
                 </motion.div>
