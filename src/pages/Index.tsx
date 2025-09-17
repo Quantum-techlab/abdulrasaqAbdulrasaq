@@ -372,6 +372,36 @@ const Index = () => {
             </motion.h2>
             
             <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <GlassCard delay={0.2} className="p-10">
+                <h3 className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100">Who I Am</h3>
+                <div className="space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p>
+                    I'm a passionate full-stack developer with 3+ years of experience in building modern web applications. 
+                    Currently pursuing my degree at the University of Ilorin while serving as Software Director at ITSA.
+                  </p>
+                  <p>
+                    My journey started with curiosity about how digital products work, which quickly evolved into a deep 
+                    love for creating solutions that genuinely impact users' lives. I specialize in React ecosystem, 
+                    AI integration, and building scalable applications with clean, maintainable code.
+                  </p>
+                  <p>
+                    When I'm not coding, you'll find me mentoring fellow developers, exploring new technologies, 
+                    or contributing to open-source projects. I believe in continuous learning and sharing knowledge 
+                    with the developer community.
+                  </p>
+                  <div className="flex items-center gap-4 pt-4">
+                    <ModernButton variant="outline" href="#projects">
+                      <Code className="w-4 h-4" />
+                      View My Work
+                    </ModernButton>
+                    <ModernButton variant="ghost" href="mailto:ola283dayo@gmail.com">
+                      <Mail className="w-4 h-4" />
+                      Get in Touch
+                    </ModernButton>
+                  </div>
+                </div>
+              </GlassCard>
+              
               <GlassCard delay={0.4} className="p-10">
                 <h3 className="text-2xl font-bold mb-8 text-slate-800 dark:text-slate-100">Skills & Technologies</h3>
                 <div className="flex flex-wrap gap-3">
@@ -394,6 +424,74 @@ const Index = () => {
                   ))}
                 </div>
               </GlassCard>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-24 relative bg-gradient-to-br from-slate-50/50 to-blue-50/50 dark:from-slate-800/50 dark:to-slate-700/50">
+        <div className="container mx-auto px-6">
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            className="text-5xl md:text-6xl font-bold mb-20 text-center"
+          >
+            <span className="text-gradient">Experience</span>
+          </motion.h2>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-8">
+              {experiences.map((experience, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    delay: index * 0.2,
+                    duration: 0.8,
+                    ease: [0.23, 1, 0.32, 1]
+                  }}
+                >
+                  <GlassCard delay={index * 0.1} className="p-8 group hover:shadow-2xl transition-all duration-300">
+                    <div className="flex items-start gap-6">
+                      <div className={`p-3 rounded-full ${
+                        experience.type === 'leadership' 
+                          ? 'bg-gradient-to-r from-purple-500 to-blue-500' 
+                          : 'bg-gradient-to-r from-blue-500 to-cyan-500'
+                      } text-white shadow-lg`}>
+                        {experience.icon}
+                      </div>
+                      
+                      <div className="flex-1">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                          <div>
+                            <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1">
+                              {experience.title}
+                            </h3>
+                            <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                              {experience.company}
+                            </p>
+                          </div>
+                          <Badge 
+                            variant="outline" 
+                            className="w-fit mt-2 md:mt-0 bg-white/50 dark:bg-slate-700/50"
+                          >
+                            {experience.period}
+                          </Badge>
+                        </div>
+                        
+                        <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                          {experience.description}
+                        </p>
+                      </div>
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
@@ -519,6 +617,108 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer Section */}
+      <footer className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-white py-16">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-4 gap-8 mb-12">
+              {/* Brand Section */}
+              <div className="md:col-span-2">
+                <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Abdulrasaq Abdulrasaq
+                </h3>
+                <p className="text-slate-300 leading-relaxed mb-6 max-w-md">
+                  Full-stack developer passionate about creating innovative solutions that make a difference. 
+                  Always ready to take on new challenges and build amazing products.
+                </p>
+                <div className="flex items-center gap-4">
+                  <a 
+                    href="https://github.com/Quantum-techlab" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full transition-colors duration-200 hover:scale-110 transform"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
+                  <a 
+                    href="https://linkedin.com/in/abdulrasaq-abdulrasaq" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full transition-colors duration-200 hover:scale-110 transform"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                  <a 
+                    href="mailto:ola283dayo@gmail.com"
+                    className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full transition-colors duration-200 hover:scale-110 transform"
+                  >
+                    <Mail className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="#about" className="text-slate-300 hover:text-white transition-colors duration-200">
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#experience" className="text-slate-300 hover:text-white transition-colors duration-200">
+                      Experience
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#projects" className="text-slate-300 hover:text-white transition-colors duration-200">
+                      Projects
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#contact" className="text-slate-300 hover:text-white transition-colors duration-200">
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Contact Info */}
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Get in Touch</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-4 h-4 text-blue-400" />
+                    <span className="text-slate-300 text-sm">ola283dayo@gmail.com</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-4 h-4 text-blue-400" />
+                    <span className="text-slate-300 text-sm">University of Ilorin, Nigeria</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse" />
+                    <span className="text-slate-300 text-sm">Available for opportunities</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-slate-400 text-sm">
+                © 2025 Abdulrasaq Abdulrasaq. All rights reserved.
+              </p>
+              <div className="flex items-center gap-6 text-sm text-slate-400">
+                <span>Built with React & Tailwind CSS</span>
+                <span>•</span>
+                <span>Deployed on Vercel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
