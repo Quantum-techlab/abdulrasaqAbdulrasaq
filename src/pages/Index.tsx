@@ -399,6 +399,51 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Experience Section */}
+      <section id="experience" className="py-24 relative">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <motion.h2 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+              className="text-5xl md:text-6xl font-bold mb-16 text-center"
+            >
+              <span className="text-gradient">Experience</span>
+            </motion.h2>
+            
+            <div className="space-y-8">
+              {experiences.map((experience, index) => (
+                <GlassCard key={index} delay={index * 0.2} className="p-8">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white">
+                      {experience.icon}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                        <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+                          {experience.title}
+                        </h3>
+                        <Badge variant="outline" className="w-fit mt-1 md:mt-0">
+                          {experience.period}
+                        </Badge>
+                      </div>
+                      <h4 className="text-lg font-semibold text-slate-600 dark:text-slate-300 mb-3">
+                        {experience.company}
+                      </h4>
+                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        {experience.description}
+                      </p>
+                    </div>
+                  </div>
+                </GlassCard>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
       <section id="projects" className="py-24 relative">
         <div className="container mx-auto px-6">
