@@ -415,74 +415,164 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 relative">
-        <div className="container mx-auto px-6">
+      <section id="about" className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/30 via-purple-50/20 to-pink-50/30 dark:from-blue-900/10 dark:via-purple-900/10 dark:to-pink-900/10" />
+        <FloatingElements />
+        
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-7xl mx-auto">
-            <motion.h2 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="text-5xl md:text-6xl font-bold mb-16 text-center"
+              className="text-center mb-20"
             >
-              <span className="text-gradient">About Me</span>
-            </motion.h2>
+              <h2 className="text-5xl md:text-7xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  About Me
+                </span>
+              </h2>
+              <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                Crafting digital experiences with passion, precision, and purpose
+              </p>
+            </motion.div>
             
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <GlassCard delay={0.2} className="p-10">
-                <h3 className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100">Who I Am</h3>
-                <div className="space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed">
-                  <p>
-                    I'm a passionate frontend developer and software engineer currently pursuing Information and Communication Science 
-                    at the University of Ilorin. As Software Director at ITSA, I lead innovative projects and mentor fellow developers 
-                    in building impactful digital solutions.
-                  </p>
-                  <p>
-                    My development journey began with a fascination for creating digital experiences that solve real-world problems. 
-                    I specialize in the React ecosystem, modern web technologies, and AI integration, with a strong focus on 
-                    building user-centric applications that combine functionality with exceptional design.
-                  </p>
-                  <p>
-                    Beyond coding, I'm deeply involved in the tech community through volunteering at conferences, supporting 
-                    developer communities, and sharing knowledge. I believe in the power of technology to create positive 
-                    change and am always eager to collaborate on projects that make a meaningful impact.
-                  </p>
-                  <div className="flex items-center gap-4 pt-4">
-                    <ModernButton variant="outline" href="#projects">
+            <div className="grid lg:grid-cols-2 gap-16 items-start mb-16">
+              {/* Main About Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+              >
+                <GlassCard delay={0.2} className="p-10 h-full relative group">
+                  <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 opacity-10 rounded-full blur-xl group-hover:opacity-20 transition-opacity duration-300" />
+                  
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                      <Code className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+                      Who I Am
+                    </h3>
+                  </div>
+                  
+                  <div className="space-y-6 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <p className="relative">
+                      I'm a passionate frontend developer and software engineer currently pursuing Information and Communication Science 
+                      at the University of Ilorin. As Software Director at ITSA, I lead innovative projects and mentor fellow developers 
+                      in building impactful digital solutions.
+                    </p>
+                    
+                    <p>
+                      My development journey began with a fascination for creating digital experiences that solve real-world problems. 
+                      I specialize in the React ecosystem, modern web technologies, and AI integration, with a strong focus on 
+                      building user-centric applications that combine functionality with exceptional design.
+                    </p>
+                    
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800/50 dark:to-purple-900/20 p-6 rounded-2xl border border-blue-100/50 dark:border-purple-500/20">
+                      <p className="text-slate-700 dark:text-slate-200 font-medium">
+                        <span className="text-2xl">💫</span> When I'm not coding, you'll find me mentoring aspiring developers, 
+                        teaching at workshops, volunteering at tech conferences, and building communities. 
+                        I believe in paying it forward and empowering the next generation of creators.
+                      </p>
+                    </div>
+                    
+                    <p>
+                      Beyond coding, I'm deeply involved in the tech community through volunteering at conferences, supporting 
+                      developer communities, and sharing knowledge. I believe in the power of technology to create positive 
+                      change and am always eager to collaborate on projects that make a meaningful impact.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-4 pt-8">
+                    <ModernButton variant="primary" href="#projects">
                       <Code className="w-4 h-4" />
                       View My Work
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </ModernButton>
-                    <ModernButton variant="ghost" href="mailto:ola283dayo@gmail.com">
+                    <ModernButton variant="outline" href="mailto:ola283dayo@gmail.com">
                       <Mail className="w-4 h-4" />
-                      Get in Touch
+                      Let's Connect
                     </ModernButton>
                   </div>
-                </div>
-              </GlassCard>
+                </GlassCard>
+              </motion.div>
               
-              <GlassCard delay={0.4} className="p-10">
-                <h3 className="text-2xl font-bold mb-8 text-slate-800 dark:text-slate-100">Skills & Technologies</h3>
-                <div className="flex flex-wrap gap-3">
-                  {skills.map((skill, index) => (
-                    <motion.div
-                      key={index} 
-                      initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ 
-                        delay: index * 0.03,
-                        duration: 0.5,
-                        ease: [0.23, 1, 0.32, 1]
-                      }}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-700 dark:to-slate-600 border border-blue-200/50 dark:border-slate-500/50 rounded-full text-slate-700 dark:text-slate-200 font-medium text-sm shadow-sm hover:shadow-md transition-all duration-200 cursor-default"
-                    >
-                      <SkillIcon skill={skill} />
-                    </motion.div>
-                  ))}
+              {/* Skills Section */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
+              >
+                <GlassCard delay={0.4} className="p-10 h-full relative group">
+                  <div className="absolute -top-2 -left-2 w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 opacity-10 rounded-full blur-xl group-hover:opacity-20 transition-opacity duration-300" />
+                  
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
+                      <Zap className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+                      Tech Arsenal
+                    </h3>
+                  </div>
+                  
+                  <p className="text-slate-600 dark:text-slate-300 mb-8 text-lg">
+                    Constantly evolving toolkit of technologies I use to bring ideas to life
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-3">
+                    {skills.map((skill, index) => (
+                      <motion.div
+                        key={index} 
+                        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                          delay: index * 0.03,
+                          duration: 0.5,
+                          ease: [0.23, 1, 0.32, 1]
+                        }}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        className="group relative"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 rounded-full blur transition-all duration-200" />
+                        <div className="relative px-4 py-3 bg-gradient-to-r from-blue-50/80 to-purple-50/80 dark:from-slate-700/80 dark:to-slate-600/80 backdrop-blur-sm border border-blue-200/50 dark:border-slate-500/50 rounded-full text-slate-700 dark:text-slate-200 font-medium text-sm shadow-sm hover:shadow-md transition-all duration-200 cursor-default">
+                          <SkillIcon skill={skill} />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </GlassCard>
+              </motion.div>
+            </div>
+
+            {/* Philosophy Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6, ease: [0.23, 1, 0.32, 1] }}
+              className="max-w-5xl mx-auto"
+            >
+              <GlassCard delay={0.6} className="p-12 text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5" />
+                <div className="relative z-10">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-8">
+                    <Star className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    My Philosophy
+                  </h3>
+                  <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl mx-auto">
+                    "Great software isn't just about clean code—it's about creating meaningful experiences that empower people 
+                    and solve real problems. Every line I write is a step toward building a better digital world."
+                  </p>
                 </div>
               </GlassCard>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
