@@ -712,63 +712,130 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-24 relative">
-        <div className="container mx-auto px-6">
-          <motion.h2 
+      <section id="projects" className="py-32 relative overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-pink-50/50 dark:from-blue-950/20 dark:via-purple-950/10 dark:to-pink-950/20" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          {/* Section Header */}
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-            className="text-5xl md:text-6xl font-bold mb-20 text-center"
+            className="text-center mb-20"
           >
-            <span className="text-gradient">Featured Projects</span>
-          </motion.h2>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-full mb-6">
+              <Code className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">Portfolio Showcase</span>
+            </div>
+            
+            <h2 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Featured Projects
+              </span>
+            </h2>
+            
+            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              Innovative solutions built with modern technologies. Each project represents a unique challenge solved with creativity and precision.
+            </p>
+          </motion.div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Projects Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {projects.map((project, index) => (
-              <GlassCard
-                key={index} 
-                delay={index * 0.1}
-                className="group overflow-hidden p-6"
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  delay: index * 0.1,
+                  duration: 0.6,
+                  ease: [0.23, 1, 0.32, 1]
+                }}
+                whileHover={{ y: -8 }}
+                className="relative group"
               >
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
-                      {project.title}
-                    </h3>
-                    <Badge variant="outline" className="text-xs px-2 py-1">
-                      {project.status}
-                    </Badge>
-                  </div>
+                {/* Hover Glow Effect */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+                
+                <GlassCard
+                  delay={0}
+                  className="relative overflow-hidden p-8 h-full flex flex-col backdrop-blur-xl border-2 border-transparent group-hover:border-blue-200/50 dark:group-hover:border-blue-700/50 transition-all duration-300"
+                >
+                  {/* Gradient Overlay */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="secondary" className="text-xs">
-                        {tech}
+                  {/* Header */}
+                  <div className="relative z-10 space-y-4 flex-1">
+                    <div className="flex items-start justify-between gap-3 mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                        {project.highlight && (
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-400/20 dark:to-purple-400/20 rounded-full border border-blue-200/50 dark:border-blue-600/30">
+                            <Star className="w-3 h-3 text-blue-600 dark:text-blue-400" />
+                            <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">{project.highlight}</span>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Status Badge */}
+                      <Badge 
+                        variant="outline" 
+                        className={`text-xs px-3 py-1 font-semibold whitespace-nowrap ${
+                          project.status === 'Live' 
+                            ? 'bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-600'
+                            : project.status === 'Beta'
+                            ? 'bg-yellow-100 text-yellow-700 border-yellow-300 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-600'
+                            : project.status === 'Active'
+                            ? 'bg-blue-100 text-blue-700 border-blue-300 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-600'
+                            : 'bg-purple-100 text-purple-700 border-purple-300 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-600'
+                        }`}
+                      >
+                        {project.status}
                       </Badge>
-                    ))}
+                    </div>
+                    
+                    {/* Description */}
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                      {project.description}
+                    </p>
+                    
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((tech, techIndex) => (
+                        <Badge 
+                          key={techIndex} 
+                          variant="secondary" 
+                          className="text-xs px-3 py-1 bg-slate-100/80 dark:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors duration-200"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                   
                   {/* Action Buttons */}
-                  <div className="flex items-center gap-3 pt-2">
+                  <div className="relative z-10 flex items-center gap-3 pt-4 border-t border-slate-200/50 dark:border-slate-700/50">
                     <Button
                       variant="outline"
                       size="sm"
                       asChild
-                      className="flex items-center gap-2 text-xs"
+                      className="flex-1 group/btn hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/50 transition-all duration-200"
                     >
                       <a 
                         href={project.github} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="no-underline"
+                        className="no-underline flex items-center justify-center gap-2"
                       >
-                        <Github className="w-3 h-3" />
-                        Code
+                        <Github className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
+                        <span className="font-medium">Code</span>
                       </a>
                     </Button>
                     
@@ -777,24 +844,55 @@ const Index = () => {
                         variant="default"
                         size="sm"
                         asChild
-                        className="flex items-center gap-2 text-xs"
+                        className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-200"
                       >
                         <a 
                           href={project.demo} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="no-underline"
+                          className="no-underline flex items-center justify-center gap-2"
                         >
-                          <ExternalLink className="w-3 h-3" />
-                          Live Demo
+                          <ExternalLink className="w-4 h-4" />
+                          <span className="font-medium">Live Demo</span>
                         </a>
                       </Button>
                     )}
                   </div>
-                </div>
-              </GlassCard>
+                  
+                  {/* Featured Project Ribbon */}
+                  {project.featured && (
+                    <div className="absolute top-6 -right-12 bg-gradient-to-r from-amber-400 to-orange-500 text-white text-xs font-bold px-12 py-1 transform rotate-45 shadow-lg">
+                      FEATURED
+                    </div>
+                  )}
+                </GlassCard>
+              </motion.div>
             ))}
           </div>
+          
+          {/* View More Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="text-center mt-16"
+          >
+            <p className="text-slate-600 dark:text-slate-300 mb-6 text-lg">
+              Want to see more of my work?
+            </p>
+            <ModernButton 
+              variant="outline" 
+              size="lg"
+              href="https://github.com/Quantum-techlab"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="w-5 h-5" />
+              Explore on GitHub
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </ModernButton>
+          </motion.div>
         </div>
       </section>
 
