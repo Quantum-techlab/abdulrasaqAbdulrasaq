@@ -59,7 +59,7 @@ const Index = () => {
     description: "Modern attendance tracking system for Ilorin Innovation Hub interns with real-time monitoring, analytics dashboard, and automated reporting features.",
     tech: ["React", "Supabase", "TypeScript", "Tailwind CSS", "Geolocation API"],
     github: "https://github.com/Quantum-techlab",
-    demo: "#",
+    demo: "https://iih-hub.vercel.app/",
     status: "In Development",
     featured: true,
     highlight: "Geolocation-Enabled"
@@ -89,7 +89,7 @@ const Index = () => {
     description: "A versatile text extraction and transcription app that converts images and audio into editable text using Tesseract.js and AI transcription APIs.",
     tech: ["React", "Tesseract.js", "Speech-to-Text APIs", "Tailwind CSS"],
     github: "https://github.com/Quantum-techlab",
-    demo: "#",
+    demo: "https://texify-ocr.vercel.app/",
     status: "Active",
     featured: true,
     highlight: "OCR & Audio Transcription"
