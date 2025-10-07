@@ -659,135 +659,55 @@ const Index = () => {
       </section>
 
       {/* Certifications Section */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-40 -left-20 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 -right-20 w-80 h-80 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          {/* Section Header */}
-          <motion.div
+      <section className="py-20 relative">
+        <div className="container mx-auto px-6">
+          <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-            className="text-center mb-20"
+            className="text-4xl md:text-5xl font-bold mb-16 text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-full mb-6">
-              <Award className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-              <span className="text-sm font-semibold text-amber-700 dark:text-amber-300">Professional Recognition</span>
-            </div>
-            
-            <h2 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                Certifications & Awards
-              </span>
-            </h2>
-            
-            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Continuous learning and professional development through industry-recognized certifications and community contributions.
-            </p>
-          </motion.div>
+            <span className="text-gradient">Certifications</span>
+          </motion.h2>
           
-          {/* Certifications Grid */}
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-6">
               {certifications.map((cert, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
                     delay: index * 0.1,
                     duration: 0.6,
                     ease: [0.23, 1, 0.32, 1]
                   }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="relative group"
                 >
-                  {/* Hover Glow Effect */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-br from-amber-500 via-orange-500 to-red-500 rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500" />
-                  
-                  <GlassCard 
-                    delay={0}
-                    className="relative h-full p-8 text-center backdrop-blur-xl border-2 border-transparent group-hover:border-amber-200/50 dark:group-hover:border-amber-700/50 transition-all duration-300"
-                  >
-                    {/* Decorative Corner */}
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
-                    {/* Icon Container */}
-                    <motion.div 
-                      className="relative mb-6"
-                      whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
-                      <div className="relative w-20 h-20 bg-gradient-to-br from-amber-500 via-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-white mx-auto shadow-xl group-hover:shadow-2xl transition-all duration-300">
-                        <div className="transform group-hover:scale-110 transition-transform duration-300">
-                          {cert.icon}
-                        </div>
+                  <GlassCard delay={index * 0.1} className="p-6 text-center group hover:shadow-xl transition-all duration-300">
+                    <div className="mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        {cert.icon}
                       </div>
-                      
-                      {/* Floating Badge */}
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ delay: index * 0.1 + 0.3, type: "spring", stiffness: 200 }}
-                        className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg"
-                      >
-                        <Award className="w-4 h-4 text-white" />
-                      </motion.div>
-                    </motion.div>
-                    
-                    {/* Content */}
-                    <div className="space-y-3">
-                      <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 leading-tight group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-300">
+                      <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">
                         {cert.title}
                       </h3>
-                      
-                      <div className="flex items-center justify-center gap-2">
-                        <div className="w-2 h-2 bg-amber-500 rounded-full" />
-                        <p className="text-amber-600 dark:text-amber-400 font-semibold text-sm">
-                          {cert.issuer}
-                        </p>
-                      </div>
-                      
-                      <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed min-h-[3rem]">
+                      <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm mb-1">
+                        {cert.issuer}
+                      </p>
+                      <p className="text-slate-500 dark:text-slate-400 text-xs mb-3 leading-relaxed">
                         {cert.description}
                       </p>
-                      
-                      <Badge 
-                        variant="outline" 
-                        className="text-xs px-3 py-1 bg-amber-100/50 text-amber-700 border-amber-300 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-600 font-semibold"
-                      >
+                      <Badge variant="outline" className="text-xs">
                         {cert.year}
                       </Badge>
                     </div>
-                    
-                    {/* Bottom Accent Line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-xl" />
                   </GlassCard>
                 </motion.div>
               ))}
             </div>
           </div>
-          
-          {/* Additional Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-center mt-16"
-          >
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-full border border-amber-200/50 dark:border-amber-700/50">
-              <Star className="w-5 h-5 text-amber-600 dark:text-amber-400" />
-              <p className="text-slate-700 dark:text-slate-300 font-medium">
-                Committed to continuous learning and professional growth
-              </p>
-            </div>
-          </motion.div>
         </div>
       </section>
 
