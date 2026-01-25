@@ -20,7 +20,7 @@ import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { SkillIcon } from "@/components/SkillIcon";
 import { Hero3DCharacter } from "@/components/Hero3DCharacter";
 import { ScrollTransitionSection } from "@/components/ScrollTransitionSection";
-import { TechArsenal3D } from "@/components/TechArsenal3D";
+import { TechAnalyticsDashboard } from "@/components/TechAnalyticsDashboard";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -614,7 +614,7 @@ const Index = () => {
       <ScrollTransitionSection />
 
       {/* Tech Arsenal 3D Section */}
-      <TechArsenal3D />
+      <TechAnalyticsDashboard />
 
       {/* Experience Section - Interactive Journey Timeline */}
       <section id="experience" className="py-24 relative overflow-hidden">
