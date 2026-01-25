@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Code, Mail, ArrowRight, Sparkles, Rocket, Users, Award, Heart } from 'lucide-react';
 import { GlassCard } from './GlassCard';
 import { ModernButton } from './ModernButton';
@@ -7,45 +7,62 @@ import { FloatingElements } from './FloatingElements';
 
 export const ScrollTransitionSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+  const isInView = useInView(containerRef, { once: false, amount: 0.2 });
 
-  // 3D Character moves from center to left
-  const characterX = useTransform(scrollYProgress, [0, 0.3, 0.5], ["50%", "0%", "0%"]);
-  const characterOpacity = useTransform(scrollYProgress, [0, 0.2, 0.4], [0, 1, 1]);
-  const characterScale = useTransform(scrollYProgress, [0, 0.3, 0.5], [0.8, 1, 1]);
-  
-  // About content slides in from right
-  const aboutX = useTransform(scrollYProgress, [0.2, 0.4, 0.6], ["100%", "0%", "0%"]);
-  const aboutOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
+  // Container animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const characterVariants = {
+    hidden: { opacity: 0, x: -50, scale: 0.9 },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      scale: 1,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const }
+    }
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const }
+    }
+  };
 
   return (
     <section 
       ref={containerRef}
       id="about" 
-      className="min-h-[200vh] relative"
+      className="min-h-screen py-20 relative overflow-hidden"
     >
-      {/* Sticky container for scroll effect */}
-      <div className="sticky top-0 h-screen overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/30 via-purple-50/20 to-pink-50/30 dark:from-blue-900/10 dark:via-purple-900/10 dark:to-pink-900/10" />
-        <FloatingElements />
-        
-        <div className="container mx-auto px-6 h-full relative z-10">
-          <div className="h-full flex items-center">
-            <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-6 items-center">
-              
-              {/* Left side - Animated 3D Character (35%) */}
-              <motion.div
-                className="lg:w-[35%] flex-shrink-0 flex justify-center lg:justify-end lg:pr-4"
-                style={{
-                  x: characterX,
-                  opacity: characterOpacity,
-                  scale: characterScale,
-                }}
-              >
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-pink-50/50 dark:from-blue-900/20 dark:via-purple-900/15 dark:to-pink-900/20" />
+      <FloatingElements />
+      
+      <motion.div 
+        className="container mx-auto px-4 sm:px-6 relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-center">
+          
+          {/* Left side - Animated 3D Character */}
+          <motion.div
+            className="w-full lg:w-[40%] flex justify-center"
+            variants={characterVariants}
+          >
                 <div className="relative w-72 h-96 md:w-80 md:h-[450px]">
                   {/* 3D Character Container - Looking Right */}
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -284,15 +301,12 @@ export const ScrollTransitionSection = () => {
                 </div>
               </motion.div>
 
-              {/* Right side - About Me content (65%) */}
+              {/* Right side - About Me content */}
               <motion.div
-                className="lg:w-[65%] flex-grow"
-                style={{
-                  x: aboutX,
-                  opacity: aboutOpacity,
-                }}
+                className="w-full lg:w-[55%]"
+                variants={contentVariants}
               >
-                <div className="space-y-6">
+                <div className="space-y-5">
                   {/* Section title with flair */}
                   <div className="relative">
                     <motion.div
@@ -440,9 +454,7 @@ export const ScrollTransitionSection = () => {
                 </div>
               </motion.div>
             </div>
-          </div>
-        </div>
-      </div>
+        </motion.div>
     </section>
   );
 };
