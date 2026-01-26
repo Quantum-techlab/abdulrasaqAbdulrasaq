@@ -4,7 +4,7 @@ Welcome to my personal developer portfolio — a sleek, interactive, and modern 
 
 ## 🌍 Live Preview
  
-(Currently hosted on Vercel or Netlify)
+(Currently hosted on Vercel
 
 ---
 
