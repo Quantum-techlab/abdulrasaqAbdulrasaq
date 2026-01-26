@@ -135,6 +135,20 @@ const Index = () => {
       type: "leadership"
     },
     {
+      title: "Front-End Developer Intern",
+      company: "Torvix AI",
+      period: "2025 – Present",
+      description: "Building modern, responsive, and user-focused web interfaces with a fast-paced, innovation-driven AI team, contributing to human-centered digital experiences.",
+      responsibilities: [
+        "Build responsive web pages using HTML, CSS, JavaScript, and React.js/Bootstrap frameworks",
+        "Convert UI/UX designs into functional, scalable, and optimized interfaces",
+        "Ensure cross-browser compatibility and performance optimization",
+        "Collaborate with designers and back-end teams for seamless integration"
+      ],
+      icon: <Sparkles className="w-4 h-4" />,
+      type: "internship"
+    },
+    {
       title: "Frontend Developer Intern",
       company: "Ilorin Innovation Hub",
       period: "2025 – Present",
