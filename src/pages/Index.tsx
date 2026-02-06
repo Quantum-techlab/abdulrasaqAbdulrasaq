@@ -219,42 +219,42 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-zinc-50 via-white to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-100 transition-colors duration-500">
       <ParticleBackground />
       <EnhancedNavigation />
       <FloatingCTA />
 
-      {/* ✨ Creative Hero Section - Cosmic Portal Design */}
+      {/* ✨ Creative Hero Section - Salt & Pepper Design */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         {/* Animated gradient mesh background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-slate-900 dark:via-indigo-950 dark:to-slate-900" />
+          <div className="absolute inset-0 bg-gradient-to-br from-zinc-50 via-white to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900" />
           
-          {/* Animated gradient orbs */}
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-purple-400/20 to-blue-400/20 dark:from-purple-600/30 dark:to-blue-600/30 blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-cyan-400/15 to-emerald-400/15 dark:from-cyan-500/20 dark:to-emerald-500/20 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-pink-400/10 to-purple-400/10 dark:from-pink-500/10 dark:to-purple-500/10 blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          {/* Animated gradient orbs - silver/gray */}
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-zinc-400/15 to-zinc-500/15 dark:from-zinc-500/20 dark:to-zinc-400/20 blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-zinc-300/15 to-zinc-400/15 dark:from-zinc-600/20 dark:to-zinc-500/20 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-zinc-300/10 to-zinc-400/10 dark:from-zinc-600/10 dark:to-zinc-500/10 blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
 
         {/* Floating geometric shapes */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Floating squares */}
+          {/* Floating squares - gray tones */}
           <motion.div
             animate={{ rotate: 360, y: [-20, 20, -20] }}
             transition={{ rotate: { duration: 20, repeat: Infinity, ease: 'linear' }, y: { duration: 5, repeat: Infinity } }}
-            className="absolute top-20 left-[10%] w-16 h-16 border-2 border-purple-400/30 dark:border-purple-500/30 rotate-45"
+            className="absolute top-20 left-[10%] w-16 h-16 border-2 border-zinc-400/30 dark:border-zinc-500/30 rotate-45"
           />
           <motion.div
             animate={{ rotate: -360, y: [20, -20, 20] }}
             transition={{ rotate: { duration: 25, repeat: Infinity, ease: 'linear' }, y: { duration: 6, repeat: Infinity } }}
-            className="absolute bottom-32 right-[15%] w-24 h-24 border-2 border-cyan-400/20 dark:border-cyan-500/20 rotate-12"
+            className="absolute bottom-32 right-[15%] w-24 h-24 border-2 border-zinc-400/20 dark:border-zinc-500/20 rotate-12"
           />
           
-          {/* Floating code symbols */}
+          {/* Floating code symbols - gray tones */}
           {['<>', '/>', '{}', '()', '[]', '=>'].map((symbol, i) => (
             <motion.div
               key={i}
-              className="absolute text-2xl font-mono text-slate-400/20 dark:text-white/10 select-none"
+              className="absolute text-2xl font-mono text-zinc-400/20 dark:text-zinc-500/15 select-none"
               style={{ left: `${10 + i * 15}%`, top: `${20 + (i % 3) * 25}%` }}
               animate={{ 
                 y: [-10, 10, -10],
@@ -288,14 +288,14 @@ const Index = () => {
               className="flex justify-center mb-8"
             >
               <div className="relative group">
-                {/* Glow effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-emerald-500 rounded-full opacity-50 blur-lg group-hover:opacity-75 transition-opacity" />
-                <div className="relative inline-flex items-center gap-3 backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/50 dark:border-white/10 rounded-full px-6 py-3 shadow-2xl">
+                {/* Glow effect - silver/white */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-zinc-400 via-zinc-300 to-zinc-400 dark:from-zinc-500 dark:via-zinc-400 dark:to-zinc-500 rounded-full opacity-50 blur-lg group-hover:opacity-75 transition-opacity" />
+                <div className="relative inline-flex items-center gap-3 backdrop-blur-xl bg-white/90 dark:bg-zinc-900/90 border border-zinc-200/50 dark:border-zinc-700/50 rounded-full px-6 py-3 shadow-2xl">
                   <div className="relative flex items-center justify-center">
-                    <div className="w-3 h-3 bg-emerald-400 rounded-full animate-ping absolute" />
-                    <div className="w-3 h-3 bg-emerald-500 rounded-full relative" />
+                    <div className="w-3 h-3 bg-zinc-400 rounded-full animate-ping absolute" />
+                    <div className="w-3 h-3 bg-zinc-500 rounded-full relative" />
                   </div>
-                  <span className="text-sm font-semibold text-slate-700 dark:text-white">
+                  <span className="text-sm font-semibold text-zinc-700 dark:text-white">
                     ✨ Available for New Opportunities
                   </span>
                 </div>
@@ -318,7 +318,7 @@ const Index = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="text-lg font-medium text-cyan-600 dark:text-cyan-400 mb-2"
+                    className="text-lg font-medium text-zinc-600 dark:text-zinc-400 mb-2"
                   >
                     👋 Hello, I'm
                   </motion.div>
@@ -326,20 +326,20 @@ const Index = () => {
                   <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4">
                     {/* First name with gradient underline */}
                     <span className="relative inline-block">
-                      <span className="bg-gradient-to-r from-slate-800 via-indigo-700 to-slate-800 dark:from-white dark:via-cyan-200 dark:to-white bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-800 dark:from-white dark:via-zinc-200 dark:to-white bg-clip-text text-transparent">
                         Abdulrasaq
                       </span>
                       <motion.span
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ delay: 0.8, duration: 0.8 }}
-                        className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 origin-left rounded-full"
+                        className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-zinc-500 via-zinc-400 to-zinc-500 origin-left rounded-full"
                       />
                     </span>
                     
                     {/* Last name with outline effect */}
                     <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold mt-3">
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-600 to-zinc-500 dark:from-zinc-400 dark:to-zinc-300">
                         Abdulrasaq
                       </span>
                     </span>
@@ -348,10 +348,10 @@ const Index = () => {
                   {/* Animated Role with terminal effect */}
                   <div className="h-16 flex items-center">
                     <div className="flex items-center gap-2">
-                      <span className="text-emerald-600 dark:text-emerald-400 font-mono">$</span>
-                      <span className="text-slate-500 dark:text-slate-400 font-mono">role:</span>
+                      <span className="text-zinc-600 dark:text-zinc-400 font-mono">$</span>
+                      <span className="text-zinc-500 dark:text-zinc-500 font-mono">role:</span>
                       <div className="text-2xl md:text-3xl font-bold">
-                        <span className="bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 dark:from-cyan-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+                        <span className="bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-700 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-300 bg-clip-text text-transparent">
                           <TypewriterText 
                             texts={[
                               "Full-Stack Developer",
@@ -376,26 +376,26 @@ const Index = () => {
                   className="mb-8 relative"
                 >
                   {/* Code-style decoration */}
-                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-500/50 via-purple-500/50 to-pink-500/50 rounded-full" />
+                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-zinc-400/50 via-zinc-500/50 to-zinc-400/50 rounded-full" />
                   
-                  <div className="pl-4 border-l-2 border-slate-300/50 dark:border-slate-700/50">
-                    <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                      <span className="text-slate-400 dark:text-slate-500 font-mono">// </span>
+                  <div className="pl-4 border-l-2 border-zinc-300/50 dark:border-zinc-700/50">
+                    <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4">
+                      <span className="text-zinc-400 dark:text-zinc-500 font-mono">// </span>
                       Passionate about crafting exceptional digital experiences 
                       through clean, efficient code. I specialize in modern web 
                       technologies and AI integration to build scalable, 
-                      user-centric applications that make a <span className="text-cyan-600 dark:text-cyan-400">real impact</span>.
+                      user-centric applications that make a <span className="text-zinc-700 dark:text-zinc-300 font-semibold">real impact</span>.
                     </p>
                     
                     {/* Location with icon */}
                     <div className="flex items-center gap-4 flex-wrap">
-                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50">
-                        <MapPin className="w-4 h-4 text-pink-500 dark:text-pink-400" />
-                        <span className="text-sm text-slate-600 dark:text-slate-300">University of Ilorin, Nigeria</span>
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-100/80 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50">
+                        <MapPin className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
+                        <span className="text-sm text-zinc-600 dark:text-zinc-300">University of Ilorin, Nigeria</span>
                       </div>
-                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50">
+                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-100/80 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50">
                         <span className="text-sm">🎓</span>
-                        <span className="text-sm text-slate-600 dark:text-slate-300">Software Engineering</span>
+                        <span className="text-sm text-zinc-600 dark:text-zinc-300">Software Engineering</span>
                       </div>
                     </div>
                   </div>
@@ -413,13 +413,13 @@ const Index = () => {
                     href="mailto:ola283dayo@gmail.com"
                     className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-                    <div className="absolute inset-[2px] bg-white dark:bg-slate-900 rounded-2xl" />
-                    <span className="relative flex items-center gap-3 bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 dark:from-cyan-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent font-bold">
-                      <Mail className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-600 via-zinc-500 to-zinc-600" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-500 via-zinc-400 to-zinc-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+                    <div className="absolute inset-[2px] bg-white dark:bg-zinc-900 rounded-2xl" />
+                    <span className="relative flex items-center gap-3 bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-700 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-300 bg-clip-text text-transparent font-bold">
+                      <Mail className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
                       Let's Connect
-                      <ArrowRight className="w-5 h-5 text-pink-600 dark:text-pink-400 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-5 h-5 text-zinc-600 dark:text-zinc-400 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </a>
 
@@ -428,7 +428,7 @@ const Index = () => {
                     href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold border border-slate-300 dark:border-slate-700 hover:border-purple-500/50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all duration-300 hover:scale-105"
+                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold border border-zinc-300 dark:border-zinc-700 hover:border-zinc-500/50 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-all duration-300 hover:scale-105"
                   >
                     <Download className="w-5 h-5" />
                     View Resume
@@ -440,17 +440,17 @@ const Index = () => {
                       href="https://github.com/Quantum-techlab"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50 hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 hover:scale-110 group"
+                      className="p-3 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 hover:border-zinc-500/50 hover:bg-zinc-500/10 transition-all duration-300 hover:scale-110 group"
                     >
-                      <Github className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-purple-600 dark:group-hover:text-white transition-colors" />
+                      <Github className="w-5 h-5 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-800 dark:group-hover:text-white transition-colors" />
                     </a>
                     <a
                       href="https://linkedin.com/in/abdulrasaq-abdulrasaq"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-300 hover:scale-110 group"
+                      className="p-3 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 hover:border-zinc-500/50 hover:bg-zinc-500/10 transition-all duration-300 hover:scale-110 group"
                     >
-                      <Linkedin className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-cyan-600 dark:group-hover:text-white transition-colors" />
+                      <Linkedin className="w-5 h-5 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-800 dark:group-hover:text-white transition-colors" />
                     </a>
                   </div>
                 </motion.div>
@@ -464,16 +464,16 @@ const Index = () => {
                 className="lg:col-span-2 flex justify-center lg:justify-end"
               >
                 <div className="relative group">
-                  {/* Glowing aura */}
+                  {/* Glowing aura - silver/gray */}
                   <div className="absolute inset-0 w-72 h-72 -translate-x-4 -translate-y-4">
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 dark:from-cyan-500/30 dark:via-purple-500/30 dark:to-pink-500/30 rounded-full blur-2xl animate-pulse" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-400/20 via-zinc-500/20 to-zinc-400/20 dark:from-zinc-500/30 dark:via-zinc-400/30 dark:to-zinc-500/30 rounded-full blur-2xl animate-pulse" />
                   </div>
                   
                   {/* Rotating ring 1 */}
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute -inset-6 rounded-full border border-dashed border-purple-400/30 dark:border-purple-500/30"
+                    className="absolute -inset-6 rounded-full border border-dashed border-zinc-400/30 dark:border-zinc-500/30"
                     style={{ width: '304px', height: '304px', left: '-20px', top: '-20px' }}
                   />
                   
@@ -481,7 +481,7 @@ const Index = () => {
                   <motion.div
                     animate={{ rotate: -360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute rounded-full border border-cyan-400/20 dark:border-cyan-500/20"
+                    className="absolute rounded-full border border-zinc-400/20 dark:border-zinc-500/20"
                     style={{ width: '340px', height: '340px', left: '-40px', top: '-40px' }}
                   />
 
@@ -514,12 +514,12 @@ const Index = () => {
                           transition={{ duration: 2 + i * 0.3, repeat: Infinity }}
                           className="relative"
                         >
-                          <div className="w-12 h-12 rounded-xl bg-white/90 dark:bg-slate-800/90 border border-slate-200/50 dark:border-slate-700/50 flex items-center justify-center text-xl shadow-xl backdrop-blur-sm hover:scale-125 hover:border-purple-500/50 transition-all duration-300 cursor-pointer">
+                          <div className="w-12 h-12 rounded-xl bg-white/90 dark:bg-zinc-800/90 border border-zinc-200/50 dark:border-zinc-700/50 flex items-center justify-center text-xl shadow-xl backdrop-blur-sm hover:scale-125 hover:border-zinc-500/50 transition-all duration-300 cursor-pointer">
                             {tech.icon}
                           </div>
                           {/* Tooltip */}
                           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/bubble:opacity-100 transition-opacity whitespace-nowrap">
-                            <span className="px-2 py-1 rounded bg-white dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">{tech.label}</span>
+                            <span className="px-2 py-1 rounded bg-white dark:bg-zinc-800 text-xs text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">{tech.label}</span>
                           </div>
                         </motion.div>
                       </motion.div>
@@ -528,9 +528,9 @@ const Index = () => {
                   
                   {/* Main profile image with gradient border */}
                   <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl">
-                    {/* Gradient border */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full" />
-                    <div className="absolute inset-[4px] bg-white dark:bg-slate-900 rounded-full" />
+                    {/* Gradient border - silver */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-500 via-zinc-400 to-zinc-500 rounded-full" />
+                    <div className="absolute inset-[4px] bg-white dark:bg-zinc-900 rounded-full" />
                     
                     <div className="absolute inset-[6px] rounded-full overflow-hidden">
                       <img 
@@ -549,8 +549,8 @@ const Index = () => {
                   {/* Animated status indicator */}
                   <div className="absolute bottom-4 right-4 z-30">
                     <div className="relative">
-                      <div className="absolute inset-0 w-8 h-8 bg-emerald-400 rounded-full blur-md animate-pulse" />
-                      <div className="relative w-8 h-8 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full border-3 border-white dark:border-slate-900 flex items-center justify-center shadow-lg">
+                      <div className="absolute inset-0 w-8 h-8 bg-zinc-400 rounded-full blur-md animate-pulse" />
+                      <div className="relative w-8 h-8 bg-gradient-to-r from-zinc-400 to-zinc-500 rounded-full border-3 border-white dark:border-zinc-900 flex items-center justify-center shadow-lg">
                         <span className="text-xs">✓</span>
                       </div>
                     </div>
@@ -569,15 +569,15 @@ const Index = () => {
             >
               {/* Section label */}
               <div className="text-center mb-8">
-                <span className="text-xs font-mono text-slate-500 uppercase tracking-widest">// My journey in numbers</span>
+                <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">// My journey in numbers</span>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-6 gap-4 max-w-5xl mx-auto">
                 {[
-                  { count: yearsCount.count, suffix: "+", label: "Years Experience", icon: <Calendar className="w-5 h-5" />, color: 'from-cyan-500 to-blue-500' },
-                  { count: projectsCount.count, suffix: "+", label: "Projects Completed", icon: <Code className="w-5 h-5" />, color: 'from-purple-500 to-pink-500' },
-                  { count: techCount.count, suffix: "+", label: "Technologies", icon: <Zap className="w-5 h-5" />, color: 'from-amber-500 to-orange-500' },
-                  { count: certsCount.count, suffix: "", label: "Certifications", icon: <Award className="w-5 h-5" />, color: 'from-emerald-500 to-teal-500' }
+                  { count: yearsCount.count, suffix: "+", label: "Years Experience", icon: <Calendar className="w-5 h-5" />, color: 'from-zinc-500 to-zinc-600' },
+                  { count: projectsCount.count, suffix: "+", label: "Projects Completed", icon: <Code className="w-5 h-5" />, color: 'from-zinc-600 to-zinc-700' },
+                  { count: techCount.count, suffix: "+", label: "Technologies", icon: <Zap className="w-5 h-5" />, color: 'from-zinc-400 to-zinc-500' },
+                  { count: certsCount.count, suffix: "", label: "Certifications", icon: <Award className="w-5 h-5" />, color: 'from-zinc-500 to-zinc-600' }
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -593,14 +593,14 @@ const Index = () => {
                     {/* Glow on hover */}
                     <div className={`absolute -inset-0.5 bg-gradient-to-r ${stat.color} rounded-2xl opacity-0 group-hover:opacity-50 blur-lg transition-opacity duration-300`} />
                     
-                    <div className="relative text-center p-5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-300 hover:-translate-y-1">
+                    <div className="relative text-center p-5 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-700/50 rounded-2xl hover:border-zinc-300 dark:hover:border-zinc-600 transition-all duration-300 hover:-translate-y-1">
                       <div className={`flex items-center justify-center mb-3 w-10 h-10 mx-auto rounded-xl bg-gradient-to-r ${stat.color}`}>
                         <span className="text-white">{stat.icon}</span>
                       </div>
-                      <div className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mb-1">
-                        {stat.count}<span className="text-slate-400">{stat.suffix}</span>
+                      <div className="text-3xl md:text-4xl font-bold text-zinc-800 dark:text-white mb-1">
+                        {stat.count}<span className="text-zinc-400">{stat.suffix}</span>
                       </div>
-                      <div className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wide">
+                      <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-wide">
                         {stat.label}
                       </div>
                     </div>

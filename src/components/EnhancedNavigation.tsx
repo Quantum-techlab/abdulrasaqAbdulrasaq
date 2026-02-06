@@ -95,7 +95,7 @@ export const EnhancedNavigation = () => {
                 >
                   {item.label}
                   <motion.span 
-                    className="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transform -translate-x-1/2"
+                    className="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-zinc-600 to-zinc-400 dark:from-zinc-400 dark:to-zinc-300 transform -translate-x-1/2"
                     initial={{ width: 0 }}
                     animate={{ 
                       width: activeSection === item.href.substring(1) ? 24 : 0 

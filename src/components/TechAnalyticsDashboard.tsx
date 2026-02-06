@@ -368,11 +368,11 @@ export const TechAnalyticsDashboard = () => {
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-zinc-100/20 dark:via-zinc-800/20 to-background" />
       
-      {/* Animated gradient orbs */}
-      <div className="absolute top-40 left-20 w-72 h-72 rounded-full bg-primary/5 blur-3xl animate-pulse" />
-      <div className="absolute bottom-40 right-20 w-96 h-96 rounded-full bg-chart-2/5 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      {/* Animated gradient orbs - silver/gray */}
+      <div className="absolute top-40 left-20 w-72 h-72 rounded-full bg-zinc-400/5 blur-3xl animate-pulse" />
+      <div className="absolute bottom-40 right-20 w-96 h-96 rounded-full bg-zinc-500/5 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
       
       {/* Grid pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -399,7 +399,7 @@ export const TechAnalyticsDashboard = () => {
           </motion.div>
           
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-zinc-700 via-zinc-500 to-zinc-700 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-300 bg-clip-text text-transparent">
               Tech Arsenal
             </span>
           </h2>
