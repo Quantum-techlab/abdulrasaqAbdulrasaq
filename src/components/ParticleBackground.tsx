@@ -41,7 +41,7 @@ export const ParticleBackground: React.FC = () => {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-gradient-to-r from-blue-400 to-purple-400"
+          className="absolute rounded-full bg-gradient-to-r from-zinc-400 to-zinc-500 dark:from-zinc-500 dark:to-zinc-400"
           style={{
             width: particle.size,
             height: particle.size,

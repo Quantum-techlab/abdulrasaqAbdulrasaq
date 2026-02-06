@@ -110,12 +110,12 @@ export default {
 						transform: 'translateY(0)'
 					}
 				},
-				'glow': {
+			'glow': {
 					'0%, 100%': {
-						boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)'
+						boxShadow: '0 0 20px rgba(161, 161, 170, 0.3)'
 					},
 					'50%': {
-						boxShadow: '0 0 30px rgba(59, 130, 246, 0.6)'
+						boxShadow: '0 0 30px rgba(161, 161, 170, 0.5)'
 					}
 				},
 				'float': {

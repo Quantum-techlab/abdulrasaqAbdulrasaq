@@ -47,7 +47,7 @@ export const ScrollTransitionSection = () => {
       className="min-h-screen py-20 relative overflow-hidden"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-pink-50/50 dark:from-blue-900/20 dark:via-purple-900/15 dark:to-pink-900/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-zinc-50/50 via-zinc-100/30 to-zinc-50/50 dark:from-zinc-800/20 dark:via-zinc-900/15 dark:to-zinc-800/20" />
       <FloatingElements />
       
       <motion.div 
@@ -310,12 +310,12 @@ export const ScrollTransitionSection = () => {
                   {/* Section title with flair */}
                   <div className="relative">
                     <motion.div
-                      className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 rounded-full"
+                      className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-zinc-500 via-zinc-400 to-zinc-500 rounded-full"
                       animate={{ scaleY: [0.8, 1, 0.8], opacity: [0.5, 1, 0.5] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
                     <motion.span 
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                     >
@@ -323,7 +323,7 @@ export const ScrollTransitionSection = () => {
                       Discover My Story
                     </motion.span>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-2">
-                      <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-700 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-300 bg-clip-text text-transparent">
                         Who I Am
                       </span>
                     </h2>
@@ -331,23 +331,23 @@ export const ScrollTransitionSection = () => {
 
                   {/* Main About content card */}
                   <GlassCard delay={0.2} className="p-8 relative overflow-hidden">
-                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-r from-blue-400 to-purple-500 opacity-10 rounded-full blur-3xl" />
-                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-r from-pink-400 to-orange-500 opacity-10 rounded-full blur-2xl" />
+                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-r from-zinc-300 to-zinc-400 opacity-10 rounded-full blur-3xl" />
+                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-r from-zinc-400 to-zinc-500 opacity-10 rounded-full blur-2xl" />
                     
                     <div className="space-y-5 relative z-10">
                       {/* Intro with impact */}
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-zinc-600 to-zinc-700 flex items-center justify-center flex-shrink-0 shadow-lg">
                           <Rocket className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                          <p className="text-lg leading-relaxed text-slate-700 dark:text-slate-200">
-                            I'm <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Abdulrasaq Abdulrasaq</span> — a 
-                            passionate <span className="font-semibold text-blue-600 dark:text-blue-400">Frontend Developer</span> and 
-                            <span className="font-semibold text-purple-600 dark:text-purple-400"> Software Engineer</span> currently studying 
-                            <span className="font-semibold"> Information and Communication Technology</span> at the <span className="font-semibold text-blue-600 dark:text-blue-400">University of Ilorin</span>.
+                          <p className="text-lg leading-relaxed text-zinc-700 dark:text-zinc-200">
+                            I'm <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-700 to-zinc-600 dark:from-zinc-300 dark:to-zinc-400">Abdulrasaq Abdulrasaq</span> — a 
+                            passionate <span className="font-semibold text-zinc-700 dark:text-zinc-300">Frontend Developer</span> and 
+                            <span className="font-semibold text-zinc-600 dark:text-zinc-400"> Software Engineer</span> currently studying
+                            <span className="font-semibold"> Information and Communication Technology</span> at the <span className="font-semibold text-zinc-700 dark:text-zinc-300">University of Ilorin</span>.
                           </p>
-                          <p className="text-base leading-relaxed text-slate-600 dark:text-slate-300 mt-3">
+                          <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-300 mt-3">
                             <span className="text-lg">🎯</span> <span className="font-medium">Designing intuitive interfaces, building scalable solutions, and solving complex problems</span> — 
                             these have always been my core focus. I transform ideas into exceptional digital experiences that users love.
                           </p>
@@ -356,28 +356,28 @@ export const ScrollTransitionSection = () => {
 
                       {/* Leadership highlight */}
                       <motion.div 
-                        className="p-5 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-pink-900/20 rounded-2xl border border-blue-200/50 dark:border-purple-500/20 relative overflow-hidden"
+                        className="p-5 bg-gradient-to-r from-zinc-50 via-zinc-100 to-zinc-50 dark:from-zinc-800/20 dark:via-zinc-700/20 dark:to-zinc-800/20 rounded-2xl border border-zinc-200/50 dark:border-zinc-600/20 relative overflow-hidden"
                         whileHover={{ scale: 1.02 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-orange-400/20 rounded-full blur-xl" />
+                        <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-zinc-300/20 to-zinc-400/20 rounded-full blur-xl" />
                         <div className="flex items-start gap-4 relative z-10">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center flex-shrink-0 shadow-md">
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-zinc-500 to-zinc-600 flex items-center justify-center flex-shrink-0 shadow-md">
                             <Award className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <h4 className="font-bold text-slate-800 dark:text-white mb-1">
+                            <h4 className="font-bold text-zinc-800 dark:text-white mb-1">
                               Software Director @ ITSA, University of Ilorin
                             </h4>
-                            <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-3">
+                            <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed mb-3">
                               Leading the software development wing of the IT Student Association, I architect innovative solutions, 
                               drive technical excellence, and shape the next generation of developers. From conceptualization to deployment, 
                               I ensure our projects push boundaries and create real impact.
                             </p>
-                            <div className="flex items-center gap-2 p-3 bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 rounded-xl border border-orange-200/50 dark:border-orange-500/20">
+                            <div className="flex items-center gap-2 p-3 bg-gradient-to-r from-zinc-100 to-zinc-50 dark:from-zinc-800/20 dark:to-zinc-700/20 rounded-xl border border-zinc-200/50 dark:border-zinc-600/20">
                               <span className="text-xl">🚀</span>
-                              <p className="text-sm text-slate-700 dark:text-slate-200">
-                                <span className="font-bold text-orange-600 dark:text-orange-400">Community Lead — TechNexus 7.0</span> | 
+                              <p className="text-sm text-zinc-700 dark:text-zinc-200">
+                                <span className="font-bold text-zinc-700 dark:text-zinc-300">Community Lead — TechNexus 7.0</span> |
                                 Spearheading initiatives to train and empower students in high-demand tech skills including Web Development, 
                                 AI/ML, Cloud Computing, and Mobile Development.
                               </p>
@@ -389,51 +389,51 @@ export const ScrollTransitionSection = () => {
                       {/* What I bring */}
                       <div className="grid grid-cols-2 gap-3">
                         <motion.div 
-                          className="p-4 bg-white/60 dark:bg-slate-800/60 rounded-xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm"
-                          whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(59, 130, 246, 0.3)" }}
+                          className="p-4 bg-white/60 dark:bg-zinc-800/60 rounded-xl border border-zinc-200/50 dark:border-zinc-700/50 backdrop-blur-sm"
+                          whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(161, 161, 170, 0.3)" }}
                         >
-                          <Users className="w-6 h-6 text-blue-500 mb-2" />
-                          <h5 className="font-semibold text-slate-800 dark:text-white text-sm">Team Leadership</h5>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Mentoring 20+ developers</p>
+                          <Users className="w-6 h-6 text-zinc-500 mb-2" />
+                          <h5 className="font-semibold text-zinc-800 dark:text-white text-sm">Team Leadership</h5>
+                          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Mentoring 20+ developers</p>
                         </motion.div>
                         
                         <motion.div 
-                          className="p-4 bg-white/60 dark:bg-slate-800/60 rounded-xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm"
-                          whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(139, 92, 246, 0.3)" }}
+                          className="p-4 bg-white/60 dark:bg-zinc-800/60 rounded-xl border border-zinc-200/50 dark:border-zinc-700/50 backdrop-blur-sm"
+                          whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(161, 161, 170, 0.3)" }}
                         >
-                          <Code className="w-6 h-6 text-purple-500 mb-2" />
-                          <h5 className="font-semibold text-slate-800 dark:text-white text-sm">Clean Code</h5>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Scalable & maintainable</p>
+                          <Code className="w-6 h-6 text-zinc-600 mb-2" />
+                          <h5 className="font-semibold text-zinc-800 dark:text-white text-sm">Clean Code</h5>
+                          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Scalable & maintainable</p>
                         </motion.div>
                         
                         <motion.div 
-                          className="p-4 bg-white/60 dark:bg-slate-800/60 rounded-xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm"
-                          whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(236, 72, 153, 0.3)" }}
+                          className="p-4 bg-white/60 dark:bg-zinc-800/60 rounded-xl border border-zinc-200/50 dark:border-zinc-700/50 backdrop-blur-sm"
+                          whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(161, 161, 170, 0.3)" }}
                         >
-                          <Heart className="w-6 h-6 text-pink-500 mb-2" />
-                          <h5 className="font-semibold text-slate-800 dark:text-white text-sm">User-Focused</h5>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Delightful experiences</p>
+                          <Heart className="w-6 h-6 text-zinc-500 mb-2" />
+                          <h5 className="font-semibold text-zinc-800 dark:text-white text-sm">User-Focused</h5>
+                          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Delightful experiences</p>
                         </motion.div>
                         
                         <motion.div 
-                          className="p-4 bg-white/60 dark:bg-slate-800/60 rounded-xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm"
-                          whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(6, 182, 212, 0.3)" }}
+                          className="p-4 bg-white/60 dark:bg-zinc-800/60 rounded-xl border border-zinc-200/50 dark:border-zinc-700/50 backdrop-blur-sm"
+                          whileHover={{ y: -3, boxShadow: "0 10px 30px -10px rgba(161, 161, 170, 0.3)" }}
                         >
-                          <Sparkles className="w-6 h-6 text-cyan-500 mb-2" />
-                          <h5 className="font-semibold text-slate-800 dark:text-white text-sm">Innovation</h5>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">AI & modern tech</p>
+                          <Sparkles className="w-6 h-6 text-zinc-600 mb-2" />
+                          <h5 className="font-semibold text-zinc-800 dark:text-white text-sm">Innovation</h5>
+                          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">AI & modern tech</p>
                         </motion.div>
                       </div>
 
                       {/* Call to action with personality */}
                       <motion.div 
-                        className="flex items-center gap-3 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl border border-emerald-200/50 dark:border-emerald-500/20"
-                        animate={{ boxShadow: ["0 0 0 0 rgba(16, 185, 129, 0)", "0 0 0 8px rgba(16, 185, 129, 0.1)", "0 0 0 0 rgba(16, 185, 129, 0)"] }}
+                        className="flex items-center gap-3 p-4 bg-gradient-to-r from-zinc-100 to-zinc-50 dark:from-zinc-800/20 dark:to-zinc-700/20 rounded-xl border border-zinc-200/50 dark:border-zinc-600/20"
+                        animate={{ boxShadow: ["0 0 0 0 rgba(161, 161, 170, 0)", "0 0 0 8px rgba(161, 161, 170, 0.1)", "0 0 0 0 rgba(161, 161, 170, 0)"] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
                         <span className="text-3xl">🚀</span>
-                        <p className="text-sm font-medium text-slate-700 dark:text-slate-200">
-                          <span className="font-bold text-emerald-600 dark:text-emerald-400">Ready to build something amazing?</span> 
+                        <p className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                          <span className="font-bold text-zinc-700 dark:text-zinc-300">Ready to build something amazing?</span> 
                           {" "}I bring creativity, technical expertise, and a passion for excellence to every project.
                         </p>
                       </motion.div>

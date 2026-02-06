@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 export const FloatingElements = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Floating geometric shapes */}
+      {/* Floating geometric shapes - silver/gray */}
       {[...Array(6)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-4 h-4 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full"
+          className="absolute w-4 h-4 bg-gradient-to-r from-zinc-400/20 to-zinc-500/20 rounded-full"
           initial={{
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
@@ -30,11 +30,11 @@ export const FloatingElements = () => {
         />
       ))}
       
-      {/* Larger floating elements */}
+      {/* Larger floating elements - silver tones */}
       {[...Array(3)].map((_, i) => (
         <motion.div
           key={`large-${i}`}
-          className="absolute w-20 h-20 bg-gradient-to-br from-blue-200/10 to-purple-200/10 rounded-full blur-xl"
+          className="absolute w-20 h-20 bg-gradient-to-br from-zinc-300/10 to-zinc-400/10 rounded-full blur-xl"
           animate={{
             x: [0, 100, 0],
             y: [0, -50, 0],
