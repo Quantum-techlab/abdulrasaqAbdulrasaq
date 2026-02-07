@@ -32,74 +32,75 @@ interface TechBranch {
   techs: TechItem[];
 }
 
+// Salt and Pepper themed branches - using silver/gray tones
 const techBranches: TechBranch[] = [
   {
     name: "Frontend",
-    color: "#61DAFB",
-    gradient: "from-cyan-400 to-blue-500",
+    color: "#a1a1aa",
+    gradient: "from-zinc-400 to-zinc-600",
     techs: [
-      { name: "React", icon: "⚛️", color: "#61DAFB" },
-      { name: "TypeScript", icon: "📘", color: "#3178C6" },
-      { name: "JavaScript", icon: "💛", color: "#F7DF1E" },
-      { name: "Tailwind", icon: "💨", color: "#06B6D4" },
-      { name: "Vite", icon: "⚡", color: "#646CFF" },
-      { name: "Next.js", icon: "▲", color: "#000000" },
-      { name: "HTML5", icon: "🌐", color: "#E34F26" },
-      { name: "CSS3", icon: "🎨", color: "#1572B6" },
+      { name: "React", icon: "⚛️", color: "#a1a1aa" },
+      { name: "TypeScript", icon: "📘", color: "#71717a" },
+      { name: "JavaScript", icon: "💛", color: "#d4d4d8" },
+      { name: "Tailwind", icon: "💨", color: "#a1a1aa" },
+      { name: "Vite", icon: "⚡", color: "#52525b" },
+      { name: "Next.js", icon: "▲", color: "#27272a" },
+      { name: "HTML5", icon: "🌐", color: "#71717a" },
+      { name: "CSS3", icon: "🎨", color: "#a1a1aa" },
     ]
   },
   {
     name: "Backend",
-    color: "#339933",
-    gradient: "from-green-400 to-emerald-600",
+    color: "#71717a",
+    gradient: "from-zinc-500 to-zinc-700",
     techs: [
-      { name: "Node.js", icon: "💚", color: "#339933" },
-      { name: "Express", icon: "🚂", color: "#000000" },
-      { name: "REST APIs", icon: "🔗", color: "#FF6B6B" },
-      { name: "GraphQL", icon: "◈", color: "#E10098" },
+      { name: "Node.js", icon: "💚", color: "#71717a" },
+      { name: "Express", icon: "🚂", color: "#3f3f46" },
+      { name: "REST APIs", icon: "🔗", color: "#a1a1aa" },
+      { name: "GraphQL", icon: "◈", color: "#52525b" },
     ]
   },
   {
     name: "Database",
-    color: "#3ECF8E",
-    gradient: "from-emerald-400 to-teal-600",
+    color: "#d4d4d8",
+    gradient: "from-zinc-300 to-zinc-500",
     techs: [
-      { name: "Supabase", icon: "⚡", color: "#3ECF8E" },
-      { name: "Firebase", icon: "🔥", color: "#FFCA28" },
-      { name: "PostgreSQL", icon: "🐘", color: "#4169E1" },
-      { name: "MongoDB", icon: "🍃", color: "#47A248" },
+      { name: "Supabase", icon: "⚡", color: "#d4d4d8" },
+      { name: "Firebase", icon: "🔥", color: "#fafafa" },
+      { name: "PostgreSQL", icon: "🐘", color: "#a1a1aa" },
+      { name: "MongoDB", icon: "🍃", color: "#71717a" },
     ]
   },
   {
     name: "AI & ML",
-    color: "#8B5CF6",
-    gradient: "from-purple-400 to-violet-600",
+    color: "#52525b",
+    gradient: "from-zinc-600 to-zinc-800",
     techs: [
-      { name: "AI Integration", icon: "🤖", color: "#8B5CF6" },
-      { name: "ChatGPT API", icon: "💬", color: "#10A37F" },
-      { name: "Prompt Eng.", icon: "✨", color: "#EC4899" },
-      { name: "ML Basics", icon: "🧠", color: "#FF6F61" },
+      { name: "AI Integration", icon: "🤖", color: "#52525b" },
+      { name: "ChatGPT API", icon: "💬", color: "#71717a" },
+      { name: "Prompt Eng.", icon: "✨", color: "#a1a1aa" },
+      { name: "ML Basics", icon: "🧠", color: "#3f3f46" },
     ]
   },
   {
     name: "DevOps",
-    color: "#2496ED",
-    gradient: "from-blue-400 to-indigo-600",
+    color: "#3f3f46",
+    gradient: "from-zinc-700 to-zinc-900",
     techs: [
-      { name: "Git/GitHub", icon: "🐙", color: "#181717" },
-      { name: "Docker", icon: "🐳", color: "#2496ED" },
-      { name: "Cloud", icon: "☁️", color: "#4285F4" },
-      { name: "Vercel", icon: "▲", color: "#000000" },
+      { name: "Git/GitHub", icon: "🐙", color: "#18181b" },
+      { name: "Docker", icon: "🐳", color: "#3f3f46" },
+      { name: "Cloud", icon: "☁️", color: "#71717a" },
+      { name: "Vercel", icon: "▲", color: "#27272a" },
     ]
   },
   {
     name: "Design",
-    color: "#F24E1E",
-    gradient: "from-orange-400 to-pink-600",
+    color: "#e4e4e7",
+    gradient: "from-zinc-200 to-zinc-400",
     techs: [
-      { name: "UI/UX", icon: "🎯", color: "#FF7262" },
-      { name: "Responsive", icon: "📱", color: "#38BDF8" },
-      { name: "Figma", icon: "🎨", color: "#F24E1E" },
+      { name: "UI/UX", icon: "🎯", color: "#e4e4e7" },
+      { name: "Responsive", icon: "📱", color: "#d4d4d8" },
+      { name: "Figma", icon: "🎨", color: "#a1a1aa" },
     ]
   },
 ];
@@ -133,7 +134,7 @@ const TechLeaf = ({ tech, index, side, branchIndex }: {
     >
       {/* Stem connecting to branch */}
       <motion.div
-        className={`absolute top-1/2 ${side === 'left' ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'} w-4 h-0.5 bg-gradient-to-r from-green-600/50 to-green-400/50`}
+        className={`absolute top-1/2 ${side === 'left' ? 'right-0 translate-x-full' : 'left-0 -translate-x-full'} w-4 h-0.5 bg-gradient-to-r from-zinc-400/50 to-zinc-500/50`}
         style={{ transformOrigin: side === 'left' ? 'right' : 'left' }}
       />
       
@@ -156,8 +157,8 @@ const TechLeaf = ({ tech, index, side, branchIndex }: {
           style={{
             background: isHovered 
               ? `linear-gradient(135deg, ${tech.color}30, ${tech.color}50)` 
-              : `linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.2))`,
-            borderColor: isHovered ? tech.color : 'rgba(34, 197, 94, 0.3)',
+              : `linear-gradient(135deg, rgba(161, 161, 170, 0.1), rgba(113, 113, 122, 0.2))`,
+            borderColor: isHovered ? tech.color : 'rgba(161, 161, 170, 0.3)',
             boxShadow: isHovered 
               ? `0 10px 40px ${tech.color}40, 0 0 20px ${tech.color}30` 
               : '0 4px 15px rgba(0,0,0,0.1)',
@@ -165,9 +166,9 @@ const TechLeaf = ({ tech, index, side, branchIndex }: {
         >
           {/* Leaf vein pattern */}
           <div className="absolute inset-0 opacity-20 overflow-hidden rounded-2xl">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-green-400 to-transparent" />
-            <div className="absolute top-1/2 left-1/4 w-px h-1/2 bg-gradient-to-b from-green-400/50 to-transparent rotate-45" />
-            <div className="absolute top-1/2 right-1/4 w-px h-1/2 bg-gradient-to-b from-green-400/50 to-transparent -rotate-45" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-zinc-400 to-transparent" />
+            <div className="absolute top-1/2 left-1/4 w-px h-1/2 bg-gradient-to-b from-zinc-400/50 to-transparent rotate-45" />
+            <div className="absolute top-1/2 right-1/4 w-px h-1/2 bg-gradient-to-b from-zinc-400/50 to-transparent -rotate-45" />
           </div>
           
           {/* Content */}
@@ -182,7 +183,7 @@ const TechLeaf = ({ tech, index, side, branchIndex }: {
             >
               {tech.icon}
             </motion.span>
-            <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 whitespace-nowrap">
+            <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-200 whitespace-nowrap">
               {tech.name}
             </span>
           </div>
@@ -195,7 +196,7 @@ const TechLeaf = ({ tech, index, side, branchIndex }: {
               animate={{ scale: 1, rotate: 180 }}
               transition={{ duration: 0.3 }}
             >
-              <Sparkles className="w-4 h-4 text-yellow-400" />
+              <Sparkles className="w-4 h-4 text-zinc-400" />
             </motion.div>
           )}
         </div>
@@ -237,7 +238,7 @@ const TreeBranch = ({ branch, index, totalBranches }: {
           className={`px-4 py-2 rounded-xl bg-gradient-to-r ${branch.gradient} shadow-lg`}
           whileHover={{ scale: 1.05 }}
         >
-          <span className="text-sm font-bold text-white whitespace-nowrap">
+          <span className="text-sm font-bold text-white dark:text-zinc-900 whitespace-nowrap">
             {branch.name}
           </span>
         </motion.div>
@@ -309,15 +310,15 @@ export const TechArsenal3D = () => {
 
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-green-50/30 to-slate-50 dark:from-slate-900 dark:via-emerald-950/20 dark:to-slate-900" />
+      {/* Background - salt and pepper gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 via-zinc-100/30 to-zinc-50 dark:from-zinc-900 dark:via-zinc-800/20 dark:to-zinc-900" />
       
-      {/* Animated gradient orbs */}
+      {/* Animated gradient orbs - silver */}
       <div
-        className="absolute top-40 left-20 w-72 h-72 rounded-full bg-green-400/10 blur-3xl animate-pulse"
+        className="absolute top-40 left-20 w-72 h-72 rounded-full bg-zinc-400/10 blur-3xl animate-pulse"
       />
       <div
-        className="absolute bottom-40 right-20 w-96 h-96 rounded-full bg-emerald-400/10 blur-3xl animate-pulse"
+        className="absolute bottom-40 right-20 w-96 h-96 rounded-full bg-zinc-500/10 blur-3xl animate-pulse"
         style={{ animationDelay: '1s' }}
       />
 
@@ -391,20 +392,20 @@ export const TechArsenal3D = () => {
           className="text-center mb-12"
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-6"
-            animate={{ boxShadow: ["0 0 20px rgba(34, 197, 94, 0)", "0 0 20px rgba(34, 197, 94, 0.3)", "0 0 20px rgba(34, 197, 94, 0)"] }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-500/10 border border-zinc-400/20 mb-6"
+            animate={{ boxShadow: ["0 0 20px rgba(161, 161, 170, 0)", "0 0 20px rgba(161, 161, 170, 0.3)", "0 0 20px rgba(161, 161, 170, 0)"] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <Zap className="w-4 h-4 text-green-500" />
-            <span className="text-sm font-medium text-green-600 dark:text-green-400">Growing Expertise</span>
+            <Zap className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
+            <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">Growing Expertise</span>
           </motion.div>
           
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-zinc-700 via-zinc-500 to-zinc-700 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-300 bg-clip-text text-transparent">
               Tech Arsenal
             </span>
           </h2>
-          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
             My skills growing like branches on a tree — each technology a leaf in my ever-expanding knowledge
           </p>
         </motion.div>
@@ -414,7 +415,7 @@ export const TechArsenal3D = () => {
           className="relative min-h-[800px] md:min-h-[700px] cursor-pointer select-none"
           onClick={handleTreeClick}
         >
-          {/* Tree glow effect on click */}
+          {/* Tree glow effect on click - silver */}
           <AnimatePresence>
             {isGlowing && (
               <motion.div
@@ -427,17 +428,17 @@ export const TechArsenal3D = () => {
                 exit={{ opacity: 0, scale: 1.5 }}
                 transition={{ duration: 2, ease: "easeOut" }}
                 style={{
-                  background: 'radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, rgba(16, 185, 129, 0.2) 40%, transparent 70%)',
+                  background: 'radial-gradient(circle, rgba(161, 161, 170, 0.4) 0%, rgba(113, 113, 122, 0.2) 40%, transparent 70%)',
                 }}
               />
             )}
           </AnimatePresence>
 
-          {/* Main trunk */}
+          {/* Main trunk - silver/gray gradient */}
           <motion.div
             className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-4 rounded-full"
             style={{
-              background: 'linear-gradient(180deg, #166534 0%, #15803d 30%, #22c55e 60%, #4ade80 100%)',
+              background: 'linear-gradient(180deg, #3f3f46 0%, #52525b 30%, #71717a 60%, #a1a1aa 100%)',
             }}
             initial={{ height: 0 }}
             whileInView={{ height: '100%' }}
@@ -445,10 +446,10 @@ export const TechArsenal3D = () => {
             transition={{ duration: 1.5, ease: "easeOut" }}
             animate={isGlowing ? {
               boxShadow: [
-                '0 0 20px rgba(34, 197, 94, 0.3)',
-                '0 0 60px rgba(34, 197, 94, 0.8)',
-                '0 0 40px rgba(34, 197, 94, 0.5)',
-                '0 0 20px rgba(34, 197, 94, 0.3)',
+                '0 0 20px rgba(161, 161, 170, 0.3)',
+                '0 0 60px rgba(161, 161, 170, 0.8)',
+                '0 0 40px rgba(161, 161, 170, 0.5)',
+                '0 0 20px rgba(161, 161, 170, 0.3)',
               ],
             } : {}}
           >
@@ -457,7 +458,7 @@ export const TechArsenal3D = () => {
               {[...Array(10)].map((_, i) => (
                 <div 
                   key={i}
-                  className="absolute left-0 right-0 h-px bg-green-900/30"
+                  className="absolute left-0 right-0 h-px bg-zinc-900/30"
                   style={{ top: `${i * 10 + 5}%` }}
                 />
               ))}
@@ -467,7 +468,7 @@ export const TechArsenal3D = () => {
             <motion.div
               className="absolute inset-0 rounded-full"
               style={{
-                background: 'linear-gradient(180deg, transparent, rgba(34, 197, 94, 0.3), transparent)',
+                background: 'linear-gradient(180deg, transparent, rgba(161, 161, 170, 0.3), transparent)',
               }}
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 3, repeat: Infinity }}
@@ -484,7 +485,7 @@ export const TechArsenal3D = () => {
             />
           ))}
 
-          {/* Tree top decoration */}
+          {/* Tree top decoration - silver */}
           <motion.div
             className="absolute left-1/2 -translate-x-1/2 -top-8"
             initial={{ opacity: 0, scale: 0 }}
@@ -493,108 +494,81 @@ export const TechArsenal3D = () => {
             transition={{ delay: 1, duration: 0.5, type: "spring" }}
           >
             <motion.div
-              className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/30"
+              className="w-16 h-16 rounded-full bg-gradient-to-br from-zinc-300 to-zinc-500 flex items-center justify-center shadow-lg shadow-zinc-400/30"
               animate={isGlowing ? { 
-                scale: [1, 1.4, 1.2, 1.3, 1],
-                rotate: [0, 10, -10, 5, 0],
+                scale: [1, 1.3, 1],
                 boxShadow: [
-                  '0 10px 15px -3px rgba(34, 197, 94, 0.3)',
-                  '0 0 80px rgba(34, 197, 94, 1)',
-                  '0 0 60px rgba(251, 191, 36, 0.8)',
-                  '0 0 40px rgba(34, 197, 94, 0.6)',
-                  '0 10px 15px -3px rgba(34, 197, 94, 0.3)',
-                ],
-              } : { 
-                scale: [1, 1.1, 1],
-                rotate: [0, 5, -5, 0],
+                  '0 0 20px rgba(161, 161, 170, 0.3)',
+                  '0 0 60px rgba(161, 161, 170, 0.8)',
+                  '0 0 20px rgba(161, 161, 170, 0.3)',
+                ]
+              } : {
+                rotate: [0, 5, 0, -5, 0],
               }}
-              transition={isGlowing ? { duration: 2 } : { duration: 4, repeat: Infinity }}
+              transition={isGlowing ? { duration: 0.5 } : { duration: 8, repeat: Infinity }}
             >
-              <motion.span 
-                className="text-3xl"
-                animate={isGlowing ? { 
-                  scale: [1, 1.5, 1],
-                  rotate: [0, 360],
-                } : {}}
-                transition={{ duration: 1 }}
-              >
-                🌟
-              </motion.span>
+              <span className="text-3xl">⭐</span>
             </motion.div>
           </motion.div>
 
-          {/* Click hint tooltip */}
+          {/* Roots */}
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 top-20 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full shadow-lg border border-green-200/50 dark:border-green-700/30"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: [0, 1, 1, 0], y: [10, 0, 0, -10] }}
-            transition={{ duration: 4, delay: 2, repeat: Infinity, repeatDelay: 8 }}
+            className="absolute left-1/2 -translate-x-1/2 bottom-0"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
           >
-            <span className="text-sm text-slate-600 dark:text-slate-300 flex items-center gap-2">
-              <span>✨</span> Click the tree for magic!
-            </span>
+            <svg width="200" height="60" viewBox="0 0 200 60" className="fill-none">
+              <motion.path
+                d="M100 0 C90 30 60 50 30 55"
+                stroke="url(#rootGradient)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1, duration: 1 }}
+              />
+              <motion.path
+                d="M100 0 C110 30 140 50 170 55"
+                stroke="url(#rootGradient)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.2, duration: 1 }}
+              />
+              <motion.path
+                d="M100 0 C100 40 100 50 100 58"
+                stroke="url(#rootGradient)"
+                strokeWidth="3"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1.1, duration: 1 }}
+              />
+              <defs>
+                <linearGradient id="rootGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#71717a" />
+                  <stop offset="100%" stopColor="#a1a1aa" />
+                </linearGradient>
+              </defs>
+            </svg>
           </motion.div>
-
-          {/* Floating leaves decoration */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute text-2xl"
-              style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-              }}
-              animate={{
-                y: [-20, 20, -20],
-                x: [-10, 10, -10],
-                rotate: [0, 360],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 5 + i * 2,
-                repeat: Infinity,
-                delay: i * 0.5,
-              }}
-            >
-              🍃
-            </motion.div>
-          ))}
         </div>
 
-        {/* Root stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-8 flex flex-wrap justify-center gap-6"
+        {/* Click hint */}
+        <motion.p
+          className="text-center text-sm text-zinc-500 dark:text-zinc-400 mt-8"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
         >
-          {[
-            { label: "Technologies", value: "27+", emoji: "🛠️" },
-            { label: "Categories", value: "6", emoji: "📂" },
-            { label: "Years Growing", value: "3+", emoji: "🌱" },
-            { label: "Projects Nurtured", value: "15+", emoji: "🌳" },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm border border-green-200/50 dark:border-green-700/30 shadow-lg"
-              whileHover={{ scale: 1.05, y: -3 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 + index * 0.1 }}
-            >
-              <span className="text-2xl">{stat.emoji}</span>
-              <div>
-                <div className="text-xl font-bold text-green-600 dark:text-green-400">{stat.value}</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">{stat.label}</div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+          ✨ Click the tree for a magical effect ✨
+        </motion.p>
       </div>
     </section>
   );
 };
-
-export default TechArsenal3D;

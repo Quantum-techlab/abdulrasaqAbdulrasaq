@@ -38,8 +38,8 @@ const techCategories: TechCategory[] = [
   {
     name: "Frontend",
     icon: <Code2 className="w-5 h-5" />,
-    color: "hsl(var(--chart-1))",
-    bgGradient: "from-cyan-500/20 to-blue-500/20",
+    color: "#a1a1aa",
+    bgGradient: "from-zinc-400/20 to-zinc-500/20",
     techs: [
       { name: "React", icon: "⚛️", proficiency: 95, projects: 12, yearsUsed: 3, trend: 'up' },
       { name: "TypeScript", icon: "📘", proficiency: 90, projects: 10, yearsUsed: 2, trend: 'up' },
@@ -54,8 +54,8 @@ const techCategories: TechCategory[] = [
   {
     name: "Backend",
     icon: <Database className="w-5 h-5" />,
-    color: "hsl(var(--chart-2))",
-    bgGradient: "from-green-500/20 to-emerald-500/20",
+    color: "#71717a",
+    bgGradient: "from-zinc-500/20 to-zinc-600/20",
     techs: [
       { name: "Node.js", icon: "💚", proficiency: 85, projects: 8, yearsUsed: 2, trend: 'up' },
       { name: "Express", icon: "🚂", proficiency: 80, projects: 6, yearsUsed: 2, trend: 'stable' },
@@ -68,8 +68,8 @@ const techCategories: TechCategory[] = [
   {
     name: "AI & ML",
     icon: <Brain className="w-5 h-5" />,
-    color: "hsl(var(--chart-3))",
-    bgGradient: "from-purple-500/20 to-violet-500/20",
+    color: "#52525b",
+    bgGradient: "from-zinc-600/20 to-zinc-700/20",
     techs: [
       { name: "AI Integration", icon: "🤖", proficiency: 85, projects: 4, yearsUsed: 1, trend: 'up' },
       { name: "ChatGPT API", icon: "💬", proficiency: 88, projects: 3, yearsUsed: 1, trend: 'up' },
@@ -80,8 +80,8 @@ const techCategories: TechCategory[] = [
   {
     name: "DevOps",
     icon: <Cloud className="w-5 h-5" />,
-    color: "hsl(var(--chart-4))",
-    bgGradient: "from-blue-500/20 to-indigo-500/20",
+    color: "#3f3f46",
+    bgGradient: "from-zinc-700/20 to-zinc-800/20",
     techs: [
       { name: "Git/GitHub", icon: "🐙", proficiency: 92, projects: 20, yearsUsed: 3, trend: 'stable' },
       { name: "Docker", icon: "🐳", proficiency: 70, projects: 2, yearsUsed: 1, trend: 'learning' },
@@ -92,8 +92,8 @@ const techCategories: TechCategory[] = [
   {
     name: "Design",
     icon: <Palette className="w-5 h-5" />,
-    color: "hsl(var(--chart-5))",
-    bgGradient: "from-orange-500/20 to-pink-500/20",
+    color: "#d4d4d8",
+    bgGradient: "from-zinc-300/20 to-zinc-400/20",
     techs: [
       { name: "UI/UX", icon: "🎯", proficiency: 85, projects: 12, yearsUsed: 2, trend: 'up' },
       { name: "Responsive", icon: "📱", proficiency: 95, projects: 15, yearsUsed: 3, trend: 'stable' },
@@ -193,15 +193,15 @@ const TechCard = ({
   onToggle: () => void;
 }) => {
   const trendColors = {
-    up: 'text-emerald-500',
-    stable: 'text-blue-500',
-    learning: 'text-amber-500'
+    up: 'text-zinc-700 dark:text-zinc-300',
+    stable: 'text-zinc-500 dark:text-zinc-400',
+    learning: 'text-zinc-600 dark:text-zinc-400'
   };
   
   const trendLabels = {
-    up: 'Trending Up',
-    stable: 'Mastered',
-    learning: 'Learning'
+    up: '↑ Trending Up',
+    stable: '● Mastered',
+    learning: '◐ Learning'
   };
 
   return (
@@ -447,15 +447,15 @@ export const TechAnalyticsDashboard = () => {
           className="flex flex-wrap justify-center gap-6 mb-12 text-sm"
         >
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-emerald-500" />
+            <div className="w-3 h-3 rounded-full bg-zinc-700 dark:bg-zinc-300" />
             <span className="text-muted-foreground">Trending Up</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-blue-500" />
+            <div className="w-3 h-3 rounded-full bg-zinc-500 dark:bg-zinc-400" />
             <span className="text-muted-foreground">Mastered</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-amber-500" />
+            <div className="w-3 h-3 rounded-full bg-zinc-400 dark:bg-zinc-500" />
             <span className="text-muted-foreground">Learning</span>
           </div>
         </motion.div>

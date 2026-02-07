@@ -12,7 +12,7 @@ export const InteractiveGrid: React.FC = () => {
         {gridItems.map((index) => (
           <motion.div
             key={index}
-            className="bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-lg backdrop-blur-sm"
+            className="bg-gradient-to-br from-zinc-400/10 to-zinc-500/10 dark:from-zinc-500/10 dark:to-zinc-400/10 rounded-lg backdrop-blur-sm"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ 
               opacity: hoveredIndex === index ? 0.8 : 0.3,
