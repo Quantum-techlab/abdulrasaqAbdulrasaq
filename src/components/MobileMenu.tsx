@@ -106,7 +106,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   >
                     {item.label}
                     <motion.span 
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transform origin-left"
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-zinc-500 to-zinc-700 dark:from-zinc-400 dark:to-zinc-500 transform origin-left"
                       initial={{ scaleX: 0 }}
                       animate={{ 
                         scaleX: activeSection === item.href.substring(1) ? 1 : 0 

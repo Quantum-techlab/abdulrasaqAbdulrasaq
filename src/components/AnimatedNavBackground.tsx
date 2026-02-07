@@ -4,15 +4,15 @@ import React from 'react';
 export const AnimatedNavBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 animate-gradient-x"></div>
+      {/* Animated gradient background - salt and pepper */}
+      <div className="absolute inset-0 bg-gradient-to-r from-zinc-300/5 via-zinc-400/5 to-zinc-500/5 dark:from-zinc-600/5 dark:via-zinc-500/5 dark:to-zinc-400/5 animate-gradient-x"></div>
       
-      {/* Floating particles */}
+      {/* Floating particles - silver/gray */}
       <div className="absolute inset-0">
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 animate-float"
+            className="absolute w-2 h-2 bg-gradient-to-r from-zinc-400 to-zinc-500 dark:from-zinc-500 dark:to-zinc-400 rounded-full opacity-20 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -23,7 +23,7 @@ export const AnimatedNavBackground = () => {
         ))}
       </div>
 
-      {/* SVG Wave */}
+      {/* SVG Wave - silver gradient */}
       <svg 
         className="absolute bottom-0 left-0 w-full h-4 opacity-30"
         viewBox="0 0 1440 54"
@@ -36,9 +36,9 @@ export const AnimatedNavBackground = () => {
         />
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.3"/>
-            <stop offset="50%" stopColor="rgb(147, 51, 234)" stopOpacity="0.3"/>
-            <stop offset="100%" stopColor="rgb(236, 72, 153)" stopOpacity="0.3"/>
+            <stop offset="0%" stopColor="rgb(161, 161, 170)" stopOpacity="0.3"/>
+            <stop offset="50%" stopColor="rgb(113, 113, 122)" stopOpacity="0.4"/>
+            <stop offset="100%" stopColor="rgb(82, 82, 91)" stopOpacity="0.3"/>
           </linearGradient>
         </defs>
       </svg>

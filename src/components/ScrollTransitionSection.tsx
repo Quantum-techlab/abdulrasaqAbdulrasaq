@@ -66,9 +66,9 @@ export const ScrollTransitionSection = () => {
                 <div className="relative w-72 h-96 md:w-80 md:h-[450px]">
                   {/* 3D Character Container - Looking Right */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    {/* Glowing base platform */}
+                    {/* Glowing base platform - silver */}
                     <motion.div
-                      className="absolute bottom-4 w-48 h-4 bg-gradient-to-r from-blue-500/20 via-purple-500/30 to-cyan-500/20 rounded-full blur-xl"
+                      className="absolute bottom-4 w-48 h-4 bg-gradient-to-r from-zinc-400/20 via-zinc-500/30 to-zinc-400/20 rounded-full blur-xl"
                       animate={{
                         scaleX: [1, 1.2, 1],
                         opacity: [0.5, 0.8, 0.5],
@@ -137,9 +137,9 @@ export const ScrollTransitionSection = () => {
                           {/* Smile */}
                           <div className="absolute bottom-7 left-1/2 -translate-x-1/2 w-10 h-4 border-b-4 border-slate-700/60 rounded-full" />
                           
-                          {/* Cheek blush */}
-                          <div className="absolute bottom-9 left-3 w-4 h-2 bg-pink-300/50 rounded-full blur-sm" />
-                          <div className="absolute bottom-9 right-3 w-4 h-2 bg-pink-300/50 rounded-full blur-sm" />
+                          {/* Cheek blush - subtle warm gray */}
+                          <div className="absolute bottom-9 left-3 w-4 h-2 bg-zinc-300/40 rounded-full blur-sm" />
+                          <div className="absolute bottom-9 right-3 w-4 h-2 bg-zinc-300/40 rounded-full blur-sm" />
                         </div>
                         
                         {/* Hair */}
@@ -150,15 +150,15 @@ export const ScrollTransitionSection = () => {
                           transition={{ duration: 2, repeat: Infinity }}
                         />
                         
-                        {/* Glasses */}
-                        <div className="absolute top-8 left-3 w-8 h-6 border-2 border-slate-600 rounded-lg bg-blue-100/20" />
-                        <div className="absolute top-8 left-12 w-8 h-6 border-2 border-slate-600 rounded-lg bg-blue-100/20" />
-                        <div className="absolute top-10 left-11 w-2 h-0.5 bg-slate-600" />
+                        {/* Glasses - silver/gray */}
+                        <div className="absolute top-8 left-3 w-8 h-6 border-2 border-zinc-600 rounded-lg bg-zinc-200/20" />
+                        <div className="absolute top-8 left-12 w-8 h-6 border-2 border-zinc-600 rounded-lg bg-zinc-200/20" />
+                        <div className="absolute top-10 left-11 w-2 h-0.5 bg-zinc-600" />
                       </motion.div>
                       
-                      {/* Body */}
+                      {/* Body - charcoal/slate hoodie */}
                       <motion.div
-                        className="w-36 h-44 mx-auto rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700 shadow-2xl relative overflow-hidden"
+                        className="w-36 h-44 mx-auto rounded-3xl bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 shadow-2xl relative overflow-hidden"
                         animate={{ rotateZ: [-1, 1, -1] }}
                         transition={{ duration: 5, repeat: Infinity }}
                       >
@@ -188,10 +188,10 @@ export const ScrollTransitionSection = () => {
                               animate={{ opacity: [0.5, 1, 0.5] }}
                               transition={{ duration: 1.5, repeat: Infinity }}
                             >
-                              <div className="h-0.5 w-full bg-green-400/70 rounded" />
-                              <div className="h-0.5 w-3/4 bg-blue-400/70 rounded" />
-                              <div className="h-0.5 w-1/2 bg-purple-400/70 rounded" />
-                              <div className="h-0.5 w-2/3 bg-cyan-400/70 rounded" />
+                              <div className="h-0.5 w-full bg-zinc-300/70 rounded" />
+                              <div className="h-0.5 w-3/4 bg-zinc-400/70 rounded" />
+                              <div className="h-0.5 w-1/2 bg-zinc-500/70 rounded" />
+                              <div className="h-0.5 w-2/3 bg-white/70 rounded" />
                             </motion.div>
                           </div>
                           {/* Keyboard base */}
@@ -201,7 +201,7 @@ export const ScrollTransitionSection = () => {
                       
                       {/* Left Arm - on keyboard */}
                       <motion.div
-                        className="absolute top-32 -left-2 w-7 h-20 bg-gradient-to-b from-blue-600 to-blue-700 rounded-full origin-top"
+                        className="absolute top-32 -left-2 w-7 h-20 bg-gradient-to-b from-zinc-700 to-zinc-800 rounded-full origin-top"
                         animate={{ rotateZ: [-8, -5, -8] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
@@ -219,7 +219,7 @@ export const ScrollTransitionSection = () => {
                         transition={{ duration: 2, repeat: Infinity }}
                       >
                         {/* Upper arm */}
-                        <div className="w-20 h-7 bg-gradient-to-r from-blue-700 to-blue-600 rounded-full transform rotate-[-20deg]">
+                        <div className="w-20 h-7 bg-gradient-to-r from-zinc-800 to-zinc-700 rounded-full transform rotate-[-20deg]">
                           {/* Hand pointing */}
                           <motion.div 
                             className="absolute -right-4 top-0 w-8 h-7 bg-gradient-to-br from-amber-200 to-amber-100 rounded-full"
@@ -241,7 +241,7 @@ export const ScrollTransitionSection = () => {
                         }}
                         transition={{ duration: 3, repeat: Infinity }}
                       >
-                        <p className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent whitespace-nowrap">
+                        <p className="text-sm font-semibold bg-gradient-to-r from-zinc-700 to-zinc-500 dark:from-zinc-300 dark:to-zinc-400 bg-clip-text text-transparent whitespace-nowrap">
                           Check this out! →
                         </p>
                         {/* Bubble tail */}
@@ -249,13 +249,13 @@ export const ScrollTransitionSection = () => {
                       </motion.div>
                     </motion.div>
                     
-                    {/* Floating particles around character */}
+                    {/* Floating particles around character - silver/gray */}
                     {[...Array(8)].map((_, i) => (
                       <motion.div
                         key={i}
                         className="absolute rounded-full"
                         style={{
-                          background: i % 3 === 0 ? '#3b82f6' : i % 3 === 1 ? '#8b5cf6' : '#06b6d4',
+                          background: i % 3 === 0 ? '#a1a1aa' : i % 3 === 1 ? '#71717a' : '#d4d4d8',
                           width: 6 + (i % 3) * 2,
                           height: 6 + (i % 3) * 2,
                           top: `${15 + i * 10}%`,
@@ -284,7 +284,7 @@ export const ScrollTransitionSection = () => {
                       }}
                       transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
                     >
-                      <Sparkles className="w-5 h-5 text-yellow-400" />
+                      <Sparkles className="w-5 h-5 text-zinc-400" />
                     </motion.div>
                     <motion.div
                       className="absolute bottom-32 left-4"
@@ -295,7 +295,7 @@ export const ScrollTransitionSection = () => {
                       }}
                       transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
                     >
-                      <Sparkles className="w-4 h-4 text-purple-400" />
+                      <Sparkles className="w-4 h-4 text-zinc-500" />
                     </motion.div>
                   </div>
                 </div>
