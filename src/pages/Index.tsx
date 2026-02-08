@@ -219,60 +219,15 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-50 via-white to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 text-zinc-800 dark:text-zinc-100 transition-colors duration-500">
-      <ParticleBackground />
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
       <EnhancedNavigation />
       <FloatingCTA />
 
-      {/* ✨ Creative Hero Section - Salt & Pepper Design */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-        {/* Animated gradient mesh background */}
+      {/* Hero Section - Clean Landing Page Style */}
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 section-hero">
+        {/* Subtle gradient accent */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-zinc-50 via-white to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900" />
-          
-          {/* Animated gradient orbs - silver/gray */}
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-zinc-400/15 to-zinc-500/15 dark:from-zinc-500/20 dark:to-zinc-400/20 blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-zinc-300/15 to-zinc-400/15 dark:from-zinc-600/20 dark:to-zinc-500/20 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-zinc-300/10 to-zinc-400/10 dark:from-zinc-600/10 dark:to-zinc-500/10 blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        </div>
-
-        {/* Floating geometric shapes */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Floating squares - gray tones */}
-          <motion.div
-            animate={{ rotate: 360, y: [-20, 20, -20] }}
-            transition={{ rotate: { duration: 20, repeat: Infinity, ease: 'linear' }, y: { duration: 5, repeat: Infinity } }}
-            className="absolute top-20 left-[10%] w-16 h-16 border-2 border-zinc-400/30 dark:border-zinc-500/30 rotate-45"
-          />
-          <motion.div
-            animate={{ rotate: -360, y: [20, -20, 20] }}
-            transition={{ rotate: { duration: 25, repeat: Infinity, ease: 'linear' }, y: { duration: 6, repeat: Infinity } }}
-            className="absolute bottom-32 right-[15%] w-24 h-24 border-2 border-zinc-400/20 dark:border-zinc-500/20 rotate-12"
-          />
-          
-          {/* Floating code symbols - gray tones */}
-          {['<>', '/>', '{}', '()', '[]', '=>'].map((symbol, i) => (
-            <motion.div
-              key={i}
-              className="absolute text-2xl font-mono text-zinc-400/20 dark:text-zinc-500/15 select-none"
-              style={{ left: `${10 + i * 15}%`, top: `${20 + (i % 3) * 25}%` }}
-              animate={{ 
-                y: [-10, 10, -10],
-                opacity: [0.1, 0.3, 0.1],
-              }}
-              transition={{ duration: 4 + i, repeat: Infinity, delay: i * 0.5 }}
-            >
-              {symbol}
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'linear-gradient(rgba(100,100,100,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(100,100,100,0.05) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }} />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-primary/[0.02] to-transparent rounded-full blur-3xl" />
         </div>
 
         <Hero3DCharacter />
@@ -630,33 +585,10 @@ const Index = () => {
       {/* Tech Arsenal 3D Section */}
       <TechAnalyticsDashboard />
 
-      {/* Experience Section - Interactive Journey Timeline */}
-      <section id="experience" className="py-24 relative overflow-hidden">
-        {/* Animated background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900" />
-        
-        {/* Starfield effect - optimized */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-              style={{
-                left: `${8 + i * 8}%`,
-                top: `${10 + (i % 4) * 22}%`,
-                opacity: 0.4 + (i % 3) * 0.2,
-                animationDelay: `${i * 0.3}s`,
-                animationDuration: '3s',
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Floating orbital rings - CSS optimized */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="absolute w-[600px] h-[600px] border border-indigo-500/10 rounded-full" style={{ animation: 'spin 60s linear infinite' }} />
-          <div className="absolute w-[400px] h-[400px] border border-purple-500/10 rounded-full" style={{ animation: 'spin 45s linear infinite reverse' }} />
-        </div>
+      {/* Experience Section */}
+      <section id="experience" className="py-24 relative overflow-hidden section-experience">
+        {/* Subtle top border */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
         <div className="container mx-auto px-6 relative z-10">
           {/* Header */}
@@ -668,21 +600,17 @@ const Index = () => {
             className="text-center mb-20"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6"
-              animate={{ boxShadow: ["0 0 20px rgba(99, 102, 241, 0)", "0 0 20px rgba(99, 102, 241, 0.3)", "0 0 20px rgba(99, 102, 241, 0)"] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6"
             >
-              <Sparkles className="w-4 h-4 text-indigo-400" />
-              <span className="text-sm font-medium text-indigo-300">My Journey</span>
+              <Sparkles className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">My Journey</span>
             </motion.div>
             
-            <h2 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Experience
-              </span>
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">
+              Experience
             </h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              A constellation of milestones in my professional universe
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              A timeline of milestones in my professional journey
             </p>
           </motion.div>
           
@@ -690,10 +618,7 @@ const Index = () => {
           <div className="max-w-5xl mx-auto relative">
             {/* Central timeline beam */}
             <motion.div
-              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 hidden md:block"
-              style={{
-                background: 'linear-gradient(180deg, transparent, #6366f1, #a855f7, #ec4899, transparent)',
-              }}
+              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px hidden md:block bg-gradient-to-b from-transparent via-border to-transparent"
               initial={{ height: 0 }}
               whileInView={{ height: '100%' }}
               viewport={{ once: true }}
@@ -704,12 +629,8 @@ const Index = () => {
             <div className="space-y-16 md:space-y-0">
               {experiences.map((experience, index) => {
                 const isLeft = index % 2 === 0;
-                const colors = [
-                  { bg: 'from-purple-600 to-indigo-600', glow: 'purple', icon: '🚀' },
-                  { bg: 'from-blue-600 to-cyan-600', glow: 'blue', icon: '💻' },
-                  { bg: 'from-emerald-600 to-teal-600', glow: 'emerald', icon: '🎯' },
-                ];
-                const color = colors[index % colors.length];
+                const icons = ['🚀', '💻', '🎯', '⭐'];
+                const icon = icons[index % icons.length];
                 
                 return (
                   <motion.div
@@ -727,56 +648,53 @@ const Index = () => {
                   >
                     {/* Timeline node */}
                     <div
-                      className={`absolute top-8 ${isLeft ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'} hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r ${color.bg} shadow-lg shadow-indigo-500/30 z-10 hover:scale-110 transition-transform duration-300`}
+                      className={`absolute top-8 ${isLeft ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'} hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg z-10 hover:scale-110 transition-transform duration-300`}
                     >
-                      <span className="text-xl">{color.icon}</span>
+                      <span className="text-xl">{icon}</span>
                     </div>
 
                     {/* Connecting line */}
                     <div
-                      className={`absolute top-12 ${isLeft ? 'right-6' : 'left-6'} w-6 h-0.5 bg-gradient-to-r ${color.bg} hidden md:block`}
+                      className={`absolute top-12 ${isLeft ? 'right-6' : 'left-6'} w-6 h-px bg-border hidden md:block`}
                     />
 
                     {/* Card */}
                     <div className="relative group cursor-pointer hover:-translate-y-1 transition-transform duration-300">
-                      {/* Glow effect */}
-                      <div className={`absolute -inset-0.5 bg-gradient-to-r ${color.bg} rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500`} />
-                      
                       {/* Main card */}
-                      <div className="relative bg-slate-800/80 backdrop-blur-xl rounded-2xl border border-slate-700/50 overflow-hidden">
-                        {/* Header gradient */}
-                        <div className={`h-2 bg-gradient-to-r ${color.bg}`} />
+                      <div className="relative premium-card rounded-2xl overflow-hidden">
+                        {/* Header accent */}
+                        <div className="h-1 bg-gradient-to-r from-primary/50 to-primary/20" />
                         
                         <div className="p-8">
                           {/* Year badge */}
                           <motion.div
-                            className={`absolute -top-3 ${isLeft ? 'right-6' : 'left-6'} md:hidden px-3 py-1 rounded-full bg-gradient-to-r ${color.bg} text-white text-xs font-bold shadow-lg`}
+                            className={`absolute -top-3 ${isLeft ? 'right-6' : 'left-6'} md:hidden px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-lg`}
                           >
                             {experience.period}
                           </motion.div>
 
                           {/* Mobile icon */}
-                          <div className={`md:hidden mb-4 w-10 h-10 rounded-xl bg-gradient-to-r ${color.bg} flex items-center justify-center`}>
-                            <span className="text-lg">{color.icon}</span>
+                          <div className="md:hidden mb-4 w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center">
+                            <span className="text-lg">{icon}</span>
                           </div>
 
                           {/* Title & Company */}
                           <div className="mb-4">
-                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-indigo-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
+                            <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-all duration-300">
                               {experience.title}
                             </h3>
                             <div className="flex items-center gap-3">
-                              <span className="text-lg font-semibold text-indigo-400">
+                              <span className="text-lg font-semibold text-primary">
                                 {experience.company}
                               </span>
-                              <span className="hidden md:inline-block px-3 py-1 rounded-full bg-slate-700/50 text-slate-300 text-sm font-medium">
+                              <span className="hidden md:inline-block px-3 py-1 rounded-full bg-secondary text-muted-foreground text-sm font-medium">
                                 {experience.period}
                               </span>
                             </div>
                           </div>
 
                           {/* Description */}
-                          <p className="text-slate-300 leading-relaxed mb-6">
+                          <p className="text-muted-foreground leading-relaxed mb-6">
                             {experience.description}
                           </p>
 
@@ -785,8 +703,8 @@ const Index = () => {
                             <div className="space-y-3">
                               {experience.responsibilities.map((responsibility, idx) => (
                                 <div key={idx} className="flex items-start gap-3">
-                                  <div className={`mt-1.5 w-2 h-2 rounded-full bg-gradient-to-r ${color.bg} flex-shrink-0`} />
-                                  <span className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors">
+                                  <div className="mt-1.5 w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                                  <span className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground transition-colors">
                                     {responsibility}
                                   </span>
                                 </div>
@@ -796,21 +714,15 @@ const Index = () => {
 
                           {/* Type badge */}
                           <div className="mt-6 flex items-center gap-2">
-                            <span className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider ${
-                              experience.type === 'leadership' 
-                                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' 
-                                : experience.type === 'volunteer'
-                                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                                : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                            }`}>
+                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-secondary text-muted-foreground border border-border">
                               {experience.type}
                             </span>
                           </div>
                         </div>
 
                         {/* Decorative elements */}
-                        <div className="absolute top-4 right-4 opacity-10">
-                          <Sparkles className="w-24 h-24 text-white" />
+                        <div className="absolute top-4 right-4 opacity-5">
+                          <Sparkles className="w-24 h-24 text-foreground" />
                         </div>
                       </div>
                     </div>
@@ -827,28 +739,14 @@ const Index = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              <motion.div
-                className="relative"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center shadow-2xl">
-                  <span className="text-3xl">✨</span>
-                </div>
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.5, 0, 0.5],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </motion.div>
+              <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg">
+                <span className="text-2xl">✨</span>
+              </div>
             </motion.div>
 
             {/* "More to come" text */}
             <motion.p
-              className="text-center mt-8 text-slate-400 italic"
+              className="text-center mt-8 text-muted-foreground italic"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -860,39 +758,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Certifications Section - Knowledge Constellation */}
-      <section className="py-24 relative overflow-hidden">
-        {/* Gradient background matching site theme */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-indigo-50/50 to-purple-50/30 dark:from-slate-900 dark:via-indigo-950/30 dark:to-purple-950/20" />
-        
-        {/* Floating particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                background: i % 2 === 0 ? 'rgba(99, 102, 241, 0.3)' : 'rgba(168, 85, 247, 0.3)',
-              }}
-              animate={{
-                y: [-20, 20, -20],
-                opacity: [0.2, 0.5, 0.2],
-                scale: [1, 1.3, 1],
-              }}
-              transition={{
-                duration: 4 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Decorative rings */}
-        <div className="absolute top-20 right-20 w-64 h-64 border border-indigo-200/30 dark:border-indigo-700/20 rounded-full" />
-        <div className="absolute bottom-20 left-20 w-48 h-48 border border-purple-200/30 dark:border-purple-700/20 rounded-full" />
+      {/* Certifications Section */}
+      <section className="py-24 relative overflow-hidden section-about">
+        {/* Subtle top border */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
         <div className="container mx-auto px-6 relative z-10">
           {/* Header */}
@@ -904,22 +773,16 @@ const Index = () => {
             className="text-center mb-16"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6"
-              animate={{ 
-                boxShadow: ["0 0 20px rgba(99, 102, 241, 0)", "0 0 30px rgba(99, 102, 241, 0.3)", "0 0 20px rgba(99, 102, 241, 0)"],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6"
             >
-              <Award className="w-4 h-4 text-indigo-500" />
-              <span className="text-sm font-medium text-indigo-600 dark:text-indigo-400">Achievements Unlocked</span>
+              <Award className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">Achievements Unlocked</span>
             </motion.div>
             
-            <h2 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Certifications
-              </span>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
+              Certifications
             </h2>
-            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Milestones of continuous learning and professional growth
             </p>
           </motion.div>
@@ -927,66 +790,46 @@ const Index = () => {
           {/* Certification Cards */}
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {certifications.map((cert, index) => {
-                const gradients = [
-                  { from: 'from-indigo-500', to: 'to-blue-500', glow: 'indigo' },
-                  { from: 'from-purple-500', to: 'to-pink-500', glow: 'purple' },
-                  { from: 'from-cyan-500', to: 'to-blue-500', glow: 'cyan' },
-                  { from: 'from-pink-500', to: 'to-rose-500', glow: 'pink' },
-                ];
-                const gradient = gradients[index % gradients.length];
-                
-                return (
-                  <div
-                    key={index}
-                    className="relative group hover:-translate-y-2 transition-transform duration-300"
-                  >
-                    {/* Glow effect */}
-                    <div
-                      className={`absolute -inset-1 bg-gradient-to-r ${gradient.from} ${gradient.to} rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500`}
-                    />
+              {certifications.map((cert, index) => (
+                <div
+                  key={index}
+                  className="relative group hover:-translate-y-2 transition-transform duration-300"
+                >
+                  {/* Card */}
+                  <div className="relative premium-card rounded-2xl overflow-hidden">
+                    {/* Top accent */}
+                    <div className="h-1 bg-gradient-to-r from-primary/50 to-primary/20" />
                     
-                    {/* Card */}
-                    <div className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300">
-                      {/* Top gradient accent */}
-                      <div className={`h-1.5 bg-gradient-to-r ${gradient.from} ${gradient.to}`} />
-                      
-                      <div className="p-6">
-                        {/* Icon & Year */}
-                        <div className="flex items-start justify-between mb-4">
-                          <div
-                            className={`w-12 h-12 rounded-xl bg-gradient-to-br ${gradient.from} ${gradient.to} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                          >
-                            <span className="text-white text-lg">{cert.icon}</span>
-                          </div>
-                          
-                          <span className={`px-2.5 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${gradient.from} ${gradient.to} text-white`}>
-                            {cert.year}
-                          </span>
+                    <div className="p-6">
+                      {/* Icon & Year */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="w-12 h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <span className="text-lg">{cert.icon}</span>
                         </div>
                         
-                        {/* Title */}
-                        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 line-clamp-2 min-h-[3.5rem] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                          {cert.title}
-                        </h3>
-                        
-                        {/* Issuer */}
-                        <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-3">
-                          {cert.issuer}
-                        </p>
-                        
-                        {/* Description */}
-                        <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed line-clamp-3">
-                          {cert.description}
-                        </p>
+                        <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-secondary text-muted-foreground border border-border">
+                          {cert.year}
+                        </span>
                       </div>
-
-                      {/* Decorative corner */}
-                      <div className={`absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl ${gradient.from} ${gradient.to} opacity-5 rounded-tl-full`} />
+                      
+                      {/* Title */}
+                      <h3 className="text-lg font-bold text-foreground mb-2 line-clamp-2 min-h-[3.5rem] group-hover:text-primary transition-colors">
+                        {cert.title}
+                      </h3>
+                      
+                      {/* Issuer */}
+                      <p className="text-sm font-medium text-primary mb-3">
+                        {cert.issuer}
+                      </p>
+                      
+                      {/* Description */}
+                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                        {cert.description}
+                      </p>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -1005,12 +848,12 @@ const Index = () => {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 shadow-sm hover:scale-105 hover:-translate-y-0.5 transition-transform duration-300"
+                className="flex items-center gap-3 px-5 py-3 rounded-xl premium-card hover:scale-105 hover:-translate-y-0.5 transition-transform duration-300"
               >
                 <span className="text-xl">{stat.icon}</span>
                 <div>
-                  <div className="text-lg font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">{stat.value}</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">{stat.label}</div>
+                  <div className="text-lg font-bold text-gradient">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -1018,54 +861,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Projects Section - Holographic Showcase */}
-      <section id="projects" className="py-32 relative overflow-hidden">
-        {/* Cyberpunk gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-cyan-950/50 to-slate-900" />
-        
-        {/* Animated grid pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: '50px 50px',
-            }}
-          />
-        </div>
-
-        {/* Static holographic orbs */}
-        <div
-          className="absolute top-20 left-20 w-64 h-64 rounded-full animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%)',
-          }}
-        />
-        <div
-          className="absolute bottom-40 right-20 w-80 h-80 rounded-full animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%)',
-          }}
-        />
-
-        {/* Static code symbols */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {['</', '/>', '{}', '()'].map((code, i) => (
-            <div
-              key={i}
-              className="absolute text-cyan-400/10 font-mono text-xl"
-              style={{
-                left: `${10 + i * 20}%`,
-                top: `${30 + (i % 2) * 30}%`,
-              }}
-            >
-              {code}
-            </div>
-          ))}
-        </div>
+      {/* Projects Section */}
+      <section id="projects" className="py-32 relative overflow-hidden section-projects">
+        {/* Subtle top border */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         
         <div className="container mx-auto px-6 relative z-10">
           {/* Section Header */}
@@ -1077,168 +876,121 @@ const Index = () => {
             className="text-center mb-20"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-6"
-              animate={{ 
-                boxShadow: ["0 0 20px rgba(6, 182, 212, 0)", "0 0 40px rgba(6, 182, 212, 0.4)", "0 0 20px rgba(6, 182, 212, 0)"],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6"
             >
-              <Code className="w-4 h-4 text-cyan-400" />
-              <span className="text-sm font-medium text-cyan-300">Digital Creations</span>
+              <Code className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-muted-foreground">Digital Creations</span>
             </motion.div>
             
-            <h2 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Featured Projects
-              </span>
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">
+              Featured Projects
             </h2>
             
-            <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              Interactive showcases of innovation — hover to explore each holographic project card
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Explore my portfolio of innovative solutions and creative implementations
             </p>
           </motion.div>
           
-          {/* Projects Grid - Holographic Cards */}
+          {/* Projects Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {projects.map((project, index) => {
-              const colorSchemes = [
-                { primary: 'cyan', gradient: 'from-cyan-500 to-blue-500', glow: 'rgba(6, 182, 212, 0.4)' },
-                { primary: 'purple', gradient: 'from-purple-500 to-pink-500', glow: 'rgba(168, 85, 247, 0.4)' },
-                { primary: 'emerald', gradient: 'from-emerald-500 to-teal-500', glow: 'rgba(16, 185, 129, 0.4)' },
-              ];
-              const scheme = colorSchemes[index % colorSchemes.length];
-              
-              return (
-                <div
-                  key={index}
-                  className="relative group perspective-1000 hover:-translate-y-3 transition-transform duration-300"
-                >
-                  {/* Holographic glow effect */}
-                  <div
-                    className={`absolute -inset-1 bg-gradient-to-r ${scheme.gradient} rounded-2xl opacity-0 group-hover:opacity-40 blur-xl transition-all duration-500`}
-                  />
-                  
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="relative group hover:-translate-y-3 transition-transform duration-300"
+              >
+                {/* Main card */}
+                <div className="relative premium-card rounded-2xl overflow-hidden">
+                  {/* Top accent */}
+                  <div className="h-1 bg-gradient-to-r from-primary/50 to-primary/20" />
 
-                  {/* Main card */}
-                  <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-2xl border border-slate-700/50 overflow-hidden group-hover:border-transparent transition-all duration-500">
-                    {/* Top gradient bar */}
-                    <div className={`h-1.5 bg-gradient-to-r ${scheme.gradient}`} />
-                    
-                    {/* Holographic shimmer overlay */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-gradient-to-br from-transparent via-white/5 to-transparent" />
-
-                    <div className="relative z-10 p-8">
-                      {/* Header */}
-                      <div className="flex items-start justify-between gap-3 mb-5">
-                        <div className="flex-1">
-                          <motion.h3 
-                            className="text-2xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300"
-                          >
-                            {project.title}
-                          </motion.h3>
-                          
-                          {project.highlight && (
-                            <div 
-                              className="inline-flex items-center gap-1.5 px-3 py-1 bg-cyan-500/10 rounded-full border border-cyan-500/30"
-                            >
-                              <Star className="w-3 h-3 text-cyan-400" />
-                              <span className="text-xs font-semibold text-cyan-300">{project.highlight}</span>
-                            </div>
-                          )}
-                        </div>
+                  <div className="relative z-10 p-8">
+                    {/* Header */}
+                    <div className="flex items-start justify-between gap-3 mb-5">
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-all duration-300">
+                          {project.title}
+                        </h3>
                         
-                        {/* Status indicator */}
-                        <div className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${
-                          project.status === 'Live' 
-                            ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' 
-                            : project.status === 'Beta'
-                            ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30'
-                            : project.status === 'Active'
-                            ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                            : 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
-                        }`}>
-                          <div
-                            className={`w-2 h-2 rounded-full animate-pulse ${
-                              project.status === 'Live' ? 'bg-emerald-400' : 
-                              project.status === 'Beta' ? 'bg-yellow-400' :
-                              project.status === 'Active' ? 'bg-blue-400' : 'bg-purple-400'
-                            }`}
-                          />
-                          {project.status}
-                        </div>
-                      </div>
-                      
-                      {/* Description */}
-                      <p className="text-slate-400 leading-relaxed mb-6 group-hover:text-slate-300 transition-colors">
-                        {project.description}
-                      </p>
-                      
-                      {/* Tech Stack - Holographic pills */}
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {project.tech.map((tech, techIndex) => (
-                          <span 
-                            key={techIndex}
-                            className="px-3 py-1 text-xs font-medium text-slate-300 bg-slate-800/80 rounded-full border border-slate-700/50 group-hover:border-cyan-500/30 group-hover:text-cyan-300 transition-all duration-300"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      
-                      {/* Action Buttons */}
-                      <div className="flex items-center gap-3 pt-4 border-t border-slate-700/50">
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/50 text-slate-300 hover:text-white hover:border-cyan-500/50 hover:bg-cyan-500/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
-                        >
-                          <Github className="w-4 h-4" />
-                          <span className="font-medium text-sm">Source</span>
-                        </a>
-                        
-                        {project.demo !== "#" && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r ${scheme.gradient} text-white font-medium text-sm shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300`}
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            <span>Live Demo</span>
-                          </a>
+                        {project.highlight && (
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary rounded-full border border-border">
+                            <Star className="w-3 h-3 text-muted-foreground" />
+                            <span className="text-xs font-semibold text-muted-foreground">{project.highlight}</span>
+                          </div>
                         )}
                       </div>
-                    </div>
-
-                    {/* Featured ribbon */}
-                    {project.featured && (
-                      <div 
-                        className="absolute top-6 -right-10 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 text-xs font-bold px-10 py-1 transform rotate-45 shadow-lg"
-                      >
-                        ⭐ FEATURED
+                      
+                      {/* Status indicator */}
+                      <div className="relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-secondary text-muted-foreground border border-border">
+                        <div className="w-2 h-2 rounded-full animate-pulse bg-primary" />
+                        {project.status}
                       </div>
-                    )}
-
-                    {/* Corner decorations */}
-                    <div className={`absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl ${scheme.gradient} opacity-5 rounded-tl-full`} />
+                    </div>
+                    
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed mb-6 group-hover:text-foreground transition-colors">
+                      {project.description}
+                    </p>
+                    
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((tech, techIndex) => (
+                        <span 
+                          key={techIndex}
+                          className="px-3 py-1 text-xs font-medium text-muted-foreground bg-secondary rounded-full border border-border group-hover:border-primary/30 transition-all duration-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* Action Buttons */}
+                    <div className="flex items-center gap-3 pt-4 border-t border-border">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-secondary border border-border text-foreground hover:bg-accent hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                      >
+                        <Github className="w-4 h-4" />
+                        <span className="font-medium text-sm">Source</span>
+                      </a>
+                      
+                      {project.demo !== "#" && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          <span>Live Demo</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
+
+                  {/* Featured ribbon */}
+                  {project.featured && (
+                    <div className="absolute top-6 -right-10 bg-primary text-primary-foreground text-xs font-bold px-10 py-1 transform rotate-45 shadow-lg">
+                      ⭐ FEATURED
+                    </div>
+                  )}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
           
           {/* View More Section */}
           <div className="text-center mt-20">
             <div className="inline-block">
-              <p className="text-slate-400 mb-6 text-lg">
+              <p className="text-muted-foreground mb-6 text-lg">
                 Exploring more digital frontiers...
               </p>
               <a
                 href="https://github.com/Quantum-techlab"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold shadow-xl hover:shadow-cyan-500/40 hover:scale-105 active:scale-[0.98] transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold shadow-lg hover:scale-105 active:scale-[0.98] transition-all duration-300"
               >
                 <Github className="w-5 h-5" />
                 Explore Full Portfolio
@@ -1248,21 +1000,21 @@ const Index = () => {
 
             {/* Terminal decoration */}
             <div className="mt-12 max-w-md mx-auto">
-              <div className="bg-slate-900/80 rounded-lg border border-slate-700/50 overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 border-b border-slate-700/50">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                  <span className="ml-2 text-xs text-slate-500 font-mono">terminal</span>
+              <div className="premium-card rounded-lg overflow-hidden">
+                <div className="flex items-center gap-2 px-4 py-2 bg-secondary border-b border-border">
+                  <div className="w-3 h-3 rounded-full bg-destructive/50" />
+                  <div className="w-3 h-3 rounded-full bg-muted-foreground/50" />
+                  <div className="w-3 h-3 rounded-full bg-primary/50" />
+                  <span className="ml-2 text-xs text-muted-foreground font-mono">terminal</span>
                 </div>
                 <div className="p-4 font-mono text-sm">
-                  <div className="text-green-400">
+                  <div className="text-primary">
                     $ git clone creativity
                   </div>
-                  <div className="text-slate-400 mt-1">
+                  <div className="text-muted-foreground mt-1">
                     Cloning into 'future-projects'...
                   </div>
-                  <div className="text-cyan-400 mt-1 flex items-center gap-2">
+                  <div className="text-primary mt-1 flex items-center gap-2">
                     <span className="animate-pulse">█</span>
                     Stay tuned...
                   </div>
@@ -1273,22 +1025,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Contact Section - Connection Portal */}
-      <section id="contact" className="py-24 relative overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-indigo-50/30 to-slate-100 dark:from-slate-900 dark:via-indigo-950/20 dark:to-slate-900" />
-        
-        {/* Floating orbs */}
-        <motion.div
-          className="absolute top-20 left-10 w-72 h-72 rounded-full bg-indigo-400/10 blur-3xl"
-          animate={{ scale: [1, 1.2, 1], x: [-10, 10, -10] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-purple-400/10 blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], x: [10, -10, 10] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
+      {/* Contact Section */}
+      <section id="contact" className="py-24 relative overflow-hidden section-contact">
+        {/* Subtle top border */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
@@ -1301,22 +1041,16 @@ const Index = () => {
               transition={{ duration: 0.8 }}
             >
               <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-6"
-                animate={{ 
-                  boxShadow: ["0 0 20px rgba(99, 102, 241, 0)", "0 0 30px rgba(99, 102, 241, 0.3)", "0 0 20px rgba(99, 102, 241, 0)"],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6"
               >
-                <Mail className="w-4 h-4 text-indigo-500" />
-                <span className="text-sm font-medium text-indigo-600 dark:text-indigo-400">Get In Touch</span>
+                <Mail className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium text-muted-foreground">Get In Touch</span>
               </motion.div>
 
-              <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Let's Connect
-                </span>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
+                Let's Connect
               </h2>
-              <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                 I'm always excited to collaborate on innovative projects and explore new opportunities
               </p>
             </motion.div>
@@ -1329,24 +1063,18 @@ const Index = () => {
                   title: 'Email', 
                   value: 'ola283dayo@gmail.com',
                   href: 'mailto:ola283dayo@gmail.com',
-                  gradient: 'from-indigo-500 to-blue-500',
-                  emoji: '📧'
                 },
                 { 
                   icon: <Linkedin className="w-6 h-6" />, 
                   title: 'LinkedIn', 
                   value: 'Connect with me',
                   href: 'https://linkedin.com/in/abdulrasaq-abdulrasaq',
-                  gradient: 'from-blue-500 to-cyan-500',
-                  emoji: '💼'
                 },
                 { 
                   icon: <Github className="w-6 h-6" />, 
                   title: 'GitHub', 
                   value: 'Explore my work',
                   href: 'https://github.com/Quantum-techlab',
-                  gradient: 'from-purple-500 to-pink-500',
-                  emoji: '🚀'
                 },
               ].map((contact, index) => (
                 <a
@@ -1356,30 +1084,23 @@ const Index = () => {
                   rel="noopener noreferrer"
                   className="relative group block hover:-translate-y-2 transition-transform duration-300"
                 >
-                  {/* Glow effect */}
-                  <div
-                    className={`absolute -inset-1 bg-gradient-to-r ${contact.gradient} rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500`}
-                  />
-                  
                   {/* Card */}
-                  <div className="relative bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl border border-slate-200/50 dark:border-slate-700/50 p-6 text-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <div className="relative premium-card rounded-2xl p-6 text-center">
                     {/* Icon */}
-                    <div 
-                      className={`w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-r ${contact.gradient} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                    >
+                    <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                       {contact.icon}
                     </div>
                     
-                    <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {contact.title}
                     </h3>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm">
+                    <p className="text-muted-foreground text-sm">
                       {contact.value}
                     </p>
 
                     {/* Arrow indicator */}
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowRight className="w-4 h-4 text-indigo-500" />
+                      <ArrowRight className="w-4 h-4 text-primary" />
                     </div>
                   </div>
                 </a>
@@ -1390,13 +1111,13 @@ const Index = () => {
             <div className="text-center">
               <a
                 href="mailto:ola283dayo@gmail.com"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-semibold shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 active:scale-[0.98] transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold shadow-lg hover:scale-105 active:scale-[0.98] transition-all duration-300"
               >
                 <span>Start a Conversation</span>
                 <ArrowRight className="w-5 h-5" />
               </a>
               
-              <p className="mt-6 text-slate-500 dark:text-slate-400 text-sm">
+              <p className="mt-6 text-muted-foreground text-sm">
                 Usually respond within 24 hours ⚡
               </p>
             </div>
@@ -1404,40 +1125,21 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer Section - Cosmic Horizon */}
-      <footer className="relative overflow-hidden bg-slate-950 text-white">
-        {/* Aurora background effect */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-black" />
-          <div
-            className="absolute top-0 left-0 right-0 h-96 animate-pulse"
+      {/* Footer Section */}
+      <footer className="relative overflow-hidden bg-primary text-primary-foreground">
+        {/* Subtle pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div 
+            className="absolute inset-0" 
             style={{
-              background: 'linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.04) 50%, transparent 100%)',
-            }}
+              backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)',
+              backgroundSize: '40px 40px',
+            }} 
           />
-          
-          {/* Static stars with CSS animation */}
-          {[...Array(15)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-white/40 rounded-full animate-pulse"
-              style={{
-                left: `${(i * 7) % 100}%`,
-                top: `${(i * 13) % 80 + 10}%`,
-                animationDelay: `${i * 0.2}s`,
-              }}
-            />
-          ))}
         </div>
 
-        {/* Horizon line glow */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-          style={{
-            background: 'linear-gradient(0deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%)',
-          }}
-        />
+        {/* Top border */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/20 to-transparent" />
 
         <div className="container mx-auto px-6 relative z-10 py-20">
           <div className="max-w-6xl mx-auto">
@@ -1450,40 +1152,40 @@ const Index = () => {
                 {/* Logo */}
                 <div className="mb-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <div className="w-12 h-12 rounded-2xl bg-primary-foreground text-primary flex items-center justify-center shadow-lg">
                       <span className="text-xl font-bold">AA</span>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      <h3 className="text-2xl font-bold">
                         Abdulrasaq Abdulrasaq
                       </h3>
-                      <p className="text-sm text-slate-400">Full-Stack Developer & Tech Lead</p>
+                      <p className="text-sm text-primary-foreground/70">Full-Stack Developer & Tech Lead</p>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-slate-400 leading-relaxed mb-8 max-w-md">
+                <p className="text-primary-foreground/70 leading-relaxed mb-8 max-w-md">
                   Crafting digital experiences at the intersection of creativity and technology. 
                   Let's build something extraordinary together.
                 </p>
 
-                {/* Social Links - Orbit style */}
+                {/* Social Links */}
                 <div className="flex items-center gap-4">
                   {[
-                    { icon: <Github className="w-5 h-5" />, href: "https://github.com/Quantum-techlab", color: "hover:bg-slate-700", label: "GitHub" },
-                    { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/in/abdulrasaq-abdulrasaq", color: "hover:bg-blue-600", label: "LinkedIn" },
-                    { icon: <Mail className="w-5 h-5" />, href: "mailto:ola283dayo@gmail.com", color: "hover:bg-pink-600", label: "Email" },
+                    { icon: <Github className="w-5 h-5" />, href: "https://github.com/Quantum-techlab", label: "GitHub" },
+                    { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/in/abdulrasaq-abdulrasaq", label: "LinkedIn" },
+                    { icon: <Mail className="w-5 h-5" />, href: "mailto:ola283dayo@gmail.com", label: "Email" },
                   ].map((social, i) => (
                     <a
                       key={i}
                       href={social.href}
                       target={social.href.startsWith('mailto') ? undefined : "_blank"}
                       rel="noopener noreferrer"
-                      className={`group relative p-3 bg-slate-800/50 backdrop-blur-sm ${social.color} rounded-xl border border-slate-700/50 hover:scale-110 hover:-translate-y-1 active:scale-95 transition-all duration-300`}
+                      className="group relative p-3 bg-primary-foreground/10 hover:bg-primary-foreground/20 rounded-xl border border-primary-foreground/10 hover:scale-110 hover:-translate-y-1 active:scale-95 transition-all duration-300"
                     >
                       {social.icon}
                       {/* Tooltip */}
-                      <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-slate-700 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-primary-foreground text-primary rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                         {social.label}
                       </span>
                     </a>
@@ -1493,7 +1195,7 @@ const Index = () => {
 
               {/* Navigation Links */}
               <div className="md:col-span-3">
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-6">Navigation</h4>
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/70 mb-6">Navigation</h4>
                 <ul className="space-y-4">
                   {[
                     { name: 'About', href: '#about', emoji: '👤' },
@@ -1505,12 +1207,12 @@ const Index = () => {
                     <li key={i} className="hover:translate-x-1 transition-transform duration-200">
                       <a 
                         href={link.href} 
-                        className="flex items-center gap-3 text-slate-300 hover:text-white transition-colors group"
+                        className="flex items-center gap-3 text-primary-foreground/70 hover:text-primary-foreground transition-colors group"
                       >
                         <span className="text-sm opacity-60 group-hover:opacity-100 transition-opacity">{link.emoji}</span>
                         <span className="relative">
                           {link.name}
-                          <span className="absolute left-0 -bottom-1 w-0 h-px bg-gradient-to-r from-indigo-400 to-purple-400 group-hover:w-full transition-all duration-300" />
+                          <span className="absolute left-0 -bottom-1 w-0 h-px bg-primary-foreground/50 group-hover:w-full transition-all duration-300" />
                         </span>
                       </a>
                     </li>
@@ -1520,43 +1222,37 @@ const Index = () => {
 
               {/* Contact & Status */}
               <div className="md:col-span-4">
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-6">Connect</h4>
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/70 mb-6">Connect</h4>
                 
                 <div className="space-y-4 mb-8">
-                  <div 
-                    className="flex items-center gap-4 p-3 rounded-xl bg-slate-800/30 border border-slate-700/30 hover:scale-[1.02] hover:border-indigo-500/30 transition-all duration-300"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                  <div className="flex items-center gap-4 p-3 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 hover:scale-[1.02] transition-all duration-300">
+                    <div className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Email</p>
-                      <p className="text-slate-300 text-sm">ola283dayo@gmail.com</p>
+                      <p className="text-xs text-primary-foreground/50">Email</p>
+                      <p className="text-primary-foreground/80 text-sm">ola283dayo@gmail.com</p>
                     </div>
                   </div>
 
-                  <div 
-                    className="flex items-center gap-4 p-3 rounded-xl bg-slate-800/30 border border-slate-700/30 hover:scale-[1.02] hover:border-indigo-500/30 transition-all duration-300"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                  <div className="flex items-center gap-4 p-3 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 hover:scale-[1.02] transition-all duration-300">
+                    <div className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center">
                       <MapPin className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Location</p>
-                      <p className="text-slate-300 text-sm">University of Ilorin, Nigeria</p>
+                      <p className="text-xs text-primary-foreground/50">Location</p>
+                      <p className="text-primary-foreground/80 text-sm">University of Ilorin, Nigeria</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Status Card */}
-                <div 
-                  className="p-4 rounded-2xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 shadow-lg shadow-emerald-500/5"
-                >
+                <div className="p-4 rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse" />
+                    <div className="w-3 h-3 bg-primary-foreground rounded-full animate-pulse" />
                     <div>
-                      <p className="text-emerald-400 font-semibold text-sm">Open to Opportunities</p>
-                      <p className="text-slate-400 text-xs">Ready for exciting projects</p>
+                      <p className="text-primary-foreground font-semibold text-sm">Open to Opportunities</p>
+                      <p className="text-primary-foreground/50 text-xs">Ready for exciting projects</p>
                     </div>
                   </div>
                 </div>
@@ -1566,10 +1262,10 @@ const Index = () => {
             {/* Decorative divider */}
             <div className="relative mb-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-800" />
+                <div className="w-full border-t border-primary-foreground/10" />
               </div>
               <div className="relative flex justify-center">
-                <div className="px-4 bg-slate-950">
+                <div className="px-4 bg-primary">
                   <span className="text-2xl">✨</span>
                 </div>
               </div>
@@ -1577,20 +1273,20 @@ const Index = () => {
 
             {/* Bottom Bar */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <div className="flex items-center gap-2 text-slate-500 text-sm">
+              <div className="flex items-center gap-2 text-primary-foreground/50 text-sm">
                 <span>© 2025</span>
-                <span className="text-slate-400 font-medium">Abdulrasaq Abdulrasaq</span>
+                <span className="text-primary-foreground/70 font-medium">Abdulrasaq Abdulrasaq</span>
                 <span>•</span>
                 <span>All rights reserved</span>
               </div>
 
               {/* Tech stack badges */}
               <div className="flex items-center gap-3">
-                <span className="text-slate-600 text-xs">Built with</span>
+                <span className="text-primary-foreground/40 text-xs">Built with</span>
                 {['⚛️ React', '🎨 Tailwind', '⚡ Vite', '▲ Vercel'].map((tech, i) => (
                   <span
                     key={i}
-                    className="px-2 py-1 rounded-md bg-slate-800/50 border border-slate-700/50 text-xs text-slate-400 hover:scale-105 hover:border-indigo-500/50 transition-all duration-200"
+                    className="px-2 py-1 rounded-md bg-primary-foreground/5 border border-primary-foreground/10 text-xs text-primary-foreground/60 hover:scale-105 transition-all duration-200"
                   >
                     {tech}
                   </span>
@@ -1598,27 +1294,11 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Easter egg - Konami hint */}
-            <p className="text-center mt-8 text-slate-700 text-xs">
+            {/* Made with love */}
+            <p className="text-center mt-8 text-primary-foreground/40 text-xs">
               Made with 💜 and lots of ☕
             </p>
           </div>
-        </div>
-
-        {/* Static decorative particles at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none overflow-hidden">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1.5 h-1.5 rounded-full animate-pulse"
-              style={{
-                left: `${15 + i * 18}%`,
-                bottom: 20 + i * 5,
-                background: i % 2 === 0 ? 'rgba(99, 102, 241, 0.4)' : 'rgba(168, 85, 247, 0.4)',
-                animationDelay: `${i * 0.3}s`,
-              }}
-            />
-          ))}
         </div>
       </footer>
     </div>
