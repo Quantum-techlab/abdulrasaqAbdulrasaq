@@ -61,7 +61,7 @@ export const EnhancedNavigation = () => {
         transition={{ duration: 0.5 }}
         className={`fixed top-0 w-full z-40 transition-all duration-500 ${
           isScrolled 
-            ? 'py-2 bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg' 
+            ? 'py-2 glass-strong shadow-lg' 
             : 'py-4 bg-transparent'
         }`}
       >
@@ -95,7 +95,7 @@ export const EnhancedNavigation = () => {
                 >
                   {item.label}
                   <motion.span 
-                    className="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-zinc-600 to-zinc-400 dark:from-zinc-400 dark:to-zinc-300 transform -translate-x-1/2"
+                    className="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-[hsl(var(--champagne-dark))] to-[hsl(var(--champagne))] transform -translate-x-1/2"
                     initial={{ width: 0 }}
                     animate={{ 
                       width: activeSection === item.href.substring(1) ? 24 : 0 

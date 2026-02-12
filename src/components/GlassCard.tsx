@@ -31,10 +31,9 @@ export const GlassCard: React.FC<GlassCardProps> = ({
         transition: { duration: 0.3, ease: [0.25, 0.25, 0, 1] }
       } : undefined}
       className={cn(
-        "backdrop-blur-xl bg-white/10 dark:bg-white/5 border border-zinc-300/30 dark:border-zinc-700/30",
-        "rounded-2xl shadow-2xl hover:shadow-3xl",
+        "glass rounded-2xl shadow-2xl hover:champagne-glow",
         "relative overflow-hidden group",
-        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/20 before:via-transparent before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500",
+        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-[hsl(var(--champagne)/0.08)] before:via-transparent before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500",
         className
       )}
     >
