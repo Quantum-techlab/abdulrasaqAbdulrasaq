@@ -66,6 +66,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				champagne: {
+					DEFAULT: 'hsl(var(--champagne))',
+					light: 'hsl(var(--champagne-light))',
+					dark: 'hsl(var(--champagne-dark))',
+					muted: 'hsl(var(--champagne-muted))',
 				}
 			},
 			borderRadius: {
@@ -112,10 +118,10 @@ export default {
 				},
 			'glow': {
 					'0%, 100%': {
-						boxShadow: '0 0 20px rgba(161, 161, 170, 0.3)'
+						boxShadow: '0 0 20px hsl(38 70% 62% / 0.2)'
 					},
 					'50%': {
-						boxShadow: '0 0 30px rgba(161, 161, 170, 0.5)'
+						boxShadow: '0 0 30px hsl(38 70% 62% / 0.35)'
 					}
 				},
 				'float': {
