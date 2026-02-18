@@ -225,10 +225,14 @@ const Index = () => {
 
       {/* Hero Section - Clean Landing Page Style */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 section-hero">
-        {/* Warm champagne gradient accent */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[400px] bg-gradient-to-br from-[hsl(38_70%_62%/0.06)] via-[hsl(45_80%_72%/0.04)] to-transparent rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[300px] bg-gradient-to-tl from-[hsl(32_55%_42%/0.04)] to-transparent rounded-full blur-3xl" />
+        {/* Tricolor gradient auras — champagne · sage · slate */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[600px] h-[380px] rounded-full blur-3xl opacity-60"
+            style={{ background: 'radial-gradient(ellipse, hsl(36 65% 58% / 0.07), transparent 70%)' }} />
+          <div className="absolute top-1/3 right-1/4 w-[420px] h-[300px] rounded-full blur-3xl opacity-50"
+            style={{ background: 'radial-gradient(ellipse, hsl(145 22% 48% / 0.06), transparent 70%)' }} />
+          <div className="absolute bottom-0 left-1/3 w-[500px] h-[280px] rounded-full blur-3xl opacity-40"
+            style={{ background: 'radial-gradient(ellipse, hsl(215 28% 48% / 0.05), transparent 70%)' }} />
         </div>
 
         <Hero3DCharacter />
@@ -236,26 +240,6 @@ const Index = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
             
-            {/* Glowing Status Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-              className="flex justify-center mb-8"
-            >
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[hsl(var(--champagne)/0.4)] via-[hsl(var(--champagne-light)/0.3)] to-[hsl(var(--champagne)/0.4)] rounded-full blur-lg group-hover:opacity-100 opacity-60 transition-opacity" />
-                <div className="relative inline-flex items-center gap-3 glass rounded-full px-6 py-3 champagne-glow">
-                  <div className="relative flex items-center justify-center">
-                    <div className="w-3 h-3 bg-[hsl(var(--champagne))] rounded-full animate-ping absolute" />
-                    <div className="w-3 h-3 bg-[hsl(var(--champagne-dark))] rounded-full relative" />
-                  </div>
-                  <span className="text-sm font-semibold text-foreground">
-                    ✨ Available for New Opportunities
-                  </span>
-                </div>
-              </div>
-            </motion.div>
 
             {/* Main Hero Content - Grid Layout */}
             <div className="grid lg:grid-cols-5 gap-12 items-center mb-16">
@@ -273,7 +257,7 @@ const Index = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="text-lg font-medium text-zinc-600 dark:text-zinc-400 mb-2"
+                    className="text-lg font-medium text-muted-foreground mb-2"
                   >
                     👋 Hello, I'm
                   </motion.div>
@@ -288,7 +272,7 @@ const Index = () => {
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ delay: 0.8, duration: 0.8 }}
-                        className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[hsl(var(--champagne))] via-[hsl(var(--champagne-light))] to-[hsl(var(--champagne))] origin-left rounded-full"
+                        className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-champagne-dark via-sage to-slate-accent origin-left rounded-full"
                       />
                     </span>
                     
@@ -303,7 +287,7 @@ const Index = () => {
                   {/* Animated Role with terminal effect */}
                   <div className="h-16 flex items-center">
                     <div className="flex items-center gap-2">
-                      <span className="text-[hsl(var(--champagne-dark))] dark:text-[hsl(var(--champagne))] font-mono">$</span>
+                      <span className="text-champagne-dark dark:text-champagne font-mono">$</span>
                       <span className="text-muted-foreground font-mono">role:</span>
                       <div className="text-2xl md:text-3xl font-bold">
                         <span className="text-gradient">
@@ -331,11 +315,11 @@ const Index = () => {
                   className="mb-8 relative"
                 >
                   {/* Code-style decoration */}
-                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[hsl(var(--champagne)/0.5)] via-[hsl(var(--champagne-dark)/0.5)] to-[hsl(var(--champagne)/0.5)] rounded-full" />
+                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-champagne via-sage to-slate-accent rounded-full opacity-60" />
                   
-                  <div className="pl-4 border-l-2 border-[hsl(var(--champagne)/0.2)]">
+                  <div className="pl-4 border-l-2 border-champagne/20">
                     <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4">
-                      <span className="text-[hsl(var(--champagne-dark))] dark:text-[hsl(var(--champagne))] font-mono">// </span>
+                      <span className="text-sage-dark dark:text-sage font-mono">// </span>
                       Passionate about crafting exceptional digital experiences 
                       through clean, efficient code. I specialize in modern web 
                       technologies and AI integration to build scalable, 
@@ -345,7 +329,7 @@ const Index = () => {
                     {/* Location with icon */}
                     <div className="flex items-center gap-4 flex-wrap">
                       <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-subtle">
-                        <MapPin className="w-4 h-4 text-[hsl(var(--champagne-dark))] dark:text-[hsl(var(--champagne))]" />
+                        <MapPin className="w-4 h-4 text-champagne-dark dark:text-champagne" />
                         <span className="text-sm text-foreground/80">University of Ilorin, Nigeria</span>
                       </div>
                       <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-subtle">
@@ -363,18 +347,18 @@ const Index = () => {
                   transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
                   className="flex flex-col sm:flex-row gap-4 items-start"
                 >
-                  {/* Primary CTA - Glowing effect */}
+                  {/* Primary CTA - Tricolor glow */}
                   <a
                     href="mailto:ola283dayo@gmail.com"
-                    className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105"
+                    className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold overflow-hidden transition-all duration-300 hover:scale-105"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--champagne-dark))] via-[hsl(var(--champagne))] to-[hsl(var(--champagne-dark))]" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--champagne))] via-[hsl(var(--champagne-light))] to-[hsl(var(--champagne))] blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-champagne-dark via-champagne to-sage rounded-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-champagne via-sage to-slate-accent blur-xl opacity-40 group-hover:opacity-65 transition-opacity rounded-2xl" />
                     <div className="absolute inset-[2px] bg-background rounded-2xl" />
-                    <span className="relative flex items-center gap-3 text-gradient-champagne font-bold">
-                      <Mail className="w-5 h-5 text-[hsl(var(--champagne-dark))] dark:text-[hsl(var(--champagne))]" />
+                    <span className="relative flex items-center gap-3 text-gradient-tricolor font-bold">
+                      <Mail className="w-5 h-5 text-champagne-dark dark:text-champagne" />
                       Let's Connect
-                      <ArrowRight className="w-5 h-5 text-[hsl(var(--champagne-dark))] dark:text-[hsl(var(--champagne))] group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-5 h-5 text-sage-dark dark:text-sage group-hover:translate-x-1 transition-transform" />
                     </span>
                   </a>
 
@@ -383,19 +367,19 @@ const Index = () => {
                     href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold glass champagne-border text-foreground hover:champagne-glow transition-all duration-300 hover:scale-105"
+                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold glass sage-border text-foreground hover:sage-glow transition-all duration-300 hover:scale-105"
                   >
                     <Download className="w-5 h-5" />
                     View Resume
                   </a>
 
-                  {/* Social Links - Floating pills */}
+                  {/* Social Links */}
                   <div className="flex items-center gap-2">
                     <a
                       href="https://github.com/Quantum-techlab"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-xl glass-subtle hover:champagne-glow hover:border-[hsl(var(--champagne)/0.3)] transition-all duration-300 hover:scale-110 group"
+                      className="p-3 rounded-xl glass-subtle hover:champagne-glow hover:champagne-border transition-all duration-300 hover:scale-110 group"
                     >
                       <Github className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                     </a>
@@ -403,7 +387,7 @@ const Index = () => {
                       href="https://linkedin.com/in/abdulrasaq-abdulrasaq"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-xl glass-subtle hover:champagne-glow hover:border-[hsl(var(--champagne)/0.3)] transition-all duration-300 hover:scale-110 group"
+                      className="p-3 rounded-xl glass-subtle hover:sage-glow hover:sage-border transition-all duration-300 hover:scale-110 group"
                     >
                       <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                     </a>
@@ -411,7 +395,7 @@ const Index = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Profile Image - Creative Portal Design */}
+              {/* Profile Image - Tricolor Portal Design */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, x: 40 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -419,14 +403,14 @@ const Index = () => {
                 className="lg:col-span-2 flex justify-center lg:justify-end"
               >
                 <div className="relative group">
-                  {/* Champagne glowing aura */}
-                  <div className="absolute inset-0 w-72 h-72 -translate-x-4 -translate-y-4">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--champagne)/0.15)] via-[hsl(var(--champagne-light)/0.2)] to-[hsl(var(--champagne)/0.15)] rounded-full blur-2xl animate-pulse" />
-                  </div>
+                  {/* Tricolor glowing aura */}
+                  <div className="absolute -inset-6 rounded-full blur-3xl opacity-40 animate-pulse"
+                    style={{ background: 'conic-gradient(from 0deg, hsl(36 65% 58% / 0.18), hsl(145 22% 48% / 0.14), hsl(215 28% 48% / 0.12), hsl(36 65% 58% / 0.18))' }} />
                   
-                  {/* Main profile image with champagne gradient border */}
-                  <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl champagne-glow">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--champagne-dark))] via-[hsl(var(--champagne))] to-[hsl(var(--champagne-dark))] rounded-full" />
+                  {/* Main profile image with tricolor gradient border */}
+                  <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl">
+                    <div className="absolute inset-0 rounded-full"
+                      style={{ background: 'conic-gradient(from 0deg, hsl(36 65% 48%), hsl(145 22% 42%), hsl(215 28% 44%), hsl(36 65% 48%))' }} />
                     <div className="absolute inset-[4px] bg-background rounded-full" />
                     
                     <div className="absolute inset-[6px] rounded-full overflow-hidden">
@@ -443,12 +427,12 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  {/* Animated status indicator */}
+                  {/* Animated craft indicator — sage green */}
                   <div className="absolute bottom-4 right-4 z-30">
                     <div className="relative">
-                      <div className="absolute inset-0 w-8 h-8 bg-[hsl(var(--champagne))] rounded-full blur-md animate-pulse" />
-                      <div className="relative w-8 h-8 bg-gradient-to-r from-[hsl(var(--champagne-dark))] to-[hsl(var(--champagne))] rounded-full border-3 border-background flex items-center justify-center shadow-lg">
-                        <span className="text-xs">✓</span>
+                      <div className="absolute inset-0 w-8 h-8 bg-sage rounded-full blur-md animate-pulse" />
+                      <div className="relative w-8 h-8 bg-gradient-to-r from-sage-dark to-sage rounded-full border-2 border-background flex items-center justify-center shadow-lg">
+                        <span className="text-xs text-white">✓</span>
                       </div>
                     </div>
                   </div>
@@ -471,10 +455,10 @@ const Index = () => {
               
               <div className="grid grid-cols-2 md:grid-cols-6 gap-4 max-w-5xl mx-auto">
                 {[
-                  { count: yearsCount.count, suffix: "+", label: "Years Experience", icon: <Calendar className="w-5 h-5" />, color: 'from-[hsl(var(--champagne-dark))] to-[hsl(var(--champagne))]' },
-                  { count: projectsCount.count, suffix: "+", label: "Projects Completed", icon: <Code className="w-5 h-5" />, color: 'from-[hsl(var(--champagne))] to-[hsl(var(--champagne-light))]' },
-                  { count: techCount.count, suffix: "+", label: "Technologies", icon: <Zap className="w-5 h-5" />, color: 'from-[hsl(var(--champagne-dark))] to-[hsl(var(--champagne))]' },
-                  { count: certsCount.count, suffix: "", label: "Certifications", icon: <Award className="w-5 h-5" />, color: 'from-[hsl(var(--champagne))] to-[hsl(var(--champagne-dark))]' }
+                  { count: yearsCount.count, suffix: "+", label: "Years Experience", icon: <Calendar className="w-5 h-5" />, color: 'from-[hsl(var(--champagne-dark))] to-[hsl(var(--champagne))]', glow: 'champagne-glow' },
+                  { count: projectsCount.count, suffix: "+", label: "Projects Completed", icon: <Code className="w-5 h-5" />, color: 'from-[hsl(var(--sage-dark))] to-[hsl(var(--sage))]', glow: 'sage-glow' },
+                  { count: techCount.count, suffix: "+", label: "Technologies", icon: <Zap className="w-5 h-5" />, color: 'from-[hsl(var(--slate-accent-dark))] to-[hsl(var(--slate-accent))]', glow: '' },
+                  { count: certsCount.count, suffix: "", label: "Certifications", icon: <Award className="w-5 h-5" />, color: 'from-[hsl(var(--champagne-dark))] to-[hsl(var(--sage))]', glow: 'champagne-glow' }
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -488,14 +472,14 @@ const Index = () => {
                     className="group relative"
                   >
                     {/* Glow on hover */}
-                    <div className={`absolute -inset-0.5 bg-gradient-to-r ${stat.color} rounded-2xl opacity-0 group-hover:opacity-50 blur-lg transition-opacity duration-300`} />
+                    <div className={`absolute -inset-0.5 bg-gradient-to-r ${stat.color} rounded-2xl opacity-0 group-hover:opacity-40 blur-lg transition-opacity duration-300`} />
                     
-                    <div className="relative text-center p-5 glass rounded-2xl hover:champagne-glow transition-all duration-300 hover:-translate-y-1 shimmer-champagne">
+                    <div className={`relative text-center p-5 glass rounded-2xl transition-all duration-300 hover:-translate-y-1 shimmer-champagne ${stat.glow ? `hover:${stat.glow}` : 'hover:shadow-lg'}`}>
                       <div className={`flex items-center justify-center mb-3 w-10 h-10 mx-auto rounded-xl bg-gradient-to-r ${stat.color}`}>
-                        <span className="text-primary-foreground">{stat.icon}</span>
+                        <span className="text-white">{stat.icon}</span>
                       </div>
                       <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                        {stat.count}<span className="text-[hsl(var(--champagne))]">{stat.suffix}</span>
+                        {stat.count}<span className="text-champagne">{stat.suffix}</span>
                       </div>
                       <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
                         {stat.label}
@@ -560,7 +544,7 @@ const Index = () => {
           <div className="max-w-5xl mx-auto relative">
             {/* Central timeline beam */}
             <motion.div
-              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px hidden md:block bg-gradient-to-b from-transparent via-border to-transparent"
+              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px hidden md:block bg-gradient-to-b from-transparent via-champagne to-sage"
               initial={{ height: 0 }}
               whileInView={{ height: '100%' }}
               viewport={{ once: true }}
@@ -605,7 +589,7 @@ const Index = () => {
                       {/* Main card */}
                       <div className="relative premium-card rounded-2xl overflow-hidden">
                         {/* Header accent */}
-                        <div className="h-1 bg-gradient-to-r from-primary/50 to-primary/20" />
+                        <div className="h-1 bg-gradient-to-r from-champagne-dark via-sage to-slate-accent" />
                         
                         <div className="p-8">
                           {/* Year badge */}
@@ -806,7 +790,7 @@ const Index = () => {
       {/* Projects Section */}
       <section id="projects" className="py-32 relative overflow-hidden section-projects">
         {/* Subtle top border */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-accent to-transparent" />
         
         <div className="container mx-auto px-6 relative z-10">
           {/* Section Header */}
@@ -843,7 +827,7 @@ const Index = () => {
                 {/* Main card */}
                 <div className="relative premium-card rounded-2xl overflow-hidden">
                   {/* Top accent */}
-                  <div className="h-1 bg-gradient-to-r from-primary/50 to-primary/20" />
+                  <div className="h-1 bg-gradient-to-r from-slate-accent-dark via-slate-accent to-champagne" />
 
                   <div className="relative z-10 p-8">
                     {/* Header */}
@@ -863,7 +847,7 @@ const Index = () => {
                       
                       {/* Status indicator */}
                       <div className="relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-secondary text-muted-foreground border border-border">
-                        <div className="w-2 h-2 rounded-full animate-pulse bg-primary" />
+                        <div className="w-2 h-2 rounded-full animate-pulse bg-sage" />
                         {project.status}
                       </div>
                     </div>
@@ -878,7 +862,7 @@ const Index = () => {
                       {project.tech.map((tech, techIndex) => (
                         <span 
                           key={techIndex}
-                          className="px-3 py-1 text-xs font-medium text-muted-foreground bg-secondary rounded-full border border-border group-hover:border-primary/30 transition-all duration-300"
+                          className="px-3 py-1 text-xs font-medium text-muted-foreground bg-secondary rounded-full border border-border group-hover:border-champagne/40 group-hover:text-foreground transition-all duration-300"
                         >
                           {tech}
                         </span>
@@ -913,7 +897,7 @@ const Index = () => {
 
                   {/* Featured ribbon */}
                   {project.featured && (
-                    <div className="absolute top-6 -right-10 bg-primary text-primary-foreground text-xs font-bold px-10 py-1 transform rotate-45 shadow-lg">
+                    <div className="absolute top-6 -right-10 bg-gradient-to-r from-champagne-dark to-sage text-white text-xs font-bold px-10 py-1 transform rotate-45 shadow-lg">
                       ⭐ FEATURED
                     </div>
                   )}
@@ -1005,18 +989,24 @@ const Index = () => {
                   title: 'Email', 
                   value: 'ola283dayo@gmail.com',
                   href: 'mailto:ola283dayo@gmail.com',
+                  glass: 'glass-sage',
+                  gradient: 'from-sage-dark to-sage',
                 },
                 { 
                   icon: <Linkedin className="w-6 h-6" />, 
                   title: 'LinkedIn', 
                   value: 'Connect with me',
                   href: 'https://linkedin.com/in/abdulrasaq-abdulrasaq',
+                  glass: 'glass-slate',
+                  gradient: 'from-slate-accent-dark to-slate-accent',
                 },
                 { 
                   icon: <Github className="w-6 h-6" />, 
                   title: 'GitHub', 
                   value: 'Explore my work',
                   href: 'https://github.com/Quantum-techlab',
+                  glass: 'glass',
+                  gradient: 'from-champagne-dark to-champagne',
                 },
               ].map((contact, index) => (
                 <a
@@ -1026,23 +1016,20 @@ const Index = () => {
                   rel="noopener noreferrer"
                   className="relative group block hover:-translate-y-2 transition-transform duration-300"
                 >
-                  {/* Card */}
-                  <div className="relative premium-card rounded-2xl p-6 text-center">
-                    {/* Icon */}
-                    <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className={`relative ${contact.glass} rounded-2xl p-6 text-center`}>
+                    <div className={`w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br ${contact.gradient} text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       {contact.icon}
                     </div>
                     
-                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-gradient transition-colors">
                       {contact.title}
                     </h3>
                     <p className="text-muted-foreground text-sm">
                       {contact.value}
                     </p>
 
-                    {/* Arrow indicator */}
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowRight className="w-4 h-4 text-primary" />
+                      <ArrowRight className="w-4 h-4 text-champagne-dark" />
                     </div>
                   </div>
                 </a>
@@ -1053,10 +1040,15 @@ const Index = () => {
             <div className="text-center">
               <a
                 href="mailto:ola283dayo@gmail.com"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold shadow-lg hover:scale-105 active:scale-[0.98] transition-all duration-300"
+                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold overflow-hidden transition-all duration-300 hover:scale-105"
               >
-                <span>Start a Conversation</span>
-                <ArrowRight className="w-5 h-5" />
+                <div className="absolute inset-0 bg-gradient-to-r from-champagne-dark via-champagne to-sage rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-r from-champagne via-sage to-slate-accent blur-xl opacity-40 group-hover:opacity-65 transition-opacity rounded-2xl" />
+                <div className="absolute inset-[2px] bg-background rounded-2xl" />
+                <span className="relative flex items-center gap-3 text-gradient-tricolor font-bold">
+                  Start a Conversation
+                  <ArrowRight className="w-5 h-5 text-sage-dark dark:text-sage group-hover:translate-x-1 transition-transform" />
+                </span>
               </a>
               
               <p className="mt-6 text-muted-foreground text-sm">
@@ -1191,7 +1183,7 @@ const Index = () => {
                 {/* Status Card */}
                 <div className="p-4 rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-primary-foreground rounded-full animate-pulse" />
+                    <div className="w-3 h-3 bg-sage rounded-full animate-pulse" />
                     <div>
                       <p className="text-primary-foreground font-semibold text-sm">Open to Opportunities</p>
                       <p className="text-primary-foreground/50 text-xs">Ready for exciting projects</p>
