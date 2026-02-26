@@ -310,12 +310,12 @@ export const ScrollTransitionSection = () => {
                   {/* Section title with flair */}
                   <div className="relative">
                     <motion.div
-                      className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[hsl(var(--champagne))] via-[hsl(var(--champagne-dark))] to-[hsl(var(--champagne))] rounded-full"
+                      className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[hsl(var(--teal))] via-[hsl(var(--coral))] to-[hsl(var(--teal))] rounded-full"
                       animate={{ scaleY: [0.8, 1, 0.8], opacity: [0.5, 1, 0.5] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
                     <motion.span 
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[hsl(var(--champagne-dark))] dark:text-[hsl(var(--champagne))] uppercase tracking-wider"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-[hsl(var(--teal-dark))] dark:text-[hsl(var(--teal))] uppercase tracking-wider"
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                     >
@@ -331,18 +331,18 @@ export const ScrollTransitionSection = () => {
 
                   {/* Main About content card */}
                   <GlassCard delay={0.2} className="p-8 relative overflow-hidden">
-                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-r from-[hsl(var(--champagne)/0.08)] to-[hsl(var(--champagne-light)/0.05)] rounded-full blur-3xl" />
-                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-r from-[hsl(var(--champagne-dark)/0.06)] to-[hsl(var(--champagne)/0.04)] rounded-full blur-2xl" />
+                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-r from-[hsl(var(--teal)/0.08)] to-[hsl(var(--teal-light)/0.05)] rounded-full blur-3xl" />
+                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-r from-[hsl(var(--coral)/0.06)] to-[hsl(var(--coral-light)/0.04)] rounded-full blur-2xl" />
                     
                     <div className="space-y-5 relative z-10">
                       {/* Intro with impact */}
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[hsl(var(--champagne-dark))] to-[hsl(var(--champagne))] flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[hsl(var(--teal-dark))] to-[hsl(var(--teal))] flex items-center justify-center flex-shrink-0 shadow-lg">
                           <Rocket className="w-6 h-6 text-primary-foreground" />
                         </div>
                         <div>
                           <p className="text-lg leading-relaxed text-foreground/80">
-                            I'm <span className="font-bold text-gradient-champagne">Abdulrasaq Abdulrasaq</span> — a 
+                            I'm <span className="font-bold text-gradient-coral">Abdulrasaq Abdulrasaq</span> — a 
                             passionate <span className="font-semibold text-foreground">Frontend Developer</span> and 
                             <span className="font-semibold text-foreground/90"> Software Engineer</span> currently studying
                             <span className="font-semibold"> Information and Communication Technology</span> at the <span className="font-semibold text-foreground">University of Ilorin</span>.

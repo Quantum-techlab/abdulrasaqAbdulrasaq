@@ -38,8 +38,8 @@ const techCategories: TechCategory[] = [
   {
     name: "Frontend",
     icon: <Code2 className="w-5 h-5" />,
-    color: "#a1a1aa",
-    bgGradient: "from-zinc-400/20 to-zinc-500/20",
+    color: "hsl(185 55% 38%)",
+    bgGradient: "from-teal/20 to-teal-light/20",
     techs: [
       { name: "React", icon: "⚛️", proficiency: 95, projects: 12, yearsUsed: 3, trend: 'up' },
       { name: "TypeScript", icon: "📘", proficiency: 90, projects: 10, yearsUsed: 2, trend: 'up' },
@@ -54,8 +54,8 @@ const techCategories: TechCategory[] = [
   {
     name: "Backend",
     icon: <Database className="w-5 h-5" />,
-    color: "#71717a",
-    bgGradient: "from-zinc-500/20 to-zinc-600/20",
+    color: "hsl(12 72% 58%)",
+    bgGradient: "from-coral/20 to-coral-light/20",
     techs: [
       { name: "Node.js", icon: "💚", proficiency: 85, projects: 8, yearsUsed: 2, trend: 'up' },
       { name: "Express", icon: "🚂", proficiency: 80, projects: 6, yearsUsed: 2, trend: 'stable' },
@@ -68,8 +68,8 @@ const techCategories: TechCategory[] = [
   {
     name: "AI & ML",
     icon: <Brain className="w-5 h-5" />,
-    color: "#52525b",
-    bgGradient: "from-zinc-600/20 to-zinc-700/20",
+    color: "hsl(38 80% 55%)",
+    bgGradient: "from-amber/20 to-amber-light/20",
     techs: [
       { name: "AI Integration", icon: "🤖", proficiency: 85, projects: 4, yearsUsed: 1, trend: 'up' },
       { name: "ChatGPT API", icon: "💬", proficiency: 88, projects: 3, yearsUsed: 1, trend: 'up' },
@@ -80,8 +80,8 @@ const techCategories: TechCategory[] = [
   {
     name: "DevOps",
     icon: <Cloud className="w-5 h-5" />,
-    color: "#3f3f46",
-    bgGradient: "from-zinc-700/20 to-zinc-800/20",
+    color: "hsl(185 40% 28%)",
+    bgGradient: "from-teal-dark/20 to-teal/20",
     techs: [
       { name: "Git/GitHub", icon: "🐙", proficiency: 92, projects: 20, yearsUsed: 3, trend: 'stable' },
       { name: "Docker", icon: "🐳", proficiency: 70, projects: 2, yearsUsed: 1, trend: 'learning' },
@@ -92,8 +92,8 @@ const techCategories: TechCategory[] = [
   {
     name: "Design",
     icon: <Palette className="w-5 h-5" />,
-    color: "#d4d4d8",
-    bgGradient: "from-zinc-300/20 to-zinc-400/20",
+    color: "hsl(12 55% 48%)",
+    bgGradient: "from-coral-dark/20 to-coral/20",
     techs: [
       { name: "UI/UX", icon: "🎯", proficiency: 85, projects: 12, yearsUsed: 2, trend: 'up' },
       { name: "Responsive", icon: "📱", proficiency: 95, projects: 15, yearsUsed: 3, trend: 'stable' },
@@ -193,9 +193,9 @@ const TechCard = ({
   onToggle: () => void;
 }) => {
   const trendColors = {
-    up: 'text-zinc-700 dark:text-zinc-300',
-    stable: 'text-zinc-500 dark:text-zinc-400',
-    learning: 'text-zinc-600 dark:text-zinc-400'
+    up: 'text-teal-dark dark:text-teal',
+    stable: 'text-amber-dark dark:text-amber',
+    learning: 'text-coral-dark dark:text-coral'
   };
   
   const trendLabels = {
@@ -399,7 +399,7 @@ export const TechAnalyticsDashboard = () => {
           </motion.div>
           
           <h2 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-zinc-700 via-zinc-500 to-zinc-700 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-300 bg-clip-text text-transparent">
+            <span className="text-gradient">
               Tech Arsenal
             </span>
           </h2>
@@ -411,32 +411,10 @@ export const TechAnalyticsDashboard = () => {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          <StatsCard 
-            icon={<Layers className="w-5 h-5" />} 
-            value={stats.totalTechs} 
-            label="Technologies"
-            delay={0}
-          />
-          <StatsCard 
-            icon={<Target className="w-5 h-5" />} 
-            value={stats.avgProficiency} 
-            label="Avg. Proficiency"
-            suffix="%"
-            delay={0.1}
-          />
-          <StatsCard 
-            icon={<Zap className="w-5 h-5" />} 
-            value={stats.totalProjects} 
-            label="Projects Built"
-            suffix="+"
-            delay={0.2}
-          />
-          <StatsCard 
-            icon={<TrendingUp className="w-5 h-5" />} 
-            value={stats.learningCount} 
-            label="Currently Learning"
-            delay={0.3}
-          />
+          <StatsCard icon={<Layers className="w-5 h-5" />} value={stats.totalTechs} label="Technologies" delay={0} />
+          <StatsCard icon={<Target className="w-5 h-5" />} value={stats.avgProficiency} label="Avg. Proficiency" suffix="%" delay={0.1} />
+          <StatsCard icon={<Zap className="w-5 h-5" />} value={stats.totalProjects} label="Projects Built" suffix="+" delay={0.2} />
+          <StatsCard icon={<TrendingUp className="w-5 h-5" />} value={stats.learningCount} label="Currently Learning" delay={0.3} />
         </div>
 
         {/* Legend */}
@@ -447,15 +425,15 @@ export const TechAnalyticsDashboard = () => {
           className="flex flex-wrap justify-center gap-6 mb-12 text-sm"
         >
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-zinc-700 dark:bg-zinc-300" />
+            <div className="w-3 h-3 rounded-full bg-teal" />
             <span className="text-muted-foreground">Trending Up</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-zinc-500 dark:bg-zinc-400" />
+            <div className="w-3 h-3 rounded-full bg-amber" />
             <span className="text-muted-foreground">Mastered</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-zinc-400 dark:bg-zinc-500" />
+            <div className="w-3 h-3 rounded-full bg-coral" />
             <span className="text-muted-foreground">Learning</span>
           </div>
         </motion.div>

@@ -21,6 +21,7 @@ import { SkillIcon } from "@/components/SkillIcon";
 import { Hero3DCharacter } from "@/components/Hero3DCharacter";
 import { ScrollTransitionSection } from "@/components/ScrollTransitionSection";
 import { TechAnalyticsDashboard } from "@/components/TechAnalyticsDashboard";
+import { DoodleStar, DoodleArrow, DoodleCircle, DoodleSquiggle, DoodleDots, DoodleSparkle, DoodleUnderline } from "@/components/Doodles";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -223,23 +224,28 @@ const Index = () => {
       <EnhancedNavigation />
       <FloatingCTA />
 
-      {/* Hero Section - Clean Landing Page Style */}
+      {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 section-hero">
-        {/* Tricolor gradient auras — champagne · sage · slate */}
+        {/* Tricolor gradient auras — teal · coral · amber */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-[600px] h-[380px] rounded-full blur-3xl opacity-60"
-            style={{ background: 'radial-gradient(ellipse, hsl(36 65% 58% / 0.07), transparent 70%)' }} />
+            style={{ background: 'radial-gradient(ellipse, hsl(185 55% 38% / 0.09), transparent 70%)' }} />
           <div className="absolute top-1/3 right-1/4 w-[420px] h-[300px] rounded-full blur-3xl opacity-50"
-            style={{ background: 'radial-gradient(ellipse, hsl(145 22% 48% / 0.06), transparent 70%)' }} />
+            style={{ background: 'radial-gradient(ellipse, hsl(12 72% 58% / 0.07), transparent 70%)' }} />
           <div className="absolute bottom-0 left-1/3 w-[500px] h-[280px] rounded-full blur-3xl opacity-40"
-            style={{ background: 'radial-gradient(ellipse, hsl(215 28% 48% / 0.05), transparent 70%)' }} />
+            style={{ background: 'radial-gradient(ellipse, hsl(38 80% 55% / 0.06), transparent 70%)' }} />
         </div>
+
+        {/* Doodle decorations in hero */}
+        <DoodleStar className="absolute top-32 right-[15%] opacity-40" color="hsl(38 80% 55%)" size={35} />
+        <DoodleDots className="absolute bottom-40 left-[8%] opacity-30" color="hsl(185 55% 38%)" />
+        <DoodleSparkle className="absolute top-48 left-[12%] opacity-30" color="hsl(12 72% 58%)" size={20} />
+        <DoodleSquiggle className="absolute bottom-32 right-[10%] opacity-25" color="hsl(38 80% 55%)" />
 
         <Hero3DCharacter />
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
-            
 
             {/* Main Hero Content - Grid Layout */}
             <div className="grid lg:grid-cols-5 gap-12 items-center mb-16">
@@ -272,22 +278,22 @@ const Index = () => {
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ delay: 0.8, duration: 0.8 }}
-                        className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-champagne-dark via-sage to-slate-accent origin-left rounded-full"
+                        className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-teal-dark via-coral to-amber origin-left rounded-full"
                       />
                     </span>
                     
-                    {/* Last name with outline effect */}
+                    {/* Last name */}
                     <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold mt-3">
-                      <span className="text-gradient-champagne">
+                      <span className="text-gradient-coral">
                         Abdulrasaq
                       </span>
                     </span>
                   </h1>
                   
-                  {/* Animated Role with terminal effect */}
+                  {/* Animated Role */}
                   <div className="h-16 flex items-center">
                     <div className="flex items-center gap-2">
-                      <span className="text-champagne-dark dark:text-champagne font-mono">$</span>
+                      <span className="text-teal-dark dark:text-teal font-mono">$</span>
                       <span className="text-muted-foreground font-mono">role:</span>
                       <div className="text-2xl md:text-3xl font-bold">
                         <span className="text-gradient">
@@ -307,29 +313,28 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Description - Code comment style */}
+                {/* Description */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                   className="mb-8 relative"
                 >
-                  {/* Code-style decoration */}
-                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-champagne via-sage to-slate-accent rounded-full opacity-60" />
+                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-teal via-coral to-amber rounded-full opacity-60" />
                   
-                  <div className="pl-4 border-l-2 border-champagne/20">
+                  <div className="pl-4 border-l-2 border-teal/20">
                     <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-4">
-                      <span className="text-sage-dark dark:text-sage font-mono">// </span>
+                      <span className="text-teal-dark dark:text-teal font-mono">// </span>
                       Passionate about crafting exceptional digital experiences 
                       through clean, efficient code. I specialize in modern web 
                       technologies and AI integration to build scalable, 
                       user-centric applications that make a <span className="text-foreground font-semibold">real impact</span>.
                     </p>
                     
-                    {/* Location with icon */}
+                    {/* Location */}
                     <div className="flex items-center gap-4 flex-wrap">
                       <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-subtle">
-                        <MapPin className="w-4 h-4 text-champagne-dark dark:text-champagne" />
+                        <MapPin className="w-4 h-4 text-teal-dark dark:text-teal" />
                         <span className="text-sm text-foreground/80">University of Ilorin, Nigeria</span>
                       </div>
                       <div className="flex items-center gap-2 px-3 py-1.5 rounded-full glass-subtle">
@@ -340,25 +345,25 @@ const Index = () => {
                   </div>
                 </motion.div>
 
-                {/* CTA Buttons - Neon Glow Style */}
+                {/* CTA Buttons */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
                   className="flex flex-col sm:flex-row gap-4 items-start"
                 >
-                  {/* Primary CTA - Tricolor glow */}
+                  {/* Primary CTA */}
                   <a
                     href="mailto:ola283dayo@gmail.com"
                     className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold overflow-hidden transition-all duration-300 hover:scale-105"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-champagne-dark via-champagne to-sage rounded-2xl" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-champagne via-sage to-slate-accent blur-xl opacity-40 group-hover:opacity-65 transition-opacity rounded-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-teal-dark via-teal to-coral rounded-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-teal via-coral to-amber blur-xl opacity-40 group-hover:opacity-65 transition-opacity rounded-2xl" />
                     <div className="absolute inset-[2px] bg-background rounded-2xl" />
                     <span className="relative flex items-center gap-3 text-gradient-tricolor font-bold">
-                      <Mail className="w-5 h-5 text-champagne-dark dark:text-champagne" />
+                      <Mail className="w-5 h-5 text-teal-dark dark:text-teal" />
                       Let's Connect
-                      <ArrowRight className="w-5 h-5 text-sage-dark dark:text-sage group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-5 h-5 text-coral-dark dark:text-coral group-hover:translate-x-1 transition-transform" />
                     </span>
                   </a>
 
@@ -367,7 +372,7 @@ const Index = () => {
                     href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold glass sage-border text-foreground hover:sage-glow transition-all duration-300 hover:scale-105"
+                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold glass teal-border text-foreground hover:teal-glow transition-all duration-300 hover:scale-105"
                   >
                     <Download className="w-5 h-5" />
                     View Resume
@@ -379,7 +384,7 @@ const Index = () => {
                       href="https://github.com/Quantum-techlab"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-xl glass-subtle hover:champagne-glow hover:champagne-border transition-all duration-300 hover:scale-110 group"
+                      className="p-3 rounded-xl glass-subtle hover:teal-glow hover:teal-border transition-all duration-300 hover:scale-110 group"
                     >
                       <Github className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                     </a>
@@ -387,7 +392,7 @@ const Index = () => {
                       href="https://linkedin.com/in/abdulrasaq-abdulrasaq"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-xl glass-subtle hover:sage-glow hover:sage-border transition-all duration-300 hover:scale-110 group"
+                      className="p-3 rounded-xl glass-subtle hover:coral-glow hover:coral-border transition-all duration-300 hover:scale-110 group"
                     >
                       <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                     </a>
@@ -395,7 +400,7 @@ const Index = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Profile Image - Tricolor Portal Design */}
+              {/* Profile Image */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, x: 40 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -405,12 +410,12 @@ const Index = () => {
                 <div className="relative group">
                   {/* Tricolor glowing aura */}
                   <div className="absolute -inset-6 rounded-full blur-3xl opacity-40 animate-pulse"
-                    style={{ background: 'conic-gradient(from 0deg, hsl(36 65% 58% / 0.18), hsl(145 22% 48% / 0.14), hsl(215 28% 48% / 0.12), hsl(36 65% 58% / 0.18))' }} />
+                    style={{ background: 'conic-gradient(from 0deg, hsl(185 55% 38% / 0.2), hsl(12 72% 58% / 0.16), hsl(38 80% 55% / 0.14), hsl(185 55% 38% / 0.2))' }} />
                   
                   {/* Main profile image with tricolor gradient border */}
                   <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl">
                     <div className="absolute inset-0 rounded-full"
-                      style={{ background: 'conic-gradient(from 0deg, hsl(36 65% 48%), hsl(145 22% 42%), hsl(215 28% 44%), hsl(36 65% 48%))' }} />
+                      style={{ background: 'conic-gradient(from 0deg, hsl(185 55% 38%), hsl(12 72% 52%), hsl(38 80% 50%), hsl(185 55% 38%))' }} />
                     <div className="absolute inset-[4px] bg-background rounded-full" />
                     
                     <div className="absolute inset-[6px] rounded-full overflow-hidden">
@@ -427,11 +432,14 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  {/* Animated craft indicator — sage green */}
+                  {/* Doodle star near profile */}
+                  <DoodleStar className="absolute -top-4 -right-6" color="hsl(12 72% 58%)" size={28} />
+                  
+                  {/* Status indicator */}
                   <div className="absolute bottom-4 right-4 z-30">
                     <div className="relative">
-                      <div className="absolute inset-0 w-8 h-8 bg-sage rounded-full blur-md animate-pulse" />
-                      <div className="relative w-8 h-8 bg-gradient-to-r from-sage-dark to-sage rounded-full border-2 border-background flex items-center justify-center shadow-lg">
+                      <div className="absolute inset-0 w-8 h-8 bg-teal rounded-full blur-md animate-pulse" />
+                      <div className="relative w-8 h-8 bg-gradient-to-r from-teal-dark to-teal rounded-full border-2 border-background flex items-center justify-center shadow-lg">
                         <span className="text-xs text-white">✓</span>
                       </div>
                     </div>
@@ -440,7 +448,7 @@ const Index = () => {
               </motion.div>
             </div>
 
-            {/* Creative Stats Section - Floating Cards */}
+            {/* Creative Stats Section */}
             <motion.div
               ref={statsRef}
               initial={{ opacity: 0, y: 40 }}
@@ -448,17 +456,20 @@ const Index = () => {
               transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
               className="pt-16 relative"
             >
+              {/* Doodle decoration */}
+              <DoodleArrow className="absolute -top-2 left-[20%] opacity-30" color="hsl(185 55% 38%)" />
+              
               {/* Section label */}
               <div className="text-center mb-8">
-                <span className="text-xs font-mono text-[hsl(var(--champagne-dark))] dark:text-[hsl(var(--champagne))] uppercase tracking-widest">// My journey in numbers</span>
+                <span className="text-xs font-mono text-[hsl(var(--teal-dark))] dark:text-[hsl(var(--teal))] uppercase tracking-widest">// My journey in numbers</span>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-6 gap-4 max-w-5xl mx-auto">
                 {[
-                  { count: yearsCount.count, suffix: "+", label: "Years Experience", icon: <Calendar className="w-5 h-5" />, color: 'from-[hsl(var(--champagne-dark))] to-[hsl(var(--champagne))]', glow: 'champagne-glow' },
-                  { count: projectsCount.count, suffix: "+", label: "Projects Completed", icon: <Code className="w-5 h-5" />, color: 'from-[hsl(var(--sage-dark))] to-[hsl(var(--sage))]', glow: 'sage-glow' },
-                  { count: techCount.count, suffix: "+", label: "Technologies", icon: <Zap className="w-5 h-5" />, color: 'from-[hsl(var(--slate-accent-dark))] to-[hsl(var(--slate-accent))]', glow: '' },
-                  { count: certsCount.count, suffix: "", label: "Certifications", icon: <Award className="w-5 h-5" />, color: 'from-[hsl(var(--champagne-dark))] to-[hsl(var(--sage))]', glow: 'champagne-glow' }
+                  { count: yearsCount.count, suffix: "+", label: "Years Experience", icon: <Calendar className="w-5 h-5" />, color: 'from-[hsl(var(--teal-dark))] to-[hsl(var(--teal))]', glow: 'teal-glow' },
+                  { count: projectsCount.count, suffix: "+", label: "Projects Completed", icon: <Code className="w-5 h-5" />, color: 'from-[hsl(var(--coral-dark))] to-[hsl(var(--coral))]', glow: 'coral-glow' },
+                  { count: techCount.count, suffix: "+", label: "Technologies", icon: <Zap className="w-5 h-5" />, color: 'from-[hsl(var(--amber-dark))] to-[hsl(var(--amber))]', glow: 'amber-glow' },
+                  { count: certsCount.count, suffix: "", label: "Certifications", icon: <Award className="w-5 h-5" />, color: 'from-[hsl(var(--teal-dark))] to-[hsl(var(--coral))]', glow: 'teal-glow' }
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
@@ -471,15 +482,14 @@ const Index = () => {
                     }}
                     className="group relative"
                   >
-                    {/* Glow on hover */}
                     <div className={`absolute -inset-0.5 bg-gradient-to-r ${stat.color} rounded-2xl opacity-0 group-hover:opacity-40 blur-lg transition-opacity duration-300`} />
                     
-                    <div className={`relative text-center p-5 glass rounded-2xl transition-all duration-300 hover:-translate-y-1 shimmer-champagne ${stat.glow ? `hover:${stat.glow}` : 'hover:shadow-lg'}`}>
+                    <div className={`relative text-center p-5 glass rounded-2xl transition-all duration-300 hover:-translate-y-1 shimmer-teal ${stat.glow ? `hover:${stat.glow}` : 'hover:shadow-lg'}`}>
                       <div className={`flex items-center justify-center mb-3 w-10 h-10 mx-auto rounded-xl bg-gradient-to-r ${stat.color}`}>
                         <span className="text-white">{stat.icon}</span>
                       </div>
                       <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">
-                        {stat.count}<span className="text-champagne">{stat.suffix}</span>
+                        {stat.count}<span className="text-teal">{stat.suffix}</span>
                       </div>
                       <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
                         {stat.label}
@@ -488,7 +498,6 @@ const Index = () => {
                   </motion.div>
                 ))}
                 
-                {/* Animated Counters */}
                 <AnimatedCounter 
                   startValue={150000} 
                   label="Lines of Code" 
@@ -513,8 +522,11 @@ const Index = () => {
 
       {/* Experience Section */}
       <section id="experience" className="py-24 relative overflow-hidden section-experience">
-        {/* Subtle top border */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        
+        {/* Doodle decorations */}
+        <DoodleDots className="absolute top-20 right-[5%] opacity-20" color="hsl(38 80% 55%)" />
+        <DoodleSquiggle className="absolute bottom-20 left-[3%] opacity-20" color="hsl(12 72% 58%)" />
 
         <div className="container mx-auto px-6 relative z-10">
           {/* Header */}
@@ -526,16 +538,17 @@ const Index = () => {
             className="text-center mb-20"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-coral border border-coral/20 mb-6"
             >
-              <Sparkles className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm font-medium text-muted-foreground">My Journey</span>
+              <Sparkles className="w-4 h-4 text-coral" />
+              <span className="text-sm font-medium text-coral-dark dark:text-coral">My Journey</span>
             </motion.div>
             
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">
-              Experience
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 relative inline-block">
+              <span className="text-gradient">Experience</span>
+              <DoodleUnderline color="hsl(12 72% 58%)" />
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mt-4">
               A timeline of milestones in my professional journey
             </p>
           </motion.div>
@@ -544,7 +557,7 @@ const Index = () => {
           <div className="max-w-5xl mx-auto relative">
             {/* Central timeline beam */}
             <motion.div
-              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px hidden md:block bg-gradient-to-b from-transparent via-champagne to-sage"
+              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px hidden md:block bg-gradient-to-b from-transparent via-teal to-coral"
               initial={{ height: 0 }}
               whileInView={{ height: '100%' }}
               viewport={{ once: true }}
@@ -574,7 +587,7 @@ const Index = () => {
                   >
                     {/* Timeline node */}
                     <div
-                      className={`absolute top-8 ${isLeft ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'} hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg z-10 hover:scale-110 transition-transform duration-300`}
+                      className={`absolute top-8 ${isLeft ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'} hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-teal to-coral text-white shadow-lg z-10 hover:scale-110 transition-transform duration-300`}
                     >
                       <span className="text-xl">{icon}</span>
                     </div>
@@ -586,31 +599,30 @@ const Index = () => {
 
                     {/* Card */}
                     <div className="relative group cursor-pointer hover:-translate-y-1 transition-transform duration-300">
-                      {/* Main card */}
                       <div className="relative premium-card rounded-2xl overflow-hidden">
                         {/* Header accent */}
-                        <div className="h-1 bg-gradient-to-r from-champagne-dark via-sage to-slate-accent" />
+                        <div className="h-1 bg-gradient-to-r from-teal-dark via-coral to-amber" />
                         
                         <div className="p-8">
                           {/* Year badge */}
                           <motion.div
-                            className={`absolute -top-3 ${isLeft ? 'right-6' : 'left-6'} md:hidden px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-lg`}
+                            className={`absolute -top-3 ${isLeft ? 'right-6' : 'left-6'} md:hidden px-3 py-1 rounded-full bg-gradient-to-r from-teal to-coral text-white text-xs font-bold shadow-lg`}
                           >
                             {experience.period}
                           </motion.div>
 
                           {/* Mobile icon */}
-                          <div className="md:hidden mb-4 w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center">
+                          <div className="md:hidden mb-4 w-10 h-10 rounded-xl bg-gradient-to-br from-teal to-coral text-white flex items-center justify-center">
                             <span className="text-lg">{icon}</span>
                           </div>
 
                           {/* Title & Company */}
                           <div className="mb-4">
-                            <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-all duration-300">
+                            <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-gradient transition-all duration-300">
                               {experience.title}
                             </h3>
                             <div className="flex items-center gap-3">
-                              <span className="text-lg font-semibold text-primary">
+                              <span className="text-lg font-semibold text-teal dark:text-teal">
                                 {experience.company}
                               </span>
                               <span className="hidden md:inline-block px-3 py-1 rounded-full bg-secondary text-muted-foreground text-sm font-medium">
@@ -629,7 +641,7 @@ const Index = () => {
                             <div className="space-y-3">
                               {experience.responsibilities.map((responsibility, idx) => (
                                 <div key={idx} className="flex items-start gap-3">
-                                  <div className="mt-1.5 w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                                  <div className="mt-1.5 w-2 h-2 rounded-full bg-gradient-to-r from-teal to-coral flex-shrink-0" />
                                   <span className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground transition-colors">
                                     {responsibility}
                                   </span>
@@ -640,13 +652,13 @@ const Index = () => {
 
                           {/* Type badge */}
                           <div className="mt-6 flex items-center gap-2">
-                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-secondary text-muted-foreground border border-border">
+                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider glass-teal text-teal-dark dark:text-teal">
                               {experience.type}
                             </span>
                           </div>
                         </div>
 
-                        {/* Decorative elements */}
+                        {/* Decorative */}
                         <div className="absolute top-4 right-4 opacity-5">
                           <Sparkles className="w-24 h-24 text-foreground" />
                         </div>
@@ -665,12 +677,11 @@ const Index = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal to-coral text-white flex items-center justify-center shadow-lg">
                 <span className="text-2xl">✨</span>
               </div>
             </motion.div>
 
-            {/* "More to come" text */}
             <motion.p
               className="text-center mt-8 text-muted-foreground italic"
               initial={{ opacity: 0 }}
@@ -686,8 +697,11 @@ const Index = () => {
 
       {/* Certifications Section */}
       <section className="py-24 relative overflow-hidden section-about">
-        {/* Subtle top border */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        
+        {/* Doodle */}
+        <DoodleCircle className="absolute top-16 left-[5%] opacity-20" color="hsl(185 55% 38%)" size={60} />
+        <DoodleStar className="absolute bottom-24 right-[8%] opacity-25" color="hsl(38 80% 55%)" size={30} />
 
         <div className="container mx-auto px-6 relative z-10">
           {/* Header */}
@@ -699,16 +713,17 @@ const Index = () => {
             className="text-center mb-16"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-amber border border-amber/20 mb-6"
             >
-              <Award className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm font-medium text-muted-foreground">Achievements Unlocked</span>
+              <Award className="w-4 h-4 text-amber" />
+              <span className="text-sm font-medium text-amber-dark dark:text-amber">Achievements Unlocked</span>
             </motion.div>
             
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
-              Certifications
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 relative inline-block">
+              <span className="text-gradient">Certifications</span>
+              <DoodleUnderline color="hsl(38 80% 55%)" />
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mt-4">
               Milestones of continuous learning and professional growth
             </p>
           </motion.div>
@@ -721,32 +736,26 @@ const Index = () => {
                   key={index}
                   className="relative group hover:-translate-y-2 transition-transform duration-300"
                 >
-                  {/* Card */}
-                  <div className="relative premium-card rounded-2xl overflow-hidden">
+                  <div className="relative glass rounded-2xl overflow-hidden">
                     {/* Top accent */}
-                    <div className="h-1 bg-gradient-to-r from-primary/50 to-primary/20" />
+                    <div className="h-1 bg-gradient-to-r from-teal via-coral to-amber" />
                     
                     <div className="p-6">
-                      {/* Icon & Year */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                          <span className="text-lg">{cert.icon}</span>
-                        </div>
-                        
-                        <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-secondary text-muted-foreground border border-border">
-                          {cert.year}
-                        </span>
+                      {/* Icon */}
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal to-coral text-white flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        {cert.icon}
                       </div>
                       
                       {/* Title */}
-                      <h3 className="text-lg font-bold text-foreground mb-2 line-clamp-2 min-h-[3.5rem] group-hover:text-primary transition-colors">
+                      <h3 className="text-lg font-bold text-foreground mb-2 leading-tight group-hover:text-gradient transition-all duration-300">
                         {cert.title}
                       </h3>
                       
-                      {/* Issuer */}
-                      <p className="text-sm font-medium text-primary mb-3">
-                        {cert.issuer}
-                      </p>
+                      {/* Issuer & Year */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-sm font-medium text-teal dark:text-teal">{cert.issuer}</span>
+                        <span className="text-muted-foreground text-xs">• {cert.year}</span>
+                      </div>
                       
                       {/* Description */}
                       <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
@@ -774,7 +783,7 @@ const Index = () => {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="flex items-center gap-3 px-5 py-3 rounded-xl premium-card hover:scale-105 hover:-translate-y-0.5 transition-transform duration-300"
+                className="flex items-center gap-3 px-5 py-3 rounded-xl glass hover:scale-105 hover:-translate-y-0.5 transition-transform duration-300"
               >
                 <span className="text-xl">{stat.icon}</span>
                 <div>
@@ -789,8 +798,12 @@ const Index = () => {
 
       {/* Projects Section */}
       <section id="projects" className="py-32 relative overflow-hidden section-projects">
-        {/* Subtle top border */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-accent to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-coral to-transparent" />
+        
+        {/* Doodle decorations */}
+        <DoodleSparkle className="absolute top-28 left-[6%] opacity-25" color="hsl(185 55% 38%)" size={28} />
+        <DoodleSquiggle className="absolute top-40 right-[5%] opacity-20" color="hsl(38 80% 55%)" />
+        <DoodleDots className="absolute bottom-32 left-[4%] opacity-20" color="hsl(12 72% 58%)" />
         
         <div className="container mx-auto px-6 relative z-10">
           {/* Section Header */}
@@ -802,17 +815,18 @@ const Index = () => {
             className="text-center mb-20"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-teal border border-teal/20 mb-6"
             >
-              <Code className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm font-medium text-muted-foreground">Digital Creations</span>
+              <Code className="w-4 h-4 text-teal" />
+              <span className="text-sm font-medium text-teal-dark dark:text-teal">Digital Creations</span>
             </motion.div>
             
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-gradient">
-              Featured Projects
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 relative inline-block">
+              <span className="text-gradient">Featured Projects</span>
+              <DoodleUnderline color="hsl(185 55% 38%)" />
             </h2>
             
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mt-4">
               Explore my portfolio of innovative solutions and creative implementations
             </p>
           </motion.div>
@@ -824,30 +838,29 @@ const Index = () => {
                 key={index}
                 className="relative group hover:-translate-y-3 transition-transform duration-300"
               >
-                {/* Main card */}
-                <div className="relative premium-card rounded-2xl overflow-hidden">
+                <div className="relative glass rounded-2xl overflow-hidden">
                   {/* Top accent */}
-                  <div className="h-1 bg-gradient-to-r from-slate-accent-dark via-slate-accent to-champagne" />
+                  <div className="h-1 bg-gradient-to-r from-teal-dark via-coral to-amber" />
 
                   <div className="relative z-10 p-8">
                     {/* Header */}
                     <div className="flex items-start justify-between gap-3 mb-5">
                       <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-all duration-300">
+                        <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-gradient transition-all duration-300">
                           {project.title}
                         </h3>
                         
                         {project.highlight && (
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary rounded-full border border-border">
-                            <Star className="w-3 h-3 text-muted-foreground" />
-                            <span className="text-xs font-semibold text-muted-foreground">{project.highlight}</span>
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 glass-subtle rounded-full">
+                            <Star className="w-3 h-3 text-amber" />
+                            <span className="text-xs font-semibold text-amber-dark dark:text-amber">{project.highlight}</span>
                           </div>
                         )}
                       </div>
                       
                       {/* Status indicator */}
-                      <div className="relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-secondary text-muted-foreground border border-border">
-                        <div className="w-2 h-2 rounded-full animate-pulse bg-sage" />
+                      <div className="relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider glass-subtle text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full animate-pulse bg-teal" />
                         {project.status}
                       </div>
                     </div>
@@ -862,7 +875,7 @@ const Index = () => {
                       {project.tech.map((tech, techIndex) => (
                         <span 
                           key={techIndex}
-                          className="px-3 py-1 text-xs font-medium text-muted-foreground bg-secondary rounded-full border border-border group-hover:border-champagne/40 group-hover:text-foreground transition-all duration-300"
+                          className="px-3 py-1 text-xs font-medium text-muted-foreground glass-subtle rounded-full group-hover:border-teal/40 group-hover:text-foreground transition-all duration-300"
                         >
                           {tech}
                         </span>
@@ -875,7 +888,7 @@ const Index = () => {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-secondary border border-border text-foreground hover:bg-accent hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl glass-subtle text-foreground hover:teal-glow hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
                       >
                         <Github className="w-4 h-4" />
                         <span className="font-medium text-sm">Source</span>
@@ -886,7 +899,7 @@ const Index = () => {
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-teal to-teal-dark text-white font-medium text-sm shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
                         >
                           <ExternalLink className="w-4 h-4" />
                           <span>Live Demo</span>
@@ -897,7 +910,7 @@ const Index = () => {
 
                   {/* Featured ribbon */}
                   {project.featured && (
-                    <div className="absolute top-6 -right-10 bg-gradient-to-r from-champagne-dark to-sage text-white text-xs font-bold px-10 py-1 transform rotate-45 shadow-lg">
+                    <div className="absolute top-6 -right-10 bg-gradient-to-r from-coral to-amber text-white text-xs font-bold px-10 py-1 transform rotate-45 shadow-lg">
                       ⭐ FEATURED
                     </div>
                   )}
@@ -916,7 +929,7 @@ const Index = () => {
                 href="https://github.com/Quantum-techlab"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold shadow-lg hover:scale-105 active:scale-[0.98] transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-teal to-teal-dark text-white font-semibold shadow-lg hover:scale-105 active:scale-[0.98] transition-all duration-300"
               >
                 <Github className="w-5 h-5" />
                 Explore Full Portfolio
@@ -926,21 +939,21 @@ const Index = () => {
 
             {/* Terminal decoration */}
             <div className="mt-12 max-w-md mx-auto">
-              <div className="premium-card rounded-lg overflow-hidden">
+              <div className="glass rounded-lg overflow-hidden">
                 <div className="flex items-center gap-2 px-4 py-2 bg-secondary border-b border-border">
-                  <div className="w-3 h-3 rounded-full bg-destructive/50" />
-                  <div className="w-3 h-3 rounded-full bg-muted-foreground/50" />
-                  <div className="w-3 h-3 rounded-full bg-primary/50" />
+                  <div className="w-3 h-3 rounded-full bg-coral/60" />
+                  <div className="w-3 h-3 rounded-full bg-amber/60" />
+                  <div className="w-3 h-3 rounded-full bg-teal/60" />
                   <span className="ml-2 text-xs text-muted-foreground font-mono">terminal</span>
                 </div>
                 <div className="p-4 font-mono text-sm">
-                  <div className="text-primary">
+                  <div className="text-teal">
                     $ git clone creativity
                   </div>
                   <div className="text-muted-foreground mt-1">
                     Cloning into 'future-projects'...
                   </div>
-                  <div className="text-primary mt-1 flex items-center gap-2">
+                  <div className="text-teal mt-1 flex items-center gap-2">
                     <span className="animate-pulse">█</span>
                     Stay tuned...
                   </div>
@@ -953,8 +966,11 @@ const Index = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-24 relative overflow-hidden section-contact">
-        {/* Subtle top border */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        
+        {/* Doodles */}
+        <DoodleStar className="absolute top-20 right-[10%] opacity-25" color="hsl(12 72% 58%)" size={32} />
+        <DoodleCircle className="absolute bottom-20 left-[6%] opacity-15" color="hsl(38 80% 55%)" size={50} />
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
@@ -967,16 +983,17 @@ const Index = () => {
               transition={{ duration: 0.8 }}
             >
               <motion.div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-6"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-teal border border-teal/20 mb-6"
               >
-                <Mail className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium text-muted-foreground">Get In Touch</span>
+                <Mail className="w-4 h-4 text-teal" />
+                <span className="text-sm font-medium text-teal-dark dark:text-teal">Get In Touch</span>
               </motion.div>
 
-              <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gradient">
-                Let's Connect
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 relative inline-block">
+                <span className="text-gradient">Let's Connect</span>
+                <DoodleUnderline color="hsl(185 55% 38%)" />
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto mt-4">
                 I'm always excited to collaborate on innovative projects and explore new opportunities
               </p>
             </motion.div>
@@ -989,24 +1006,24 @@ const Index = () => {
                   title: 'Email', 
                   value: 'ola283dayo@gmail.com',
                   href: 'mailto:ola283dayo@gmail.com',
-                  glass: 'glass-sage',
-                  gradient: 'from-sage-dark to-sage',
+                  glass: 'glass-teal',
+                  gradient: 'from-teal-dark to-teal',
                 },
                 { 
                   icon: <Linkedin className="w-6 h-6" />, 
                   title: 'LinkedIn', 
                   value: 'Connect with me',
                   href: 'https://linkedin.com/in/abdulrasaq-abdulrasaq',
-                  glass: 'glass-slate',
-                  gradient: 'from-slate-accent-dark to-slate-accent',
+                  glass: 'glass-coral',
+                  gradient: 'from-coral-dark to-coral',
                 },
                 { 
                   icon: <Github className="w-6 h-6" />, 
                   title: 'GitHub', 
                   value: 'Explore my work',
                   href: 'https://github.com/Quantum-techlab',
-                  glass: 'glass',
-                  gradient: 'from-champagne-dark to-champagne',
+                  glass: 'glass-amber',
+                  gradient: 'from-amber-dark to-amber',
                 },
               ].map((contact, index) => (
                 <a
@@ -1029,7 +1046,7 @@ const Index = () => {
                     </p>
 
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowRight className="w-4 h-4 text-champagne-dark" />
+                      <ArrowRight className="w-4 h-4 text-teal-dark" />
                     </div>
                   </div>
                 </a>
@@ -1042,12 +1059,12 @@ const Index = () => {
                 href="mailto:ola283dayo@gmail.com"
                 className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold overflow-hidden transition-all duration-300 hover:scale-105"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-champagne-dark via-champagne to-sage rounded-2xl" />
-                <div className="absolute inset-0 bg-gradient-to-r from-champagne via-sage to-slate-accent blur-xl opacity-40 group-hover:opacity-65 transition-opacity rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-dark via-teal to-coral rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-r from-teal via-coral to-amber blur-xl opacity-40 group-hover:opacity-65 transition-opacity rounded-2xl" />
                 <div className="absolute inset-[2px] bg-background rounded-2xl" />
                 <span className="relative flex items-center gap-3 text-gradient-tricolor font-bold">
                   Start a Conversation
-                  <ArrowRight className="w-5 h-5 text-sage-dark dark:text-sage group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 text-coral-dark dark:text-coral group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
               
@@ -1060,7 +1077,7 @@ const Index = () => {
       </section>
 
       {/* Footer Section */}
-      <footer className="relative overflow-hidden bg-primary text-primary-foreground">
+      <footer className="relative overflow-hidden bg-gradient-to-br from-[hsl(220_25%_10%)] to-[hsl(185_20%_12%)] text-white">
         {/* Subtle pattern */}
         <div className="absolute inset-0 opacity-5">
           <div 
@@ -1073,7 +1090,7 @@ const Index = () => {
         </div>
 
         {/* Top border */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/20 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-teal/30 to-transparent" />
 
         <div className="container mx-auto px-6 relative z-10 py-20">
           <div className="max-w-6xl mx-auto">
@@ -1081,24 +1098,23 @@ const Index = () => {
             {/* Main Footer Content */}
             <div className="grid md:grid-cols-12 gap-12 mb-16">
               
-              {/* Brand Section - Large */}
+              {/* Brand Section */}
               <div className="md:col-span-5">
-                {/* Logo */}
                 <div className="mb-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-primary-foreground text-primary flex items-center justify-center shadow-lg">
-                      <span className="text-xl font-bold">AA</span>
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal to-coral flex items-center justify-center shadow-lg">
+                      <span className="text-xl font-bold text-white">AA</span>
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">
                         Abdulrasaq Abdulrasaq
                       </h3>
-                      <p className="text-sm text-primary-foreground/70">Full-Stack Developer & Tech Lead</p>
+                      <p className="text-sm text-white/70">Full-Stack Developer & Tech Lead</p>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-primary-foreground/70 leading-relaxed mb-8 max-w-md">
+                <p className="text-white/70 leading-relaxed mb-8 max-w-md">
                   Crafting digital experiences at the intersection of creativity and technology. 
                   Let's build something extraordinary together.
                 </p>
@@ -1115,11 +1131,10 @@ const Index = () => {
                       href={social.href}
                       target={social.href.startsWith('mailto') ? undefined : "_blank"}
                       rel="noopener noreferrer"
-                      className="group relative p-3 bg-primary-foreground/10 hover:bg-primary-foreground/20 rounded-xl border border-primary-foreground/10 hover:scale-110 hover:-translate-y-1 active:scale-95 transition-all duration-300"
+                      className="group relative p-3 bg-white/10 hover:bg-white/20 rounded-xl border border-white/10 hover:scale-110 hover:-translate-y-1 active:scale-95 transition-all duration-300"
                     >
                       {social.icon}
-                      {/* Tooltip */}
-                      <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-primary-foreground text-primary rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-white text-[hsl(220_25%_10%)] rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                         {social.label}
                       </span>
                     </a>
@@ -1129,7 +1144,7 @@ const Index = () => {
 
               {/* Navigation Links */}
               <div className="md:col-span-3">
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/70 mb-6">Navigation</h4>
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-6">Navigation</h4>
                 <ul className="space-y-4">
                   {[
                     { name: 'About', href: '#about', emoji: '👤' },
@@ -1141,12 +1156,12 @@ const Index = () => {
                     <li key={i} className="hover:translate-x-1 transition-transform duration-200">
                       <a 
                         href={link.href} 
-                        className="flex items-center gap-3 text-primary-foreground/70 hover:text-primary-foreground transition-colors group"
+                        className="flex items-center gap-3 text-white/70 hover:text-white transition-colors group"
                       >
                         <span className="text-sm opacity-60 group-hover:opacity-100 transition-opacity">{link.emoji}</span>
                         <span className="relative">
                           {link.name}
-                          <span className="absolute left-0 -bottom-1 w-0 h-px bg-primary-foreground/50 group-hover:w-full transition-all duration-300" />
+                          <span className="absolute left-0 -bottom-1 w-0 h-px bg-teal group-hover:w-full transition-all duration-300" />
                         </span>
                       </a>
                     </li>
@@ -1156,37 +1171,37 @@ const Index = () => {
 
               {/* Contact & Status */}
               <div className="md:col-span-4">
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/70 mb-6">Connect</h4>
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-6">Connect</h4>
                 
                 <div className="space-y-4 mb-8">
-                  <div className="flex items-center gap-4 p-3 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 hover:scale-[1.02] transition-all duration-300">
-                    <div className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center">
+                  <div className="flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/10 hover:scale-[1.02] transition-all duration-300">
+                    <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs text-primary-foreground/50">Email</p>
-                      <p className="text-primary-foreground/80 text-sm">ola283dayo@gmail.com</p>
+                      <p className="text-xs text-white/50">Email</p>
+                      <p className="text-white/80 text-sm">ola283dayo@gmail.com</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 p-3 rounded-xl bg-primary-foreground/5 border border-primary-foreground/10 hover:scale-[1.02] transition-all duration-300">
-                    <div className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center">
+                  <div className="flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/10 hover:scale-[1.02] transition-all duration-300">
+                    <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
                       <MapPin className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs text-primary-foreground/50">Location</p>
-                      <p className="text-primary-foreground/80 text-sm">University of Ilorin, Nigeria</p>
+                      <p className="text-xs text-white/50">Location</p>
+                      <p className="text-white/80 text-sm">University of Ilorin, Nigeria</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Status Card */}
-                <div className="p-4 rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10">
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-sage rounded-full animate-pulse" />
+                    <div className="w-3 h-3 bg-teal rounded-full animate-pulse" />
                     <div>
-                      <p className="text-primary-foreground font-semibold text-sm">Open to Opportunities</p>
-                      <p className="text-primary-foreground/50 text-xs">Ready for exciting projects</p>
+                      <p className="text-white font-semibold text-sm">Open to Opportunities</p>
+                      <p className="text-white/50 text-xs">Ready for exciting projects</p>
                     </div>
                   </div>
                 </div>
@@ -1196,10 +1211,10 @@ const Index = () => {
             {/* Decorative divider */}
             <div className="relative mb-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-primary-foreground/10" />
+                <div className="w-full border-t border-white/10" />
               </div>
               <div className="relative flex justify-center">
-                <div className="px-4 bg-primary">
+                <div className="px-4 bg-[hsl(220_25%_10%)]">
                   <span className="text-2xl">✨</span>
                 </div>
               </div>
@@ -1207,20 +1222,20 @@ const Index = () => {
 
             {/* Bottom Bar */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <div className="flex items-center gap-2 text-primary-foreground/50 text-sm">
+              <div className="flex items-center gap-2 text-white/50 text-sm">
                 <span>© 2025</span>
-                <span className="text-primary-foreground/70 font-medium">Abdulrasaq Abdulrasaq</span>
+                <span className="text-white/70 font-medium">Abdulrasaq Abdulrasaq</span>
                 <span>•</span>
                 <span>All rights reserved</span>
               </div>
 
               {/* Tech stack badges */}
               <div className="flex items-center gap-3">
-                <span className="text-primary-foreground/40 text-xs">Built with</span>
+                <span className="text-white/40 text-xs">Built with</span>
                 {['⚛️ React', '🎨 Tailwind', '⚡ Vite', '▲ Vercel'].map((tech, i) => (
                   <span
                     key={i}
-                    className="px-2 py-1 rounded-md bg-primary-foreground/5 border border-primary-foreground/10 text-xs text-primary-foreground/60 hover:scale-105 transition-all duration-200"
+                    className="px-2 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-white/60 hover:scale-105 transition-all duration-200"
                   >
                     {tech}
                   </span>
@@ -1229,7 +1244,7 @@ const Index = () => {
             </div>
 
             {/* Made with love */}
-            <p className="text-center mt-8 text-primary-foreground/40 text-xs">
+            <p className="text-center mt-8 text-white/40 text-xs">
               Made with ✨ and lots of ☕
             </p>
           </div>
