@@ -19,7 +19,7 @@ export const FloatingCTA = () => {
           variant="primary" 
           size="sm" 
           href="mailto:ola283dayo@gmail.com"
-          className="shadow-2xl backdrop-blur-sm bg-gradient-to-r from-champagne-dark to-sage hover:from-sage hover:to-champagne"
+          className="shadow-2xl backdrop-blur-sm bg-gradient-to-r from-teal-dark to-coral hover:from-coral hover:to-teal"
         >
           <Mail className="w-4 h-4" />
           <span className="hidden group-hover:inline ml-2 transition-all duration-300">Hire Me</span>

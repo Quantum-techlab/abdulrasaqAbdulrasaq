@@ -52,7 +52,7 @@ export const ThemeToggle = () => {
         </motion.div>
       </div>
       <span className="sr-only">Toggle theme</span>
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-champagne/20 to-sage/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
+      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-teal/20 to-coral/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
     </Button>
     </motion.div>
   );

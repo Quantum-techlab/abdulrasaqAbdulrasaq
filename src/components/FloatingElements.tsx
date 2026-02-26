@@ -4,13 +4,15 @@ import { motion } from 'framer-motion';
 export const FloatingElements = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Floating geometric shapes - champagne/warm */}
+      {/* Floating geometric shapes — teal/coral */}
       {[...Array(5)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-3 h-3 rounded-full"
           style={{
-            background: `hsl(38 ${50 + i * 5}% ${60 + i * 4}% / 0.15)`,
+            background: i % 2 === 0 
+              ? `hsl(185 ${45 + i * 5}% ${50 + i * 4}% / 0.15)` 
+              : `hsl(12 ${55 + i * 4}% ${55 + i * 3}% / 0.12)`,
             left: `${15 + i * 18}%`,
             top: `${10 + i * 15}%`,
           }}
@@ -28,13 +30,17 @@ export const FloatingElements = () => {
         />
       ))}
       
-      {/* Larger floating orbs - warm champagne glow */}
+      {/* Larger floating orbs — teal + coral glow */}
       {[...Array(3)].map((_, i) => (
         <motion.div
           key={`large-${i}`}
           className="absolute w-24 h-24 rounded-full blur-2xl"
           style={{
-            background: `radial-gradient(circle, hsl(38 60% 65% / 0.06), transparent)`,
+            background: i === 0 
+              ? `radial-gradient(circle, hsl(185 55% 45% / 0.07), transparent)`
+              : i === 1
+              ? `radial-gradient(circle, hsl(12 65% 58% / 0.06), transparent)`
+              : `radial-gradient(circle, hsl(38 75% 55% / 0.06), transparent)`,
             left: `${20 + i * 30}%`,
             top: `${25 + i * 18}%`,
           }}
