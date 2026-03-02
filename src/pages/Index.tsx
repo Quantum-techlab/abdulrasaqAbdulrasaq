@@ -22,6 +22,7 @@ import { Hero3DCharacter } from "@/components/Hero3DCharacter";
 import { ScrollTransitionSection } from "@/components/ScrollTransitionSection";
 import { TechAnalyticsDashboard } from "@/components/TechAnalyticsDashboard";
 import { DoodleStar, DoodleArrow, DoodleCircle, DoodleSquiggle, DoodleDots, DoodleSparkle, DoodleUnderline } from "@/components/Doodles";
+import { HeroDoodleBackground } from "@/components/HeroDoodleBackground";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -236,11 +237,8 @@ const Index = () => {
             style={{ background: 'radial-gradient(ellipse, hsl(38 80% 55% / 0.06), transparent 70%)' }} />
         </div>
 
-        {/* Doodle decorations in hero */}
-        <DoodleStar className="absolute top-32 right-[15%] opacity-40" color="hsl(38 80% 55%)" size={35} />
-        <DoodleDots className="absolute bottom-40 left-[8%] opacity-30" color="hsl(185 55% 38%)" />
-        <DoodleSparkle className="absolute top-48 left-[12%] opacity-30" color="hsl(12 72% 58%)" size={20} />
-        <DoodleSquiggle className="absolute bottom-32 right-[10%] opacity-25" color="hsl(38 80% 55%)" />
+        {/* Full doodle background */}
+        <HeroDoodleBackground />
 
         <Hero3DCharacter />
 
