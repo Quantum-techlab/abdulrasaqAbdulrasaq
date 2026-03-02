@@ -1,170 +1,186 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const draw = {
+const softDraw = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: (delay: number) => ({
     pathLength: 1,
     opacity: 1,
-    transition: { duration: 2, delay, ease: "easeInOut" as const }
+    transition: { duration: 3, delay, ease: "easeOut" as const }
   })
 };
 
-const fade = (delay: number) => ({
+const softFade = (delay: number) => ({
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1.2, delay } }
+  visible: { opacity: 1, transition: { duration: 2, delay } }
 });
+
+// Muted charcoal/pencil palette
+const pencil = {
+  dark: 'hsl(210 8% 35%)',
+  medium: 'hsl(210 6% 50%)',
+  light: 'hsl(210 5% 65%)',
+  warm: 'hsl(25 12% 48%)',
+  cool: 'hsl(195 10% 45%)',
+};
 
 export const HeroDoodleBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Top-left cluster: spirals + small circles */}
-      <motion.svg className="absolute top-[8%] left-[5%] w-32 h-32" viewBox="0 0 120 120" fill="none"
+      {/* Loose loopy spiral — top left */}
+      <motion.svg className="absolute top-[6%] left-[4%] w-40 h-40" viewBox="0 0 150 150" fill="none"
         initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M60 60 C60 50,70 40,80 45 C90 50,85 65,75 65 C65 65,55 55,60 45 C65 35,80 30,90 40"
-          stroke="hsl(185 55% 38%)" strokeWidth="1.5" strokeLinecap="round" fill="none"
-          custom={0.2} variants={draw} />
-        <motion.circle cx="30" cy="90" r="8" stroke="hsl(38 80% 55%)" strokeWidth="1.2" fill="none"
-          strokeDasharray="3 4" custom={0.5} variants={draw} />
-        <motion.circle cx="20" cy="40" r="4" fill="hsl(12 72% 58%)" fillOpacity="0.2"
-          variants={fade(0.8)} />
+        <motion.path
+          d="M75 75 C75 68,82 62,88 66 C94 70,90 80,83 80 C76 80,70 72,74 65 C78 58,90 54,96 60 C102 66,98 82,88 85 C78 88,65 80,68 68 C71 56,86 48,98 56"
+          stroke={pencil.medium} strokeWidth="0.9" strokeLinecap="round" fill="none"
+          opacity="0.35" custom={0.3} variants={softDraw}
+          style={{ filter: 'url(#pencilTexture)' }}
+        />
       </motion.svg>
 
-      {/* Top-right: scattered x marks + dots */}
-      <motion.svg className="absolute top-[12%] right-[8%] w-28 h-28" viewBox="0 0 100 100" fill="none"
+      {/* Gentle wispy curves — top right */}
+      <motion.svg className="absolute top-[10%] right-[6%] w-44 h-32" viewBox="0 0 180 120" fill="none"
         initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        {[[20,25],[60,15],[80,55],[35,70]].map(([x,y], i) => (
-          <motion.g key={i} custom={0.1 * i} variants={draw}>
-            <line x1={x-6} y1={y-6} x2={x+6} y2={y+6} stroke="hsl(12 72% 58%)" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-            <line x1={x+6} y1={y-6} x2={x-6} y2={y+6} stroke="hsl(12 72% 58%)" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-          </motion.g>
-        ))}
-        <motion.circle cx="50" cy="45" r="3" fill="hsl(38 80% 55%)" fillOpacity="0.35" variants={fade(0.6)} />
+        <motion.path
+          d="M10 60 C30 30,60 90,90 50 C120 10,150 70,170 45"
+          stroke={pencil.light} strokeWidth="0.8" strokeLinecap="round" fill="none"
+          opacity="0.3" custom={0.5} variants={softDraw} />
+        <motion.path
+          d="M20 80 C50 55,80 95,110 70 C140 45,160 85,175 65"
+          stroke={pencil.warm} strokeWidth="0.7" strokeLinecap="round" fill="none"
+          opacity="0.2" custom={0.8} variants={softDraw} />
       </motion.svg>
 
-      {/* Left side: wavy lines */}
-      <motion.svg className="absolute top-[35%] left-[3%] w-20 h-48" viewBox="0 0 60 180" fill="none"
+      {/* Loose cloud puff — center left */}
+      <motion.svg className="absolute top-[30%] left-[2%] w-36 h-24" viewBox="0 0 140 80" fill="none"
         initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M30 10 C10 30,50 50,30 70 C10 90,50 110,30 130 C10 150,50 170,30 180"
-          stroke="hsl(38 80% 55%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.3"
-          custom={0.3} variants={draw} />
-        <motion.path d="M45 20 C25 40,55 60,40 80"
-          stroke="hsl(185 55% 38%)" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.2"
-          custom={0.6} variants={draw} />
+        <motion.path
+          d="M20 55 C8 55,5 42,15 38 C10 25,25 18,38 24 C35 12,55 8,62 18 C68 8,88 10,90 22 C102 16,118 22,112 35 C125 38,122 55,108 55 C100 58,85 56,75 55 C60 57,40 58,20 55"
+          stroke={pencil.dark} strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" fill="none"
+          opacity="0.2" custom={0.6} variants={softDraw} />
       </motion.svg>
 
-      {/* Right side: brackets + hash marks */}
-      <motion.svg className="absolute top-[40%] right-[4%] w-24 h-36" viewBox="0 0 80 120" fill="none"
-        initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M20 10 L10 10 L10 50 L20 50" stroke="hsl(185 55% 38%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.3" custom={0.4} variants={draw} />
-        <motion.path d="M60 30 L70 30 L70 70 L60 70" stroke="hsl(185 55% 38%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.3" custom={0.6} variants={draw} />
-        {/* Hash / code symbol */}
-        <motion.path d="M30 80 L35 110 M45 80 L40 110 M25 90 L50 90 M27 100 L48 100"
-          stroke="hsl(12 72% 58%)" strokeWidth="1.2" strokeLinecap="round" opacity="0.25" custom={0.8} variants={draw} />
-      </motion.svg>
-
-      {/* Bottom-left: cloud doodle */}
-      <motion.svg className="absolute bottom-[15%] left-[10%] w-36 h-20" viewBox="0 0 140 70" fill="none"
-        initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M25 50 C10 50,5 35,20 30 C15 15,35 10,45 20 C50 5,75 5,80 18 C95 10,115 15,110 30 C125 35,120 50,105 50 Z"
-          stroke="hsl(38 80% 55%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.25"
-          custom={0.5} variants={draw} />
-      </motion.svg>
-
-      {/* Center-top: tiny stars scatter */}
-      {[[25, 6], [45, 18], [70, 8], [85, 22], [15, 20], [55, 5]].map(([x, y], i) => (
-        <motion.svg key={`star-${i}`} className="absolute" style={{ left: `${x}%`, top: `${y}%` }}
-          width="14" height="14" viewBox="0 0 14 14" fill="none"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: [0, 0.4, 0.15, 0.4], scale: 1 }}
-          transition={{ duration: 3, delay: 0.2 * i, repeat: Infinity, repeatType: "reverse" }}>
-          <path d="M7 1 L8.5 5 L13 5.5 L9.5 8.5 L10.5 13 L7 10.5 L3.5 13 L4.5 8.5 L1 5.5 L5.5 5 Z"
-            stroke={i % 3 === 0 ? "hsl(185 55% 38%)" : i % 3 === 1 ? "hsl(12 72% 58%)" : "hsl(38 80% 55%)"}
-            strokeWidth="0.8" fill="none" />
-        </motion.svg>
-      ))}
-
-      {/* Bottom-right: lightbulb doodle */}
-      <motion.svg className="absolute bottom-[20%] right-[12%] w-16 h-24" viewBox="0 0 50 80" fill="none"
-        initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M25 5 C10 5,5 20,15 32 C18 38,18 42,18 48 L32 48 C32 42,32 38,35 32 C45 20,40 5,25 5 Z"
-          stroke="hsl(38 80% 55%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.3"
-          custom={0.7} variants={draw} />
-        <motion.path d="M18 52 L32 52 M20 56 L30 56 M22 60 L28 60"
-          stroke="hsl(38 80% 55%)" strokeWidth="1.2" strokeLinecap="round" opacity="0.25" custom={1} variants={draw} />
-        {/* Rays */}
-        <motion.path d="M25 0 L25 -3 M10 8 L7 5 M40 8 L43 5 M5 25 L1 25 M45 25 L49 25"
-          stroke="hsl(38 80% 55%)" strokeWidth="1" strokeLinecap="round" opacity="0.2" custom={1.2} variants={draw} />
-      </motion.svg>
-
-      {/* Left-center: zigzag lines */}
-      <motion.svg className="absolute top-[55%] left-[6%] w-16 h-20" viewBox="0 0 50 70" fill="none"
-        initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M5 10 L20 25 L5 40 L20 55" stroke="hsl(12 72% 58%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.2" custom={0.4} variants={draw} />
-        <motion.path d="M30 15 L45 30 L30 45" stroke="hsl(185 55% 38%)" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.15" custom={0.7} variants={draw} />
-      </motion.svg>
-
-      {/* Scattered dots grid - top center */}
-      <motion.svg className="absolute top-[5%] left-[40%] w-24 h-16" viewBox="0 0 90 60" fill="none"
-        initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        {[...Array(12)].map((_, i) => (
-          <motion.circle key={i} cx={10 + (i % 4) * 22} cy={12 + Math.floor(i / 4) * 18} r="2"
-            fill={i % 3 === 0 ? "hsl(185 55% 38%)" : i % 3 === 1 ? "hsl(12 72% 58%)" : "hsl(38 80% 55%)"}
-            fillOpacity="0.25"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.05 * i + 0.5 }} />
-        ))}
-      </motion.svg>
-
-      {/* Bottom-center: squiggly underline */}
-      <motion.svg className="absolute bottom-[8%] left-[30%] w-40 h-6" viewBox="0 0 160 20" fill="none"
-        initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M0 10 Q8 2,16 10 Q24 18,32 10 Q40 2,48 10 Q56 18,64 10 Q72 2,80 10 Q88 18,96 10 Q104 2,112 10 Q120 18,128 10 Q136 2,144 10 Q152 18,160 10"
-          stroke="hsl(185 55% 38%)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.2"
-          custom={0.8} variants={draw} />
-      </motion.svg>
-
-      {/* Top-left: triangle doodle */}
-      <motion.svg className="absolute top-[25%] left-[18%] w-12 h-12" viewBox="0 0 40 40" fill="none"
-        initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M20 5 L35 35 L5 35 Z" stroke="hsl(12 72% 58%)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.2" custom={0.6} variants={draw} />
-      </motion.svg>
-
-      {/* Right: diamond */}
-      <motion.svg className="absolute top-[25%] right-[18%] w-10 h-14" viewBox="0 0 36 50" fill="none"
-        initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M18 3 L33 25 L18 47 L3 25 Z" stroke="hsl(38 80% 55%)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.2" custom={0.9} variants={draw} />
-      </motion.svg>
-
-      {/* Bottom: small arrows pointing random directions */}
-      {[[20, 85], [75, 90], [50, 92]].map(([x, y], i) => (
-        <motion.svg key={`arrow-${i}`} className="absolute" style={{ left: `${x}%`, top: `${y}%`, transform: `rotate(${i * 120}deg)` }}
-          width="24" height="16" viewBox="0 0 24 16" fill="none"
-          initial={{ opacity: 0 }} animate={{ opacity: 0.2 }} transition={{ delay: 1 + i * 0.3 }}>
-          <path d="M2 8 L18 8 M14 3 L20 8 L14 13" stroke="hsl(185 55% 38%)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </motion.svg>
-      ))}
-
-      {/* Floating circles - organic feel */}
-      {[[8, 70], [92, 45], [88, 75], [12, 50]].map(([x, y], i) => (
-        <motion.div key={`orb-${i}`} className="absolute rounded-full"
+      {/* Small scattered dots — organic placement */}
+      {[
+        [18, 15, 2.5, pencil.medium, 0.2],
+        [82, 8, 2, pencil.warm, 0.18],
+        [35, 72, 3, pencil.cool, 0.15],
+        [68, 78, 2, pencil.medium, 0.2],
+        [90, 65, 2.5, pencil.light, 0.18],
+        [12, 55, 1.8, pencil.warm, 0.22],
+        [55, 12, 2.2, pencil.dark, 0.15],
+        [42, 88, 2.8, pencil.cool, 0.18],
+      ].map(([x, y, r, color, op], i) => (
+        <motion.div
+          key={`dot-${i}`}
+          className="absolute rounded-full"
           style={{
             left: `${x}%`, top: `${y}%`,
-            width: 6 + i * 3, height: 6 + i * 3,
-            border: `1.2px solid ${i % 2 === 0 ? 'hsl(185 55% 38% / 0.2)' : 'hsl(12 72% 58% / 0.2)'}`,
+            width: (r as number) * 2, height: (r as number) * 2,
+            backgroundColor: color as string,
+            opacity: 0,
           }}
-          animate={{ y: [0, -8, 0], opacity: [0.15, 0.3, 0.15] }}
-          transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ opacity: [0, op as number, (op as number) * 0.5, op as number] }}
+          transition={{ duration: 6 + i * 0.5, delay: 0.8 + i * 0.15, repeat: Infinity, repeatType: "reverse" }}
         />
       ))}
 
-      {/* Pencil scribble lines - top right area */}
-      <motion.svg className="absolute top-[15%] right-[30%] w-20 h-12" viewBox="0 0 70 40" fill="none"
+      {/* Delicate leaf/branch — right side */}
+      <motion.svg className="absolute top-[45%] right-[3%] w-20 h-44" viewBox="0 0 60 160" fill="none"
         initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        <motion.path d="M5 20 C15 10,25 30,35 15 C45 0,55 25,65 18" stroke="hsl(185 55% 38%)" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.18" custom={1.1} variants={draw} />
-        <motion.path d="M10 28 C20 18,30 38,40 23 C50 8,60 33,68 26" stroke="hsl(38 80% 55%)" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.12" custom={1.4} variants={draw} />
+        <motion.path
+          d="M30 10 C30 30,28 50,30 70 C32 90,28 120,30 150"
+          stroke={pencil.cool} strokeWidth="0.7" strokeLinecap="round" fill="none"
+          opacity="0.25" custom={0.4} variants={softDraw} />
+        {/* Tiny leaves */}
+        <motion.path d="M30 35 C22 28,18 32,24 38" stroke={pencil.cool} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.2" custom={0.7} variants={softDraw} />
+        <motion.path d="M30 55 C38 48,42 52,36 58" stroke={pencil.cool} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.2" custom={0.9} variants={softDraw} />
+        <motion.path d="M30 80 C22 73,17 77,24 83" stroke={pencil.cool} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.18" custom={1.1} variants={softDraw} />
+        <motion.path d="M30 105 C38 98,43 102,36 108" stroke={pencil.cool} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.18" custom={1.3} variants={softDraw} />
       </motion.svg>
+
+      {/* Gentle squiggle — bottom left */}
+      <motion.svg className="absolute bottom-[12%] left-[8%] w-48 h-10" viewBox="0 0 200 30" fill="none"
+        initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.path
+          d="M5 15 Q15 5,25 15 Q35 25,45 15 Q55 5,65 15 Q75 25,85 15 Q95 5,105 15 Q115 25,125 15 Q135 5,145 15 Q155 25,165 15 Q175 5,190 15"
+          stroke={pencil.light} strokeWidth="0.7" strokeLinecap="round" fill="none"
+          opacity="0.2" custom={1} variants={softDraw} />
+      </motion.svg>
+
+      {/* Abstract loose circle — top center */}
+      <motion.svg className="absolute top-[4%] left-[42%] w-20 h-20" viewBox="0 0 60 60" fill="none"
+        initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.path
+          d="M30 8 C42 6,54 18,52 30 C50 42,40 54,28 52 C16 50,6 40,8 28 C10 16,20 10,30 8"
+          stroke={pencil.warm} strokeWidth="0.8" strokeLinecap="round" fill="none"
+          opacity="0.22" custom={0.5} variants={softDraw} />
+      </motion.svg>
+
+      {/* Tiny asterisks — like pencil marks */}
+      {[
+        [28, 25], [72, 18], [88, 40], [15, 80], [60, 85], [45, 35],
+      ].map(([x, y], i) => (
+        <motion.svg key={`ast-${i}`} className="absolute" style={{ left: `${x}%`, top: `${y}%` }}
+          width="10" height="10" viewBox="0 0 10 10" fill="none"
+          variants={softFade(1.2 + i * 0.2)} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <line x1="5" y1="1" x2="5" y2="9" stroke={pencil.medium} strokeWidth="0.5" strokeLinecap="round" opacity="0.25" />
+          <line x1="1" y1="5" x2="9" y2="5" stroke={pencil.medium} strokeWidth="0.5" strokeLinecap="round" opacity="0.25" />
+          <line x1="2" y1="2" x2="8" y2="8" stroke={pencil.medium} strokeWidth="0.5" strokeLinecap="round" opacity="0.2" />
+        </motion.svg>
+      ))}
+
+      {/* Loose parenthesis marks — like margin notes */}
+      <motion.svg className="absolute top-[60%] left-[5%] w-10 h-28" viewBox="0 0 30 90" fill="none"
+        initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.path d="M20 5 C5 20,5 70,20 85" stroke={pencil.dark} strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.18" custom={0.8} variants={softDraw} />
+      </motion.svg>
+
+      <motion.svg className="absolute top-[55%] right-[7%] w-10 h-28" viewBox="0 0 30 90" fill="none"
+        initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.path d="M10 5 C25 20,25 70,10 85" stroke={pencil.dark} strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.18" custom={1} variants={softDraw} />
+      </motion.svg>
+
+      {/* Bottom right — gentle arc with shading */}
+      <motion.svg className="absolute bottom-[18%] right-[10%] w-32 h-20" viewBox="0 0 120 60" fill="none"
+        initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <motion.path
+          d="M10 50 C20 15,50 5,70 10 C90 15,110 35,115 50"
+          stroke={pencil.warm} strokeWidth="0.8" strokeLinecap="round" fill="none"
+          opacity="0.2" custom={1.2} variants={softDraw} />
+        <motion.path
+          d="M15 48 C25 20,50 10,68 14 C86 18,108 38,112 48"
+          stroke={pencil.warm} strokeWidth="0.5" strokeLinecap="round" fill="none"
+          opacity="0.1" custom={1.4} variants={softDraw} />
+      </motion.svg>
+
+      {/* Floating gentle orbs — barely visible */}
+      {[
+        [10, 40, 8], [88, 30, 6], [50, 75, 10], [75, 85, 7], [25, 90, 9],
+      ].map(([x, y, size], i) => (
+        <motion.div
+          key={`orb-${i}`}
+          className="absolute rounded-full"
+          style={{
+            left: `${x}%`, top: `${y}%`,
+            width: size, height: size,
+            border: `0.8px solid ${i % 2 === 0 ? pencil.light : pencil.cool}`,
+            opacity: 0,
+          }}
+          animate={{ y: [0, -6, 0], opacity: [0.08, 0.18, 0.08] }}
+          transition={{ duration: 7 + i * 1.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+        />
+      ))}
+
+      {/* Pencil texture filter */}
+      <svg width="0" height="0">
+        <defs>
+          <filter id="pencilTexture">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" />
+          </filter>
+        </defs>
+      </svg>
     </div>
   );
 };
