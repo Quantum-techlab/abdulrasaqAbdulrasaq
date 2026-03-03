@@ -1,234 +1,452 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const softDraw = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: (delay: number) => ({
-    pathLength: 1,
-    opacity: 1,
-    transition: { duration: 2.5, delay, ease: "easeOut" as const }
-  })
-};
-
 const pencil = {
-  dark: 'hsl(210 8% 35%)',
-  medium: 'hsl(210 6% 50%)',
-  light: 'hsl(210 5% 65%)',
-  warm: 'hsl(25 12% 48%)',
-  cool: 'hsl(195 10% 45%)',
+  dark: 'hsl(210 8% 40%)',
+  medium: 'hsl(210 6% 55%)',
+  light: 'hsl(210 5% 68%)',
+  warm: 'hsl(25 10% 52%)',
+  cool: 'hsl(195 8% 50%)',
 };
 
-// Reusable small doodle primitives
-const Spiral = ({ x, y, scale = 1, color = pencil.medium, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: 50 * scale, height: 50 * scale }} viewBox="0 0 50 50" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d="M25 25C25 22,28 19,31 21C34 23,32 28,29 28C26 28,23 25,24 22C25 19,30 17,33 19C36 21,35 28,31 30C27 32,21 29,22 24" stroke={color} strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.3" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+// A single repeating tile with ~50 tiny doodle icons packed tightly
+// Tile size: 200x200, repeated via SVG pattern to fill entire background
+const DoodleTile = () => (
+  <g strokeLinecap="round" strokeLinejoin="round" fill="none">
+    {/* --- Phones / devices --- */}
+    <g stroke={pencil.medium} strokeWidth="0.6" opacity="0.22">
+      <rect x="8" y="5" width="8" height="14" rx="1.5" />
+      <line x1="10.5" y1="16" x2="13.5" y2="16" />
+    </g>
+    {/* Laptop */}
+    <g stroke={pencil.light} strokeWidth="0.5" opacity="0.18">
+      <rect x="38" y="10" width="14" height="9" rx="1" />
+      <line x1="35" y1="19" x2="55" y2="19" />
+    </g>
+    {/* Camera */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <rect x="70" y="6" width="12" height="9" rx="1.5" />
+      <circle cx="76" cy="10.5" r="3" />
+      <rect x="73" y="5" width="4" height="2" rx="0.5" />
+    </g>
+    {/* Headphones */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.2">
+      <path d="M100 18c0-6 3-10 7-10s7 4 7 10" />
+      <rect x="98" y="16" width="4" height="5" rx="1" />
+      <rect x="112" y="16" width="4" height="5" rx="1" />
+    </g>
+    {/* Globe */}
+    <g stroke={pencil.medium} strokeWidth="0.45" opacity="0.18">
+      <circle cx="138" cy="12" r="7" />
+      <ellipse cx="138" cy="12" rx="3" ry="7" />
+      <line x1="131" y1="12" x2="145" y2="12" />
+    </g>
+    {/* Envelope / mail */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <rect x="162" y="7" width="14" height="10" rx="1" />
+      <path d="M162 7l7 6 7-6" />
+    </g>
+    {/* Star */}
+    <path d="M190 10l1.5 3 3.5.5-2.5 2.5.6 3.5-3.1-1.6-3.1 1.6.6-3.5-2.5-2.5 3.5-.5z" stroke={pencil.light} strokeWidth="0.5" opacity="0.2" />
 
-const Squiggle = ({ x, y, w = 80, color = pencil.light, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: w, height: 16 }} viewBox={`0 0 ${w} 16`} fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d={`M2 8Q${w*0.1} 2,${w*0.2} 8Q${w*0.3} 14,${w*0.4} 8Q${w*0.5} 2,${w*0.6} 8Q${w*0.7} 14,${w*0.8} 8Q${w*0.9} 2,${w-2} 8`} stroke={color} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.25" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+    {/* --- Row 2 --- */}
+    {/* Heart */}
+    <path d="M12 38c-4-6 6-10 0-2 6-8-4 4 0 2z" stroke={pencil.warm} strokeWidth="0.5" opacity="0.2" />
+    {/* Music note */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.2">
+      <line x1="38" y1="28" x2="38" y2="40" />
+      <circle cx="36" cy="40" r="2.5" />
+      <path d="M38 28c4-1 6 0 6 2" />
+    </g>
+    {/* Coffee cup */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <path d="M60 30h10v10c0 2-2 3-5 3s-5-1-5-3z" />
+      <path d="M70 32c3 0 4 1 4 3s-1 3-4 3" />
+      <path d="M63 28c0-2 1-2 2 0" />
+      <path d="M66 27c0-2 1-3 2 0" />
+    </g>
+    {/* Lightbulb */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <path d="M96 28c-4 0-6 3-6 6 0 2 2 3 2 5h8c0-2 2-3 2-5 0-3-2-6-6-6z" />
+      <line x1="93" y1="39" x2="99" y2="39" />
+      <line x1="93" y1="41" x2="99" y2="41" />
+    </g>
+    {/* Clock */}
+    <g stroke={pencil.light} strokeWidth="0.5" opacity="0.18">
+      <circle cx="125" cy="35" r="7" />
+      <line x1="125" y1="35" x2="125" y2="30" />
+      <line x1="125" y1="35" x2="129" y2="35" />
+    </g>
+    {/* Book */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.2">
+      <path d="M150 28c4-1 8-1 10 0v14c-2-1-6-1-10 0z" />
+      <path d="M150 28c-4-1-8-1-10 0v14c2-1 6-1 10 0z" />
+    </g>
+    {/* Key */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.18">
+      <circle cx="178" cy="32" r="4" />
+      <line x1="182" y1="32" x2="192" y2="32" />
+      <line x1="189" y1="32" x2="189" y2="35" />
+      <line x1="192" y1="32" x2="192" y2="35" />
+    </g>
 
-const LooseCircle = ({ x, y, r = 18, color = pencil.warm, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: r * 2 + 10, height: r * 2 + 10 }} viewBox={`0 0 ${r*2+10} ${r*2+10}`} fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d={`M${r+5} ${5}C${r*1.8+5} ${3},${r*2+5} ${r*0.8},${r*2+3} ${r+5}C${r*2+5} ${r*1.5},${r*1.3+5} ${r*2+5},${r+5} ${r*2+3}C${r*0.5} ${r*2+5},${3} ${r*1.4},${5} ${r+5}C${3} ${r*0.5},${r*0.7} ${3},${r+5} ${5}`} stroke={color} strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.22" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+    {/* --- Row 3 --- */}
+    {/* Rocket */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <path d="M15 55c-1-5 2-10 5-14 3 4 6 9 5 14z" />
+      <path d="M15 55c-3 0-4 2-3 4l3-1" />
+      <path d="M25 55c3 0 4 2 3 4l-3-1" />
+    </g>
+    {/* Palette */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.18">
+      <path d="M45 50c-5 2-8 8-5 13s10 5 14 1c2-2 0-4-2-4-3 0-3-3 0-4 2-1 2-3-1-5-2-2-4-2-6-1z" />
+      <circle cx="43" cy="57" r="1" />
+      <circle cx="46" cy="53" r="1" />
+    </g>
+    {/* Paper airplane */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <path d="M70 48l20 7-20 7 4-7z" />
+      <line x1="74" y1="55" x2="90" y2="55" />
+    </g>
+    {/* Wifi symbol */}
+    <g stroke={pencil.light} strokeWidth="0.5" opacity="0.18">
+      <path d="M105 60a12 12 0 0 1 16 0" />
+      <path d="M108 57a8 8 0 0 1 10 0" />
+      <path d="M111 54a4 4 0 0 1 4 0" />
+      <circle cx="113" cy="62" r="1" />
+    </g>
+    {/* Sun */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <circle cx="140" cy="55" r="4" />
+      <line x1="140" y1="48" x2="140" y2="50" />
+      <line x1="140" y1="60" x2="140" y2="62" />
+      <line x1="133" y1="55" x2="135" y2="55" />
+      <line x1="145" y1="55" x2="147" y2="55" />
+      <line x1="135" y1="50" x2="136.5" y2="51.5" />
+      <line x1="143.5" y1="58.5" x2="145" y2="60" />
+      <line x1="135" y1="60" x2="136.5" y2="58.5" />
+      <line x1="143.5" y1="51.5" x2="145" y2="50" />
+    </g>
+    {/* Cloud */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.18">
+      <path d="M165 58c-2-6 4-10 8-7 1-4 7-4 8 0 4-2 7 2 5 5-1 2-3 3-6 3h-12c-3 0-4-1-3-1z" />
+    </g>
+    {/* Gamepad */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <path d="M185 50c-3 0-5 2-5 5v4c0 2 1 3 3 3s3-2 4-4h6c1 2 2 4 4 4s3-1 3-3v-4c0-3-2-5-5-5z" />
+      <line x1="188" y1="53" x2="188" y2="57" />
+      <line x1="186" y1="55" x2="190" y2="55" />
+      <circle cx="195" cy="54" r="0.8" />
+      <circle cx="197" cy="56" r="0.8" />
+    </g>
 
-const Cross = ({ x, y, size = 10, color = pencil.medium, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: size, height: size }} viewBox="0 0 10 10" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d="M2 2L8 8M8 2L2 8" stroke={color} strokeWidth="0.5" strokeLinecap="round" opacity="0.2" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+    {/* --- Row 4 --- */}
+    {/* Bicycle */}
+    <g stroke={pencil.light} strokeWidth="0.5" opacity="0.18">
+      <circle cx="12" cy="82" r="5" />
+      <circle cx="28" cy="82" r="5" />
+      <path d="M12 82l6-8h6l4 8" />
+      <line x1="18" y1="74" x2="22" y2="74" />
+    </g>
+    {/* Pizza slice */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <path d="M45 72l-7 16h14z" />
+      <circle cx="43" cy="80" r="1" />
+      <circle cx="47" cy="82" r="1" />
+      <circle cx="45" cy="77" r="0.8" />
+    </g>
+    {/* Speech bubble */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.2">
+      <path d="M65 72c-4 0-7 3-7 6s3 6 7 6c1 0 2 0 3-.5l4 2.5-1-3.5c2-1.2 3-3 3-4.5 0-3-3-6-7-6h-2z" />
+      <line x1="62" y1="76" x2="72" y2="76" />
+      <line x1="62" y1="79" x2="70" y2="79" />
+    </g>
+    {/* Diamond gem */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.18">
+      <path d="M95 72l-7 5 7 10 7-10z" />
+      <line x1="88" y1="77" x2="102" y2="77" />
+      <line x1="95" y1="72" x2="92" y2="77" />
+      <line x1="95" y1="72" x2="98" y2="77" />
+    </g>
+    {/* Flower */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <circle cx="125" cy="75" r="2" />
+      <circle cx="125" cy="71" r="2.5" />
+      <circle cx="128" cy="73.5" r="2.5" />
+      <circle cx="127" cy="77.5" r="2.5" />
+      <circle cx="123" cy="77.5" r="2.5" />
+      <circle cx="122" cy="73.5" r="2.5" />
+      <line x1="125" y1="77" x2="125" y2="88" />
+      <path d="M125 83c-2-1-4 0-5 2" />
+    </g>
+    {/* Atom */}
+    <g stroke={pencil.cool} strokeWidth="0.45" opacity="0.18">
+      <circle cx="155" cy="80" r="1.5" />
+      <ellipse cx="155" cy="80" rx="8" ry="3" />
+      <ellipse cx="155" cy="80" rx="8" ry="3" transform="rotate(60 155 80)" />
+      <ellipse cx="155" cy="80" rx="8" ry="3" transform="rotate(-60 155 80)" />
+    </g>
+    {/* Scissors */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <circle cx="182" cy="78" r="3" />
+      <circle cx="182" cy="86" r="3" />
+      <path d="M185 78l8 4" />
+      <path d="M185 86l8-4" />
+    </g>
 
-const Dot = ({ x, y, r = 2, color = pencil.dark }: any) => (
-  <motion.div className="absolute rounded-full" style={{ left: `${x}%`, top: `${y}%`, width: r * 2, height: r * 2, backgroundColor: color }}
-    initial={{ opacity: 0 }} animate={{ opacity: 0.18 }} transition={{ delay: Math.random() * 2 + 0.5 }} />
-);
+    {/* --- Row 5 --- */}
+    {/* Crown */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <path d="M5 105l3-8 4 5 4-5 4 5 3-8v10H5z" />
+    </g>
+    {/* Umbrella */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.18">
+      <path d="M38 100c0-6 5-10 10-10s10 4 10 10" />
+      <line x1="48" y1="95" x2="48" y2="110" />
+      <path d="M48 110c0 2 2 3 3 2" />
+    </g>
+    {/* Guitar */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <line x1="75" y1="92" x2="75" y2="104" />
+      <ellipse cx="75" cy="107" rx="5" ry="4" />
+      <circle cx="75" cy="107" r="1.5" />
+      <rect x="73" y="92" width="4" height="3" rx="1" />
+    </g>
+    {/* Hourglass */}
+    <g stroke={pencil.light} strokeWidth="0.5" opacity="0.18">
+      <line x1="100" y1="92" x2="112" y2="92" />
+      <line x1="100" y1="112" x2="112" y2="112" />
+      <path d="M101 92c0 5 5 8 5 10s-5 5-5 10" />
+      <path d="M111 92c0 5-5 8-5 10s5 5 5 10" />
+    </g>
+    {/* Anchor */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.2">
+      <circle cx="138" cy="95" r="2.5" />
+      <line x1="138" y1="97.5" x2="138" y2="110" />
+      <path d="M131 106c0 5 3 7 7 7s7-2 7-7" />
+      <line x1="135" y1="101" x2="141" y2="101" />
+    </g>
+    {/* Paper clip */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.18">
+      <path d="M165 95c0-2 2-3 4-3s4 1 4 3v12c0 3-2 5-4 5s-4-2-4-5v-9c0-1 1-2 2-2s2 1 2 2v8" />
+    </g>
+    {/* Arrow target */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <circle cx="192" cy="102" r="7" />
+      <circle cx="192" cy="102" r="4" />
+      <circle cx="192" cy="102" r="1.5" />
+    </g>
 
-const Arc = ({ x, y, w = 60, color = pencil.cool, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: w, height: w * 0.5 }} viewBox={`0 0 ${w} ${w*0.5}`} fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d={`M5 ${w*0.45}C${w*0.25} ${w*0.05},${w*0.75} ${w*0.05},${w-5} ${w*0.45}`} stroke={color} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.2" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+    {/* --- Row 6 --- */}
+    {/* Cat face */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <circle cx="15" cy="130" r="6" />
+      <path d="M9 124l2 5" />
+      <path d="M21 124l-2 5" />
+      <circle cx="13" cy="129" r="0.8" />
+      <circle cx="17" cy="129" r="0.8" />
+      <path d="M14 132c1 1 2 1 2 0" />
+      <line x1="9" y1="130" x2="6" y2="128" />
+      <line x1="9" y1="131" x2="6" y2="132" />
+      <line x1="21" y1="130" x2="24" y2="128" />
+      <line x1="21" y1="131" x2="24" y2="132" />
+    </g>
+    {/* Leaf */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.18">
+      <path d="M42 122c8 0 14 6 14 14-8 0-14-6-14-14z" />
+      <path d="M42 136c4-4 9-9 14-14" />
+    </g>
+    {/* Trophy */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <path d="M68 120h10v8c0 3-2 4-5 4s-5-1-5-4z" />
+      <path d="M68 122c-3 0-4 2-4 4s1 4 4 4" />
+      <path d="M78 122c3 0 4 2 4 4s-1 4-4 4" />
+      <line x1="73" y1="132" x2="73" y2="136" />
+      <line x1="69" y1="136" x2="77" y2="136" />
+    </g>
+    {/* Compass */}
+    <g stroke={pencil.light} strokeWidth="0.45" opacity="0.18">
+      <circle cx="100" cy="128" r="7" />
+      <path d="M100 122l2 5-2 1-2-1z" />
+      <path d="M100 134l-2-5 2-1 2 1z" />
+    </g>
+    {/* Cactus */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <rect x="128" y="122" width="5" height="14" rx="2.5" />
+      <path d="M128 128c-3 0-4-2-4-4" />
+      <path d="M133 126c3 0 4 2 4 5" />
+      <line x1="127" y1="136" x2="134" y2="136" />
+    </g>
+    {/* Lightning bolt */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.2">
+      <path d="M158 120l-4 8h6l-4 8" />
+    </g>
+    {/* Pencil */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <path d="M178 120l12 12-2 2-12-12z" />
+      <line x1="178" y1="120" x2="180" y2="118" />
+      <line x1="188" y1="132" x2="189" y2="133" />
+    </g>
 
-const Triangle = ({ x, y, size = 20, color = pencil.light, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: size, height: size }} viewBox="0 0 24 24" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d="M12 3L22 21L2 21Z" stroke={color} strokeWidth="0.6" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.18" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+    {/* --- Row 7 --- */}
+    {/* House */}
+    <g stroke={pencil.light} strokeWidth="0.5" opacity="0.18">
+      <path d="M12 155l8-8 8 8" />
+      <rect x="13" y="155" width="14" height="10" />
+      <rect x="18" y="158" width="4" height="7" />
+    </g>
+    {/* Magnifying glass */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <circle cx="48" cy="152" r="5" />
+      <line x1="52" y1="156" x2="57" y2="161" />
+    </g>
+    {/* Cupcake */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.18">
+      <path d="M72 155h10l-1 10H73z" />
+      <path d="M71 155c0-4 3-6 6-6s6 2 6 6" />
+      <circle cx="77" cy="152" r="1.5" />
+    </g>
+    {/* Airplane */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <path d="M100 148l10 6-10 6v-4l-6 2v-4l6-2z" />
+    </g>
+    {/* Battery */}
+    <g stroke={pencil.light} strokeWidth="0.5" opacity="0.18">
+      <rect x="128" y="150" width="14" height="8" rx="1" />
+      <rect x="142" y="152" width="2" height="4" rx="0.5" />
+      <rect x="130" y="152" width="4" height="4" rx="0.5" />
+      <rect x="135" y="152" width="4" height="4" rx="0.5" />
+    </g>
+    {/* Paw print */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <ellipse cx="160" cy="156" rx="3" ry="4" />
+      <circle cx="156" cy="151" r="1.8" />
+      <circle cx="160" cy="149" r="1.8" />
+      <circle cx="164" cy="151" r="1.8" />
+    </g>
+    {/* Mountain */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.18">
+      <path d="M182 162l8-14 8 14z" />
+      <path d="M188 152l-2 3 2 2 2-2z" />
+    </g>
 
-const Diamond = ({ x, y, size = 16, color = pencil.warm, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: size, height: size * 1.3 }} viewBox="0 0 20 26" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d="M10 2L18 13L10 24L2 13Z" stroke={color} strokeWidth="0.6" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.18" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+    {/* --- Row 8 --- */}
+    {/* Gift box */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <rect x="8" y="178" width="12" height="10" />
+      <rect x="7" y="175" width="14" height="4" rx="1" />
+      <line x1="14" y1="175" x2="14" y2="188" />
+      <path d="M14 175c-2-3-5-3-5 0" />
+      <path d="M14 175c2-3 5-3 5 0" />
+    </g>
+    {/* Skull (cute) */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.18">
+      <path d="M42 172c-5 0-8 4-8 8 0 3 2 6 4 7v3h8v-3c2-1 4-4 4-7 0-4-3-8-8-8z" />
+      <circle cx="39" cy="179" r="1.5" />
+      <circle cx="45" cy="179" r="1.5" />
+      <path d="M40 184v2" />
+      <path d="M42 184v2" />
+      <path d="M44 184v2" />
+    </g>
+    {/* Rainbow */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.18">
+      <path d="M65 188a12 12 0 0 1 24 0" />
+      <path d="M68 188a9 9 0 0 1 18 0" />
+      <path d="M71 188a6 6 0 0 1 12 0" />
+    </g>
+    {/* Eye */}
+    <g stroke={pencil.medium} strokeWidth="0.5" opacity="0.2">
+      <path d="M98 180c4-4 10-4 14 0-4 4-10 4-14 0z" />
+      <circle cx="105" cy="180" r="2.5" />
+      <circle cx="105" cy="180" r="1" />
+    </g>
+    {/* Beaker / flask */}
+    <g stroke={pencil.light} strokeWidth="0.5" opacity="0.18">
+      <path d="M132 172h6v6l4 10h-14l4-10z" />
+      <line x1="130" y1="188" x2="140" y2="188" />
+    </g>
+    {/* Candy */}
+    <g stroke={pencil.warm} strokeWidth="0.5" opacity="0.2">
+      <circle cx="162" cy="180" r="4" />
+      <path d="M158 180c-3-2-4-1-3 1" />
+      <path d="M166 180c3 2 4 1 3-1" />
+      <path d="M159 178l6 4" />
+    </g>
+    {/* Flag */}
+    <g stroke={pencil.cool} strokeWidth="0.5" opacity="0.18">
+      <line x1="188" y1="170" x2="188" y2="190" />
+      <path d="M188 172h10c-1 3-1 6 0 9h-10z" />
+    </g>
 
-const Leaf = ({ x, y, size = 20, color = pencil.cool, delay = 0, flip = false }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: size, height: size, transform: flip ? 'scaleX(-1)' : 'none' }} viewBox="0 0 24 24" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d="M4 20C4 12,12 4,20 4C20 12,12 20,4 20Z" stroke={color} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.2" custom={delay} variants={softDraw} />
-    <motion.path d="M4 20C8 16,14 10,20 4" stroke={color} strokeWidth="0.4" strokeLinecap="round" fill="none" opacity="0.15" custom={delay + 0.3} variants={softDraw} />
-  </motion.svg>
-);
+    {/* Extra small scattered marks for density */}
+    {/* Dots */}
+    <circle cx="25" cy="48" r="0.8" fill={pencil.medium} opacity="0.15" />
+    <circle cx="55" cy="95" r="0.8" fill={pencil.warm} opacity="0.12" />
+    <circle cx="85" cy="45" r="0.8" fill={pencil.cool} opacity="0.15" />
+    <circle cx="115" cy="145" r="0.8" fill={pencil.medium} opacity="0.12" />
+    <circle cx="145" cy="95" r="0.8" fill={pencil.warm} opacity="0.15" />
+    <circle cx="175" cy="145" r="0.8" fill={pencil.cool} opacity="0.12" />
+    <circle cx="30" cy="140" r="0.8" fill={pencil.light} opacity="0.12" />
+    <circle cx="60" cy="170" r="0.8" fill={pencil.medium} opacity="0.15" />
+    <circle cx="90" cy="120" r="0.8" fill={pencil.warm} opacity="0.12" />
+    <circle cx="120" cy="170" r="0.8" fill={pencil.cool} opacity="0.15" />
+    <circle cx="150" cy="42" r="0.8" fill={pencil.medium} opacity="0.12" />
+    <circle cx="180" cy="100" r="0.8" fill={pencil.warm} opacity="0.15" />
 
-const Star = ({ x, y, size = 12, color = pencil.medium, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: size, height: size }} viewBox="0 0 12 12" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d="M6 1L7.2 4.5L11 4.8L8.2 7.2L9 11L6 9L3 11L3.8 7.2L1 4.8L4.8 4.5Z" stroke={color} strokeWidth="0.5" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.2" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+    {/* Small x marks */}
+    <g stroke={pencil.light} strokeWidth="0.4" opacity="0.12">
+      <path d="M32 68l2 2m0-2l-2 2" />
+      <path d="M82 138l2 2m0-2l-2 2" />
+      <path d="M152 68l2 2m0-2l-2 2" />
+      <path d="M112 38l2 2m0-2l-2 2" />
+      <path d="M62 118l2 2m0-2l-2 2" />
+      <path d="M172 38l2 2m0-2l-2 2" />
+    </g>
 
-const Wave = ({ x, y, w = 100, color = pencil.light, delay = 0 }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: w, height: 20 }} viewBox={`0 0 ${w} 20`} fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d={`M0 10C${w*0.08} 3,${w*0.17} 17,${w*0.25} 10C${w*0.33} 3,${w*0.42} 17,${w*0.5} 10C${w*0.58} 3,${w*0.67} 17,${w*0.75} 10C${w*0.83} 3,${w*0.92} 17,${w} 10`} stroke={color} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.2" custom={delay} variants={softDraw} />
-  </motion.svg>
-);
+    {/* Small circles */}
+    <circle cx="50" cy="68" r="2.5" stroke={pencil.medium} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <circle cx="110" cy="68" r="2" stroke={pencil.cool} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <circle cx="170" cy="118" r="2.5" stroke={pencil.warm} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <circle cx="30" cy="168" r="2" stroke={pencil.light} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <circle cx="90" cy="168" r="2.5" stroke={pencil.medium} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <circle cx="150" cy="168" r="2" stroke={pencil.cool} strokeWidth="0.4" fill="none" opacity="0.12" />
 
-const Bracket = ({ x, y, size = 30, color = pencil.dark, delay = 0, right = false }: any) => (
-  <motion.svg className="absolute" style={{ left: `${x}%`, top: `${y}%`, width: size * 0.4, height: size }} viewBox="0 0 12 30" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-    <motion.path d={right ? "M3 2C9 6,9 24,3 28" : "M9 2C3 6,3 24,9 28"} stroke={color} strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.18" custom={delay} variants={softDraw} />
-  </motion.svg>
+    {/* Tiny squiggles */}
+    <path d="M28 98q3-3 6 0q3 3 6 0" stroke={pencil.light} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <path d="M88 98q3-3 6 0q3 3 6 0" stroke={pencil.warm} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <path d="M148 118q3-3 6 0q3 3 6 0" stroke={pencil.medium} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <path d="M58 148q3-3 6 0q3 3 6 0" stroke={pencil.cool} strokeWidth="0.4" fill="none" opacity="0.12" />
+    <path d="M118 198q3-3 6 0q3 3 6 0" stroke={pencil.light} strokeWidth="0.4" fill="none" opacity="0.12" />
+  </g>
 );
 
 export const HeroDoodleBackground = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* ===== ROW 1: Top 0-15% ===== */}
-      <Spiral x={2} y={2} scale={1.2} color={pencil.medium} delay={0.1} />
-      <Squiggle x={12} y={5} w={90} color={pencil.light} delay={0.2} />
-      <Cross x={22} y={3} delay={0.15} />
-      <Dot x={28} y={8} r={2} color={pencil.warm} />
-      <LooseCircle x={30} y={1} r={14} color={pencil.cool} delay={0.3} />
-      <Star x={40} y={4} size={14} delay={0.25} />
-      <Squiggle x={45} y={10} w={70} color={pencil.warm} delay={0.4} />
-      <Dot x={55} y={3} r={1.5} color={pencil.medium} />
-      <Triangle x={58} y={5} size={18} color={pencil.light} delay={0.35} />
-      <Cross x={65} y={2} delay={0.2} />
-      <Spiral x={68} y={6} scale={0.8} color={pencil.warm} delay={0.45} />
-      <Dot x={75} y={9} r={2.5} color={pencil.cool} />
-      <Arc x={78} y={2} w={50} color={pencil.medium} delay={0.3} />
-      <Diamond x={88} y={4} size={14} color={pencil.light} delay={0.5} />
-      <Dot x={92} y={8} r={1.8} color={pencil.dark} />
-      <Cross x={96} y={3} size={8} delay={0.15} />
-
-      {/* ===== ROW 2: 15-30% ===== */}
-      <Wave x={1} y={16} w={110} color={pencil.cool} delay={0.3} />
-      <Leaf x={8} y={20} size={18} color={pencil.cool} delay={0.5} />
-      <Diamond x={15} y={18} size={12} delay={0.4} />
-      <Dot x={20} y={22} r={2} color={pencil.warm} />
-      <Cross x={25} y={17} delay={0.25} />
-      <Spiral x={30} y={22} scale={0.9} color={pencil.light} delay={0.55} />
-      <Squiggle x={38} y={25} w={65} color={pencil.medium} delay={0.6} />
-      <Star x={42} y={18} size={11} color={pencil.warm} delay={0.35} />
-      <Dot x={48} y={28} r={1.8} color={pencil.cool} />
-      <LooseCircle x={52} y={17} r={12} color={pencil.warm} delay={0.45} />
-      <Bracket x={58} y={20} delay={0.5} />
-      <Leaf x={63} y={24} size={16} flip delay={0.65} />
-      <Arc x={68} y={18} w={45} color={pencil.warm} delay={0.4} />
-      <Cross x={75} y={26} size={9} delay={0.3} />
-      <Triangle x={78} y={19} size={15} color={pencil.cool} delay={0.55} />
-      <Squiggle x={82} y={28} w={80} color={pencil.light} delay={0.7} />
-      <Dot x={90} y={20} r={2.2} color={pencil.medium} />
-      <Star x={94} y={25} size={13} color={pencil.cool} delay={0.45} />
-
-      {/* ===== ROW 3: 30-45% ===== */}
-      <Bracket x={2} y={32} size={35} delay={0.4} />
-      <Squiggle x={6} y={38} w={75} color={pencil.warm} delay={0.5} />
-      <Dot x={12} y={33} r={2.5} color={pencil.light} />
-      <LooseCircle x={14} y={36} r={16} color={pencil.medium} delay={0.6} />
-      <Cross x={22} y={40} delay={0.35} />
-      <Star x={26} y={34} size={12} color={pencil.warm} delay={0.55} />
-      <Wave x={30} y={42} w={90} color={pencil.cool} delay={0.65} />
-      <Diamond x={38} y={33} size={13} color={pencil.cool} delay={0.5} />
-      <Leaf x={44} y={38} size={20} delay={0.7} />
-      <Dot x={50} y={44} r={1.5} color={pencil.dark} />
-      <Spiral x={54} y={35} scale={1} color={pencil.warm} delay={0.6} />
-      <Cross x={62} y={42} size={8} delay={0.4} />
-      <Triangle x={66} y={34} size={16} color={pencil.medium} delay={0.65} />
-      <Arc x={72} y={40} w={55} color={pencil.light} delay={0.55} />
-      <Bracket x={80} y={33} size={28} right delay={0.5} />
-      <Dot x={84} y={38} r={2} color={pencil.warm} />
-      <Squiggle x={86} y={44} w={70} color={pencil.medium} delay={0.75} />
-      <Star x={94} y={36} size={10} color={pencil.light} delay={0.6} />
-
-      {/* ===== ROW 4: 45-60% ===== */}
-      <Arc x={1} y={48} w={60} color={pencil.warm} delay={0.5} />
-      <Cross x={8} y={52} delay={0.3} />
-      <Diamond x={12} y={48} size={15} color={pencil.medium} delay={0.55} />
-      <Dot x={18} y={55} r={2} color={pencil.cool} />
-      <Wave x={20} y={50} w={85} color={pencil.warm} delay={0.6} />
-      <Leaf x={28} y={56} size={17} flip color={pencil.cool} delay={0.7} />
-      <Spiral x={34} y={48} scale={1.1} color={pencil.light} delay={0.65} />
-      <Squiggle x={42} y={58} w={60} color={pencil.dark} delay={0.75} />
-      <Star x={48} y={50} size={13} color={pencil.warm} delay={0.55} />
-      <LooseCircle x={54} y={52} r={13} color={pencil.cool} delay={0.6} />
-      <Cross x={60} y={48} size={9} delay={0.4} />
-      <Dot x={65} y={56} r={1.8} color={pencil.medium} />
-      <Triangle x={70} y={50} size={14} color={pencil.warm} delay={0.65} />
-      <Leaf x={76} y={54} size={19} delay={0.75} />
-      <Bracket x={82} y={48} delay={0.55} />
-      <Arc x={86} y={56} w={50} color={pencil.cool} delay={0.7} />
-      <Dot x={92} y={50} r={2.5} color={pencil.light} />
-      <Cross x={96} y={58} size={7} delay={0.45} />
-
-      {/* ===== ROW 5: 60-75% ===== */}
-      <Squiggle x={2} y={62} w={95} color={pencil.cool} delay={0.6} />
-      <Star x={8} y={68} size={12} color={pencil.medium} delay={0.5} />
-      <LooseCircle x={14} y={64} r={11} color={pencil.warm} delay={0.7} />
-      <Dot x={20} y={70} r={2} color={pencil.dark} />
-      <Diamond x={24} y={63} size={13} color={pencil.light} delay={0.55} />
-      <Wave x={30} y={72} w={80} color={pencil.medium} delay={0.75} />
-      <Cross x={36} y={65} delay={0.4} />
-      <Leaf x={40} y={68} size={16} flip delay={0.65} />
-      <Spiral x={46} y={62} scale={0.9} color={pencil.cool} delay={0.7} />
-      <Dot x={52} y={74} r={1.5} color={pencil.warm} />
-      <Triangle x={56} y={66} size={17} color={pencil.cool} delay={0.6} />
-      <Arc x={62} y={70} w={48} color={pencil.warm} delay={0.65} />
-      <Bracket x={70} y={63} size={30} right delay={0.55} />
-      <Squiggle x={74} y={74} w={65} color={pencil.light} delay={0.8} />
-      <Star x={80} y={65} size={11} color={pencil.dark} delay={0.5} />
-      <Cross x={86} y={72} size={8} delay={0.35} />
-      <LooseCircle x={90} y={64} r={15} color={pencil.medium} delay={0.7} />
-      <Dot x={96} y={70} r={2.2} color={pencil.cool} />
-
-      {/* ===== ROW 6: 75-90% ===== */}
-      <Leaf x={3} y={78} size={18} delay={0.6} />
-      <Cross x={8} y={82} delay={0.35} />
-      <Wave x={12} y={76} w={100} color={pencil.warm} delay={0.7} />
-      <Diamond x={18} y={84} size={12} color={pencil.cool} delay={0.55} />
-      <Dot x={24} y={78} r={2} color={pencil.medium} />
-      <Spiral x={28} y={82} scale={1} color={pencil.light} delay={0.75} />
-      <Squiggle x={35} y={88} w={70} color={pencil.dark} delay={0.8} />
-      <Star x={40} y={78} size={14} color={pencil.warm} delay={0.6} />
-      <LooseCircle x={46} y={82} r={12} color={pencil.cool} delay={0.65} />
-      <Arc x={52} y={86} w={55} color={pencil.medium} delay={0.7} />
-      <Cross x={58} y={78} size={9} delay={0.4} />
-      <Triangle x={62} y={84} size={15} color={pencil.warm} delay={0.75} />
-      <Dot x={68} y={80} r={1.8} color={pencil.light} />
-      <Leaf x={72} y={86} size={17} flip color={pencil.cool} delay={0.8} />
-      <Bracket x={78} y={78} delay={0.55} />
-      <Squiggle x={82} y={84} w={75} color={pencil.warm} delay={0.85} />
-      <Star x={88} y={80} size={12} color={pencil.medium} delay={0.65} />
-      <Diamond x={92} y={86} size={14} color={pencil.dark} delay={0.7} />
-      <Dot x={97} y={82} r={2.5} color={pencil.cool} />
-
-      {/* ===== ROW 7: 90-100% ===== */}
-      <Squiggle x={3} y={92} w={85} color={pencil.medium} delay={0.7} />
-      <Cross x={10} y={95} delay={0.4} />
-      <LooseCircle x={16} y={92} r={10} color={pencil.warm} delay={0.75} />
-      <Dot x={24} y={96} r={2} color={pencil.cool} />
-      <Star x={30} y={93} size={11} color={pencil.light} delay={0.6} />
-      <Wave x={36} y={96} w={70} color={pencil.cool} delay={0.8} />
-      <Diamond x={44} y={92} size={13} color={pencil.medium} delay={0.65} />
-      <Arc x={50} y={94} w={45} color={pencil.warm} delay={0.75} />
-      <Leaf x={58} y={92} size={15} delay={0.7} />
-      <Cross x={64} y={96} size={8} delay={0.45} />
-      <Spiral x={70} y={92} scale={0.8} color={pencil.cool} delay={0.8} />
-      <Dot x={78} y={95} r={1.8} color={pencil.dark} />
-      <Triangle x={82} y={92} size={14} color={pencil.warm} delay={0.7} />
-      <Squiggle x={88} y={96} w={60} color={pencil.light} delay={0.85} />
-      <Dot x={95} y={93} r={2.2} color={pencil.medium} />
-    </div>
+    <motion.div
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+    >
+      <svg
+        className="absolute inset-0 w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <pattern
+            id="whatsapp-doodle"
+            x="0"
+            y="0"
+            width="200"
+            height="200"
+            patternUnits="userSpaceOnUse"
+          >
+            <DoodleTile />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#whatsapp-doodle)" />
+      </svg>
+    </motion.div>
   );
 };
