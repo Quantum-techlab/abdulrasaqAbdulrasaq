@@ -20,9 +20,12 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'heading': ['Inter', 'sans-serif'],
-				'body': ['Atkinson Hyperlegible', 'sans-serif'],
-				'mono': ['JetBrains Mono', 'monospace'],
+				'heading': ['"Inter Tight"', 'Inter', 'sans-serif'],
+				'body': ['Inter', 'sans-serif'],
+				'mono': ['"JetBrains Mono"', 'monospace'],
+			},
+			letterSpacing: {
+				'tight-heading': '-0.02em',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -67,12 +70,6 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				electric: {
-					DEFAULT: 'hsl(var(--electric))',
-					light: 'hsl(var(--electric-light))',
-					dark: 'hsl(var(--electric-dark))',
-					muted: 'hsl(var(--electric-muted))',
 				},
 			},
 			borderRadius: {
