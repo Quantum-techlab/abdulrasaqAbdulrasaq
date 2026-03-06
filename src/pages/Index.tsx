@@ -1,30 +1,127 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, MapPin, ArrowRight, Download, ArrowUp, Terminal, Globe, Server, Wrench, Code } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { Github, Linkedin, Mail, ExternalLink, MapPin, ArrowRight, Download, ArrowUp, Terminal, Globe, Server, Wrench, Code, ChevronRight, Star, Quote, Menu, X } from "lucide-react";
 import { TypewriterText } from "@/components/TypewriterText";
 
+// ── Animation variants ──
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (delay: number = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.7, delay, ease: [0.25, 0.1, 0, 1] }
+  })
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0, 1] } }
+};
+
+// ── 3D Tilt Card ──
+const TiltCard = ({ children, className = '', featured = false }: { children: React.ReactNode; className?: string; featured?: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springX = useSpring(rotateX, { stiffness: 200, damping: 20 });
+  const springY = useSpring(rotateY, { stiffness: 200, damping: 20 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    if (!ref.current || !featured) return;
+    const rect = ref.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    rotateX.set(y * -8);
+    rotateY.set(x * 8);
+  };
+
+  const handleLeave = () => { rotateX.set(0); rotateY.set(0); };
+
+  return (
+    <motion.div ref={ref} onMouseMove={handleMouse} onMouseLeave={handleLeave}
+      style={{ rotateX: springX, rotateY: springY, transformPerspective: 800 }}
+      className={className}>
+      {children}
+    </motion.div>
+  );
+};
+
+// ── Magnetic Button ──
+const MagneticButton = ({ children, className = '', ...props }: React.ComponentProps<'a'>) => {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 200, damping: 15 });
+  const springY = useSpring(y, { stiffness: 200, damping: 15 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    x.set((e.clientX - rect.left - rect.width / 2) * 0.3);
+    y.set((e.clientY - rect.top - rect.height / 2) * 0.3);
+  };
+
+  return (
+    <motion.a ref={ref} onMouseMove={handleMouse} onMouseLeave={() => { x.set(0); y.set(0); }}
+      style={{ x: springX, y: springY }} className={`magnetic-btn ${className}`} {...props as any}>
+      {children}
+    </motion.a>
+  );
+};
+
 const Index = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  useEffect(() => { setIsVisible(true); }, []);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Cursor-following radial gradient
+  const handleHeroMouse = useCallback((e: React.MouseEvent) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  }, []);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const projects = [
+    {
+      title: "MindConnect",
+      description: "AI-driven mental wellness platform enabling anonymous conversations, guided support sessions, and mood tracking with intelligent recommendations.",
+      tech: ["React", "AI", "Node.js", "Tailwind CSS", "WebSocket"],
+      github: "https://github.com/Quantum-techlab",
+      demo: "#",
+      featured: true,
+      tag: "Featured",
+    },
+    {
+      title: "Textify OCR",
+      description: "Versatile text extraction app converting images and audio into editable text using Tesseract.js and advanced speech recognition.",
+      tech: ["React", "Tesseract.js", "Speech-to-Text", "Tailwind CSS"],
+      github: "https://github.com/Quantum-techlab",
+      demo: "https://texify-ocr.vercel.app/",
+      featured: true,
+      tag: "Technical Achievement",
+      hasOcrScan: true,
+    },
     {
       title: "FaceTrust AI",
       description: "AI-powered facial recognition system for secure identity verification and centralized data access using deep learning models.",
       tech: ["React", "AI/ML", "Deep Learning", "Facial Recognition"],
       github: "https://github.com/Quantum-techlab",
       demo: "https://facetrust-rho.vercel.app",
-      featured: true,
+      featured: false,
     },
     {
-      title: "Attendance System for IIH",
-      description: "Modern attendance tracking for Ilorin Innovation Hub interns with real-time monitoring, analytics dashboard, and automated reporting.",
-      tech: ["React", "Supabase", "TypeScript", "Tailwind CSS", "Geolocation"],
+      title: "Attendance System",
+      description: "Modern attendance tracking for Ilorin Innovation Hub interns with real-time monitoring and analytics.",
+      tech: ["React", "Supabase", "TypeScript", "Geolocation"],
       github: "https://github.com/Quantum-techlab",
       demo: "https://iih-hub.vercel.app/",
-      featured: true,
+      featured: false,
     },
     {
       title: "ScanShare",
@@ -35,29 +132,13 @@ const Index = () => {
       featured: false,
     },
     {
-      title: "MindConnect",
-      description: "AI-driven mental wellness platform enabling anonymous conversations and guided support.",
-      tech: ["React", "AI", "Node.js", "Tailwind CSS"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "#",
-      featured: false,
-    },
-    {
-      title: "Textify",
-      description: "Versatile text extraction app converting images and audio into editable text using Tesseract.js.",
-      tech: ["React", "Tesseract.js", "Speech-to-Text", "Tailwind CSS"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "https://texify-ocr.vercel.app/",
-      featured: false,
-    },
-    {
       title: "SynBridge",
       description: "Cross-device clipboard and file sync tool with end-to-end encryption.",
       tech: ["React", "Supabase", "WebSockets", "Encryption"],
       github: "https://github.com/Quantum-techlab",
       demo: "#",
       featured: false,
-    }
+    },
   ];
 
   const experiences = [
@@ -111,9 +192,24 @@ const Index = () => {
     "Prompt Engineering", "OCR", "Accessibility", "Responsive Design",
   ];
 
+  const testimonials = [
+    { text: "Abdulrasaq's attention to detail and technical skill consistently exceeded expectations. A rare talent.", author: "Tech Lead, Torvix AI", role: "Manager" },
+    { text: "His ability to translate complex designs into pixel-perfect, performant code is exceptional.", author: "Design Lead, IIH", role: "Colleague" },
+    { text: "One of the most dedicated developers I've worked with. Always delivers quality work ahead of schedule.", author: "Senior Developer", role: "Mentor" },
+    { text: "Abdulrasaq brings both creativity and solid engineering to every project. Highly recommend.", author: "Project Manager", role: "Client" },
+  ];
+
+  const processSteps = [
+    { step: "01", title: "Plan", desc: "Research, architecture & design systems", icon: "📐" },
+    { step: "02", title: "Build", desc: "Clean code, component-driven development", icon: "⚡" },
+    { step: "03", title: "Test", desc: "Cross-browser QA & performance audits", icon: "🔍" },
+    { step: "04", title: "Ship", desc: "CI/CD deployment & monitoring", icon: "🚀" },
+  ];
+
   const navItems = [
     { href: '#about', label: 'About' },
     { href: '#projects', label: 'Projects' },
+    { href: '#process', label: 'Process' },
     { href: '#tech', label: 'Tech' },
     { href: '#experience', label: 'Experience' },
     { href: '#contact', label: 'Contact' },
@@ -123,95 +219,107 @@ const Index = () => {
   const smallProjects = projects.filter(p => !p.featured);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-0 w-full z-50 glass-card"
-      >
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* ─── NAVIGATION ─── */}
+      <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1] }}
+        className="fixed top-0 w-full z-50 glass-card">
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center h-16">
             <span className="font-heading font-bold text-xl tracking-tight-heading">
-              AA<span className="text-gradient">.</span>
+              AA<span className="text-primary">.</span>
             </span>
             <div className="hidden md:flex items-center gap-8">
               {navItems.map(item => (
-                <a key={item.href} href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body">
+                <a key={item.href} href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 font-body">
                   {item.label}
                 </a>
               ))}
             </div>
-            <a href="mailto:ola283dayo@gmail.com" className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg btn-gradient text-sm font-heading font-semibold transition-all duration-300">
-              <Mail className="w-4 h-4" />
-              Hire Me
-            </a>
+            <div className="flex items-center gap-4">
+              <a href="mailto:ola283dayo@gmail.com" className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg btn-primary text-sm font-heading font-semibold">
+                <Mail className="w-4 h-4" /> Hire Me
+              </a>
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-foreground p-2">
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-border">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-3">
+              {navItems.map(item => (
+                <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors py-2 font-body">
+                  {item.label}
+                </a>
+              ))}
+              <a href="mailto:ola283dayo@gmail.com" className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg btn-primary text-sm font-heading font-semibold mt-2">
+                <Mail className="w-4 h-4" /> Hire Me
+              </a>
+            </div>
+          </motion.div>
+        )}
       </motion.nav>
 
       {/* ─── HERO ─── */}
-      <section className="min-h-screen flex items-center justify-center relative pt-16">
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-[0.04]" style={{
-          backgroundImage: `linear-gradient(hsl(199 89% 60% / 0.3) 1px, transparent 1px), linear-gradient(90deg, hsl(199 89% 60% / 0.3) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
+      <section ref={heroRef} onMouseMove={handleHeroMouse} className="min-h-screen flex items-center justify-center relative pt-16">
+        {/* Cursor-following radial gradient */}
+        <div className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, hsl(211 100% 67% / 0.06), transparent 60%)`,
+          }} />
+        {/* Grid pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `linear-gradient(hsl(211 100% 67% / 0.4) 1px, transparent 1px), linear-gradient(90deg, hsl(211 100% 67% / 0.4) 1px, transparent 1px)`,
+          backgroundSize: '80px 80px',
         }} />
-        {/* Gradient orb */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full opacity-15 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, hsl(199 89% 60%), hsl(234 89% 74%), transparent 70%)' }} />
 
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.1, 0, 1] }}
-          >
-            <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full glass-card">
+          <motion.div variants={staggerContainer} initial="hidden" animate="visible">
+            <motion.div variants={staggerItem} className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full glass-card">
               <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-xs font-mono text-muted-foreground">Available for work</span>
-            </div>
+              <span className="text-xs font-mono text-muted-foreground">Available for opportunities</span>
+            </motion.div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight-heading leading-[0.95] mb-6">
+            <motion.h1 variants={staggerItem}
+              className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight-heading leading-[0.92] mb-6">
               Abdulrasaq
               <br />
               <span className="text-gradient">Abdulrasaq</span>
-            </h1>
+            </motion.h1>
 
-            <div className="flex items-center justify-center gap-3 mb-8">
+            <motion.div variants={staggerItem} className="flex items-center justify-center gap-3 mb-8">
               <Terminal className="w-5 h-5 text-primary" />
               <span className="text-xl md:text-2xl font-body text-muted-foreground">
                 <TypewriterText
-                  texts={[
-                    "Full-Stack Developer",
-                    "Software Engineer",
-                    "React Specialist",
-                    "AI Integration Expert",
-                  ]}
+                  texts={["Full-Stack Developer", "Software Engineer", "React Specialist", "AI Integration Expert"]}
                   className="text-foreground"
                 />
               </span>
-            </div>
+            </motion.div>
 
-            <p className="text-lg font-body text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              Passionate about crafting exceptional digital experiences through clean, efficient code.
+            <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+              Crafting exceptional digital experiences through clean, efficient code.
               Specializing in modern web technologies and AI integration.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div variants={staggerItem} className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="mailto:ola283dayo@gmail.com"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl btn-gradient font-heading font-semibold transition-all duration-300">
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl btn-primary font-heading font-semibold text-base">
                 Let's Connect <ArrowRight className="w-5 h-5" />
               </a>
               <a href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk"
                 target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl glass-card hover-glow font-heading font-semibold transition-all duration-300">
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl glass-card hover-glow font-heading font-semibold text-base">
                 <Download className="w-5 h-5" /> Resume
               </a>
-            </div>
+            </motion.div>
 
-            <div className="flex items-center justify-center gap-4 mt-10">
+            <motion.div variants={staggerItem} className="flex items-center justify-center gap-4 mt-10">
               {[
                 { icon: <Github className="w-5 h-5" />, href: "https://github.com/Quantum-techlab" },
                 { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/in/abdulrasaq-abdulrasaq" },
@@ -222,140 +330,145 @@ const Index = () => {
                   {s.icon}
                 </a>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* ─── ABOUT ─── */}
-      <section id="about" className="py-24 md:py-32">
+      <section id="about" className="py-28 md:py-36">
         <div className="container mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-2">About <span className="text-gradient">Me</span></h2>
-            <div className="w-16 h-1 rounded-full mb-12" style={{ background: 'linear-gradient(90deg, hsl(199 89% 60%), hsl(234 89% 74%))' }} />
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
+              About <span className="text-primary">Me</span>
+            </h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Image */}
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-              className="relative">
-              <div className="relative w-full max-w-md mx-auto aspect-square rounded-2xl overflow-hidden glass-card">
-                <img src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" alt="Abdulrasaq Abdulrasaq - Software Engineer"
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: 'center 15%', transform: 'scale(1.4)', transformOrigin: 'center 25%' }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.1}
+              className="relative flex justify-center">
+              {/* Circular headshot with glowing cyan border */}
+              <div className="relative w-72 h-72 md:w-80 md:h-80">
+                <div className="absolute inset-0 rounded-full pulse-point" />
+                <div className="absolute inset-[3px] rounded-full overflow-hidden border-2 border-primary/40"
+                  style={{ boxShadow: '0 0 40px hsl(211 100% 67% / 0.15)' }}>
+                  <img src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" alt="Abdulrasaq Abdulrasaq"
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: 'center 15%', transform: 'scale(1.4)', transformOrigin: 'center 25%' }} />
+                </div>
               </div>
             </motion.div>
 
-            {/* Text + Stats */}
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <p className="text-lg font-body text-muted-foreground leading-relaxed mb-6">
-                I'm a passionate Full-Stack Developer based at the University of Ilorin, Nigeria,
+            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground leading-relaxed mb-6">
+                I'm a Full-Stack Developer based at the University of Ilorin, Nigeria,
                 with expertise in building modern, scalable web applications. I specialize in the React ecosystem,
                 AI integration, and creating user-centric digital experiences.
-              </p>
-              <p className="text-lg font-body text-muted-foreground leading-relaxed mb-8">
+              </motion.p>
+              <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground leading-relaxed mb-10">
                 As the Software Director at ITSA, I lead technical initiatives and mentor fellow developers.
-                I'm driven by the challenge of turning complex problems into elegant, efficient solutions.
-              </p>
+                I'm driven by turning complex problems into elegant, efficient solutions.
+              </motion.p>
 
-              {/* Stats bento */}
-              <div className="grid grid-cols-2 gap-4">
+              <motion.div variants={staggerItem} className="grid grid-cols-2 gap-4">
                 {[
                   { value: "3+", label: "Years Experience" },
                   { value: "6+", label: "Projects Built" },
                   { value: "27+", label: "Technologies" },
                   { value: "3", label: "Certifications" },
                 ].map((stat, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
-                    className="p-5 rounded-xl glass-card hover-glow">
-                    <div className="text-3xl font-heading font-bold text-gradient mb-1">{stat.value}</div>
+                  <div key={i} className="p-5 rounded-lg glass-card hover-glow">
+                    <div className="text-3xl font-heading font-bold text-primary mb-1">{stat.value}</div>
                     <div className="text-sm font-body text-muted-foreground">{stat.label}</div>
-                  </motion.div>
+                  </div>
                 ))}
-              </div>
+              </motion.div>
 
-              <div className="flex items-center gap-3 mt-8">
+              <motion.div variants={staggerItem} className="flex items-center gap-3 mt-8">
                 <MapPin className="w-4 h-4 text-primary" />
                 <span className="text-sm font-body text-muted-foreground">University of Ilorin, Nigeria</span>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ─── PROJECTS (BENTO GRID) ─── */}
-      <section id="projects" className="py-24 md:py-32">
+      {/* ─── PROJECTS (MASONRY BENTO) ─── */}
+      <section id="projects" className="py-28 md:py-36">
         <div className="container mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-2">Featured <span className="text-gradient">Projects</span></h2>
-            <div className="w-16 h-1 rounded-full mb-12" style={{ background: 'linear-gradient(90deg, hsl(199 89% 60%), hsl(234 89% 74%))' }} />
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
+              Featured <span className="text-primary">Projects</span>
+            </h2>
           </motion.div>
 
-          {/* Featured — large cards */}
+          {/* Featured — large 2-col cards */}
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             {featuredProjects.map((project, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group glass-card hover-glow rounded-2xl p-8 relative overflow-hidden">
-                {/* Subtle gradient accent */}
-                <div className="absolute top-0 right-0 w-32 h-32 opacity-10 rounded-bl-full"
-                  style={{ background: 'linear-gradient(135deg, hsl(199 89% 60%), hsl(234 89% 74%))' }} />
+              <motion.div key={index} variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index * 0.15}>
+                <TiltCard featured className="glass-card hover-glow rounded-2xl p-8 relative overflow-hidden h-full group">
+                  {/* OCR scan line for Textify */}
+                  {project.hasOcrScan && <div className="ocr-scan-line" />}
 
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-2xl font-heading font-bold tracking-tight-heading group-hover:text-gradient transition-colors duration-300">
+                  {/* Tag badge */}
+                  {project.tag && (
+                    <div className="absolute top-6 right-6">
+                      <span className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-primary bg-primary/10 border border-primary/20 rounded-full">
+                        {project.tag}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-heading font-bold tracking-tight-heading mb-3 group-hover:text-primary transition-colors duration-300">
                       {project.title}
                     </h3>
-                    <Code className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 mt-1" />
-                  </div>
+                    <p className="font-body text-muted-foreground leading-relaxed mb-6">{project.description}</p>
 
-                  <p className="font-body text-muted-foreground leading-relaxed mb-6">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((tech, i) => (
+                        <span key={i} className="px-3 py-1 text-xs font-mono text-primary/80 bg-primary/5 border border-primary/10 rounded-full">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((tech, i) => (
-                      <span key={i} className="px-3 py-1 text-xs font-mono text-primary bg-primary/10 border border-primary/20 rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-3">
-                    {project.demo !== "#" && (
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl btn-gradient text-sm font-heading font-semibold transition-all duration-300">
-                        <ExternalLink className="w-4 h-4" /> View Live
+                    <div className="flex gap-3">
+                      {project.demo !== "#" && (
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl btn-primary text-sm font-heading font-semibold">
+                          <ExternalLink className="w-4 h-4" /> View Live
+                        </a>
+                      )}
+                      <a href={project.github} target="_blank" rel="noopener noreferrer"
+                        className={`${project.demo !== "#" ? 'flex-1' : 'w-full'} inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl glass-card hover-glow text-sm font-heading font-semibold`}>
+                        <Github className="w-4 h-4" /> Github
                       </a>
-                    )}
-                    <a href={project.github} target="_blank" rel="noopener noreferrer"
-                      className={`${project.demo !== "#" ? 'flex-1' : 'w-full'} inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl glass-card hover-glow text-sm font-heading font-semibold transition-all duration-300`}>
-                      <Github className="w-4 h-4" /> Github
-                    </a>
+                    </div>
                   </div>
-                </div>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
 
-          {/* Small projects — compact bento */}
+          {/* Compact cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {smallProjects.map((project, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.08 }}
+              <motion.div key={index} variants={fadeInUp} initial="hidden" whileInView="visible"
+                viewport={{ once: true }} custom={index * 0.08}
                 className="group glass-card hover-glow rounded-xl p-5">
-                <h3 className="text-base font-heading font-bold tracking-tight-heading mb-2 group-hover:text-gradient transition-colors duration-300">
+                <h3 className="text-base font-heading font-bold tracking-tight-heading mb-2 group-hover:text-primary transition-colors duration-300">
                   {project.title}
                 </h3>
                 <p className="text-sm font-body text-muted-foreground leading-relaxed mb-4 line-clamp-2">{project.description}</p>
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {project.tech.slice(0, 3).map((tech, i) => (
-                    <span key={i} className="px-2 py-0.5 text-[10px] font-mono text-muted-foreground bg-muted rounded-full">{tech}</span>
+                    <span key={i} className="px-2 py-0.5 text-[10px] font-mono text-muted-foreground bg-muted/50 rounded-full">{tech}</span>
                   ))}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   {project.demo !== "#" && (
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-secondary transition-colors font-mono flex items-center gap-1">
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors font-mono flex items-center gap-1">
                       <ExternalLink className="w-3 h-3" /> Live
                     </a>
                   )}
@@ -369,65 +482,131 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── TECH ARSENAL (BENTO) ─── */}
-      <section id="tech" className="py-24 md:py-32">
+      {/* ─── THE PROCESS (Horizontal scroll) ─── */}
+      <section id="process" className="py-28 md:py-36 overflow-hidden">
         <div className="container mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-2">Tech <span className="text-gradient">Arsenal</span></h2>
-            <div className="w-16 h-1 rounded-full mb-12" style={{ background: 'linear-gradient(90deg, hsl(199 89% 60%), hsl(234 89% 74%))' }} />
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
+              The <span className="text-primary">Process</span>
+            </h2>
+          </motion.div>
+        </div>
+
+        <div className="relative">
+          <motion.div className="flex gap-6 px-6 md:px-[calc((100vw-1200px)/2+2rem)]"
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}>
+            {processSteps.map((step, i) => (
+              <motion.div key={i}
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
+                className="min-w-[260px] md:min-w-[300px] glass-card hover-glow rounded-2xl p-8 flex-shrink-0">
+                <div className="text-4xl mb-4">{step.icon}</div>
+                <div className="text-xs font-mono text-primary mb-2">{step.step}</div>
+                <h3 className="text-2xl font-heading font-bold tracking-tight-heading mb-2">{step.title}</h3>
+                <p className="text-sm font-body text-muted-foreground leading-relaxed">{step.desc}</p>
+                {i < processSteps.length - 1 && (
+                  <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/30 hidden md:block" />
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─── TECH ARSENAL (BENTO) ─── */}
+      <section id="tech" className="py-28 md:py-36">
+        <div className="container mx-auto px-6">
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
+              Tech <span className="text-primary">Arsenal</span>
+            </h2>
           </motion.div>
 
-          {/* Core Stack — large tiles */}
           <h3 className="text-lg font-heading font-semibold text-foreground mb-6 flex items-center gap-2">
             <Globe className="w-5 h-5 text-primary" /> Core Stack
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             {coreStack.map((tech, i) => (
-              <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="glass-card hover-glow rounded-xl p-6 text-center group cursor-default">
-                <div className="text-3xl mb-3">{tech.icon}</div>
-                <div className="text-sm font-mono text-muted-foreground group-hover:text-foreground transition-colors">{tech.name}</div>
+              <motion.div key={i} variants={fadeInUp} initial="hidden" whileInView="visible"
+                viewport={{ once: true }} custom={i * 0.05}
+                className="glass-card hover-glow rounded-lg p-6 text-center group cursor-default">
+                <div className="text-3xl mb-3 grayscale group-hover:grayscale-0 transition-all duration-300">{tech.icon}</div>
+                <div className="text-sm font-mono text-muted-foreground group-hover:text-primary transition-colors duration-300">{tech.name}</div>
               </motion.div>
             ))}
           </div>
 
-          {/* Tools — small chips */}
           <h3 className="text-lg font-heading font-semibold text-foreground mb-6 flex items-center gap-2">
             <Wrench className="w-5 h-5 text-primary" /> Tools & Technologies
           </h3>
-          <div className="flex flex-wrap gap-2">
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}
+            className="flex flex-wrap gap-2">
             {tools.map((tool, i) => (
-              <motion.span key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-                viewport={{ once: true }} transition={{ duration: 0.3, delay: i * 0.02 }}
-                className="px-4 py-2 text-xs font-mono text-muted-foreground glass-card rounded-lg hover:text-foreground hover:border-primary/30 transition-all duration-300 cursor-default">
+              <motion.span key={i} variants={staggerItem}
+                className="px-4 py-2 text-xs font-mono text-muted-foreground glass-card rounded-lg hover:text-primary hover:border-primary/20 transition-all duration-300 cursor-default">
                 {tool}
               </motion.span>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─── TESTIMONIALS MARQUEE ─── */}
+      <section className="py-20 border-t border-b border-border overflow-hidden">
+        <div className="container mx-auto px-6 mb-10">
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading">
+              Social <span className="text-primary">Proof</span>
+            </h2>
+          </motion.div>
+        </div>
+
+        <div className="relative">
+          <div className="marquee-track">
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <div key={i} className="min-w-[350px] md:min-w-[420px] glass-card rounded-2xl p-6 flex-shrink-0">
+                <Quote className="w-5 h-5 text-primary/40 mb-4" />
+                <p className="font-body text-foreground/90 leading-relaxed mb-4 text-sm">"{t.text}"</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Star className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-heading font-semibold">{t.author}</div>
+                    <div className="text-[10px] font-mono text-muted-foreground">{t.role}</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ─── EXPERIENCE TIMELINE ─── */}
-      <section id="experience" className="py-24 md:py-32">
+      <section id="experience" className="py-28 md:py-36">
         <div className="container mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-2"><span className="text-gradient">Experience</span></h2>
-            <div className="w-16 h-1 rounded-full mb-12" style={{ background: 'linear-gradient(90deg, hsl(199 89% 60%), hsl(234 89% 74%))' }} />
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
+              <span className="text-primary">Experience</span>
+            </h2>
           </motion.div>
 
           <div className="max-w-3xl relative">
-            {/* Vertical line */}
             <div className="absolute left-[11px] top-0 bottom-0 w-[2px] bg-border" />
 
             <div className="space-y-10">
               {experiences.map((exp, index) => (
-                <motion.div key={index} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}
+                <motion.div key={index} variants={fadeInUp} initial="hidden" whileInView="visible"
+                  viewport={{ once: true }} custom={index * 0.15}
                   className="relative pl-10">
                   {/* Glowing pulse point */}
                   <div className="absolute left-0 top-2 w-6 h-6 rounded-full border-2 border-primary bg-background flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse-glow" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-primary pulse-point" />
                   </div>
 
                   <div className="glass-card hover-glow rounded-xl p-6">
@@ -435,7 +614,7 @@ const Index = () => {
                       <h3 className="text-lg font-heading font-bold tracking-tight-heading">{exp.title}</h3>
                       <span className="text-xs font-mono text-primary px-3 py-1 rounded-full bg-primary/10 border border-primary/20 whitespace-nowrap">{exp.period}</span>
                     </div>
-                    <p className="text-sm font-heading font-semibold text-gradient mb-3">{exp.company}</p>
+                    <p className="text-sm font-heading font-semibold text-primary mb-3">{exp.company}</p>
                     <p className="font-body text-muted-foreground text-sm leading-relaxed mb-4">{exp.description}</p>
                     <ul className="space-y-2">
                       {exp.responsibilities.map((r, i) => (
@@ -453,30 +632,34 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── CONTACT ─── */}
-      <section id="contact" className="py-24 md:py-32">
+      {/* ─── FOOTER CTA ─── */}
+      <section id="contact" className="py-28 md:py-36">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-2">Let's <span className="text-gradient">Connect</span></h2>
-              <div className="w-16 h-1 rounded-full mb-8 mx-auto" style={{ background: 'linear-gradient(90deg, hsl(199 89% 60%), hsl(234 89% 74%))' }} />
-              <p className="text-lg font-body text-muted-foreground mb-10">
+            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+              <motion.h2 variants={staggerItem} className="text-4xl md:text-6xl font-heading font-bold tracking-tight-heading mb-6">
+                Let's Build Something <span className="text-primary">Amazing</span>
+              </motion.h2>
+              <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground mb-12">
                 I'm always excited to collaborate on innovative projects and explore new opportunities.
-              </p>
+              </motion.p>
 
-              <a href="mailto:ola283dayo@gmail.com"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl btn-gradient font-heading font-semibold transition-all duration-300 mb-12">
-                <Mail className="w-5 h-5" /> Get in Touch
-              </a>
+              {/* Magnetic oversized CTA */}
+              <motion.div variants={staggerItem}>
+                <MagneticButton href="mailto:ola283dayo@gmail.com"
+                  className="inline-flex items-center justify-center gap-4 px-12 py-6 rounded-2xl btn-primary text-lg md:text-xl font-heading font-bold">
+                  <Mail className="w-6 h-6" /> Work with me
+                </MagneticButton>
+              </motion.div>
 
-              <div className="grid sm:grid-cols-3 gap-4">
+              <motion.div variants={staggerItem} className="grid sm:grid-cols-3 gap-4 mt-16">
                 {[
                   { icon: <Mail className="w-5 h-5" />, label: "Email", value: "ola283dayo@gmail.com", href: "mailto:ola283dayo@gmail.com" },
                   { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", value: "Connect", href: "https://linkedin.com/in/abdulrasaq-abdulrasaq" },
                   { icon: <Github className="w-5 h-5" />, label: "GitHub", value: "Quantum-techlab", href: "https://github.com/Quantum-techlab" },
                 ].map((c, i) => (
                   <a key={i} href={c.href} target={c.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
-                    className="p-5 rounded-xl glass-card hover-glow group text-center transition-all duration-300">
+                    className="p-5 rounded-xl glass-card hover-glow group text-center">
                     <div className="inline-flex p-2.5 rounded-xl bg-primary/10 text-primary mb-3 group-hover:bg-primary/20 transition-colors">
                       {c.icon}
                     </div>
@@ -484,7 +667,7 @@ const Index = () => {
                     <div className="text-xs font-body text-muted-foreground mt-1">{c.value}</div>
                   </a>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -497,7 +680,6 @@ const Index = () => {
             <div className="text-sm text-muted-foreground font-body">
               © 2025 <span className="font-heading font-semibold text-foreground">Abdulrasaq Abdulrasaq</span> · All rights reserved
             </div>
-
             <div className="flex items-center gap-5">
               {[
                 { icon: <Github className="w-6 h-6" />, href: "https://github.com/Quantum-techlab" },
@@ -505,11 +687,10 @@ const Index = () => {
                 { icon: <Mail className="w-6 h-6" />, href: "mailto:ola283dayo@gmail.com" },
               ].map((s, i) => (
                 <a key={i} href={s.href} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors">
+                  className="text-muted-foreground hover:text-primary transition-colors duration-300">
                   {s.icon}
                 </a>
               ))}
-
               <button onClick={scrollToTop}
                 className="ml-4 p-2.5 rounded-xl glass-card hover-glow text-muted-foreground hover:text-foreground transition-all duration-300"
                 aria-label="Back to top">
