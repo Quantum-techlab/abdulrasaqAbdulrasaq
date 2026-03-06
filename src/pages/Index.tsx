@@ -8,7 +8,7 @@ const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (delay: number = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.7, delay, ease: [0.25, 0.1, 0, 1] }
+    transition: { duration: 0.7, delay, ease: "easeOut" as const }
   })
 };
 
@@ -19,7 +19,7 @@ const staggerContainer = {
 
 const staggerItem = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
 };
 
 // ── 3D Tilt Card ──
