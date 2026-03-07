@@ -97,8 +97,8 @@
 
   body {
     @apply bg-background text-foreground font-body;
-    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   html {
@@ -107,11 +107,44 @@
 
   /* Smooth theme transition for all elements */
   *, *::before, *::after {
-    transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
+}
+
+/* Sunrise/Sunset theme transition overlay */
+.theme-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.theme-transition-overlay.to-light {
+  animation: sunriseWash 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  background: radial-gradient(ellipse at 50% 120%, #ff9f4320 0%, #fbbf2420 30%, #fde68a15 50%, transparent 80%);
+}
+
+.theme-transition-overlay.to-dark {
+  animation: sunsetWash 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  background: radial-gradient(ellipse at 50% -20%, #1e1b4b40 0%, #0f172a30 40%, #0D111720 60%, transparent 80%);
+}
+
+@keyframes sunriseWash {
+  0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+  30% { opacity: 1; }
+  70% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-20px) scale(1.05); }
+}
+
+@keyframes sunsetWash {
+  0% { opacity: 0; transform: translateY(-40px) scale(0.95); }
+  30% { opacity: 1; }
+  70% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(20px) scale(1.05); }
 }
 
 @layer components {
