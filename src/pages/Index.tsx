@@ -598,6 +598,14 @@ const Index = () => {
               </motion.div>
             </motion.div>
           </div>
+
+          {/* ── CMD Terminal Story ── */}
+          <motion.div
+            variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.3}
+            className="mt-20 max-w-4xl mx-auto"
+          >
+            <TerminalStory />
+          </motion.div>
         </div>
       </section>
 
