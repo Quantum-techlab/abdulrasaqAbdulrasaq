@@ -108,6 +108,116 @@ const TechIcons: Record<string, React.ReactNode> = {
   ),
 };
 
+// ── CMD Terminal Story ──
+const terminalLines = [
+  { type: 'cmd', text: 'C:\\Users\\Abdulrasaq> whoami' },
+  { type: 'output', text: 'Self-taught developer. No bootcamp. No CS degree (yet). Just pure curiosity.' },
+  { type: 'blank', text: '' },
+  { type: 'cmd', text: 'C:\\Users\\Abdulrasaq> cat origin_story.txt' },
+  { type: 'output', text: 'It all started with a simple question: "How do websites actually work?"' },
+  { type: 'output', text: 'That curiosity led me down a rabbit hole — HTML first, then CSS,' },
+  { type: 'output', text: 'then JavaScript hit me like a freight train. I was hooked.' },
+  { type: 'blank', text: '' },
+  { type: 'cmd', text: 'C:\\Users\\Abdulrasaq> cat journey.log' },
+  { type: 'output', text: '> Late nights debugging code I barely understood...' },
+  { type: 'output', text: '> YouTube tutorials at 2x speed, StackOverflow open in 47 tabs...' },
+  { type: 'output', text: '> Building projects no one asked for, just to prove I could.' },
+  { type: 'output', text: '> Failing. Breaking things. Fixing them. Repeat.' },
+  { type: 'blank', text: '' },
+  { type: 'cmd', text: 'C:\\Users\\Abdulrasaq> echo $CURRENT_STATUS' },
+  { type: 'output', text: 'Software Director @ ITSA | Mentoring the next wave of developers' },
+  { type: 'output', text: 'Teaching because someone once told me "you can\'t learn to code on your own."' },
+  { type: 'output', text: 'I took that personally. Now I help others prove the same thing wrong.' },
+  { type: 'blank', text: '' },
+  { type: 'cmd', text: 'C:\\Users\\Abdulrasaq> echo $PHILOSOPHY' },
+  { type: 'output', text: '"The best developers aren\'t the ones who know everything —' },
+  { type: 'output', text: ' they\'re the ones who never stop being curious."' },
+  { type: 'blank', text: '' },
+  { type: 'cmd', text: 'C:\\Users\\Abdulrasaq> _' },
+];
+
+const TerminalStory = () => {
+  const [visibleLines, setVisibleLines] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  const terminalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isInView) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (terminalRef.current) observer.observe(terminalRef.current);
+    return () => observer.disconnect();
+  }, [isInView]);
+
+  useEffect(() => {
+    if (!isInView) return;
+    if (visibleLines >= terminalLines.length) return;
+
+    const currentLine = terminalLines[visibleLines];
+    const delay = currentLine?.type === 'cmd' ? 600 : currentLine?.type === 'blank' ? 200 : 80;
+
+    const timer = setTimeout(() => {
+      setVisibleLines(v => v + 1);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [isInView, visibleLines]);
+
+  useEffect(() => {
+    if (terminalRef.current) {
+      const scrollEl = terminalRef.current.querySelector('.terminal-scroll');
+      if (scrollEl) scrollEl.scrollTop = scrollEl.scrollHeight;
+    }
+  }, [visibleLines]);
+
+  return (
+    <div ref={terminalRef} className="rounded-2xl overflow-hidden glass-card border border-border/50">
+      {/* Terminal title bar */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30 bg-card/50">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-destructive/70" />
+          <div className="w-3 h-3 rounded-full bg-amber-500/70" />
+          <div className="w-3 h-3 rounded-full bg-green-500/70" />
+        </div>
+        <span className="text-xs font-mono text-muted-foreground ml-2">abdulrasaq@dev — cmd</span>
+      </div>
+      {/* Terminal body */}
+      <div className="terminal-scroll p-5 md:p-6 max-h-[420px] overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
+        <div className="space-y-1">
+          {terminalLines.slice(0, visibleLines).map((line, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className={`font-mono text-sm leading-relaxed ${
+                line.type === 'cmd'
+                  ? 'text-primary font-semibold'
+                  : line.type === 'blank'
+                  ? 'h-3'
+                  : 'text-muted-foreground pl-0 md:pl-2'
+              }`}
+            >
+              {line.text}
+            </motion.div>
+          ))}
+          {visibleLines < terminalLines.length && isInView && (
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.6, repeat: Infinity, repeatType: 'reverse' }}
+              className="inline-block w-2.5 h-4 bg-primary ml-1 align-middle"
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
