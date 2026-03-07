@@ -34,7 +34,19 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    
+    // Create sunrise/sunset overlay
+    const overlay = document.createElement('div');
+    overlay.className = `theme-transition-overlay ${newTheme === 'light' ? 'to-light' : 'to-dark'}`;
+    document.body.appendChild(overlay);
+    
+    // Remove overlay after animation
+    setTimeout(() => {
+      overlay.remove();
+    }, 1500);
+
+    setTheme(newTheme);
   };
 
   return (
