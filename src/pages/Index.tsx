@@ -454,11 +454,13 @@ const Index = () => {
           <HeroParticleField mousePos={mousePos} />
         </Suspense>
 
-        <div className="absolute inset-0 pointer-events-none transition-opacity duration-500" style={{ zIndex: 1 }}
+        <div className="absolute inset-0 pointer-events-none transition-opacity duration-500"
           style={{
+            zIndex: 1,
             background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, hsl(var(--primary) / 0.06), transparent 60%)`,
           }} />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ zIndex: 1,
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          zIndex: 1,
           backgroundImage: `linear-gradient(hsl(var(--primary) / 0.4) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary) / 0.4) 1px, transparent 1px)`,
           backgroundSize: '80px 80px',
         }} />
