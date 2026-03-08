@@ -204,6 +204,12 @@ const Index = () => {
     setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   }, []);
 
+  const handleHeroTouch = useCallback((e: React.TouchEvent) => {
+    if (!heroRef.current || !e.touches[0]) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    setMousePos({ x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top });
+  }, []);
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
