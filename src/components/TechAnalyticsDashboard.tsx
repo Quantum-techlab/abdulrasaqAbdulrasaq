@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { TechBrandIcons } from './TechBrandIcons';
 import { 
   BarChart3, 
   TrendingUp, 
