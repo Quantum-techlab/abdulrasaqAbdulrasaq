@@ -562,7 +562,7 @@ const Index = () => {
                 <div className="absolute inset-[3px] rounded-2xl overflow-hidden">
                   <img src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" alt="Abdulrasaq Abdulrasaq"
                     className="w-full h-full object-cover"
-                    style={{ objectPosition: 'center 15%', transform: 'scale(1.2)', transformOrigin: 'center 25%' }} />
+                    style={{ objectPosition: 'center 10%', transform: 'scale(1.35)', transformOrigin: 'center 20%' }} />
                 </div>
               </div>
             </motion.div>
