@@ -454,7 +454,7 @@ const Index = () => {
       </motion.nav>
 
       {/* ─── HERO ─── */}
-      <section ref={heroRef} onMouseMove={handleHeroMouse} className="min-h-screen flex items-center justify-center relative pt-16">
+      <section ref={heroRef} onMouseMove={handleHeroMouse} onTouchMove={handleHeroTouch} className="min-h-screen flex items-center justify-center relative pt-16">
         {/* Three.js Particle Wave Background */}
         <Suspense fallback={null}>
           <HeroParticleField mousePos={mousePos} />
