@@ -3,6 +3,9 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motio
 import { Github, Linkedin, Mail, ExternalLink, MapPin, ArrowRight, Download, ArrowUp, Terminal, Globe, Wrench, ChevronRight, ChevronLeft, Star, Quote, Menu, X, Moon, Sun, Award } from "lucide-react";
 import { TypewriterText } from "@/components/TypewriterText";
 import { useTheme } from "@/contexts/ThemeContext";
+import { lazy, Suspense } from 'react';
+
+const HeroParticleField = lazy(() => import('@/components/HeroParticleField'));
 
 // ── Animation variants ──
 const fadeInUp = {
