@@ -1,6 +1,9 @@
-import { useRef, useMemo, useCallback, useEffect, useState } from 'react';
+import { useRef, useMemo, useCallback, useEffect, useState, lazy, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useTheme } from '@/contexts/ThemeContext';
+
+const GeometricMesh = lazy(() => import('@/components/HeroGeometricMesh'));
 
 const PARTICLE_COUNT = 3000;
 
@@ -206,12 +209,13 @@ interface HeroParticleFieldProps {
 const HeroParticleField = ({ mousePos }: HeroParticleFieldProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const { theme } = useTheme();
 
   // Device orientation for mobile tilt
   useEffect(() => {
     const handleOrientation = (e: DeviceOrientationEvent) => {
-      const x = (e.gamma || 0) / 45; // left/right tilt, normalized to ~[-1, 1]
-      const y = (e.beta || 0) / 45;  // front/back tilt
+      const x = (e.gamma || 0) / 45;
+      const y = (e.beta || 0) / 45;
       setTilt({ x: Math.max(-1, Math.min(1, x)), y: Math.max(-1, Math.min(1, y - 0.5)) });
     };
 
@@ -246,11 +250,21 @@ const HeroParticleField = ({ mousePos }: HeroParticleFieldProps) => {
         gl={{ alpha: true, antialias: true }}
         dpr={[1, 1.5]}
       >
-        <StarField
-          mousePos={mousePos}
-          containerSize={getContainerSize()}
-          tilt={tilt}
-        />
+        {theme === 'dark' ? (
+          <StarField
+            mousePos={mousePos}
+            containerSize={getContainerSize()}
+            tilt={tilt}
+          />
+        ) : (
+          <Suspense fallback={null}>
+            <GeometricMesh
+              mousePos={mousePos}
+              containerSize={getContainerSize()}
+              tilt={tilt}
+            />
+          </Suspense>
+        )}
       </Canvas>
     </div>
   );
