@@ -1,6 +1,9 @@
-import { useRef, useMemo, useCallback, useEffect, useState } from 'react';
+import { useRef, useMemo, useCallback, useEffect, useState, lazy, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useTheme } from '@/contexts/ThemeContext';
+
+const GeometricMesh = lazy(() => import('@/components/HeroGeometricMesh'));
 
 const PARTICLE_COUNT = 3000;
 
