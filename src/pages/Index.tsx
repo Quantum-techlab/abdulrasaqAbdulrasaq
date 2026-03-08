@@ -3,6 +3,9 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motio
 import { Github, Linkedin, Mail, ExternalLink, MapPin, ArrowRight, Download, ArrowUp, Terminal, Globe, Wrench, ChevronRight, ChevronLeft, Star, Quote, Menu, X, Moon, Sun, Award } from "lucide-react";
 import { TypewriterText } from "@/components/TypewriterText";
 import { useTheme } from "@/contexts/ThemeContext";
+import { lazy, Suspense } from 'react';
+
+const HeroParticleField = lazy(() => import('@/components/HeroParticleField'));
 
 // ── Animation variants ──
 const fadeInUp = {
@@ -446,11 +449,18 @@ const Index = () => {
 
       {/* ─── HERO ─── */}
       <section ref={heroRef} onMouseMove={handleHeroMouse} className="min-h-screen flex items-center justify-center relative pt-16">
+        {/* Three.js Particle Wave Background */}
+        <Suspense fallback={null}>
+          <HeroParticleField mousePos={mousePos} />
+        </Suspense>
+
         <div className="absolute inset-0 pointer-events-none transition-opacity duration-500"
           style={{
+            zIndex: 1,
             background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, hsl(var(--primary) / 0.06), transparent 60%)`,
           }} />
         <div className="absolute inset-0 opacity-[0.03]" style={{
+          zIndex: 1,
           backgroundImage: `linear-gradient(hsl(var(--primary) / 0.4) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary) / 0.4) 1px, transparent 1px)`,
           backgroundSize: '80px 80px',
         }} />
