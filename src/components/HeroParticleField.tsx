@@ -2,7 +2,7 @@ import { useRef, useMemo, useCallback, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const PARTICLE_COUNT = 2500;
+const PARTICLE_COUNT = 3000;
 
 interface StarFieldProps {
   mousePos: { x: number; y: number };
