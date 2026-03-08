@@ -457,10 +457,7 @@ const Index = () => {
 
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
           <motion.div variants={staggerContainer} initial="hidden" animate="visible">
-            <motion.div variants={staggerItem} className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full glass-card">
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-xs font-mono text-muted-foreground">Available for opportunities</span>
-            </motion.div>
+
 
             <motion.h1 variants={staggerItem}
               className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight-heading leading-[0.92] mb-6">
