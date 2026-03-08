@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { TechBrandIcons } from './TechBrandIcons';
 import { 
   BarChart3, 
   TrendingUp, 
@@ -234,8 +235,9 @@ const TechCard = ({
               className="text-2xl"
               animate={{ rotate: isExpanded ? 360 : 0 }}
               transition={{ duration: 0.5 }}
+              style={{ color }}
             >
-              {tech.icon}
+              {TechBrandIcons[tech.name] || tech.icon}
             </motion.span>
             <div>
               <h4 className="font-semibold text-foreground">{tech.name}</h4>
