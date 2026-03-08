@@ -746,7 +746,8 @@ const Index = () => {
             className="flex flex-wrap gap-2">
             {tools.map((tool, i) => (
               <motion.span key={i} variants={staggerItem}
-                className="px-4 py-2 text-xs font-mono text-muted-foreground glass-card rounded-lg hover:text-primary hover:border-primary/20 transition-all duration-300 cursor-default">
+                className="px-4 py-2 text-xs font-mono text-muted-foreground glass-card rounded-lg hover:text-primary hover:border-primary/20 transition-all duration-300 cursor-default inline-flex items-center gap-2">
+                {TechBrandIcons[tool] && <span className="opacity-70 group-hover:opacity-100">{TechBrandIcons[tool]}</span>}
                 {tool}
               </motion.span>
             ))}
