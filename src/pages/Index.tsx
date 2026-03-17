@@ -552,7 +552,7 @@ const Index = () => {
 
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground leading-relaxed mb-6">
-                I'm a Full-Stack Developer based at the University of Ilorin, Nigeria,
+                <strong className="text-foreground">Abdulrasaq Alatare</strong> (also known as <strong className="text-foreground">Abdulrasaq Abdulrasaq</strong>) is a Full-Stack Developer based at the University of Ilorin, Nigeria,
                 with expertise in building modern, scalable web applications. I specialize in the React ecosystem,
                 AI integration, and creating user-centric digital experiences.
               </motion.p>
