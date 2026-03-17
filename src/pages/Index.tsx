@@ -479,7 +479,7 @@ const Index = () => {
               className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight-heading leading-[0.92] mb-6">
               Abdulrasaq
               <br />
-              <span className="text-gradient">Alatare</span>
+              <span className="text-gradient">Abdulrasaq</span>
             </motion.h1>
 
             <motion.div variants={staggerItem} className="flex items-center justify-center gap-3 mb-8">
