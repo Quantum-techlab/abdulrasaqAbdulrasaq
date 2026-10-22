@@ -1,0 +1,115 @@
+{
+  "site": "https://abdulrasaq-abdulrasaq.vercel.app",
+  "defaultImage": "/og-image.jpg",
+  "lastmod": "2026-10-22",
+  "routes": [
+    {
+      "path": "/",
+      "name": "Home",
+      "title": "Abdulrasaq Alatare — Full-Stack Developer, FaceTrust AI",
+      "description": "Full-stack developer (React, TypeScript, Next.js) in Ilorin, Nigeria. Co-founder of FaceTrust AI and ₦50M S-VCG 2026 grant winner. UNILORIN IT, Class of 2026.",
+      "priority": "1.0",
+      "changefreq": "weekly",
+      "schemaType": "WebPage"
+    },
+    {
+      "path": "/about",
+      "name": "About",
+      "title": "About Abdulrasaq Alatare | University of Ilorin, IT 2026",
+      "description": "Meet Abdulrasaq Abdulrasaq Alatare: self-taught full-stack developer, University of Ilorin IT graduate (Class of 2026) and ITSA Software Director 2025/26.",
+      "h1": "About Abdulrasaq Alatare",
+      "priority": "0.9",
+      "changefreq": "monthly",
+      "schemaType": "ProfilePage"
+    },
+    {
+      "path": "/projects",
+      "name": "Projects",
+      "title": "Projects — FaceTrust AI, SuperviseOS, UniVehicle QR",
+      "description": "Web apps by Abdulrasaq Alatare: FaceTrust AI face verification, SuperviseOS project supervision, UniVehicle QR campus vehicle checks, MindConnect and more.",
+      "h1": "Projects",
+      "priority": "0.9",
+      "changefreq": "monthly",
+      "schemaType": "CollectionPage"
+    },
+    {
+      "path": "/projects/facetrust-ai",
+      "name": "FaceTrust AI",
+      "title": "FaceTrust AI — NIN & BVN Face Verification for Nigeria",
+      "description": "FaceTrust AI links a NIN or BVN identity to a live, liveness-checked face to verify people in seconds. Co-founded by Abdulrasaq Alatare. ₦50M S-VCG 2026.",
+      "h1": "FaceTrust AI",
+      "image": "/previews/facetrust.jpg",
+      "project": "facetrust-ai",
+      "priority": "0.9",
+      "changefreq": "monthly",
+      "schemaType": "WebPage",
+      "demo": "https://facetrustai.com/"
+    },
+    {
+      "path": "/projects/superviseos",
+      "name": "SuperviseOS",
+      "title": "SuperviseOS — Final Year Project Supervision Software",
+      "description": "SuperviseOS: final year project supervision software with milestones, submissions, reviews, automatic risk detection and supervisor workload in one view.",
+      "h1": "SuperviseOS",
+      "image": "/previews/superviseos.jpg",
+      "project": "superviseos",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "schemaType": "WebPage",
+      "demo": "https://superviseos.vercel.app/"
+    },
+    {
+      "path": "/projects/univehicle-qr",
+      "name": "UniVehicle QR",
+      "title": "UniVehicle QR — QR Vehicle Verification, Unilorin",
+      "description": "QR code driver and vehicle verification for the University of Ilorin campus shuttle: driver registration, real-time scans and an admin dashboard.",
+      "h1": "UniVehicle QR",
+      "image": "/previews/univehicleqr.jpg",
+      "project": "univehicle-qr",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "schemaType": "WebPage",
+      "demo": "https://univehicleqr.vercel.app/"
+    },
+    {
+      "path": "/experience",
+      "name": "Experience",
+      "title": "Experience — Abdulrasaq Alatare, Full-Stack Developer",
+      "description": "Abdulrasaq Alatare's experience: Software Director at ITSA, University of Ilorin (2025/26), and front-end roles at Torvix AI and Ilorin Innovation Hub.",
+      "h1": "Experience",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "schemaType": "WebPage"
+    },
+    {
+      "path": "/skills",
+      "name": "Skills",
+      "title": "Skills — React, TypeScript, Next.js | Abdulrasaq Alatare",
+      "description": "Abdulrasaq Alatare builds with React, TypeScript, Next.js, Node.js, Supabase and Tailwind CSS, plus AI integration, OCR, PostgreSQL and Docker.",
+      "h1": "Skills & Tech Stack",
+      "priority": "0.7",
+      "changefreq": "monthly",
+      "schemaType": "WebPage"
+    },
+    {
+      "path": "/awards",
+      "name": "Awards",
+      "title": "₦50M S-VCG 2026 Grant Winner — Abdulrasaq Alatare",
+      "description": "Abdulrasaq Alatare won the ₦50M Federal Government Students Venture Capital Grant (S-VCG/FG-SVCG) 2026 for FaceTrust AI, one of 45 from 36,000+.",
+      "h1": "Awards & Certifications",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "schemaType": "WebPage"
+    },
+    {
+      "path": "/contact",
+      "name": "Contact",
+      "title": "Hire Abdulrasaq Alatare — Full-Stack Developer, Nigeria",
+      "description": "Hire Abdulrasaq Alatare, a React and Next.js full-stack developer in Ilorin, Nigeria, for web apps, AI integration and product builds.",
+      "h1": "Hire Abdulrasaq Alatare",
+      "priority": "0.7",
+      "changefreq": "yearly",
+      "schemaType": "ContactPage"
+    }
+  ]
+}

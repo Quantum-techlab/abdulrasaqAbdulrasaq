@@ -1,29 +1,37 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, useMotionValue, useSpring, AnimatePresence, MotionConfig } from 'framer-motion';
 import { Github, Linkedin, Mail, ExternalLink, MapPin, ArrowRight, Download, ArrowUp, Terminal, Globe, Wrench, ChevronRight, ChevronLeft, Star, Quote, Menu, X, Moon, Sun, Award } from "lucide-react";
 import { TypewriterText } from "@/components/TypewriterText";
 import { useTheme } from "@/contexts/ThemeContext";
 import { lazy, Suspense } from 'react';
+import type { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGsapEffects, smoothScrollTo } from '@/hooks/useGsapEffects';
+import { RollText } from '@/components/RollText';
+import { Link } from 'react-router-dom';
+import { useSeo, ROUTES } from '@/seo/useSeo';
+import { projects, experiences, certifications, coreStack, tools, testimonials } from '@/data/portfolio';
+import { LiquidLogo } from '@/components/LiquidLogo';
+import { useLiquidGlass } from '@/hooks/useLiquidGlass';
 
 const HeroParticleField = lazy(() => import('@/components/HeroParticleField'));
 
 // ── Animation variants ──
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 24 },
   visible: (delay: number = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.7, delay, ease: "easeOut" as const }
+    transition: { duration: 0.8, delay, ease: [0.25, 0.1, 0, 1] as const }
   })
 };
 
 const staggerContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } }
 };
 
 const staggerItem = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0, 1] as const } }
 };
 
 // ── 3D Tilt Card ──
@@ -39,15 +47,15 @@ const TiltCard = ({ children, className = '', featured = false }: { children: Re
     const rect = ref.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    rotateX.set(y * -8);
-    rotateY.set(x * 8);
+    rotateX.set(y * -6);
+    rotateY.set(x * 6);
   };
 
   const handleLeave = () => { rotateX.set(0); rotateY.set(0); };
 
   return (
     <motion.div ref={ref} onMouseMove={handleMouse} onMouseLeave={handleLeave}
-      style={{ rotateX: springX, rotateY: springY, transformPerspective: 800 }}
+      style={{ rotateX: springX, rotateY: springY, transformPerspective: 1000 }}
       className={className}>
       {children}
     </motion.div>
@@ -71,7 +79,7 @@ const MagneticButton = ({ children, className = '', ...props }: React.ComponentP
 
   return (
     <motion.a ref={ref} onMouseMove={handleMouse} onMouseLeave={() => { x.set(0); y.set(0); }}
-      style={{ x: springX, y: springY }} className={`magnetic-btn ${className}`} {...props as any}>
+      style={{ x: springX, y: springY }} className={className} {...props as any}>
       {children}
     </motion.a>
   );
@@ -80,6 +88,27 @@ const MagneticButton = ({ children, className = '', ...props }: React.ComponentP
 // ── Tech Icons (actual brand SVGs) ──
 import { TechBrandIcons, TechBrandIconsLarge } from '@/components/TechBrandIcons';
 const TechIcons = TechBrandIconsLarge;
+
+// ── Section header: index label, dashed hairline, uppercase heading ──
+const SectionHead = ({ index, label, title, className = '' }: { index: string; label: string; title: React.ReactNode; className?: string }) => (
+  <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0} className={className}>
+    <div className="flex items-center justify-between t-label mb-4">
+      <span>({index})</span>
+      <span>{label}</span>
+    </div>
+    <hr className="rule-dashed mb-10 md:mb-14" />
+    <h2 data-split-scroll className="t-heading max-w-[18ch]">{title}</h2>
+  </motion.div>
+);
+
+// ── Project preview: the "object" in each void-mode reveal ──
+const ProjectPreview = ({ url, title, image, scan = false }: { url: string; title: string; image?: string; scan?: boolean }) => (
+  <div className="relative aspect-[4/3] w-full overflow-hidden card-edge bg-surface/40">
+    {image && <img src={image} alt={`${title} website`} width={1280} height={960} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-top" />}
+    {scan && <div className="ocr-scan-line" />}
+    <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${title} live site`} className="absolute inset-0 z-[3]" />
+  </div>
+);
 
 // ── CMD Terminal Story ──
 const terminalLines = [
@@ -98,7 +127,8 @@ const terminalLines = [
   { type: 'output', text: '> Failing. Breaking things. Fixing them. Repeat.' },
   { type: 'blank', text: '' },
   { type: 'cmd', text: 'C:\\Users\\Abdulrasaq> echo $CURRENT_STATUS' },
-  { type: 'output', text: 'Software Director @ ITSA | Mentoring the next wave of developers' },
+  { type: 'output', text: 'Information Technology graduate, Class of 2026 | Co-founder @ FaceTrust AI' },
+  { type: 'output', text: 'Software Director @ ITSA (2025/2026) | Mentoring the next wave of developers' },
   { type: 'output', text: 'Teaching because someone once told me "you can\'t learn to code on your own."' },
   { type: 'output', text: 'I took that personally. Now I help others prove the same thing wrong.' },
   { type: 'blank', text: '' },
@@ -148,32 +178,32 @@ const TerminalStory = () => {
   }, [visibleLines]);
 
   return (
-    <div ref={terminalRef} className="rounded-2xl overflow-hidden glass-card border border-border/50">
+    <div ref={terminalRef} className="card-edge overflow-hidden">
       {/* Terminal title bar */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-border/30 bg-card/50">
-        <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-destructive/70" />
-          <div className="w-3 h-3 rounded-full bg-amber-500/70" />
-          <div className="w-3 h-3 rounded-full bg-green-500/70" />
+      <div className="flex items-center justify-between gap-3 px-6 py-4 border-b border-dashed border-line">
+        <span className="t-label">abdulrasaq@dev — cmd</span>
+        <div className="flex gap-1.5" aria-hidden>
+          <div className="w-2.5 h-2.5 rounded-full border border-line-strong" />
+          <div className="w-2.5 h-2.5 rounded-full border border-line-strong" />
+          <div className="w-2.5 h-2.5 rounded-full border border-line-strong" />
         </div>
-        <span className="text-xs font-mono text-muted-foreground ml-2">abdulrasaq@dev — cmd</span>
       </div>
       {/* Terminal body */}
-      <div className="terminal-scroll p-5 md:p-6 max-h-[420px] overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
-        <div className="space-y-1">
+      <div className="terminal-scroll px-6 py-6 md:px-8 h-[460px] overflow-y-auto" style={{ scrollBehavior: 'smooth' }}>
+        <div className="space-y-1.5">
           {terminalLines.slice(0, visibleLines).map((line, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              className={`font-mono text-sm leading-relaxed ${
+              className={
                 line.type === 'cmd'
-                  ? 'text-primary font-semibold'
+                  ? 't-label text-[13px] pt-1'
                   : line.type === 'blank'
                   ? 'h-3'
-                  : 'text-muted-foreground pl-0 md:pl-2'
-              }`}
+                  : 't-body-sm md:pl-4'
+              }
             >
               {line.text}
             </motion.div>
@@ -182,7 +212,7 @@ const TerminalStory = () => {
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.6, repeat: Infinity, repeatType: 'reverse' }}
-              className="inline-block w-2.5 h-4 bg-primary ml-1 align-middle"
+              className="inline-block w-2 h-3.5 bg-ink ml-1 align-middle"
             />
           )}
         </div>
@@ -192,163 +222,24 @@ const TerminalStory = () => {
 };
 
 const Index = () => {
+  useSeo('/');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [processIndex, setProcessIndex] = useState(0);
+  const [activeSection, setActiveSection] = useState('');
+  const [navHidden, setNavHidden] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const navPillRef = useRef<HTMLDivElement>(null);
+  useLiquidGlass(navPillRef, { depth: 20, scale: 30 });
+  const processTriggerRef = useRef<ScrollTrigger | null>(null);
   const { theme, toggleTheme } = useTheme();
-
-  const handleHeroMouse = useCallback((e: React.MouseEvent) => {
-    if (!heroRef.current) return;
-    const rect = heroRef.current.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  }, []);
-
-  const handleHeroTouch = useCallback((e: React.TouchEvent) => {
-    if (!heroRef.current || !e.touches[0]) return;
-    const rect = heroRef.current.getBoundingClientRect();
-    setMousePos({ x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top });
-  }, []);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) smoothScrollTo(el);
   };
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  const projects = [
-    {
-      title: "MindConnect",
-      description: "AI-driven mental wellness platform enabling anonymous conversations, guided support sessions, and mood tracking with intelligent recommendations.",
-      tech: ["React", "AI", "Node.js", "Tailwind CSS", "WebSocket"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "https://mindconnect-one.vercel.app/",
-      featured: true,
-      tag: "Featured",
-    },
-    {
-      title: "Textify OCR",
-      description: "Versatile text extraction app converting images and audio into editable text using Tesseract.js and advanced speech recognition.",
-      tech: ["React", "Tesseract.js", "Speech-to-Text", "Tailwind CSS"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "https://texify-ocr.vercel.app/",
-      featured: true,
-      tag: "Technical Achievement",
-      hasOcrScan: true,
-    },
-    {
-      title: "FaceTrust AI",
-      description: "AI-powered facial recognition system for secure identity verification and centralized data access using deep learning models.",
-      tech: ["React", "AI/ML", "Deep Learning", "Facial Recognition"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "https://facetrust-rho.vercel.app/",
-      featured: false,
-    },
-    {
-      title: "Attendance System",
-      description: "Modern attendance tracking for Ilorin Innovation Hub interns with real-time monitoring and analytics.",
-      tech: ["React", "Supabase", "TypeScript", "Geolocation"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "https://iih-hub.vercel.app/",
-      featured: false,
-    },
-    {
-      title: "ScanShare",
-      description: "Advanced document scanning and sharing platform with OCR capabilities and cloud storage integration.",
-      tech: ["React", "OCR", "Cloud Storage", "Web APIs"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "#",
-      featured: false,
-    },
-    {
-      title: "SynBridge",
-      description: "Cross-device clipboard and file sync tool with end-to-end encryption.",
-      tech: ["React", "Supabase", "WebSockets", "Encryption"],
-      github: "https://github.com/Quantum-techlab",
-      demo: "#",
-      featured: false,
-    },
-  ];
-
-  const experiences = [
-    {
-      title: "Software Director & Tech Lead",
-      company: "ITSA - University of Ilorin",
-      period: "2025 – Present",
-      description: "Leading software innovation initiatives within the department while fostering a collaborative environment for student developers.",
-      responsibilities: [
-        "Spearhead departmental software development projects",
-        "Mentor fellow students in modern web development",
-        "Organize coding workshops and technical sessions",
-      ],
-    },
-    {
-      title: "Front-End Developer Intern",
-      company: "Torvix AI",
-      period: "2025 – Present",
-      description: "Building modern, responsive web interfaces with a fast-paced AI team, contributing to human-centered digital experiences.",
-      responsibilities: [
-        "Build responsive web pages using React.js",
-        "Convert UI/UX designs into functional interfaces",
-        "Ensure cross-browser compatibility and performance",
-      ],
-    },
-    {
-      title: "Frontend Developer Intern",
-      company: "Ilorin Innovation Hub",
-      period: "2025 – Present",
-      description: "Developing modern web applications with focus on React ecosystem, building dashboards and implementing advanced features.",
-      responsibilities: [
-        "Built React components with authentication flows",
-        "Implemented Supabase integration for auth and database",
-        "Developed geolocation features with role-based access control",
-      ],
-    },
-  ];
-
-  const certifications = [
-    {
-      title: "HackerRank Frontend Developer (React)",
-      issuer: "HackerRank",
-      date: "2025",
-      credential: "Verified",
-    },
-    {
-      title: "Responsive Web Design",
-      issuer: "freeCodeCamp",
-      date: "2024",
-      credential: "Verified",
-    },
-    {
-      title: "JavaScript Algorithms & Data Structures",
-      issuer: "freeCodeCamp",
-      date: "2024",
-      credential: "Verified",
-    },
-  ];
-
-  const coreStack = [
-    { name: "React", icon: "React" },
-    { name: "TypeScript", icon: "TypeScript" },
-    { name: "Node.js", icon: "Node.js" },
-    { name: "Tailwind CSS", icon: "Tailwind CSS" },
-    { name: "Supabase", icon: "Supabase" },
-    { name: "Next.js", icon: "Next.js" },
-  ];
-
-  const tools = [
-    "Git/GitHub", "Docker", "Vite", "Firebase", "PostgreSQL", "MongoDB",
-    "REST APIs", "GraphQL", "Figma", "VS Code", "Cloud Deployment", "AI Integration",
-    "Prompt Engineering", "OCR", "Accessibility", "Responsive Design",
-  ];
-
-  const testimonials = [
-    { text: "Abdulrasaq's attention to detail and technical skill consistently exceeded expectations. A rare talent.", author: "Tech Lead, Torvix AI", role: "Manager" },
-    { text: "His ability to translate complex designs into pixel-perfect, performant code is exceptional.", author: "Design Lead, IIH", role: "Colleague" },
-    { text: "One of the most dedicated developers I've worked with. Always delivers quality work ahead of schedule.", author: "Senior Developer", role: "Mentor" },
-    { text: "Abdulrasaq brings both creativity and solid engineering to every project. Highly recommend.", author: "Project Manager", role: "Client" },
-  ];
+  const scrollToTop = () => smoothScrollTo(0);
 
   const processSteps = [
     { step: "01", title: "Plan", desc: "Research, architecture & design systems", icon: <Terminal className="w-8 h-8" /> },
@@ -370,583 +261,642 @@ const Index = () => {
   const featuredProjects = projects.filter(p => p.featured);
   const smallProjects = projects.filter(p => !p.featured);
 
-  const nextProcess = () => setProcessIndex(i => Math.min(i + 1, processSteps.length - 1));
-  const prevProcess = () => setProcessIndex(i => Math.max(i - 1, 0));
+  useGsapEffects(rootRef, { onProcessStep: setProcessIndex, processSteps: processSteps.length, processTriggerRef });
+
+  // While the Process section is pinned, steps are driven by scroll, so controls scroll to the step
+  const goToProcess = (i: number) => {
+    const step = Math.max(0, Math.min(i, processSteps.length - 1));
+    const st = processTriggerRef.current;
+    if (st) smoothScrollTo(st.start + ((st.end - st.start) * (step + 0.5)) / processSteps.length);
+    else setProcessIndex(step);
+  };
+  const nextProcess = () => goToProcess(processIndex + 1);
+  const prevProcess = () => goToProcess(processIndex - 1);
+
+  // Scroll-spy for the dashed active indicator in the nav
+  useEffect(() => {
+    const ids = navItems.map(n => n.href.slice(1));
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    // Hide the nav while scrolling down, reveal it the moment the user scrolls up
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (Math.abs(y - lastY) < 6) return;
+      setNavHidden(y > lastY && y > 80);
+      lastY = y;
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
+  const socials = [
+    { icon: <Github className="w-4 h-4" />, name: "GitHub", label: "GitHub profile", href: "https://github.com/Quantum-techlab" },
+    { icon: <Linkedin className="w-4 h-4" />, name: "LinkedIn", label: "LinkedIn profile", href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
+    { icon: <Mail className="w-4 h-4" />, name: "Email", label: "Email Abdulrasaq", href: "mailto:ola283dayo@gmail.com" },
+  ];
+
+  const sectionPad = "py-[clamp(68px,10vw,160px)]";
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* ─── NAVIGATION ─── */}
-      <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1] }}
-        className="fixed top-0 w-full z-50 glass-card">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center h-16">
-            <span className="font-heading font-bold text-xl tracking-tight-heading">
-              AA<span className="text-primary">.</span>
-            </span>
-            <div className="hidden md:flex items-center gap-8">
-              {navItems.map(item => (
-                <a key={item.href} href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 font-body">
-                  {item.label}
-                </a>
-              ))}
-            </div>
-            <div className="flex items-center gap-3">
-              {/* Theme Toggle */}
-              <motion.button
-                onClick={toggleTheme}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="relative w-10 h-10 rounded-full glass-card flex items-center justify-center hover:border-primary/30 transition-all duration-500"
-                aria-label="Toggle theme"
-              >
-                <AnimatePresence mode="wait">
-                  {theme === 'dark' ? (
-                    <motion.div
-                      key="sun"
-                      initial={{ rotate: -90, scale: 0, opacity: 0 }}
-                      animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                      exit={{ rotate: 90, scale: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                    >
-                      <Sun className="w-4 h-4 text-amber-400" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="moon"
-                      initial={{ rotate: 90, scale: 0, opacity: 0 }}
-                      animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                      exit={{ rotate: -90, scale: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                    >
-                      <Moon className="w-4 h-4 text-primary" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+    <MotionConfig reducedMotion="user">
+    <div ref={rootRef} className="min-h-screen bg-canvas text-ink overflow-x-hidden">
+      {/* ─── NAVIGATION (floating glass pill: logo / centred links / CTA) ─── */}
+      <motion.nav initial={{ y: -40, opacity: 0 }} animate={{ y: navHidden && !mobileMenuOpen ? '-140%' : 0, opacity: 1 }} transition={{ duration: 0.45, ease: [0.25, 0.1, 0, 1] }}
+        className="fixed top-3 md:top-4 inset-x-0 z-50 gutter">
+        <div ref={navPillRef} className="glass-nav grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center h-16 md:h-[72px] pl-5 md:pl-7 pr-2.5 md:pr-3">
+          <a href="#" onClick={(e) => { e.preventDefault(); scrollToTop(); }} className="inline-flex items-center justify-self-start" aria-label="Back to top">
+            <LiquidLogo />
+          </a>
 
-              <a href="mailto:ola283dayo@gmail.com" className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg btn-primary text-sm font-heading font-semibold">
-                <Mail className="w-4 h-4" /> Hire Me
+          <div className="hidden lg:flex items-center gap-8 xl:gap-10">
+            {navItems.map(item => (
+              <a key={item.href} href={item.href}
+                data-scramble
+                className={`t-label text-[13px] ${activeSection === item.href.slice(1) ? 'nav-active' : ''}`}>
+                {item.label}
               </a>
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? "Close menu" : "Open menu"} className="md:hidden text-foreground p-2">
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 justify-self-end">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="btn-ghost btn-round border-line-strong"
+              aria-label="Toggle theme"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {theme === 'dark' ? (
+                  <motion.span key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.3 }}>
+                    <Sun className="w-4 h-4" />
+                  </motion.span>
+                ) : (
+                  <motion.span key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.3 }}>
+                    <Moon className="w-4 h-4" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+
+            <a href="mailto:ola283dayo@gmail.com" data-magnetic className="hidden md:inline-flex btn-cream">
+              <Mail className="w-4 h-4" /> <RollText>Hire Me</RollText>
+            </a>
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={mobileMenuOpen}
+              className="lg:hidden btn-ghost btn-round border-line-strong">
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
           </div>
         </div>
+      </motion.nav>
 
-        {/* Mobile menu */}
+      {/* Mobile menu — full-viewport void */}
+      <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-border">
-            <div className="container mx-auto px-6 py-4 flex flex-col gap-3">
-              {navItems.map(item => (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
+            className="lg:hidden fixed inset-0 z-40 bg-canvas gutter pt-28 pb-8 flex flex-col">
+            <nav className="flex flex-col">
+              {navItems.map((item, i) => (
                 <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors py-2 font-body">
-                  {item.label}
+                  className="flex items-baseline justify-between py-4 border-b border-dashed border-line">
+                  <span className="t-heading-sm">{item.label}</span>
+                  <span className="t-label">0{i + 1}</span>
                 </a>
               ))}
-              <a href="mailto:ola283dayo@gmail.com" className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg btn-primary text-sm font-heading font-semibold mt-2">
-                <Mail className="w-4 h-4" /> Hire Me
+            </nav>
+            <a href="mailto:ola283dayo@gmail.com" className="btn-fill mt-auto">
+              <Mail className="w-4 h-4" /> Hire Me
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Everything below scrolls inside ScrollSmoother; fixed layers stay above */}
+      <div id="smooth-wrapper">
+      <div id="smooth-content">
+
+      {/* ─── HERO ─── */}
+      <section ref={heroRef}
+        className="relative min-h-[100svh] flex flex-col justify-between gutter pt-28 md:pt-36 pb-6 md:pb-8 overflow-hidden">
+        {/* Three.js warm dust field */}
+        <Suspense fallback={null}>
+          <HeroParticleField />
+        </Suspense>
+        {/* Vertical edge label — the portfolio's serial number */}
+        <div data-lag="0.35" className="hidden md:block absolute right-[clamp(16px,3vw,41px)] top-1/2 -translate-y-1/2 z-10 edge-label t-micro">
+          Abdulrasaq Alatare — Portfolio 2026
+        </div>
+
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="relative z-10">
+          <motion.div variants={staggerItem} className="flex items-center gap-2.5 t-label mb-5 md:mb-7 min-h-[14px]">
+            <Terminal className="w-3.5 h-3.5" />
+            <TypewriterText
+              texts={["Full-Stack Developer", "Software Engineer", "React Specialist", "AI Integration Expert"]}
+            />
+          </motion.div>
+
+          <h1 className="t-wordmark" data-speed="0.82">
+            <span data-hero-split className="block">Abdulrasaq</span>
+            <span data-hero-split className="block">Abdulrasaq</span>
+            <span className="sr-only"> — Full-Stack Developer &amp; Software Engineer Portfolio</span>
+          </h1>
+        </motion.div>
+
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible"
+          className="relative z-10 mt-12 flex flex-col md:flex-row md:items-end md:justify-between gap-[18px]">
+          {/* Info card — lower left */}
+          <motion.div variants={staggerItem} className="card-edge bg-canvas/70 p-6 max-w-[460px]">
+            <p className="t-sub leading-[1.09] mb-5">
+              Crafting exceptional digital experiences through clean, efficient code.
+            </p>
+            <hr className="rule-dashed mb-5" />
+            <p className="t-body-sm mb-6">
+              Specializing in modern web technologies and AI integration.
+            </p>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <button onClick={() => scrollToSection('contact')} className="btn-fill">
+                <RollText>Let's Connect</RollText> <ArrowRight className="w-4 h-4" />
+              </button>
+              <a href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk"
+                target="_blank" rel="noopener noreferrer" className="btn-ghost min-h-[40px] px-5">
+                <Download className="w-3.5 h-3.5" /> <RollText>Resume</RollText>
               </a>
             </div>
           </motion.div>
-        )}
-      </motion.nav>
 
-      {/* ─── HERO ─── */}
-      <section ref={heroRef} onMouseMove={handleHeroMouse} onTouchMove={handleHeroTouch} className="min-h-screen flex items-center justify-center relative pt-16">
-        {/* Three.js Particle Wave Background */}
-        <Suspense fallback={null}>
-          <HeroParticleField mousePos={mousePos} />
-        </Suspense>
-
-        <div className="absolute inset-0 pointer-events-none transition-opacity duration-500"
-          style={{
-            zIndex: 1,
-            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, hsl(var(--primary) / 0.06), transparent 60%)`,
-          }} />
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          zIndex: 1,
-          backgroundImage: `linear-gradient(hsl(var(--primary) / 0.4) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary) / 0.4) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-        }} />
-
-        <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible">
-
-
-            <motion.h1 variants={staggerItem}
-              className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight-heading leading-[0.92] mb-6">
-               Abdulrasaq
-              <br />
-              <span className="text-gradient">Abdulrasaq</span>
-              <span className="sr-only"> — Full-Stack Developer &amp; Software Engineer Portfolio</span>
-            </motion.h1>
-
-            <motion.div variants={staggerItem} className="flex items-center justify-center gap-3 mb-8">
-              <Terminal className="w-5 h-5 text-primary" />
-              <span className="text-xl md:text-2xl font-body text-muted-foreground">
-                <TypewriterText
-                  texts={["Full-Stack Developer", "Software Engineer", "React Specialist", "AI Integration Expert"]}
-                  className="text-foreground"
-                />
-              </span>
-            </motion.div>
-
-            <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              Crafting exceptional digital experiences through clean, efficient code.
-              Specializing in modern web technologies and AI integration.
-            </motion.p>
-
-            <motion.div variants={staggerItem} className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl btn-primary font-heading font-semibold text-base cursor-pointer">
-                Let's Connect <ArrowRight className="w-5 h-5" />
-              </button>
-              <a href="https://drive.google.com/file/d/1K8cK897qgGwDqbKxofTqqlURNZgCeWmt/view?usp=drivesdk"
-                target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl glass-card hover-glow font-heading font-semibold text-base">
-                <Download className="w-5 h-5" /> Resume
-              </a>
-            </motion.div>
-
-            <motion.div variants={staggerItem} className="flex items-center justify-center gap-4 mt-10">
-              {[
-                { icon: <Github className="w-5 h-5" />, label: "GitHub profile", href: "https://github.com/Quantum-techlab" },
-                { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn profile", href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
-                { icon: <Mail className="w-5 h-5" />, label: "Email Abdulrasaq", href: "mailto:ola283dayo@gmail.com" },
-              ].map((s, i) => (
+          {/* Social card — lower right */}
+          <motion.div variants={staggerItem} className="card-edge bg-canvas/70 p-5 md:w-[260px] md:mr-8">
+            <div className="flex items-center justify-between mb-5">
+              <span className="t-sub">AA</span>
+              <span className="t-micro">Elsewhere</span>
+            </div>
+            <div className="flex items-center gap-2">
+              {socials.map((s, i) => (
                 <a key={i} href={s.href} aria-label={s.label} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
-                  className="p-3 rounded-xl glass-card hover-glow text-muted-foreground hover:text-foreground transition-all duration-300">
+                  data-magnetic className="btn-ghost btn-round">
                   {s.icon}
                 </a>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* ─── ABOUT ─── */}
-      <section id="about" className="py-28 md:py-36">
-        <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
-              About <span className="text-primary">Me</span>
-            </h2>
-          </motion.div>
+      {/* ─── ABOUT (void-mode reveal: text / object / text) ─── */}
+      <section id="about" className={`min-h-screen gutter ${sectionPad}`}>
+        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
+          className="flex items-center justify-between t-label mb-4">
+          <span>(01)</span><span>About</span>
+        </motion.div>
+        <hr className="rule-dashed mb-12 md:mb-16" />
 
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.1}
-              className="relative flex justify-center">
-              {/* Rectangle/square headshot */}
-              <div className="relative w-72 h-80 md:w-80 md:h-96">
-                <div className="absolute inset-0 rounded-2xl border-2 border-primary/30"
-                  style={{ boxShadow: '0 0 40px hsl(var(--primary) / 0.15)' }} />
-                <div className="absolute inset-[3px] rounded-2xl overflow-hidden">
-                  <img src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" alt="Abdulrasaq Abdulrasaq"
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: 'center 10%', transform: 'scale(1.35)', transformOrigin: 'center 20%' }} />
+        <div className="grid lg:grid-cols-[1fr_minmax(260px,28vw)_1fr] gap-x-[18px] gap-y-12 items-start">
+          {/* Left — heading + facts */}
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="order-1">
+            <h2 data-split-scroll className="t-heading mb-8">About Me</h2>
+            <motion.div variants={staggerItem} className="flex items-center gap-2 t-label mb-3">
+              <MapPin className="w-3.5 h-3.5" />
+              <span>University of Ilorin, Nigeria</span>
+            </motion.div>
+            <motion.div variants={staggerItem} className="t-label mb-10 pl-[22px]">
+              Information Technology — Class of 2026
+            </motion.div>
+            <motion.div variants={staggerItem} className="grid grid-cols-2">
+              {[
+                { value: "3+", label: "Years Experience" },
+                { value: "8+", label: "Projects Built" },
+                { value: "27+", label: "Technologies" },
+                { value: "3", label: "Certifications" },
+                { value: "2026", label: "Graduated" },
+                {
+                  value: (
+                    <span aria-label="Four point something" title="Four point something.">
+                      4.<span aria-hidden className="inline-block w-[1.05em] h-[0.7em] ml-[0.06em] bg-ink align-baseline" />
+                    </span>
+                  ),
+                  label: "CGPA — Yes, a 4-pointer",
+                },
+              ].map((stat, i) => (
+                <div key={i} className={`py-5 border-t border-dashed border-line ${i % 2 === 0 ? 'pr-4' : 'pl-4 border-l'}`}>
+                  <div className="t-heading mb-2">
+                    {typeof stat.value === 'string' && /^\d+\+?$/.test(stat.value)
+                      ? <span data-count={parseInt(stat.value, 10)} data-suffix={stat.value.endsWith('+') ? '+' : ''}>{stat.value}</span>
+                      : stat.value}
+                  </div>
+                  <div className="t-label">{stat.label}</div>
                 </div>
-              </div>
+              ))}
             </motion.div>
+          </motion.div>
 
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground leading-relaxed mb-6">
-                <strong className="text-foreground">Abdulrasaq Alatare</strong> (also known as <strong className="text-foreground">Abdulrasaq Abdulrasaq</strong>) is a Full-Stack Developer based at the University of Ilorin, Nigeria,
-                with expertise in building modern, scalable web applications. I specialize in the React ecosystem,
-                AI integration, and creating user-centric digital experiences.
-              </motion.p>
-              <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground leading-relaxed mb-10">
-                As the Software Director at ITSA, I lead technical initiatives and mentor fellow developers.
-                I'm driven by turning complex problems into elegant, efficient solutions.
-              </motion.p>
+          {/* Center — the object */}
+          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.1}
+            className="order-2 w-full max-w-[420px] mx-auto lg:max-w-none">
+            <div data-skew className="relative aspect-[3/4] overflow-hidden">
+              <img src="/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" alt="Abdulrasaq Abdulrasaq"
+                width={810} height={1080} loading="lazy" decoding="async"
+                className="w-full h-full object-cover grade-warm"
+                style={{ objectPosition: 'center 10%', transform: 'scale(1.35)', transformOrigin: 'center 20%' }} />
+            </div>
+            <div className="flex justify-between t-micro mt-3">
+              <span>Fig. 01</span><span>Ilorin, NG</span>
+            </div>
+          </motion.div>
 
-              <motion.div variants={staggerItem} className="grid grid-cols-2 gap-4">
-                {[
-                  { value: "3+", label: "Years Experience" },
-                  { value: "6+", label: "Projects Built" },
-                  { value: "27+", label: "Technologies" },
-                  { value: "3", label: "Certifications" },
-                ].map((stat, i) => (
-                  <div key={i} className="p-5 rounded-lg glass-card hover-glow">
-                    <div className="text-3xl font-heading font-bold text-primary mb-1">{stat.value}</div>
-                    <div className="text-sm font-body text-muted-foreground">{stat.label}</div>
-                  </div>
-                ))}
-              </motion.div>
-
-              <motion.div variants={staggerItem} className="flex items-center gap-3 mt-8">
-                <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-sm font-body text-muted-foreground">University of Ilorin, Nigeria</span>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* ── CMD Terminal Story ── */}
-          <motion.div
-            variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.3}
-            className="mt-20 max-w-4xl mx-auto"
-          >
-            <TerminalStory />
+          {/* Right — conversational body voice */}
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="order-3">
+            <motion.p variants={staggerItem} data-scrub-text className="t-body mb-8">
+              <strong className="font-medium">Abdulrasaq Alatare</strong> (also known as <strong className="font-medium">Abdulrasaq Abdulrasaq</strong>) is a Full-Stack Developer and a Class of 2026 graduate of the Department of Information Technology, University of Ilorin, Nigeria,
+              with expertise in building modern, scalable web applications. I specialize in the React ecosystem,
+              AI integration, and creating user-centric digital experiences.
+            </motion.p>
+            <motion.p variants={staggerItem} data-scrub-text className="t-body">
+              As Software Director at ITSA for the 2025/2026 session, I led technical initiatives and mentored fellow developers.
+              I'm driven by turning complex problems into elegant, efficient solutions.
+            </motion.p>
           </motion.div>
         </div>
+
+        {/* ── CMD Terminal Story ── */}
+        <motion.div
+          variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.2}
+          className="mt-[clamp(68px,8vw,120px)]"
+        >
+          <div className="flex items-center justify-between t-label mb-4">
+            <span>origin_story.txt</span><span>Read-only</span>
+          </div>
+          <TerminalStory />
+        </motion.div>
       </section>
 
-      {/* ─── PROJECTS (MASONRY BENTO) ─── */}
-      <section id="projects" className="py-28 md:py-36">
-        <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
-              Featured <span className="text-primary">Projects</span>
-            </h2>
-          </motion.div>
+      {/* ─── PROJECTS ─── */}
+      <section id="projects" className={`gutter ${sectionPad}`}>
+        <SectionHead index="02" label="Work" title="Featured Projects" className="mb-12 md:mb-16" />
 
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-            {featuredProjects.map((project, index) => (
-              <motion.div key={index} variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index * 0.15}>
-                <TiltCard featured className="glass-card hover-glow rounded-2xl p-8 relative overflow-hidden h-full group">
-                  {project.hasOcrScan && <div className="ocr-scan-line" />}
-                  {project.tag && (
-                    <div className="absolute top-6 right-6">
-                      <span className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-primary bg-primary/10 border border-primary/20 rounded-full">
-                        {project.tag}
-                      </span>
-                    </div>
-                  )}
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-heading font-bold tracking-tight-heading mb-3 group-hover:text-primary transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    <p className="font-body text-muted-foreground leading-relaxed mb-6">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tech.map((tech, i) => (
-                        <span key={i} className="px-3 py-1 text-xs font-mono text-primary/80 bg-primary/5 border border-primary/10 rounded-full">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex gap-3">
-                      {project.demo !== "#" && (
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl btn-primary text-sm font-heading font-semibold">
-                          <ExternalLink className="w-4 h-4" /> View Live
-                        </a>
-                      )}
-                      <a href={project.github} target="_blank" rel="noopener noreferrer"
-                        className={`${project.demo !== "#" ? 'flex-1' : 'w-full'} inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl glass-card hover-glow text-sm font-heading font-semibold`}>
-                        <Github className="w-4 h-4" /> Github
-                      </a>
-                    </div>
-                  </div>
-                </TiltCard>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {smallProjects.map((project, index) => (
-              <motion.div key={index} variants={fadeInUp} initial="hidden" whileInView="visible"
-                viewport={{ once: true }} custom={index * 0.08}
-                className="group glass-card hover-glow rounded-xl p-5">
-                <h3 className="text-base font-heading font-bold tracking-tight-heading mb-2 group-hover:text-primary transition-colors duration-300">
-                  {project.title}
+        <div className="js-hscroll bleed-x relative lg:h-screen lg:overflow-hidden">
+          <div className="js-hscroll-track lg:flex lg:h-full lg:w-max">
+          {featuredProjects.map((project, index) => (
+            <article key={index}
+              className="grid lg:grid-cols-[1fr_minmax(0,1.35fr)_1fr] gap-x-[18px] gap-y-8 py-12 md:py-16 border-t border-dashed border-line lg:w-screen lg:h-full lg:shrink-0 lg:gutter lg:py-0 lg:border-t-0 lg:items-center lg:[&:not(:first-child)]:border-l">
+              {/* Left — label + title */}
+              <div className="self-start lg:self-center">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="t-label">{String(index + 1).padStart(2, '0')} / {String(featuredProjects.length).padStart(2, '0')}</span>
+                  {project.tag && <span className="t-label px-3 py-1.5 rounded-outlined border border-dashed border-line-strong">{project.tag}</span>}
+                </div>
+                <h3 className="t-heading">
+                  {'caseStudy' in project ? <Link to={`/projects/${project.slug}`}>{project.title}</Link> : project.title}
                 </h3>
-                <p className="text-sm font-body text-muted-foreground leading-relaxed mb-4 line-clamp-2">{project.description}</p>
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.tech.slice(0, 3).map((tech, i) => (
-                    <span key={i} className="px-2 py-0.5 text-[10px] font-mono text-muted-foreground bg-muted/50 rounded-full">{tech}</span>
+                {project.credit && <p className="t-label mt-5">{project.credit}</p>}
+                {'caseStudy' in project && (
+                  <Link to={`/projects/${project.slug}`} className="t-label mt-6 inline-flex items-center gap-2 underline underline-offset-4 decoration-1">
+                    Read case study <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
+              </div>
+
+              {/* Center — the product */}
+              <div data-skew>
+                <TiltCard featured>
+                  <ProjectPreview url={project.demo} title={project.title} scan={project.hasOcrScan} image={project.preview} />
+                </TiltCard>
+              </div>
+
+              {/* Right — description, stack, actions */}
+              <div>
+                <p className="t-body mb-8">{project.description}</p>
+                <ul className="flex flex-wrap gap-2 mb-8">
+                  {project.tech.map((tech, i) => (
+                    <li key={i} className="t-micro px-3 py-1.5 rounded-outlined border border-line-strong">{tech}</li>
                   ))}
-                </div>
-                <div className="flex gap-3">
+                </ul>
+                <div className="flex flex-wrap items-center gap-5">
                   {project.demo !== "#" && (
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary/80 transition-colors font-mono flex items-center gap-1">
-                      <ExternalLink className="w-3 h-3" /> Live
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-ghost min-h-[40px] px-5">
+                      <ExternalLink className="w-3.5 h-3.5" /> <RollText>View Live</RollText>
                     </a>
                   )}
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-foreground transition-colors font-mono flex items-center gap-1">
-                    <Github className="w-3 h-3" /> Code
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="link-u t-label inline-flex items-center gap-2">
+                    <Github className="w-3.5 h-3.5" /> Github
                   </a>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </article>
+          ))}
           </div>
+          {/* Scroll progress through the showcase */}
+          <div className="hidden lg:block absolute bottom-8 inset-x-[clamp(16px,3vw,41px)] border-t border-dashed border-line">
+            <div className="js-hscroll-progress h-px -mt-px bg-ink origin-left" style={{ transform: 'scaleX(0)' }} />
+          </div>
+        </div>
+
+        {/* More projects — editorial index list */}
+        <div className="mt-8">
+          <div className="flex items-center justify-between t-label mb-4 pt-12 border-t border-dashed border-line">
+            <span>Index</span>
+            <Link to="/projects" className="inline-flex items-center gap-2 underline underline-offset-4 decoration-1">All projects <ArrowRight className="w-3 h-3" /></Link>
+          </div>
+          {smallProjects.map((project, index) => (
+            <motion.div key={index} variants={fadeInUp} initial="hidden" whileInView="visible"
+              viewport={{ once: true }} custom={index * 0.06}
+              className="group grid md:grid-cols-[56px_1.1fr_2fr_150px] gap-x-[18px] gap-y-3 py-6 border-t border-dashed border-line items-baseline">
+              <span className="t-label">{String(index + featuredProjects.length + 1).padStart(2, '0')}</span>
+              <div>
+                <h3 className="t-heading-sm">{project.title}</h3>
+                {project.tag && <span className="inline-block t-micro mt-3 px-2.5 py-1 rounded-outlined border border-dashed border-line-strong">{project.tag}</span>}
+              </div>
+              <div>
+                <p className="t-body-sm mb-3">{project.description}</p>
+                <p className="t-micro">{project.tech.slice(0, 3).join(' / ')}</p>
+              </div>
+              <div className="flex gap-5 md:justify-end">
+                {project.demo !== "#" && (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="link-u t-label inline-flex items-center gap-1.5">
+                    <ExternalLink className="w-3 h-3" /> Live
+                  </a>
+                )}
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="link-u t-label inline-flex items-center gap-1.5">
+                  <Github className="w-3 h-3" /> Code
+                </a>
+              </div>
+            </motion.div>
+          ))}
+          <hr className="rule-dashed" />
         </div>
       </section>
 
       {/* ─── THE PROCESS (Carousel) ─── */}
-      <section id="process" className="py-28 md:py-36">
-        <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
-              The <span className="text-primary">Process</span>
-            </h2>
-          </motion.div>
+      <section id="process" className={`js-process md:min-h-screen lg:h-screen flex flex-col gutter ${sectionPad} lg:py-24`}>
+        <SectionHead index="03" label="Method" title="The Process" className="mb-12 md:mb-16" />
 
-          <div className="relative max-w-2xl mx-auto">
-            {/* Carousel controls */}
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex gap-2">
-                {processSteps.map((_, i) => (
-                  <button key={i} onClick={() => setProcessIndex(i)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${i === processIndex ? 'bg-primary w-8' : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'}`} />
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <button onClick={prevProcess} disabled={processIndex === 0}
-                  className="p-2 rounded-lg glass-card hover-glow disabled:opacity-30 transition-all">
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button onClick={nextProcess} disabled={processIndex === processSteps.length - 1}
-                  className="p-2 rounded-lg glass-card hover-glow disabled:opacity-30 transition-all">
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Carousel content */}
-            <div className="overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={processIndex}
-                  initial={{ opacity: 0, x: 80 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -80 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="glass-card hover-glow rounded-2xl p-10 text-center"
-                >
-                  <div className="inline-flex p-4 rounded-2xl bg-primary/10 text-primary mb-6">
-                    {processSteps[processIndex].icon}
-                  </div>
-                  <div className="text-xs font-mono text-primary mb-3">{processSteps[processIndex].step}</div>
-                  <h3 className="text-3xl font-heading font-bold tracking-tight-heading mb-3">{processSteps[processIndex].title}</h3>
-                  <p className="text-base font-body text-muted-foreground leading-relaxed max-w-md mx-auto">{processSteps[processIndex].desc}</p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+        {/* Carousel controls */}
+        <div className="flex items-center justify-between gap-4 mb-10 md:mb-14">
+          <div className="flex flex-wrap gap-x-6 gap-y-3" role="tablist" aria-label="Process steps">
+            {processSteps.map((s, i) => (
+              <button key={i} onClick={() => goToProcess(i)} role="tab" aria-selected={i === processIndex}
+                className={`t-label ${i === processIndex ? 'nav-active' : ''}`}>
+                {s.step} {s.title}
+              </button>
+            ))}
           </div>
+          <div className="flex gap-2 shrink-0">
+            <button onClick={prevProcess} disabled={processIndex === 0} aria-label="Previous step" className="btn-ghost btn-round">
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button onClick={nextProcess} disabled={processIndex === processSteps.length - 1} aria-label="Next step" className="btn-ghost btn-round">
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Carousel content */}
+        <div className="flex-1 flex items-center overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={processIndex}
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -60 }}
+              transition={{ duration: 0.45, ease: [0.25, 0.1, 0, 1] }}
+              className="w-full grid md:grid-cols-[1fr_auto_1fr] gap-x-[18px] gap-y-10 items-center"
+            >
+              <div>
+                <div className="t-display mb-4">{processSteps[processIndex].step}</div>
+                <h3 className="t-heading">{processSteps[processIndex].title}</h3>
+              </div>
+              <div className="w-36 h-36 md:w-56 md:h-56 rounded-full border border-dashed border-line-strong flex items-center justify-center [&_svg]:w-12 [&_svg]:h-12 md:[&_svg]:w-16 md:[&_svg]:h-16 [&_svg]:stroke-[1.25]">
+                {processSteps[processIndex].icon}
+              </div>
+              <p className="t-body md:max-w-[22ch]">{processSteps[processIndex].desc}</p>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 
-      {/* ─── TECH ARSENAL (BENTO) ─── */}
-      <section id="tech" className="py-28 md:py-36">
-        <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
-              Tech <span className="text-primary">Arsenal</span>
-            </h2>
-          </motion.div>
+      {/* ─── TECH ARSENAL ─── */}
+      <section id="tech" className={`md:min-h-screen gutter ${sectionPad}`}>
+        <SectionHead index="04" label="Toolkit" title="Tech Arsenal" className="mb-12 md:mb-16" />
 
-          <h3 className="text-lg font-heading font-semibold text-foreground mb-6 flex items-center gap-2">
-            <Globe className="w-5 h-5 text-primary" /> Core Stack
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
-            {coreStack.map((tech, i) => (
-              <motion.div key={i} variants={fadeInUp} initial="hidden" whileInView="visible"
-                viewport={{ once: true }} custom={i * 0.05}
-                className="glass-card hover-glow rounded-lg p-6 text-center group cursor-default">
-                <div className="mb-3 text-muted-foreground group-hover:text-primary transition-all duration-300 flex justify-center">
-                  {TechIcons[tech.icon] || <Globe className="w-8 h-8" />}
-                </div>
-                <div className="text-sm font-mono text-muted-foreground group-hover:text-primary transition-colors duration-300">{tech.name}</div>
-              </motion.div>
-            ))}
-          </div>
+        <h3 className="t-label mb-5 flex items-center gap-2">
+          <Globe className="w-3.5 h-3.5" /> Core Stack
+        </h3>
+        <div className="card-edge overflow-hidden mb-16"><div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 -mt-px -ml-px">
+          {coreStack.map((tech, i) => (
+            <motion.div key={i} variants={fadeInUp} initial="hidden" whileInView="visible"
+              viewport={{ once: true }} custom={i * 0.05}
+              className="p-6 aspect-square flex flex-col justify-between cursor-default group border-t border-l border-dashed border-line">
+              <div className="flex justify-between t-micro">
+                <span>{String(i + 1).padStart(2, '0')}</span>
+              </div>
+              <div className="flex justify-center transition-transform duration-500 group-hover:scale-110">
+                {TechIcons[tech.icon] || <Globe className="w-8 h-8" />}
+              </div>
+              <div className="t-label">{tech.name}</div>
+            </motion.div>
+          ))}
+        </div></div>
 
-          <h3 className="text-lg font-heading font-semibold text-foreground mb-6 flex items-center gap-2">
-            <Wrench className="w-5 h-5 text-primary" /> Tools & Technologies
-          </h3>
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            className="flex flex-wrap gap-2">
-            {tools.map((tool, i) => (
-              <motion.span key={i} variants={staggerItem}
-                className="px-4 py-2 text-xs font-mono text-muted-foreground glass-card rounded-lg hover:text-primary hover:border-primary/20 transition-all duration-300 cursor-default inline-flex items-center gap-2">
-                {TechBrandIcons[tool] && <span className="opacity-70 group-hover:opacity-100">{TechBrandIcons[tool]}</span>}
-                {tool}
-              </motion.span>
-            ))}
-          </motion.div>
-        </div>
+        <h3 className="t-label mb-5 flex items-center gap-2">
+          <Wrench className="w-3.5 h-3.5" /> Tools & Technologies
+        </h3>
+        <motion.ul variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          className="flex flex-wrap gap-2">
+          {tools.map((tool, i) => (
+            <motion.li key={i} variants={staggerItem}
+              className="t-label px-4 py-2.5 rounded-outlined border border-line-strong inline-flex items-center gap-2 cursor-default transition-colors duration-300 hover:border-ink">
+              {TechBrandIcons[tool] && <span className="[&_svg]:w-3.5 [&_svg]:h-3.5">{TechBrandIcons[tool]}</span>}
+              {tool}
+            </motion.li>
+          ))}
+        </motion.ul>
       </section>
 
       {/* ─── CERTIFICATIONS ─── */}
-      <section id="certifications" className="py-28 md:py-36">
-        <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
-              <span className="text-primary">Certifications</span>
-            </h2>
-          </motion.div>
+      <section id="certifications" className={`md:min-h-screen gutter ${sectionPad}`}>
+        <SectionHead index="05" label="Credentials" title="Awards & Certifications" className="mb-12 md:mb-16" />
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certifications.map((cert, i) => (
-              <motion.div key={i} variants={fadeInUp} initial="hidden" whileInView="visible"
-                viewport={{ once: true }} custom={i * 0.1}
-                className="glass-card hover-glow rounded-xl p-6 group">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                    <Award className="w-6 h-6" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-base font-heading font-bold tracking-tight-heading mb-1 group-hover:text-primary transition-colors">
-                      {cert.title}
-                    </h3>
-                    <p className="text-sm font-body text-muted-foreground">{cert.issuer}</p>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-muted-foreground">{cert.date}</span>
-                  <span className="px-2 py-0.5 text-[10px] font-mono text-primary bg-primary/10 border border-primary/20 rounded-full">
-                    {cert.credential}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+        {/* Award — void-mode reveal */}
+        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.05}
+          className="grid lg:grid-cols-[1fr_auto_1fr] gap-x-[18px] gap-y-8 items-center py-12 md:py-16 mb-12 md:mb-16 border-t border-dashed border-line">
+          <div>
+            <div className="t-label mb-6">Award — 2026</div>
+            <h3 className="t-heading">Federal Government Students Venture Capital Grant</h3>
           </div>
+          <div data-speed="0.92" className="t-wordmark text-left lg:text-center" style={{ fontSize: 'clamp(64px, 9vw, 150px)' }}>₦<span data-count="50">50</span>M</div>
+          <div>
+            <p className="t-body mb-8">
+              Awarded for FaceTrust AI, co-founded with Elijah Adeniji, and selected as one of 45 ventures from over 36,000 student applicants nationwide. The grant was presented at the University of Ilorin on July 28, 2026.
+            </p>
+            <a href="https://www.unilorin.edu.ng/3-unilorites-secure-multimillion-naira-grant/" target="_blank" rel="noopener noreferrer"
+              className="tag-ember underline underline-offset-4 decoration-1 inline-flex items-center gap-1.5">
+              Source: University of Ilorin <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
+        </motion.div>
+
+        <div>
+          {certifications.map((cert, i) => (
+            <motion.div key={i} variants={fadeInUp} initial="hidden" whileInView="visible"
+              viewport={{ once: true }} custom={i * 0.08}
+              className="grid grid-cols-[auto_1fr] md:grid-cols-[56px_1fr_220px_80px_auto] gap-x-[18px] gap-y-2 py-6 border-t border-dashed border-line items-center">
+              <Award className="w-5 h-5 stroke-[1.5] row-span-2 md:row-span-1" />
+              <h3 className="t-heading-sm">{cert.title}</h3>
+              <p className="t-label col-start-2 md:col-start-auto">{cert.issuer}</p>
+              <span className="t-label col-start-2 md:col-start-auto">{cert.date}</span>
+              <span className="t-label col-start-2 md:col-start-auto md:text-right">{cert.credential}</span>
+            </motion.div>
+          ))}
+          <hr className="rule-dashed" />
         </div>
       </section>
 
       {/* ─── TESTIMONIALS MARQUEE ─── */}
-      <section className="py-20 border-t border-b border-border overflow-hidden">
-        <div className="container mx-auto px-6 mb-10">
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading">
-              Social <span className="text-primary">Proof</span>
-            </h2>
-          </motion.div>
-        </div>
+      <section className={`md:min-h-screen overflow-hidden ${sectionPad}`}>
+        <SectionHead index="06" label="Words" title="Social Proof" className="gutter mb-12 md:mb-16" />
 
         <div className="relative">
-          <div className="marquee-track">
+          <div className="marquee-track js-marquee">
             {[...testimonials, ...testimonials].map((t, i) => (
-              <div key={i} className="min-w-[350px] md:min-w-[420px] glass-card rounded-2xl p-6 flex-shrink-0">
-                <Quote className="w-5 h-5 text-primary/40 mb-4" />
-                <p className="font-body text-foreground/90 leading-relaxed mb-4 text-sm">"{t.text}"</p>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Star className="w-4 h-4 text-primary" />
-                  </div>
+              <figure key={i} aria-hidden={i >= testimonials.length} className="w-[320px] md:w-[440px] card-edge p-6 md:p-8 flex-shrink-0 flex flex-col">
+                <Quote className="w-4 h-4 mb-6" />
+                <blockquote className="t-body-sm md:text-[22px] md:leading-[1.26] mb-8">"{t.text}"</blockquote>
+                <figcaption className="mt-auto pt-5 border-t border-dashed border-line flex items-center gap-3">
+                  <Star className="w-3.5 h-3.5" />
                   <div>
-                    <div className="text-xs font-heading font-semibold">{t.author}</div>
-                    <div className="text-[10px] font-mono text-muted-foreground">{t.role}</div>
+                    <div className="t-label">{t.author}</div>
+                    <div className="t-micro mt-1">{t.role}</div>
                   </div>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── EXPERIENCE TIMELINE ─── */}
-      <section id="experience" className="py-28 md:py-36">
-        <div className="container mx-auto px-6">
-          <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight-heading mb-16">
-              <span className="text-primary">Experience</span>
-            </h2>
-          </motion.div>
+      {/* ─── EXPERIENCE ─── */}
+      <section id="experience" className={`md:min-h-screen gutter ${sectionPad}`}>
+        <SectionHead index="07" label="Career" title="Experience" className="mb-12 md:mb-16" />
 
-          <div className="max-w-3xl relative">
-            <div className="absolute left-[11px] top-0 bottom-0 w-[2px] bg-border" />
-            <div className="space-y-10">
-              {experiences.map((exp, index) => (
-                <motion.div key={index} variants={fadeInUp} initial="hidden" whileInView="visible"
-                  viewport={{ once: true }} custom={index * 0.15}
-                  className="relative pl-10">
-                  <div className="absolute left-0 top-2 w-6 h-6 rounded-full border-2 border-primary bg-background flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary pulse-point" />
-                  </div>
-                  <div className="glass-card hover-glow rounded-xl p-6">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                      <h3 className="text-lg font-heading font-bold tracking-tight-heading">{exp.title}</h3>
-                      <span className="text-xs font-mono text-primary px-3 py-1 rounded-full bg-primary/10 border border-primary/20 whitespace-nowrap">{exp.period}</span>
-                    </div>
-                    <p className="text-sm font-heading font-semibold text-primary mb-3">{exp.company}</p>
-                    <p className="font-body text-muted-foreground text-sm leading-relaxed mb-4">{exp.description}</p>
-                    <ul className="space-y-2">
-                      {exp.responsibilities.map((r, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm font-body text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                          {r}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+        <div>
+          {experiences.map((exp, index) => (
+            <motion.div key={index} variants={fadeInUp} initial="hidden" whileInView="visible"
+              viewport={{ once: true }} custom={index * 0.1}
+              className="grid lg:grid-cols-[1fr_1.2fr_1.4fr] gap-x-[18px] gap-y-5 py-10 md:py-12 border-t border-dashed border-line">
+              <div>
+                <div className="t-label mb-3">{exp.period}</div>
+                <div className="t-label">{exp.company}</div>
+              </div>
+              <h3 className="t-heading-sm">{exp.title}</h3>
+              <div>
+                <p className="t-body-sm mb-5">{exp.description}</p>
+                <ul className="space-y-2.5">
+                  {exp.responsibilities.map((r, i) => (
+                    <li key={i} className="grid grid-cols-[24px_1fr] t-body-sm">
+                      <span aria-hidden>—</span>
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+          <hr className="rule-dashed" />
         </div>
       </section>
 
-      {/* ─── FOOTER CTA ─── */}
-      <section id="contact" className="py-28 md:py-36">
-        <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center">
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <motion.h2 variants={staggerItem} className="text-4xl md:text-6xl font-heading font-bold tracking-tight-heading mb-6">
-                Let's Build Something <span className="text-primary">Amazing</span>
-              </motion.h2>
-              <motion.p variants={staggerItem} className="text-lg font-body text-muted-foreground mb-12">
-                I'm always excited to collaborate on innovative projects and explore new opportunities.
-              </motion.p>
+      {/* ─── CONTACT ─── */}
+      <section id="contact" className={`min-h-screen flex flex-col gutter ${sectionPad}`}>
+        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
+          className="flex items-center justify-between t-label mb-4">
+          <span>(08)</span><span>Contact</span>
+        </motion.div>
+        <hr className="rule-dashed mb-12 md:mb-16" />
 
-              <motion.div variants={staggerItem}>
-                <MagneticButton href="mailto:ola283dayo@gmail.com"
-                  className="inline-flex items-center justify-center gap-4 px-12 py-6 rounded-2xl btn-primary text-lg md:text-xl font-heading font-bold">
-                  <Mail className="w-6 h-6" /> Work with me
-                </MagneticButton>
-              </motion.div>
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          className="flex-1 grid lg:grid-cols-[1.4fr_1fr] gap-x-[18px] gap-y-10 items-end">
+          <h2 data-split-scroll className="t-display max-w-[14ch]">
+            Let's Build Something Amazing
+          </h2>
+          <motion.div variants={staggerItem}>
+            <p className="t-body mb-10">
+              I'm always excited to collaborate on innovative projects and explore new opportunities.
+            </p>
+            <MagneticButton href="mailto:ola283dayo@gmail.com" className="btn-fill px-8 py-[18px] text-[14px]">
+              <Mail className="w-4 h-4" /> <RollText>Work with me</RollText>
+            </MagneticButton>
+          </motion.div>
+        </motion.div>
 
-              <motion.div variants={staggerItem} className="grid sm:grid-cols-3 gap-4 mt-16">
-                {[
-                  { icon: <Mail className="w-5 h-5" />, label: "Email", value: "ola283dayo@gmail.com", href: "mailto:ola283dayo@gmail.com" },
-                  { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", value: "Connect", href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
-                  { icon: <Github className="w-5 h-5" />, label: "GitHub", value: "Quantum-techlab", href: "https://github.com/Quantum-techlab" },
-                ].map((c, i) => (
-                  <a key={i} href={c.href} target={c.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
-                    className="p-5 rounded-xl glass-card hover-glow group text-center">
-                    <div className="inline-flex p-2.5 rounded-xl bg-primary/10 text-primary mb-3 group-hover:bg-primary/20 transition-colors">
-                      {c.icon}
-                    </div>
-                    <div className="text-sm font-heading font-semibold">{c.label}</div>
-                    <div className="text-xs font-body text-muted-foreground mt-1">{c.value}</div>
-                  </a>
-                ))}
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          className="grid sm:grid-cols-3 gap-[18px] mt-16 md:mt-24">
+          {[
+            { icon: <Mail className="w-4 h-4" />, label: "Email", value: "ola283dayo@gmail.com", href: "mailto:ola283dayo@gmail.com" },
+            { icon: <Linkedin className="w-4 h-4" />, label: "LinkedIn", value: "Connect", href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
+            { icon: <Github className="w-4 h-4" />, label: "GitHub", value: "Quantum-techlab", href: "https://github.com/Quantum-techlab" },
+          ].map((c, i) => (
+            <motion.a key={i} variants={staggerItem} href={c.href} target={c.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
+              className="group card-edge p-6 flex flex-col gap-8 transition-colors duration-300 hover:border-ink">
+              <div className="flex items-center justify-between">
+                <span className="t-label">{c.label}</span>
+                {c.icon}
+              </div>
+              <span className="t-sub break-all underline decoration-1 underline-offset-4 decoration-transparent group-hover:decoration-current transition-colors">{c.value}</span>
+            </motion.a>
+          ))}
+        </motion.div>
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer className="border-t border-border py-12">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-sm text-muted-foreground font-body">
-              © 2025 <span className="font-heading font-semibold text-foreground">Abdulrasaq Abdulrasaq</span> · All rights reserved
-            </div>
-            <div className="flex items-center gap-5">
-              {[
-                { icon: <Github className="w-6 h-6" />, label: "GitHub profile", href: "https://github.com/Quantum-techlab" },
-                { icon: <Linkedin className="w-6 h-6" />, label: "LinkedIn profile", href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
-                { icon: <Mail className="w-6 h-6" />, label: "Email Abdulrasaq", href: "mailto:ola283dayo@gmail.com" },
-              ].map((s, i) => (
-                <a key={i} href={s.href} aria-label={s.label} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300">
-                  {s.icon}
-                </a>
-              ))}
-              <button onClick={scrollToTop}
-                className="ml-4 p-2.5 rounded-xl glass-card hover-glow text-muted-foreground hover:text-foreground transition-all duration-300"
-                aria-label="Back to top">
-                <ArrowUp className="w-5 h-5" />
-              </button>
-            </div>
+      <footer className="gutter pb-8">
+        <hr className="rule-dashed mb-10" />
+        <nav aria-label="Site index" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-[18px] gap-y-3 mb-12">
+          {ROUTES.map((r) => (
+            <Link key={r.path} to={r.path} className="t-label link-u no-underline hover:underline">{r.name}</Link>
+          ))}
+        </nav>
+        <div className="flex flex-col md:flex-row justify-between md:items-center gap-6">
+          <div className="flex flex-col gap-2">
+            <span className="t-legal">© 2026 Abdulrasaq Abdulrasaq Alatare · All rights reserved</span>
+            <span className="tag-ember">Designed &amp; built by Abdulrasaq Abdulrasaq</span>
+          </div>
+          <div className="flex items-center gap-2">
+            {socials.map((s, i) => (
+              <a key={i} href={s.href} aria-label={s.label} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
+                className="btn-ghost btn-round">
+                {s.icon}
+              </a>
+            ))}
+            <button onClick={scrollToTop} className="btn-ghost ml-3 min-h-[40px] px-4" aria-label="Back to top">
+              <ArrowUp className="w-3.5 h-3.5" /> Top
+            </button>
           </div>
         </div>
       </footer>
+      </div>
+      </div>
     </div>
+    </MotionConfig>
   );
 };
 

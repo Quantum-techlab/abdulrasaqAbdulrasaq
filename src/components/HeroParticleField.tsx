@@ -1,103 +1,153 @@
-import { useRef, useMemo, useCallback, useEffect, useState, lazy, Suspense } from 'react';
+import { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useTheme } from '@/contexts/ThemeContext';
 
-const GeometricMesh = lazy(() => import('@/components/HeroGeometricMesh'));
+// Lots of stars — they're animated on the GPU, so the count costs almost no CPU
+const PARTICLE_COUNT = typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches ? 2500 : 5000;
 
-const PARTICLE_COUNT = 3000;
+type Vec2 = { x: number; y: number };
+type Pointer = Vec2 & { inside: boolean; moved: number };
+type Size = { width: number; height: number };
 
 interface StarFieldProps {
-  mousePos: { x: number; y: number };
-  containerSize: { width: number; height: number };
-  tilt: { x: number; y: number };
+  mouse: Pointer;
+  size: Size;
+  tilt: Vec2;
+  light: boolean;
 }
 
-const StarField = ({ mousePos, containerSize, tilt }: StarFieldProps) => {
-  const pointsRef = useRef<THREE.Points>(null);
+// All per-particle motion runs in the vertex shader — a flowing current, parallax drift
+// toward the pointer, a whirlpool around the cursor, depth bob and twinkle — so each frame
+// the CPU only updates a handful of uniforms.
+const vertexShader = /* glsl */ `
+  attribute float aSize;
+  attribute float aOpacity;
+  attribute float aSeed;
+  uniform float uTime;
+  uniform vec2 uDrift;
+  uniform vec2 uMouse;   // pointer in NDC (-1..1)
+  uniform float uAspect;
+  uniform float uPush;   // whirlpool strength (rises while the pointer moves)
+  uniform float uPixelRatio;
+  varying float vOpacity;
+  void main() {
+    vec3 p = position;
+    float depth = (p.z + 4.0) / 8.0;
+    float parallax = 0.3 + depth * 0.7;
 
-  const { positions, basePositions, sizes, opacities } = useMemo(() => {
+    // Flowing current: the field streams sideways (wrapping) and undulates
+    p.x = mod(p.x + uTime * (0.12 + depth * 0.22) + 9.0, 18.0) - 9.0;
+    p.y += sin(p.x * 0.35 + uTime * 0.25 + aSeed * 0.013) * 0.35;
+    p.x += cos(p.y * 0.4 + uTime * 0.2 + aSeed * 0.007) * 0.2;
+
+    // Parallax drift toward where the pointer is
+    p.xy += uDrift * parallax * 0.5;
+
+    // Whirlpool: stars near the cursor are pushed out and spun around it
+    float halfH = 0.5774 * (7.0 - p.z);                 // tan(30deg) * distance to camera
+    vec2 m = uMouse * vec2(halfH * uAspect, halfH);
+    vec2 d = p.xy - m;
+    float dist = max(length(d), 0.001);
+    float f = exp(-(dist * dist) / 2.6) * uPush;
+    p.xy += (d / dist) * f * 0.9 + vec2(-d.y, d.x) / dist * f * 0.7;
+
+    p.z += sin(uTime * (0.3 + depth * 0.5) + aSeed * 0.1) * 0.05;
+    float twinkle = sin(uTime * (1.0 + mod(aSeed, 7.0) * 0.3) + aSeed * 2.1) * 0.15;
+    // Stars caught in the whirlpool flare a little
+    vOpacity = clamp(aOpacity + twinkle + f * 0.35, 0.08, 1.0);
+    vec4 mv = modelViewMatrix * vec4(p, 1.0);
+    gl_PointSize = aSize * uPixelRatio * (420.0 / -mv.z);
+    gl_Position = projectionMatrix * mv;
+  }
+`;
+
+const fragmentShader = /* glsl */ `
+  uniform sampler2D uTexture;
+  uniform float uLight;
+  varying float vOpacity;
+  void main() {
+    vec4 tex = texture2D(uTexture, gl_PointCoord);
+    if (uLight > 0.5) {
+      // Light mode: warm ink specks on cream — driftwood when dim, deep bark when bright
+      vec3 ink = mix(vec3(0.42, 0.37, 0.32), vec3(0.16, 0.09, 0.05), vOpacity);
+      gl_FragColor = vec4(ink, tex.a * vOpacity * 0.9);
+    } else {
+      // Dark mode: warm cream stars — slightly deeper cream when dim, never brown
+      vec3 color = mix(vec3(0.92, 0.8, 0.66), vec3(1.0, 0.95, 0.88), vOpacity);
+      gl_FragColor = vec4(color * tex.rgb, tex.a * vOpacity);
+    }
+  }
+`;
+
+const StarField = ({ mouse, size, tilt, light }: StarFieldProps) => {
+  const { positions, sizes, opacities, seeds } = useMemo(() => {
     const positions = new Float32Array(PARTICLE_COUNT * 3);
-    const basePositions = new Float32Array(PARTICLE_COUNT * 3);
     const sizes = new Float32Array(PARTICLE_COUNT);
     const opacities = new Float32Array(PARTICLE_COUNT);
+    const seeds = new Float32Array(PARTICLE_COUNT);
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       // Spread across a wide area to fill the hero
-      const x = (Math.random() - 0.5) * 18;
-      const y = (Math.random() - 0.5) * 12;
-      const z = (Math.random() - 0.5) * 8;
-
-      positions[i * 3] = x;
-      positions[i * 3 + 1] = y;
-      positions[i * 3 + 2] = z;
-
-      basePositions[i * 3] = x;
-      basePositions[i * 3 + 1] = y;
-      basePositions[i * 3 + 2] = z;
+      positions[i * 3] = (Math.random() - 0.5) * 18;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+      seeds[i] = i;
 
       // Varied brightness — some stars are much brighter
       const brightness = Math.random();
       if (brightness > 0.95) {
-        sizes[i] = 0.08 + Math.random() * 0.06; // Bright stars
+        sizes[i] = 0.12 + Math.random() * 0.08;
         opacities[i] = 0.8 + Math.random() * 0.2;
       } else if (brightness > 0.8) {
-        sizes[i] = 0.04 + Math.random() * 0.04; // Medium stars
-        opacities[i] = 0.5 + Math.random() * 0.3;
+        sizes[i] = 0.07 + Math.random() * 0.05;
+        opacities[i] = 0.6 + Math.random() * 0.3;
       } else {
-        sizes[i] = 0.015 + Math.random() * 0.025; // Dim stars
-        opacities[i] = 0.15 + Math.random() * 0.25;
+        sizes[i] = 0.04 + Math.random() * 0.03;
+        opacities[i] = 0.3 + Math.random() * 0.3;
       }
     }
 
-    return { positions, basePositions, sizes, opacities };
+    return { positions, sizes, opacities, seeds };
   }, []);
 
-  // Star texture
+  // 4-point star sprite with a warm glow
   const starTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
     canvas.width = 64;
     canvas.height = 64;
     const ctx = canvas.getContext('2d')!;
-
-    // 4-point star shape with glow
     const cx = 32, cy = 32;
 
-    // Outer glow
     const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 32);
-    glow.addColorStop(0, 'rgba(255,255,255,1)');
-    glow.addColorStop(0.1, 'rgba(255,255,255,0.8)');
-    glow.addColorStop(0.3, 'rgba(200,220,255,0.3)');
-    glow.addColorStop(0.6, 'rgba(100,160,255,0.08)');
+    glow.addColorStop(0, 'rgba(255,237,215,1)');
+    glow.addColorStop(0.1, 'rgba(255,237,215,0.8)');
+    glow.addColorStop(0.3, 'rgba(255,220,180,0.25)');
+    glow.addColorStop(0.6, 'rgba(220,150,90,0.06)');
     glow.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, 64, 64);
 
-    // Star cross flare
     ctx.globalCompositeOperation = 'lighter';
     for (let angle = 0; angle < 4; angle++) {
-      const rad = (angle * Math.PI) / 2;
       ctx.save();
       ctx.translate(cx, cy);
-      ctx.rotate(rad);
+      ctx.rotate((angle * Math.PI) / 2);
       const flare = ctx.createLinearGradient(0, 0, 28, 0);
-      flare.addColorStop(0, 'rgba(255,255,255,0.9)');
-      flare.addColorStop(0.3, 'rgba(200,220,255,0.3)');
+      flare.addColorStop(0, 'rgba(255,237,215,0.9)');
+      flare.addColorStop(0.3, 'rgba(255,220,180,0.25)');
       flare.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = flare;
       ctx.fillRect(0, -1.5, 28, 3);
       ctx.restore();
     }
-
-    // Diagonal flares (fainter)
     for (let angle = 0; angle < 4; angle++) {
-      const rad = (angle * Math.PI) / 2 + Math.PI / 4;
       ctx.save();
       ctx.translate(cx, cy);
-      ctx.rotate(rad);
+      ctx.rotate((angle * Math.PI) / 2 + Math.PI / 4);
       const flare = ctx.createLinearGradient(0, 0, 16, 0);
-      flare.addColorStop(0, 'rgba(255,255,255,0.4)');
-      flare.addColorStop(0.5, 'rgba(180,210,255,0.1)');
+      flare.addColorStop(0, 'rgba(255,237,215,0.4)');
+      flare.addColorStop(0.5, 'rgba(255,220,180,0.08)');
       flare.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = flare;
       ctx.fillRect(0, -0.8, 16, 1.6);
@@ -109,127 +159,113 @@ const StarField = ({ mousePos, containerSize, tilt }: StarFieldProps) => {
     return tex;
   }, []);
 
-  // Custom shader material for per-particle opacity
-  const shaderMaterial = useMemo(() => {
-    return new THREE.ShaderMaterial({
-      uniforms: {
-        uTexture: { value: starTexture },
-        uTime: { value: 0 },
-      },
-      vertexShader: `
-        attribute float aSize;
-        attribute float aOpacity;
-        varying float vOpacity;
-        varying float vSize;
-        void main() {
-          vOpacity = aOpacity;
-          vSize = aSize;
-          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-          gl_PointSize = aSize * (300.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      `,
-      fragmentShader: `
-        uniform sampler2D uTexture;
-        uniform float uTime;
-        varying float vOpacity;
-        varying float vSize;
-        void main() {
-          vec4 texColor = texture2D(uTexture, gl_PointCoord);
-          // Tint toward cool blue/cyan
-          vec3 color = mix(vec3(0.6, 0.8, 1.0), vec3(1.0), vOpacity);
-          gl_FragColor = vec4(color * texColor.rgb, texColor.a * vOpacity);
-        }
-      `,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
-  }, [starTexture]);
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        uniforms: {
+          uTexture: { value: starTexture },
+          uTime: { value: 0 },
+          uDrift: { value: new THREE.Vector2() },
+          uMouse: { value: new THREE.Vector2(0, 0) },
+          uAspect: { value: 1 },
+          uPush: { value: 0 },
+          uPixelRatio: { value: 1 },
+          uLight: { value: light ? 1 : 0 },
+        },
+        vertexShader,
+        fragmentShader,
+        transparent: true,
+        depthWrite: false,
+        // Glowing light adds up on the dark canvas; ink has to sit on top of the cream one
+        blending: light ? THREE.NormalBlending : THREE.AdditiveBlending,
+      }),
+    [starTexture, light]
+  );
+  useEffect(() => () => material.dispose(), [material]);
 
-  useFrame(({ clock }) => {
-    if (!pointsRef.current) return;
-    const geo = pointsRef.current.geometry;
-    const pos = geo.attributes.position.array as Float32Array;
-    const time = clock.getElapsedTime();
+  useFrame(({ clock, gl }, delta) => {
+    material.uniforms.uPixelRatio.value = gl.getPixelRatio();
+    const mx = size.width > 0 ? (mouse.x / size.width) * 2 - 1 : 0;
+    const my = size.height > 0 ? -((mouse.y / size.height) * 2 - 1) : 0;
+    const drift = material.uniforms.uDrift.value as THREE.Vector2;
+    // Eased follow — no snapping when the cursor jumps
+    const k = 1 - Math.exp(-delta * 4);
+    drift.x += (mx * 1.2 + tilt.x * 2.0 - drift.x) * k;
+    drift.y += (my * 1.2 + tilt.y * 2.0 - drift.y) * k;
+    material.uniforms.uTime.value = clock.getElapsedTime();
 
-    // Normalize mouse to [-1, 1]
-    const mx = containerSize.width > 0 ? (mousePos.x / containerSize.width) * 2 - 1 : 0;
-    const my = containerSize.height > 0 ? -((mousePos.y / containerSize.height) * 2 - 1) : 0;
-
-    // Combined drift from mouse + device tilt
-    const driftX = mx * 1.2 + tilt.x * 2.0;
-    const driftY = my * 1.2 + tilt.y * 2.0;
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const bx = basePositions[i * 3];
-      const by = basePositions[i * 3 + 1];
-      const bz = basePositions[i * 3 + 2];
-
-      // Gentle parallax drift based on depth
-      const depthFactor = (bz + 4) / 8; // 0 to 1
-      const parallax = 0.3 + depthFactor * 0.7;
-
-      pos[i * 3] = bx + driftX * parallax * 0.5;
-      pos[i * 3 + 1] = by + driftY * parallax * 0.5;
-
-      // Subtle twinkling via slight z oscillation
-      pos[i * 3 + 2] = bz + Math.sin(time * (0.3 + depthFactor * 0.5) + i * 0.1) * 0.05;
-    }
-
-    // Update twinkling opacity
-    const opAttr = geo.attributes.aOpacity.array as Float32Array;
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const baseOp = opacities[i];
-      const twinkle = Math.sin(time * (1.0 + (i % 7) * 0.3) + i * 2.1) * 0.15;
-      opAttr[i] = Math.max(0.05, baseOp + twinkle);
-    }
-
-    geo.attributes.position.needsUpdate = true;
-    geo.attributes.aOpacity.needsUpdate = true;
-
-    shaderMaterial.uniforms.uTime.value = time;
+    // Whirlpool follows the cursor with a little lag; it swells while the pointer moves
+    const m = material.uniforms.uMouse.value as THREE.Vector2;
+    const km = 1 - Math.exp(-delta * 7);
+    m.x += (mx - m.x) * km;
+    m.y += (my - m.y) * km;
+    material.uniforms.uAspect.value = size.height > 0 ? size.width / size.height : 1;
+    const active = mouse.inside ? (performance.now() - mouse.moved < 250 ? 1.6 : 0.55) : 0;
+    material.uniforms.uPush.value += (active - material.uniforms.uPush.value) * (1 - Math.exp(-delta * 3));
   });
 
   return (
-    <points ref={pointsRef} material={shaderMaterial}>
+    <points material={material} frustumCulled={false}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={PARTICLE_COUNT} array={positions} itemSize={3} />
         <bufferAttribute attach="attributes-aSize" count={PARTICLE_COUNT} array={sizes} itemSize={1} />
         <bufferAttribute attach="attributes-aOpacity" count={PARTICLE_COUNT} array={opacities} itemSize={1} />
+        <bufferAttribute attach="attributes-aSeed" count={PARTICLE_COUNT} array={seeds} itemSize={1} />
       </bufferGeometry>
     </points>
   );
 };
 
-interface HeroParticleFieldProps {
-  mousePos: { x: number; y: number };
-}
-
-const HeroParticleField = ({ mousePos }: HeroParticleFieldProps) => {
+const HeroParticleField = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const { theme } = useTheme();
+  // Mutable refs read inside the render loop — pointer moves never trigger React renders
+  const mouse = useRef<Pointer>({ x: 0, y: 0, inside: false, moved: 0 }).current;
+  const size = useRef<Size>({ width: 1, height: 1 }).current;
+  const tilt = useRef<Vec2>({ x: 0, y: 0 }).current;
+  const [visible, setVisible] = useState(true);
 
-  // Device orientation for mobile tilt
   useEffect(() => {
-    const handleOrientation = (e: DeviceOrientationEvent) => {
-      const x = (e.gamma || 0) / 45;
-      const y = (e.beta || 0) / 45;
-      setTilt({ x: Math.max(-1, Math.min(1, x)), y: Math.max(-1, Math.min(1, y - 0.5)) });
-    };
+    const el = containerRef.current;
+    if (!el) return;
 
-    window.addEventListener('deviceorientation', handleOrientation);
-    return () => window.removeEventListener('deviceorientation', handleOrientation);
-  }, []);
-
-  const getContainerSize = useCallback(() => {
-    if (!containerRef.current) return { width: 1, height: 1 };
-    return {
-      width: containerRef.current.clientWidth,
-      height: containerRef.current.clientHeight,
+    const measure = () => {
+      size.width = el.clientWidth;
+      size.height = el.clientHeight;
     };
-  }, []);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+
+    const onPointer = (x: number, y: number) => {
+      const r = el.getBoundingClientRect();
+      mouse.x = x - r.left;
+      mouse.y = y - r.top;
+      mouse.inside = mouse.x >= 0 && mouse.y >= 0 && mouse.x <= r.width && mouse.y <= r.height;
+      mouse.moved = performance.now();
+    };
+    const onMouse = (e: MouseEvent) => onPointer(e.clientX, e.clientY);
+    const onTouch = (e: TouchEvent) => e.touches[0] && onPointer(e.touches[0].clientX, e.touches[0].clientY);
+    const onOrientation = (e: DeviceOrientationEvent) => {
+      tilt.x = Math.max(-1, Math.min(1, (e.gamma || 0) / 45));
+      tilt.y = Math.max(-1, Math.min(1, (e.beta || 0) / 45 - 0.5));
+    };
+    window.addEventListener('mousemove', onMouse, { passive: true });
+    window.addEventListener('touchmove', onTouch, { passive: true });
+    window.addEventListener('deviceorientation', onOrientation);
+
+    // Stop rendering entirely once the hero is off screen
+    const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { rootMargin: '100px' });
+    io.observe(el);
+
+    return () => {
+      ro.disconnect();
+      io.disconnect();
+      window.removeEventListener('mousemove', onMouse);
+      window.removeEventListener('touchmove', onTouch);
+      window.removeEventListener('deviceorientation', onOrientation);
+    };
+  }, [mouse, size, tilt]);
 
   const hasWebGL = useMemo(() => {
     try {
@@ -247,24 +283,11 @@ const HeroParticleField = ({ mousePos }: HeroParticleFieldProps) => {
       <Canvas
         camera={{ position: [0, 0, 7], fov: 60 }}
         style={{ background: 'transparent' }}
-        gl={{ alpha: true, antialias: true }}
+        gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
         dpr={[1, 1.5]}
+        frameloop={visible ? 'always' : 'never'}
       >
-        {theme === 'dark' ? (
-          <StarField
-            mousePos={mousePos}
-            containerSize={getContainerSize()}
-            tilt={tilt}
-          />
-        ) : (
-          <Suspense fallback={null}>
-            <GeometricMesh
-              mousePos={mousePos}
-              containerSize={getContainerSize()}
-              tilt={tilt}
-            />
-          </Suspense>
-        )}
+        <StarField mouse={mouse} size={size} tilt={tilt} light={theme === 'light'} />
       </Canvas>
     </div>
   );

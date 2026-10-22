@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 
 const NotFound = () => {
@@ -9,16 +9,33 @@ const NotFound = () => {
       "404 Error: User attempted to access non-existent route:",
       location.pathname
     );
+    // Keep soft-404s out of search results
+    document.title = "Page not found — Abdulrasaq Alatare";
+    let robots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement("meta");
+      robots.name = "robots";
+      document.head.appendChild(robots);
+    }
+    const previous = robots.content;
+    robots.content = "noindex, follow";
+    return () => { robots!.content = previous; };
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
+    <div className="min-h-screen bg-canvas text-ink gutter py-8 flex flex-col">
+      <div className="flex items-center justify-between t-label mb-4">
+        <span>AA</span><span>Error</span>
+      </div>
+      <hr className="rule-dashed" />
+      <div className="flex-1 flex flex-col justify-center">
+        <h1 className="t-wordmark mb-6">404</h1>
+        <p className="t-body mb-10">Oops! Page not found</p>
+        <div className="flex flex-wrap gap-6">
+          <Link to="/" className="link-u t-label">Return to Home</Link>
+          <Link to="/projects" className="link-u t-label">Projects</Link>
+          <Link to="/contact" className="link-u t-label">Contact</Link>
+        </div>
       </div>
     </div>
   );

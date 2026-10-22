@@ -1,120 +1,117 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ===================================================================
+   DARKROOM EDITORIAL — after the ORYZO style reference (DESIGN.md)
+   Warm near-black canvas, cream type, one ember accent for credits/tags.
+   No shadows: depth is the two-step surface stack #100904 → #382416.
+=================================================================== */
+
 @layer base {
   :root {
-    /* ===================================
-       SOPHISTICATED MINIMALIST — 2026
-       Midnight + Charcoal + Electric Cyan
-    =================================== */
+    /* Raw tokens (DESIGN.md) */
+    --color-warm-cream: #ffedd7;
+    --color-walnut-shadow: #100904;
+    --color-bark-brown: #382416;
+    --color-cork-border: #40372e;
+    --color-driftwood: #6c5f51;
+    --color-ember-accent: #dc5000;
 
-    --background: 215 28% 5%;        /* #0D1117 */
-    --foreground: 210 17% 91%;       /* #E6EDF3 */
+    --text-subheading: 18px;
+    --text-heading-sm: 24px;
+    --text-body: 29px;
+    --text-heading: 41px;
+    --text-display: 51px;
 
-    --card: 216 28% 11%;             /* #161B22 */
-    --card-foreground: 210 17% 91%;
+    --radius-cards: 12px;
+    --radius-buttons-pill: 36px;
+    --radius-buttons-outlined: 22.5px;
 
-    --popover: 216 28% 11%;
-    --popover-foreground: 210 17% 91%;
+    /* Semantic roles as RGB channels so Tailwind can apply alpha */
+    --canvas: 16 9 4;          /* walnut-shadow */
+    --ink: 255 237 215;        /* warm-cream */
+    --surface: 56 36 22;       /* bark-brown */
+    --on-surface: 255 237 215; /* warm-cream */
+    --line: 64 55 46;          /* cork-border */
+    --line-strong: 108 95 81;  /* driftwood */
+    --ember: 220 80 0;         /* ember-accent */
 
-    --primary: 211 100% 67%;         /* #58A6FF */
-    --primary-foreground: 215 28% 5%;
-
-    --secondary: 215 14% 35%;        /* #30363D */
-    --secondary-foreground: 210 17% 91%;
-
-    --muted: 216 28% 11%;
-    --muted-foreground: 215 14% 45%;
-
-    --accent: 216 20% 14%;
-    --accent-foreground: 211 100% 67%;
-
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 215 14% 22%;           /* #30363D */
-    --input: 216 28% 14%;
-    --ring: 211 100% 67%;
-
-    --radius: 0.75rem;
-
-    --sidebar-background: 215 28% 5%;
-    --sidebar-foreground: 210 17% 91%;
-    --sidebar-primary: 211 100% 67%;
-    --sidebar-primary-foreground: 215 28% 5%;
-    --sidebar-accent: 216 20% 14%;
-    --sidebar-accent-foreground: 211 100% 67%;
-    --sidebar-border: 215 14% 22%;
-    --sidebar-ring: 211 100% 67%;
+    /* shadcn bridge — keeps ui/* primitives (toasts, tooltips) on-system */
+    --background: 25 60% 4%;
+    --foreground: 33 100% 92%;
+    --card: 25 60% 4%;
+    --card-foreground: 33 100% 92%;
+    --popover: 25 44% 15%;
+    --popover-foreground: 33 100% 92%;
+    --primary: 25 44% 15%;
+    --primary-foreground: 33 100% 92%;
+    --secondary: 30 16% 22%;
+    --secondary-foreground: 33 100% 92%;
+    --muted: 30 16% 22%;
+    --muted-foreground: 33 40% 75%;
+    --accent: 25 44% 15%;
+    --accent-foreground: 33 100% 92%;
+    --destructive: 22 100% 43%;
+    --destructive-foreground: 33 100% 92%;
+    --border: 30 16% 22%;
+    --input: 30 16% 22%;
+    --ring: 33 100% 92%;
+    --radius: 12px;
   }
 
+  /* Inverse variant for the existing theme toggle: cream canvas, walnut ink.
+     Same tokens, roles swapped — no new colors introduced. */
   .light {
-    --background: 0 0% 98%;           /* #FAFAFA */
-    --foreground: 215 28% 10%;        /* Dark text */
+    --canvas: 255 237 215;
+    --ink: 16 9 4;
+    --surface: 56 36 22;
+    --on-surface: 255 237 215;
+    --line: 108 95 81;
+    --line-strong: 64 55 46;
 
-    --card: 0 0% 100%;                /* White cards */
-    --card-foreground: 215 28% 10%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 28% 10%;
-
-    --primary: 211 100% 50%;          /* Slightly deeper cyan for contrast */
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 215 14% 90%;
-    --secondary-foreground: 215 28% 10%;
-
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 14% 40%;
-
-    --accent: 210 20% 94%;
-    --accent-foreground: 211 100% 50%;
-
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 215 14% 88%;
-    --input: 215 14% 92%;
-    --ring: 211 100% 50%;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 215 28% 10%;
-    --sidebar-primary: 211 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 20% 94%;
-    --sidebar-accent-foreground: 211 100% 50%;
-    --sidebar-border: 215 14% 88%;
-    --sidebar-ring: 211 100% 50%;
+    --background: 33 100% 92%;
+    --foreground: 25 60% 4%;
+    --card: 33 100% 92%;
+    --card-foreground: 25 60% 4%;
+    --popover: 25 44% 15%;
+    --popover-foreground: 33 100% 92%;
+    --muted-foreground: 30 14% 37%;
+    --border: 30 14% 37%;
+    --input: 30 14% 37%;
+    --ring: 25 60% 4%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
+  /* Smooth scrolling is handled by GSAP ScrollSmoother (native smooth scroll would fight it) */
+
   body {
-    @apply bg-background text-foreground font-body;
-    transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  html {
-    scroll-behavior: smooth;
+    background-color: rgb(var(--canvas));
+    color: rgb(var(--ink));
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 500;
+    font-feature-settings: "ss01" on;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Smooth theme transition for all elements */
-  *, *::before, *::after {
-    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  ::selection {
+    background: rgb(var(--ink));
+    color: rgb(var(--canvas));
   }
+
+  :focus-visible {
+    outline: 1px dashed rgb(var(--ink));
+    outline-offset: 4px;
+  }
+
 }
 
-/* Sunrise/Sunset theme transition overlay */
+/* Theme transition overlay (ThemeContext) — warm wash, no foreign hues */
 .theme-transition-overlay {
   position: fixed;
   inset: 0;
@@ -122,134 +119,304 @@
   pointer-events: none;
   opacity: 0;
 }
-
 .theme-transition-overlay.to-light {
-  animation: sunriseWash 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  background: radial-gradient(ellipse at 50% 120%, #ff9f4320 0%, #fbbf2420 30%, #fde68a15 50%, transparent 80%);
+  animation: themeWash 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  background: rgb(255 237 215 / 0.18);
 }
-
 .theme-transition-overlay.to-dark {
-  animation: sunsetWash 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  background: radial-gradient(ellipse at 50% -20%, #1e1b4b40 0%, #0f172a30 40%, #0D111720 60%, transparent 80%);
+  animation: themeWash 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  background: rgb(16 9 4 / 0.35);
 }
-
-@keyframes sunriseWash {
-  0% { opacity: 0; transform: translateY(40px) scale(0.95); }
-  30% { opacity: 1; }
-  70% { opacity: 0.6; }
-  100% { opacity: 0; transform: translateY(-20px) scale(1.05); }
-}
-
-@keyframes sunsetWash {
-  0% { opacity: 0; transform: translateY(-40px) scale(0.95); }
-  30% { opacity: 1; }
-  70% { opacity: 0.6; }
-  100% { opacity: 0; transform: translateY(20px) scale(1.05); }
+@keyframes themeWash {
+  0% { opacity: 0; }
+  35% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @layer components {
-  /* ── Gradient text ── */
-  .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(211 100% 80%) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* ── Layout ── */
+  .gutter {
+    padding-inline: clamp(16px, 3vw, 41px);
   }
 
-  .light .text-gradient {
-    background: linear-gradient(135deg, hsl(211 100% 45%) 0%, hsl(211 100% 60%) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* ── Typography: two voices only ── */
+  /* Voice 1 — UPPERCASE / 500 */
+  .t-wordmark {
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: 0;
+    font-size: clamp(var(--text-display), 13.2vw, 13.5rem);
+  }
+  .t-display {
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 0.9;
+    font-size: clamp(36px, 1.6rem + 1.6vw, var(--text-display));
+    text-wrap: balance;
+  }
+  .t-heading {
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 0.9;
+    font-size: clamp(30px, 1.2rem + 1.3vw, var(--text-heading));
+    text-wrap: balance;
+  }
+  .t-heading-sm {
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.09;
+    font-size: clamp(20px, 1rem + 0.5vw, var(--text-heading-sm));
+    text-wrap: balance;
+  }
+  .t-sub {
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1;
+    font-size: var(--text-subheading);
+  }
+  .t-label {
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.1;
+    font-size: 12px;
+  }
+  .t-micro {
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.2;
+    font-size: 10px;
+  }
+  .t-legal {
+    font-family: Arial, system-ui, sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.2;
+    font-size: 8px;
+  }
+  /* Voice 2 — Mixed case / 400: the only conversational voice */
+  .t-body {
+    font-weight: 400;
+    line-height: 1.26;
+    font-size: clamp(20px, 0.9rem + 0.8vw, var(--text-body));
+    text-wrap: pretty;
+  }
+  .t-body-sm {
+    font-weight: 400;
+    line-height: 1.33;
+    font-size: clamp(16px, 0.9rem + 0.2vw, var(--text-subheading));
+    text-wrap: pretty;
   }
 
-  /* ── Glass card ── */
-  .glass-card {
-    background: hsl(var(--card) / 0.7);
-    border: 1px solid hsl(var(--border) / 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+  /* ── Buttons ── */
+  .btn-fill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: var(--radius-buttons-pill);
+    background: rgb(var(--surface));
+    color: rgb(var(--on-surface));
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: filter 0.25s ease;
+  }
+  .btn-fill:hover { filter: brightness(1.25); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 7.5px 16px;
+    min-height: 36px;
+    border-radius: var(--radius-buttons-outlined);
+    border: 1px solid rgb(var(--ink));
+    background: transparent;
+    color: rgb(var(--ink));
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: rgb(var(--ink));
+    color: rgb(var(--canvas));
+  }
+  .btn-ghost:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .btn-round {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    min-height: 0;
+    border-radius: 9999px;
   }
 
-  .light .glass-card {
-    background: hsl(var(--card) / 0.8);
-    border: 1px solid hsl(var(--border) / 0.5);
-    box-shadow: 0 1px 3px hsl(0 0% 0% / 0.05);
+  /* Nav CTA — cream pill on the glass bar (inverse of canvas) */
+  .btn-cream {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 48px;
+    padding: 0 26px;
+    border-radius: 9999px;
+    background: rgb(var(--ink));
+    color: rgb(var(--canvas));
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: filter 0.25s ease;
+  }
+  .btn-cream:hover { filter: brightness(0.92); }
+
+  /* ── Floating glass nav ── */
+  .glass-nav {
+    border-radius: 9999px;
+    background: rgb(var(--canvas) / 0.55);
+    border: 1px solid rgb(var(--ink) / 0.08);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+  }
+  /* Liquid glass (Chromium): specular rim light on the refracting edge */
+  .is-liquid {
+    box-shadow:
+      inset 0 1px 0 rgb(255 237 215 / 0.28),
+      inset 0 -1px 0 rgb(0 0 0 / 0.35),
+      inset 0 0 0 1px rgb(255 237 215 / 0.06),
+      inset 0 0 24px rgb(255 237 215 / 0.05);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-nav { background: rgb(var(--canvas) / 0.94); }
   }
 
-  /* ── Gradient button ── */
-  .btn-primary {
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-    font-weight: 600;
-    transition: all 0.3s ease;
+  /* ── Rolling button label (gsap.com-style hover) ── */
+  .roll {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    line-height: 1.2;
+    vertical-align: middle;
+  }
+  .roll__a, .roll__b { display: inline-flex; }
+  .roll__b { position: absolute; left: 0; top: 100%; }
+  .roll__char {
+    display: inline-block;
+    transition: transform 0.55s cubic-bezier(0.7, 0, 0.2, 1);
+  }
+  :is(a, button):hover .roll__char,
+  :is(a, button):focus-visible .roll__char {
+    transform: translateY(-100%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .roll__char { transition: none; }
+    :is(a, button):hover .roll__char { transform: none; }
   }
 
-  .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+  /* Promote continuously-moving layers to their own compositor layer */
+  .js-marquee, .js-hscroll-track, [data-skew] { will-change: transform; }
+
+  /* Full-bleed escape from the section gutter (pinned horizontal showcase) */
+  @media (min-width: 1024px) {
+    .bleed-x { margin-inline: calc(clamp(16px, 3vw, 41px) * -1); }
   }
 
-  /* ── Hover glow ── */
-  .hover-glow {
-    transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+  /* ── Underline text link ── */
+  .link-u {
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
   }
-  .hover-glow:hover {
-    box-shadow: 0 0 40px hsl(var(--primary) / 0.08), 0 4px 20px hsl(0 0% 0% / 0.15);
-    border-color: hsl(var(--primary) / 0.2);
+  .link-u:hover { text-decoration-style: dashed; }
+
+  /* ── Tags (ember text accent) ── */
+  .tag-ember {
+    color: rgb(var(--ember));
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.1;
+    text-transform: uppercase;
   }
 
-  /* ── OCR scan line ── */
+  /* ── Structure ── */
+  .rule-dashed {
+    border: 0;
+    border-top: 1px dashed rgb(var(--line));
+  }
+  .card-edge {
+    border-radius: var(--radius-cards);
+    border: 1px solid rgb(var(--line));
+  }
+
+  /* Nav active indicator — dashed underline */
+  .nav-active {
+    position: relative;
+  }
+  .nav-active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    border-top: 1px dashed rgb(var(--ink));
+  }
+
+  /* Vertical edge label — product serial number */
+  .edge-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  /* Warm editorial grading for photography */
+  .grade-warm {
+    filter: sepia(0.28) saturate(0.85) contrast(1.08) brightness(0.92);
+  }
+
+  /* ── OCR scan line (Textify preview) ── */
   .ocr-scan-line {
     position: absolute;
     left: 0;
     width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent 0%, hsl(var(--primary)) 50%, transparent 100%);
+    height: 1px;
+    background: rgb(var(--ink));
     animation: scanLine 3s ease-in-out infinite;
-    opacity: 0.6;
+    opacity: 0.7;
+    z-index: 2;
+    pointer-events: none;
   }
 
   /* ── Marquee ── */
   .marquee-track {
     display: flex;
-    gap: 2rem;
-    animation: marquee 30s linear infinite;
+    gap: 18px;
+    width: max-content;
+    animation: marquee 40s linear infinite;
   }
   .marquee-track:hover {
     animation-play-state: paused;
   }
-
-  /* ── Pulse glow point ── */
-  .pulse-point {
-    animation: pulseGlow 2s ease-in-out infinite;
-  }
-
-  /* ── Magnetic button ── */
-  .magnetic-btn {
-    transition: transform 0.2s ease;
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track, .ocr-scan-line { animation: none; }
   }
 }
 
 /* ── Keyframes ── */
 @keyframes scanLine {
   0%, 100% { top: 0%; opacity: 0; }
-  10% { opacity: 0.6; }
-  50% { top: 100%; opacity: 0.6; }
+  10% { opacity: 0.7; }
+  50% { top: 100%; opacity: 0.7; }
   60% { opacity: 0; }
 }
 
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 4px hsl(var(--primary) / 0.4); }
-  50% { box-shadow: 0 0 16px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--primary) / 0.3); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
 }

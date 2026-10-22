@@ -19,15 +19,33 @@ export default {
 			}
 		},
 		extend: {
+			// One typeface system-wide (Halyard Display substitute → Inter)
 			fontFamily: {
-				'heading': ['"Clash Grotesk"', 'Inter', 'sans-serif'],
-				'body': ['"Geist Sans"', 'Inter', 'sans-serif'],
-				'mono': ['"JetBrains Mono"', 'monospace'],
+				'sans': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				'heading': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				'body': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				'mono': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				'legal': ['Arial', 'system-ui', 'sans-serif'],
 			},
 			letterSpacing: {
-				'tight-heading': '-0.04em',
+				'tight-heading': '0',
 			},
 			colors: {
+				// Semantic roles (swap under .light)
+				canvas: 'rgb(var(--canvas) / <alpha-value>)',
+				ink: 'rgb(var(--ink) / <alpha-value>)',
+				surface: 'rgb(var(--surface) / <alpha-value>)',
+				'on-surface': 'rgb(var(--on-surface) / <alpha-value>)',
+				line: 'rgb(var(--line) / <alpha-value>)',
+				'line-strong': 'rgb(var(--line-strong) / <alpha-value>)',
+				ember: 'rgb(var(--ember) / <alpha-value>)',
+				// Raw DESIGN.md tokens
+				'warm-cream': '#ffedd7',
+				'walnut-shadow': '#100904',
+				'bark-brown': '#382416',
+				'cork-border': '#40372e',
+				driftwood: '#6c5f51',
+				'ember-accent': '#dc5000',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -73,6 +91,9 @@ export default {
 				},
 			},
 			borderRadius: {
+				card: '12px',
+				pill: '36px',
+				outlined: '22.5px',
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'

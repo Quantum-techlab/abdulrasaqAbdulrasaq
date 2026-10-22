@@ -104,9 +104,9 @@ const GeometricMesh = ({ mousePos, containerSize, tilt }: GeometricMeshProps) =>
     });
   });
 
-  // Soft teal/gray color matching light mode palette
-  const lineColor = new THREE.Color('hsl(174, 35%, 65%)');
-  const lineColorFaint = new THREE.Color('hsl(174, 25%, 75%)');
+  // Driftwood / cork lines on the cream canvas
+  const lineColor = new THREE.Color('#6c5f51');
+  const lineColorFaint = new THREE.Color('#40372e');
 
   return (
     <group ref={groupRef}>

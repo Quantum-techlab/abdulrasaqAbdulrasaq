@@ -1,106 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Favicons - cross-browser & device support -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="/apple-touch-icon.png" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Primary Meta Tags -->
-    <title>Abdulrasaq Alatare — Full-Stack Developer Portfolio</title>
-    <meta name="title" content="Abdulrasaq Alatare — Full-Stack Developer Portfolio" />
-    <meta name="description" content="Portfolio of Abdulrasaq Abdulrasaq Alatare — self-taught full-stack developer, founder of FaceTrust AI (biometric verification), and ₦50M FG-SVCG grant winner from the University of Ilorin, Nigeria. Building AI-powered web apps with React, TypeScript, and Node.js." />
-    <meta name="keywords" content="Abdulrasaq Abdulrasaq Alatare, Abdulrasaq Alatare, Abdulrasaq Abdulrasaq, FaceTrust AI, FaceTrust AI founder, biometric verification, digital identity verification, facial recognition developer, liveness detection, Full Stack Developer Nigeria, Nigerian software engineer, software developer Ilorin, web developer Kwara, University of Ilorin developer, FG-SVCG grant winner, student entrepreneur Nigeria, startup founder Nigeria, React Developer, TypeScript Developer, Next.js, Node.js, Supabase, AI Integration, Quantum Techlab, MindConnect, mental health tech, Textify OCR, OCR developer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Primary meta (home defaults — each route's HTML gets its own at build time: scripts/seo-build.mjs) -->
+    <title>Abdulrasaq Alatare — Full-Stack Developer, FaceTrust AI</title>
+    <meta name="title" content="Abdulrasaq Alatare — Full-Stack Developer, FaceTrust AI" />
+    <meta name="description" content="Full-stack developer (React, TypeScript, Next.js) in Ilorin, Nigeria. Co-founder of FaceTrust AI and ₦50M S-VCG 2026 grant winner. UNILORIN IT, Class of 2026." />
+    <meta name="keywords" content="Abdulrasaq Alatare, Abdulrasaq Abdulrasaq Alatare, Abdulrasaq Abdulrasaq, FaceTrust AI, FaceTrust AI co-founder, S-VCG 2026 winner, FG-SVCG grant winner, Students Venture Capital Grant, full-stack developer Ilorin, React developer Nigeria, Next.js developer Nigeria, TypeScript developer Nigeria, software engineer Kwara, University of Ilorin Information Technology, biometric identity verification Nigeria, NIN BVN face verification, final year project supervision software, QR code vehicle verification, UniVehicle QR, SuperviseOS" />
     <meta name="author" content="Abdulrasaq Alatare" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="revisit-after" content="7 days" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="geo.region" content="NG-KW" />
     <meta name="geo.placename" content="Ilorin, Kwara State, Nigeria" />
-    
-    <!-- Open Graph / Facebook -->
+    <link rel="canonical" href="https://abdulrasaq-abdulrasaq.vercel.app/" />
+
+    <!-- Favicons — one walnut / cream / ember mark everywhere -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#100904" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffedd7" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="apple-mobile-web-app-title" content="Abdulrasaq" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Abdulrasaq Alatare" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://abdulrasaq-abdulrasaq.vercel.app/" />
-    <meta property="og:title" content="Abdulrasaq Alatare — Full-Stack Developer Portfolio" />
-    <meta property="og:description" content="Self-taught full-stack developer, founder of FaceTrust AI, and ₦50M FG-SVCG grant winner from the University of Ilorin, Nigeria. Building AI-powered web apps with React, TypeScript, and Node.js." />
-    <meta property="og:image" content="https://abdulrasaq-abdulrasaq.vercel.app/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" />
+    <meta property="og:title" content="Abdulrasaq Alatare — Full-Stack Developer, FaceTrust AI" />
+    <meta property="og:description" content="Full-stack developer (React, TypeScript, Next.js) in Ilorin, Nigeria. Co-founder of FaceTrust AI and ₦50M S-VCG 2026 grant winner. UNILORIN IT, Class of 2026." />
+    <meta property="og:image" content="https://abdulrasaq-abdulrasaq.vercel.app/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="Abdulrasaq Alatare Portfolio" />
-    
-    <!-- Twitter -->
+    <meta property="og:image:alt" content="Abdulrasaq Alatare — full-stack developer, co-founder of FaceTrust AI" />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://abdulrasaq-abdulrasaq.vercel.app/" />
-    <meta name="twitter:title" content="Abdulrasaq Alatare — Full-Stack Developer Portfolio" />
-    <meta name="twitter:description" content="Self-taught full-stack developer, founder of FaceTrust AI, and ₦50M FG-SVCG grant winner from the University of Ilorin, Nigeria. Building AI-powered web apps with React, TypeScript, and Node.js." />
-    <meta name="twitter:image" content="https://abdulrasaq-abdulrasaq.vercel.app/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png" />
+    <meta name="twitter:title" content="Abdulrasaq Alatare — Full-Stack Developer, FaceTrust AI" />
+    <meta name="twitter:description" content="Full-stack developer (React, TypeScript, Next.js) in Ilorin, Nigeria. Co-founder of FaceTrust AI and ₦50M S-VCG 2026 grant winner. UNILORIN IT, Class of 2026." />
+    <meta name="twitter:image" content="https://abdulrasaq-abdulrasaq.vercel.app/og-image.jpg" />
     <meta name="twitter:creator" content="@abdulrasaq_dev" />
-    
-    <!-- Additional SEO -->
-    <link rel="canonical" href="https://abdulrasaq-abdulrasaq.vercel.app/" />
-    <meta name="theme-color" content="#0D1117" />
-    
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Abdulrasaq Alatare",
-      "givenName": "Abdulrasaq",
-      "familyName": "Alatare",
-      "additionalName": "Abdulrasaq",
-      "alternateName": ["Abdulrasaq Abdulrasaq", "Alatare Abdulrasaq"],
-      "url": "https://abdulrasaq-abdulrasaq.vercel.app/",
-      "image": "https://abdulrasaq-abdulrasaq.vercel.app/lovable-uploads/74fd8ca7-3647-4bc0-a715-8d5cfcb2d108.png",
-      "jobTitle": "Full-Stack Developer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "ITSA - University of Ilorin"
-      },
-      "description": "Self-taught Full-Stack Developer and founder of FaceTrust AI, a decentralized digital identity and biometric verification platform. Winner of the ₦50 million Federal Government Students Venture Capital Grant (FG-SVCG) 2026. Software Director at ITSA, University of Ilorin.",
-      "award": "Federal Government Students Venture Capital Grant (FG-SVCG) — ₦50 million, 2026",
-      "knowsAbout": ["React", "TypeScript", "JavaScript", "Node.js", "AI Integration", "Supabase", "Next.js", "Tailwind CSS", "Web Development", "Frontend Development", "Full-Stack Development", "Biometric Verification", "Digital Identity", "Facial Recognition", "Startup Founding"],
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "University of Ilorin"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Ilorin",
-        "addressRegion": "Kwara State",
-        "addressCountry": "Nigeria"
-      },
-      "sameAs": [
-        "https://github.com/Quantum-techlab",
-        "https://www.linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351",
-        "https://www.instagram.com/abdulrasaqqqq"
-      ]
-    }
-    </script>
-    
-    <!-- WebSite Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Abdulrasaq Alatare Portfolio",
-      "alternateName": "Abdulrasaq Abdulrasaq Portfolio",
-      "url": "https://abdulrasaq-abdulrasaq.vercel.app/"
-    }
-    </script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.min.css" rel="stylesheet">
+
+    <!-- Structured data: Person + FaceTrust AI + WebSite (filled from src/seo/schema.js at build time) -->
+    <!--seo:global-jsonld-->
+    <!--seo:route-jsonld-->
+
+    <!-- Fonts: connect early, swap in without blocking first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root"><!--seo:shell--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
