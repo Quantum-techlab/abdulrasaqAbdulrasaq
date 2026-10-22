@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://abdulrasaq-alatare.dev/sitemap.xml
+Sitemap: https://alatare-web-craft.lovable.app/sitemap.xml
