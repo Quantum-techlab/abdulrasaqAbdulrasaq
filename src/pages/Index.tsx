@@ -427,7 +427,7 @@ const Index = () => {
               <a href="mailto:ola283dayo@gmail.com" className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg btn-primary text-sm font-heading font-semibold">
                 <Mail className="w-4 h-4" /> Hire Me
               </a>
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-foreground p-2">
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? "Close menu" : "Open menu"} className="md:hidden text-foreground p-2">
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
@@ -477,9 +477,10 @@ const Index = () => {
 
             <motion.h1 variants={staggerItem}
               className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight-heading leading-[0.92] mb-6">
-              Abdulrasaq
+               Abdulrasaq
               <br />
               <span className="text-gradient">Abdulrasaq</span>
+              <span className="sr-only"> — Full-Stack Developer &amp; Software Engineer Portfolio</span>
             </motion.h1>
 
             <motion.div variants={staggerItem} className="flex items-center justify-center gap-3 mb-8">
@@ -512,11 +513,11 @@ const Index = () => {
 
             <motion.div variants={staggerItem} className="flex items-center justify-center gap-4 mt-10">
               {[
-                { icon: <Github className="w-5 h-5" />, href: "https://github.com/Quantum-techlab" },
-                { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
-                { icon: <Mail className="w-5 h-5" />, href: "mailto:ola283dayo@gmail.com" },
+                { icon: <Github className="w-5 h-5" />, label: "GitHub profile", href: "https://github.com/Quantum-techlab" },
+                { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn profile", href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
+                { icon: <Mail className="w-5 h-5" />, label: "Email Abdulrasaq", href: "mailto:ola283dayo@gmail.com" },
               ].map((s, i) => (
-                <a key={i} href={s.href} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
+                <a key={i} href={s.href} aria-label={s.label} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
                   className="p-3 rounded-xl glass-card hover-glow text-muted-foreground hover:text-foreground transition-all duration-300">
                   {s.icon}
                 </a>
@@ -927,11 +928,11 @@ const Index = () => {
             </div>
             <div className="flex items-center gap-5">
               {[
-                { icon: <Github className="w-6 h-6" />, href: "https://github.com/Quantum-techlab" },
-                { icon: <Linkedin className="w-6 h-6" />, href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
-                { icon: <Mail className="w-6 h-6" />, href: "mailto:ola283dayo@gmail.com" },
+                { icon: <Github className="w-6 h-6" />, label: "GitHub profile", href: "https://github.com/Quantum-techlab" },
+                { icon: <Linkedin className="w-6 h-6" />, label: "LinkedIn profile", href: "https://linkedin.com/in/abdulrasaq-abdulrasaq-68b0b1351" },
+                { icon: <Mail className="w-6 h-6" />, label: "Email Abdulrasaq", href: "mailto:ola283dayo@gmail.com" },
               ].map((s, i) => (
-                <a key={i} href={s.href} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
+                <a key={i} href={s.href} aria-label={s.label} target={s.href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-primary transition-colors duration-300">
                   {s.icon}
                 </a>
